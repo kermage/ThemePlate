@@ -21,13 +21,13 @@ if( ! function_exists( 'themeplate_add_settings' ) ) {
 
 		foreach ( $param['fields'] as $id => $field ) {
 			add_settings_field(
-				$id,
+				$param['id'] . '_' . $id,
 				$field['name'],
 				'themeplate_create_settings',
 				'themeplate',
 				$param['id'],
 				array(
-					'label_for' => $id,
+					'label_for' => $param['id'] . '_' . $id,
 					'type'      => $field['type'],
 					'options'   => $field['options'],
 					'multiple'  => $field['multiple']
@@ -114,17 +114,17 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 				wp_editor( $setting, $id, $settings );
 				break;
 
-            case 'page':
-                echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-                echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
-                $pages = get_pages( array ( 'post_type' => $param['options'] ) );
-                foreach( $pages as $page ) {
-                    echo '<option value="' . $page->ID . '"';
-                    if ( in_array( $page->ID, (array) $setting ) ) echo ' selected="selected"';
-                    echo '>' . $page->post_title . '</option>';
-                }
-                echo '</select>';
-                break;
+			case 'page':
+				echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
+				$pages = get_pages( array ( 'post_type' => $param['options'] ) );
+				foreach( $pages as $page ) {
+					echo '<option value="' . $page->ID . '"';
+					if ( in_array( $page->ID, (array) $setting ) ) echo ' selected="selected"';
+					echo '>' . $page->post_title . '</option>';
+				}
+				echo '</select>';
+				break;
 		}
 	}
 }
