@@ -7,6 +7,44 @@
  * @since 0.1.0
  */
 
+if( ! function_exists( 'themeplate_settings_menu' ) ) {
+	register_setting( 'themeplate', 'themeplate' );
+	
+	function themeplate_settings_menu() {
+		add_menu_page(
+			// Page Title
+			'Theme Settings',
+			// Menu Title
+			'Theme',
+			// Capability
+			'edit_theme_options',
+			// Menu Slug
+			'themeplate-settings',
+			// Content Function
+			'themeplate_settings_page'
+		);
+	}
+	add_action( 'admin_menu', 'themeplate_settings_menu' );
+}
+
+if( ! function_exists( 'themeplate_settings_page' ) ) {
+	function themeplate_settings_page() {
+		wp_enqueue_media();
+		?>
+		<div class="wrap">
+			<h1>Theme Settings</h1>
+			<form action="options.php" method="post">
+				<?php
+					settings_fields( 'themeplate' );
+					do_settings_sections( 'themeplate' );
+					submit_button();
+				?>
+			</form>
+		</div>
+		<?php
+	}
+}
+
 if( ! function_exists( 'themeplate_add_settings' ) ) {
 	function themeplate_add_settings( $param ) {
 		if ( ! is_array( $param ) )
