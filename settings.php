@@ -15,7 +15,7 @@ if( ! function_exists( 'themeplate_settings_menu' ) ) {
 			// Page Title
 			'Theme Settings',
 			// Menu Title
-			'Theme',
+			'Theme Settings',
 			// Capability
 			'edit_theme_options',
 			// Menu Slug

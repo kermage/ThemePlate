@@ -38,20 +38,20 @@ if( ! function_exists( 'themeplate_add_post_type' ) ) {
 			'name_admin_bar'        => __( $plural, 'themeplate' )
 		);
 		$defaults = array(
-			'label'         => __( $plural, 'themeplate' ),
-			'labels'        => $labels,
-			'description'   => __( $param['description'], 'themeplate' )
+			'label'       => __( $plural, 'themeplate' ),
+			'labels'      => $labels,
+			'description' => __( $param['description'], 'themeplate' )
 		);
 
 		if ( is_array( $param['tax'] ) ) {
 			foreach ( $param['tax'] as $tax_name => $tax ) {
 				themeplate_add_taxonomy( array(
-					'name'          => $tax_name,
-					'plural'        => __( $tax['plural'], 'themeplate' ),
-					'singular'      => __( $tax['singular'], 'themeplate' ),
-					'description'   => __( $tax['description'], 'themeplate' ),
-					'type'          => $name,
-					'args'          => $tax['args']
+					'name'        => $tax_name,
+					'plural'      => __( $tax['plural'], 'themeplate' ),
+					'singular'    => __( $tax['singular'], 'themeplate' ),
+					'description' => __( $tax['description'], 'themeplate' ),
+					'type'        => $name,
+					'args'        => $tax['args']
 				) );
 			}
 		}
@@ -67,28 +67,28 @@ if( ! function_exists( 'themeplate_add_taxonomy' ) ) {
 		$args = $param['args'];
 
 		$labels = array(
-			'name'                          => _x( $plural, 'Taxonomy General Name', 'themeplate' ),
-			'singular_name'                 => _x( $singular, 'Taxonomy Singular Name', 'themeplate' ),
-			'menu_name'                     => __( $plural, 'themeplate' ),
-			'all_items'                     => __( 'All ' . $plural, 'themeplate' ),
-			'edit_item'                     => __( 'Edit ' . $singular, 'themeplate' ),
-			'view_item'                     => __( 'View ' . $singular, 'themeplate' ),
-			'update_item'                   => __( 'Update ' . $singular, 'themeplate' ),
-			'add_new_item'                  => __( 'Add New ' . $singular, 'themeplate' ),
-			'new_item_name'                 => __( 'New ' . $singular . ' Name', 'themeplate' ),
-			'parent_item'                   => __( 'Parent ' . $singular, 'themeplate' ),
-			'parent_item_colon'             => __( 'Parent ' . $singular . ':', 'themeplate' ),
-			'search_items'                  => __( 'Search ' . $singular, 'themeplate' ),
-			'popular_items'                 => __( 'Popular ' . $singular, 'themeplate' ),
-			'separate_items_with_commas'    => __( 'Separate ' . $plural . ' with commas', 'themeplate' ),
-			'add_or_remove_items'           => __( 'Add or remove ' . $plural, 'themeplate' ),
-			'choose_from_most_used'         => __( 'Choose from the most used ' . $singular, 'themeplate' ),
-			'not_found'                     => __( $singular . ' not found', 'themeplate' )
+			'name'                       => _x( $plural, 'Taxonomy General Name', 'themeplate' ),
+			'singular_name'              => _x( $singular, 'Taxonomy Singular Name', 'themeplate' ),
+			'menu_name'                  => __( $plural, 'themeplate' ),
+			'all_items'                  => __( 'All ' . $plural, 'themeplate' ),
+			'edit_item'                  => __( 'Edit ' . $singular, 'themeplate' ),
+			'view_item'                  => __( 'View ' . $singular, 'themeplate' ),
+			'update_item'                => __( 'Update ' . $singular, 'themeplate' ),
+			'add_new_item'               => __( 'Add New ' . $singular, 'themeplate' ),
+			'new_item_name'              => __( 'New ' . $singular . ' Name', 'themeplate' ),
+			'parent_item'                => __( 'Parent ' . $singular, 'themeplate' ),
+			'parent_item_colon'          => __( 'Parent ' . $singular . ':', 'themeplate' ),
+			'search_items'               => __( 'Search ' . $singular, 'themeplate' ),
+			'popular_items'              => __( 'Popular ' . $singular, 'themeplate' ),
+			'separate_items_with_commas' => __( 'Separate ' . $plural . ' with commas', 'themeplate' ),
+			'add_or_remove_items'        => __( 'Add or remove ' . $plural, 'themeplate' ),
+			'choose_from_most_used'      => __( 'Choose from the most used ' . $singular, 'themeplate' ),
+			'not_found'                  => __( $singular . ' not found', 'themeplate' )
 		);
 		$defaults = array(
-			'label'         => __( $plural, 'themeplate' ),
-			'labels'        => $labels,
-			'description'   => __( $param['description'], 'themeplate' )
+			'label'       => __( $plural, 'themeplate' ),
+			'labels'      => $labels,
+			'description' => __( $param['description'], 'themeplate' )
 		);
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
