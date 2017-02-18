@@ -1,0 +1,38 @@
+.themeplate-meta-table {
+	width: 100%;
+	margin-top: .5em;
+}
+
+.themeplate-meta-table th,
+.themeplate-meta-table td {
+	border-top: 1px solid #eee;
+}
+
+.themeplate-meta-table th {
+	width: 200px;
+	padding: 20px 10px 20px 0;
+	text-align: left;
+	vertical-align: top;
+}
+
+.themeplate-meta-table td {
+	padding: 20px 0 20px 10px;
+}
+
+.themeplate-meta-table label span {
+	display: block;
+	padding-top: .25em;
+	color: #bbb;
+	font-weight: normal;
+}
+
+.themeplate-meta-table input[type="text"],
+.themeplate-meta-table textarea,
+.themeplate-meta-table select {
+	width: 100%;
+}
+
+.themeplate-meta-table .radio-label {
+	display: block;
+	margin: .5em 0;
+}
