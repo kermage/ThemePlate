@@ -62,7 +62,7 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 					case 'radio' :
 						echo '<td>';
 						foreach( $field['options'] as $value => $option ) {
-							echo '<label class="radio-label"><input type="radio" name="themeplate_meta[' . $id . ']" value="' . ( $value +  1 ) . '" class="radio"' . checked( $meta, ( $value +  1 ), false ) . ' /> ' . $option . '</label>';
+							echo '<label class="radio-label"><input type="radio" name="themeplate_meta[' . $id . ']" value="' . ( $value +  1 ) . '"' . checked( $meta, ( $value +  1 ), false ) . ' /> ' . $option . '</label>';
 						}
 						echo '</td>';
 						break;
@@ -72,7 +72,7 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 						break;
 
 					case 'color':
-						echo '<td><input type="text" name="themeplate_meta[' . $id . ']" id="' . $id . '" class="wp-color-picker" value="' . $meta . '" data-default-color="' . $field['std'] . '" /></td>';
+						echo '<td><input type="text" name="themeplate_meta[' . $id . ']" id="' . $id . '" class="wp-color-picker" value="' . $meta . '" data-default-color="' . $meta . '" /></td>';
 						break;
 
 					case 'file':

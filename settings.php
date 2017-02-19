@@ -67,6 +67,7 @@ if( ! function_exists( 'themeplate_add_settings' ) ) {
 				array(
 					'label_for' => $param['id'] . '_' . $id,
 					'type'      => $field['type'],
+					'std'       => $field['std'],
 					'options'   => $field['options'],
 					'multiple'  => $field['multiple']
 				)
@@ -83,6 +84,7 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 		$id = $param['label_for'];
 		$setting = get_option( 'themeplate' );
 		$setting = $setting[$id];
+		$setting = $setting ? $setting : $param['std'];
 
 		switch ( $param['type'] ) {
 			default:
@@ -96,6 +98,7 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 
 			case 'select' :
 				echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
 				foreach( $param['options'] as $value => $option ) {
 					echo '<option value="' . ( $value + 1 ) . '"';
 					if ( in_array( ( $value + 1 ), (array) $setting ) ) echo ' selected="selected"';
@@ -107,7 +110,7 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 
 			case 'radio' :
 				foreach( $param['options'] as $value => $option ) {
-					echo '<label><input type="radio" name="themeplate[' . $id . ']" value="' . ( $value +  1 ) . '"' . checked( $setting, ( $value +  1 ), false ) . ' /> ' . $option . '</label>';
+					echo '<label class="radio-label"><input type="radio" name="themeplate[' . $id . ']" value="' . ( $value +  1 ) . '"' . checked( $setting, ( $value +  1 ), false ) . ' /> ' . $option . '</label>';
 				}
 				break;
 
@@ -116,7 +119,7 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 				break;
 
 			case 'color':
-				echo '<input type="text" name="themeplate[' . $id . ']" id="' . $id . '" class="wp-color-picker" value="' . $setting . '" />';
+				echo '<input type="text" name="themeplate[' . $id . ']" id="' . $id . '" class="wp-color-picker" value="' . $setting . '" data-default-color="' . $setting . '" />';
 				break;
 
 			case 'file':
