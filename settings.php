@@ -9,17 +9,17 @@
 
 if( ! function_exists( 'themeplate_settings_menu' ) ) {
 	register_setting( 'themeplate', 'themeplate' );
-	
+
 	function themeplate_settings_menu() {
 		add_menu_page(
 			// Page Title
-			'Theme Settings',
+			'Theme Options',
 			// Menu Title
-			'Theme Settings',
+			'Theme Options',
 			// Capability
 			'edit_theme_options',
 			// Menu Slug
-			'themeplate-settings',
+			'theme-options',
 			// Content Function
 			'themeplate_settings_page'
 		);
@@ -33,7 +33,7 @@ if( ! function_exists( 'themeplate_settings_page' ) ) {
 		wp_enqueue_media();
 		?>
 		<div class="wrap">
-			<h1>Theme Settings</h1>
+			<h1><?php echo get_admin_page_title(); ?></h1>
 			<form action="options.php" method="post">
 				<div id="poststuff">
 					<div id="post-body" class="metabox-holder columns-2">
