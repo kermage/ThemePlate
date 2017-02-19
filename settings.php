@@ -29,6 +29,7 @@ if( ! function_exists( 'themeplate_settings_menu' ) ) {
 
 if( ! function_exists( 'themeplate_settings_page' ) ) {
 	function themeplate_settings_page() {
+		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 		?>
 		<div class="wrap">
@@ -40,10 +41,8 @@ if( ! function_exists( 'themeplate_settings_page' ) ) {
 							<div id="submitdiv" class="postbox">
 								<h2>Publish</h2>
 								<div id="major-publishing-actions">
-									<?php
-										settings_fields( 'themeplate' );
-										submit_button();
-									?>
+									<?php settings_fields( 'themeplate' ); ?>
+									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
 						</div>
@@ -66,9 +65,15 @@ if( ! function_exists( 'themeplate_settings_section' ) ) {
 		if ( ! isset( $wp_settings_sections[$page] ) )
 			return;
 
+		echo '<div id="normal-sortables" class="meta-box-sortables">';
+
 		foreach ( (array) $wp_settings_sections[$page] as $section ) {
 			printf( '<div id="%s-box" class="postbox">', $section['id'] );
-			echo '<h2>' . $section['title'] . '</h2>';
+			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
+			echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $section['title'] ) . '</span>';
+			echo '<span class="toggle-indicator" aria-hidden="true"></span>';
+			echo '</button>';
+			echo '<h2 class="hndle"><span>' . $section['title'] . '</span></h2>';
 			echo '<div class="inside">';
 
 			if ( $section['callback'] )
@@ -83,6 +88,8 @@ if( ! function_exists( 'themeplate_settings_section' ) ) {
 			echo '</div>';
 			echo '</div>';
 		}
+
+		echo '</div>';
 	}
 }
 
