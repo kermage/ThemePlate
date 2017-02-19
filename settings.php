@@ -35,11 +35,23 @@ if( ! function_exists( 'themeplate_settings_page' ) ) {
 			<h1>Theme Settings</h1>
 			<form action="options.php" method="post">
 				<div id="poststuff">
-				<?php
-					settings_fields( 'themeplate' );
-					themeplate_settings_section( 'themeplate' );
-					submit_button();
-				?>
+					<div id="post-body" class="metabox-holder columns-2">
+						<div id="postbox-container-1" class="postbox-container">
+							<div id="submitdiv" class="postbox">
+								<h2>Publish</h2>
+								<div id="major-publishing-actions">
+									<?php
+										settings_fields( 'themeplate' );
+										submit_button();
+									?>
+								</div>
+							</div>
+						</div>
+
+						<div id="postbox-container-2" class="postbox-container">
+							<?php themeplate_settings_section( 'themeplate' ); ?>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
