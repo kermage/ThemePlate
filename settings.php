@@ -34,14 +34,43 @@ if( ! function_exists( 'themeplate_settings_page' ) ) {
 		<div class="wrap">
 			<h1>Theme Settings</h1>
 			<form action="options.php" method="post">
+				<div id="poststuff">
 				<?php
 					settings_fields( 'themeplate' );
-					do_settings_sections( 'themeplate' );
+					themeplate_settings_section( 'themeplate' );
 					submit_button();
 				?>
+				</div>
 			</form>
 		</div>
 		<?php
+	}
+}
+
+if( ! function_exists( 'themeplate_settings_section' ) ) {
+	function themeplate_settings_section( $page ) {
+		global $wp_settings_sections, $wp_settings_fields;
+
+		if ( ! isset( $wp_settings_sections[$page] ) )
+			return;
+
+		foreach ( (array) $wp_settings_sections[$page] as $section ) {
+			printf( '<div id="%s-box" class="postbox">', $section['id'] );
+			echo '<h2>' . $section['title'] . '</h2>';
+			echo '<div class="inside">';
+
+			if ( $section['callback'] )
+				call_user_func( $section['callback'], $section );
+
+			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) )
+				continue;
+
+			echo '<table class="themeplate-meta-table">';
+			do_settings_fields( $page, $section['id'] );
+			echo '</table>';
+			echo '</div>';
+			echo '</div>';
+		}
 	}
 }
 
