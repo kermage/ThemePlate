@@ -171,14 +171,14 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 				break;
 
 			case 'file':
-				echo '<input type="hidden" name="themeplate[' . $id . ']" id="' . $id . '" value="' . $setting . '" /><div id="' . $id . '_files">';
+				echo '<input type="hidden" name="themeplate[' . $id . ']" id="themeplate_' . $id . '" value="' . $setting . '" /><div id="themeplate_' . $id . '_files">';
 				if ( $setting ) {
 					$files = explode( ',', $setting );
 					foreach( $files as $file ) {
 						echo '<p>' . basename( get_attached_file( $file ) ) . '</p>';
 					}
 				}
-				echo '</div><input type="button" class="button" id="' . $id . '_button" value="' . ( $setting ? 'Re-select' : 'Select' ) . '" ' . ( $param['multiple'] ? 'multiple' : '' ) . '/> <input type="' . ( $setting ? 'button' : 'hidden' ) . '" class="button" id="' . $id . '_remove" value="Remove" />';
+				echo '</div><input type="button" class="button" id="themeplate_' . $id . '_button" value="' . ( $setting ? 'Re-select' : 'Select' ) . '" ' . ( $param['multiple'] ? 'multiple' : '' ) . '/> <input type="' . ( $setting ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $id . '_remove" value="Remove" />';
 				break;
 
 			case 'date':

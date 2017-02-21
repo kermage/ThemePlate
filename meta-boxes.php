@@ -63,7 +63,7 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 					case 'radio' :
 						echo '<td>';
 						foreach( $field['options'] as $value => $option ) {
-							echo '<label class="radio-label"><input type="radio" name="themeplate_meta[' . $id . ']" value="' . ( $value +  1 ) . '"' . checked( $meta, ( $value +  1 ), false ) . ' /> ' . $option . '</label>';
+							echo '<label class="radio-label"><input type="radio" name="themeplate_meta[' . $id . ']" value="' . ( $value + 1 ) . '"' . checked( $meta, ( $value + 1 ), false ) . ' /> ' . $option . '</label>';
 						}
 						echo '</td>';
 						break;
@@ -77,14 +77,14 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 						break;
 
 					case 'file':
-						echo '<td><input type="hidden" name="themeplate_meta[' . $id . ']" id="' . $id . '" value="' . $meta . '" /><div id="' . $id . '_files">';
+						echo '<td><input type="hidden" name="themeplate_meta[' . $id . ']" id="themeplate_' . $id . '" value="' . $meta . '" /><div id="themeplate_' . $id . '_files">';
 						if ( $meta ) {
 							$files = explode( ',', $meta );
 							foreach( $files as $file ) {
 								echo '<p>' . basename( get_attached_file( $file ) ) . '</p>';
 							}
 						}
-						echo '</div><input type="button" class="button" id="' . $id . '_button" value="' . ( $meta ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $meta ? 'button' : 'hidden' ) . '" class="button" id="' . $id . '_remove" value="Remove" /></td>';
+						echo '</div><input type="button" class="button" id="themeplate_' . $id . '_button" value="' . ( $meta ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $meta ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $id . '_remove" value="Remove" /></td>';
 						break;
 
 					case 'date':
