@@ -35,6 +35,7 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 			echo '<table class="themeplate-meta-table">';
 
 			foreach ( $fields as $id => $field ) {
+				$id = $meta_box['args']['id'] . '_' . $id;
 				$meta = get_post_meta( $post->ID, $id, true );
 				$meta = $meta ? $meta : $field['std'];
 				echo '<tr><th><label for="' . $id . '"><strong>' . $field['name'] . '</strong><span>' . $field['desc'] . '</span></label></th>';
