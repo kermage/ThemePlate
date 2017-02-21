@@ -12,10 +12,11 @@ if( ! function_exists( 'themeplate_add_meta_box' ) ) {
 		if ( ! is_array( $meta_box ) )
 			return false;
 
+		$id = 'themeplate_' . $meta_box['id'];
 		if ( $meta_box['screen'] == 'post' )
-			$meta_box['id'] =  $meta_box['id'] . '_post';
+			$id .= '_post';
 
-		add_meta_box( $meta_box['id'], $meta_box['title'], 'themeplate_create_meta_box', $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+		add_meta_box( $id, $meta_box['title'], 'themeplate_create_meta_box', $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 	}
 }
 

@@ -1,20 +1,20 @@
 jQuery( document ).ready( function( $ ) {
 
 	function HideAll() {
-		$( 'div[id^="themeplate_meta_box_"][id $="_post"]' ).hide();
+		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
 	};
 
 	HideAll();
 
-	$( '#themeplate_meta_box_' + $( 'input[name=post_format]:checked' ).val() + '_post' ).show();
+	$( '#themeplate_' + $( 'input[name=post_format]:checked' ).val() + '_post' ).show();
 
 	$( '#post-formats-select input' ).change( function() {
 		HideAll();
-		if ( $( '#themeplate_meta_box_' + $( this ).val() + '_post' ).length ) {
-			$( '#themeplate_meta_box_' + $( this ).val() + '_post' ).show();
+		if ( $( '#themeplate_' + $( this ).val() + '_post' ).length ) {
+			$( '#themeplate_' + $( this ).val() + '_post' ).show();
 
 			$( 'html,body' ).animate({
-				scrollTop: $( '#themeplate_meta_box_' + $( this ).val() + '_post' ).offset().top
+				scrollTop: $( '#themeplate_' + $( this ).val() + '_post' ).offset().top
 			});
 		}
 	});
