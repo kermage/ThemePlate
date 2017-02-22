@@ -123,6 +123,18 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 						}
 						echo '</select></td>';
 						break;
+
+					case 'term':
+						echo '<td><select name="themeplate_meta[' . $id . ']' . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+						echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
+						$terms = get_terms( array ( 'taxonomy' => $field['options'] ) );
+						foreach( $terms as $term ) {
+							echo '<option value="' . $term->term_id . '"';
+							if ( in_array( $term->term_id, (array) $meta ) ) echo ' selected="selected"';
+							echo '>' . $term->name . '</option>';
+						}
+						echo '</select></td>';
+						break;
 				}
 				echo '</tr>';
 			}

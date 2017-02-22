@@ -214,6 +214,18 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 				}
 				echo '</select>';
 				break;
+
+			case 'term':
+				echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
+				$terms = get_terms( array ( 'taxonomy' => $param['options'] ) );
+				foreach( $terms as $term ) {
+					echo '<option value="' . $term->term_id . '"';
+					if ( in_array( $term->term_id, (array) $setting ) ) echo ' selected="selected"';
+					echo '>' . $term->name . '</option>';
+				}
+				echo '</select>';
+				break;
 		}
 	}
 }
