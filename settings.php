@@ -77,7 +77,7 @@ if( ! function_exists( 'themeplate_settings_section' ) ) {
 			echo '<div class="inside">';
 
 			if ( $section['callback'] )
-				call_user_func( $section['callback'], $section );
+				echo '<p>' . $section['callback'] . '</p>';
 
 			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) )
 				continue;
@@ -101,7 +101,7 @@ if( ! function_exists( 'themeplate_add_settings' ) ) {
 		add_settings_section(
 			$param['id'],
 			$param['title'],
-			$param['callback'],
+			$param['description'],
 			'themeplate'
 		);
 
