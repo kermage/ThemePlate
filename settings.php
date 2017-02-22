@@ -108,7 +108,7 @@ if( ! function_exists( 'themeplate_add_settings' ) ) {
 		foreach ( $param['fields'] as $id => $field ) {
 			add_settings_field(
 				$param['id'] . '_' . $id,
-				$field['name'],
+				'<strong>' . $field['name'] . '</strong><span>' . $field['desc'] . '</span>',
 				'themeplate_create_settings',
 				'themeplate',
 				$param['id'],
