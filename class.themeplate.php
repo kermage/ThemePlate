@@ -24,6 +24,7 @@ class ThemePlate {
 
 	private function __construct() {
 
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.fields.php' );
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.meta-boxes.php' );
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.post-types.php' );
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.settings.php' );
