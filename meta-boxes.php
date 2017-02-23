@@ -70,7 +70,17 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 						break;
 
 					case 'checkbox' :
-						echo '<td><input type="hidden" name="themeplate_meta[' . $id . ']" value="0" /><input type="checkbox" id="' . $id . '" name="themeplate_meta[' . $id . ']" value="1"' . checked( $meta, 1, false ) . ' /></td>';
+						echo '<td><input type="hidden" name="themeplate_meta[' . $id . ']" />';
+						if ( $field['options'] ) {
+							foreach( $field['options'] as $value => $option ) {
+								echo '<label class="radio-label"><input type="checkbox" name="themeplate_meta[' . $id . '][]" value="' . ( $value + 1 ) . '"';
+								if ( in_array( ( $value + 1 ), (array) $meta ) ) echo ' checked="checked"';
+								echo ' /> ' . $option . '</label>';
+							}
+						} else {
+							echo '<input type="checkbox" id="' . $id . '" name="themeplate_meta[' . $id . ']" value="1"' . checked( $meta, 1, false ) . ' />';
+						}
+						echo '</td>';
 						break;
 
 					case 'color':

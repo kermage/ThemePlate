@@ -163,7 +163,15 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 				break;
 
 			case 'checkbox' :
-				echo '<input type="checkbox" name="themeplate[' . $id . ']" id="' . $id . '" value="1" ' . checked( $setting, 1, false ) . ' />';
+				if ( $param['options'] ) {
+					foreach( $param['options'] as $value => $option ) {
+						echo '<label class="radio-label"><input type="checkbox" name="themeplate[' . $id . '][]" value="' . ( $value + 1 ) . '"';
+						if ( in_array( ( $value + 1 ), (array) $setting ) ) echo ' checked="checked"';
+						echo ' /> ' . $option . '</label>';
+					}
+				} else {
+					echo '<input type="checkbox" id="' . $id . '" name="themeplate[' . $id . ']" value="1"' . checked( $setting, 1, false ) . ' />';
+				}
 				break;
 
 			case 'color':
