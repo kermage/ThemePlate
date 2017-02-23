@@ -7,8 +7,30 @@
  * @since 0.1.0
  */
 
-if( ! function_exists( 'themeplate_add_post_type' ) ) {
-	function themeplate_add_post_type( $param ) {
+
+class ThemePlate_PostTypes {
+
+	private static $instance;
+
+
+	public static function instance() {
+
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+
+	}
+
+
+	public function __construct() {
+
+
+	}
+
+
+	public function add_type( $param ) {
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -58,10 +80,9 @@ if( ! function_exists( 'themeplate_add_post_type' ) ) {
 
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
 	}
-}
 
-if( ! function_exists( 'themeplate_add_taxonomy' ) ) {
-	function themeplate_add_taxonomy( $param ) {
+
+	public function add_tax( $param ) {
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -93,4 +114,7 @@ if( ! function_exists( 'themeplate_add_taxonomy' ) ) {
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
 	}
+
 }
+
+ThemePlate_PostTypes::instance();

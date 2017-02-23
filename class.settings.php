@@ -7,10 +7,32 @@
  * @since 0.1.0
  */
 
-if( ! function_exists( 'themeplate_settings_menu' ) ) {
-	register_setting( 'themeplate', 'themeplate' );
 
-	function themeplate_settings_menu() {
+class ThemePlate_Settings {
+
+	private static $instance;
+
+
+	public static function instance() {
+
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+
+	}
+
+
+	public function __construct() {
+
+		register_setting( 'themeplate', 'themeplate' );
+		add_action( 'admin_menu', array( $this, 'menu' ) );
+
+	}
+	
+
+	public function menu() {
 		add_menu_page(
 			// Page Title
 			'Theme Options',
@@ -21,14 +43,12 @@ if( ! function_exists( 'themeplate_settings_menu' ) ) {
 			// Menu Slug
 			'theme-options',
 			// Content Function
-			'themeplate_settings_page'
+			array( $this, 'page' )
 		);
 	}
-	add_action( 'admin_menu', 'themeplate_settings_menu' );
-}
 
-if( ! function_exists( 'themeplate_settings_page' ) ) {
-	function themeplate_settings_page() {
+
+	public function page() {
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 		?>
@@ -48,7 +68,7 @@ if( ! function_exists( 'themeplate_settings_page' ) ) {
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php themeplate_settings_section( 'themeplate' ); ?>
+							<?php $this->section( 'themeplate' ); ?>
 						</div>
 					</div>
 				</div>
@@ -56,10 +76,9 @@ if( ! function_exists( 'themeplate_settings_page' ) ) {
 		</div>
 		<?php
 	}
-}
 
-if( ! function_exists( 'themeplate_settings_section' ) ) {
-	function themeplate_settings_section( $page ) {
+
+	public function section( $page ) {
 		global $wp_settings_sections, $wp_settings_fields;
 
 		if ( ! isset( $wp_settings_sections[$page] ) )
@@ -91,10 +110,9 @@ if( ! function_exists( 'themeplate_settings_section' ) ) {
 
 		echo '</div>';
 	}
-}
 
-if( ! function_exists( 'themeplate_add_settings' ) ) {
-	function themeplate_add_settings( $param ) {
+
+	public function add( $param ) {
 		if ( ! is_array( $param ) )
 			return false;
 
@@ -109,7 +127,7 @@ if( ! function_exists( 'themeplate_add_settings' ) ) {
 			add_settings_field(
 				$param['id'] . '_' . $id,
 				'<strong>' . $field['name'] . '</strong><span>' . $field['desc'] . '</span>',
-				'themeplate_create_settings',
+				array( $this, 'create' ),
 				'themeplate',
 				$param['id'],
 				array(
@@ -122,10 +140,9 @@ if( ! function_exists( 'themeplate_add_settings' ) ) {
 			);
 		}
 	}
-}
 
-if( ! function_exists( 'themeplate_create_settings' ) ) {
-	function themeplate_create_settings( $param ) {
+
+	public function create( $param ) {
 		if ( ! is_array( $param ) )
 			return false;
 
@@ -236,4 +253,7 @@ if( ! function_exists( 'themeplate_create_settings' ) ) {
 				break;
 		}
 	}
+
 }
+
+ThemePlate_Settings::instance();

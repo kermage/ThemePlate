@@ -7,8 +7,31 @@
  * @since 0.1.0
  */
 
-if( ! function_exists( 'themeplate_add_meta_box' ) ) {
-	function themeplate_add_meta_box( $meta_box ) {
+
+class ThemePlate_MetaBoxes {
+
+	private static $instance;
+
+
+	public static function instance() {
+
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+
+	}
+
+
+	public function __construct() {
+
+		add_action( 'save_post', array( $this, 'save' ) );
+
+	}
+
+
+	public function add( $meta_box ) {
 		if ( ! is_array( $meta_box ) )
 			return false;
 
@@ -16,12 +39,11 @@ if( ! function_exists( 'themeplate_add_meta_box' ) ) {
 		if ( $meta_box['screen'] == 'post' )
 			$id .= '_post';
 
-		add_meta_box( $id, $meta_box['title'], 'themeplate_create_meta_box', $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 	}
-}
 
-if( ! function_exists( 'themeplate_create_meta_box' ) ) {
-	function themeplate_create_meta_box( $post, $meta_box ) {
+
+	public function create( $post, $meta_box ) {
 		if ( ! is_array( $meta_box ) )
 			return false;
 
@@ -151,10 +173,9 @@ if( ! function_exists( 'themeplate_create_meta_box' ) ) {
 			echo '</table>';
 		}
 	}
-}
 
-if( ! function_exists( 'themeplate_save_meta_box' ) ) {
-	function themeplate_save_meta_box( $post_id ) {
+
+	public function save( $post_id ) {
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return;
 
@@ -173,5 +194,7 @@ if( ! function_exists( 'themeplate_save_meta_box' ) ) {
 			update_post_meta( $post_id, $key, $val );
 		}
 	}
-	add_action( 'save_post', 'themeplate_save_meta_box' );
+
 }
+
+ThemePlate_MetaBoxes::instance();
