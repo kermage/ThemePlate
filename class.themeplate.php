@@ -28,6 +28,7 @@ class ThemePlate {
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.meta-boxes.php' );
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.post-types.php' );
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.settings.php' );
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.taxonomies.php' );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 
