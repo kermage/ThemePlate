@@ -146,112 +146,13 @@ class ThemePlate_Settings {
 		if ( ! is_array( $param ) )
 			return false;
 
-		$id = $param['label_for'];
-		$setting = get_option( 'themeplate' );
-		$setting = $setting[$id];
-		$setting = $setting ? $setting : $param['std'];
+		$field = $param;
+		$field['id'] = $param['label_for'];
+		$field['value'] = get_option( 'themeplate' );
+		$field['value'] = $field['value'][$field['id']];
+		$field['value'] = $field['value'] ? $field['value'] : $param['std'];
 
-		switch ( $param['type'] ) {
-			default:
-			case 'text':
-				echo '<input type="text" name="themeplate[' . $id . ']" id="' . $id . '" value="' . $setting . '" />';
-				break;
-
-			case 'textarea':
-				echo '<textarea name="themeplate[' . $id . ']" id="' . $id . '" rows="4">' . $setting . '</textarea>';
-				break;
-
-			case 'select' :
-				echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
-				foreach( $param['options'] as $value => $option ) {
-					echo '<option value="' . ( $value + 1 ) . '"';
-					if ( in_array( ( $value + 1 ), (array) $setting ) ) echo ' selected="selected"';
-					else selected( $setting, ( $value + 1 ) );
-					echo '>' . $option . '</option>';
-				}
-				echo '</select>';
-				break;
-
-			case 'radio' :
-				foreach( $param['options'] as $value => $option ) {
-					echo '<label class="radio-label"><input type="radio" name="themeplate[' . $id . ']" value="' . ( $value +  1 ) . '"' . checked( $setting, ( $value +  1 ), false ) . ' /> ' . $option . '</label>';
-				}
-				break;
-
-			case 'checkbox' :
-				if ( $param['options'] ) {
-					foreach( $param['options'] as $value => $option ) {
-						echo '<label class="radio-label"><input type="checkbox" name="themeplate[' . $id . '][]" value="' . ( $value + 1 ) . '"';
-						if ( in_array( ( $value + 1 ), (array) $setting ) ) echo ' checked="checked"';
-						echo ' /> ' . $option . '</label>';
-					}
-				} else {
-					echo '<input type="checkbox" id="' . $id . '" name="themeplate[' . $id . ']" value="1"' . checked( $setting, 1, false ) . ' />';
-				}
-				break;
-
-			case 'color':
-				echo '<input type="text" name="themeplate[' . $id . ']" id="' . $id . '" class="wp-color-picker" value="' . $setting . '" data-default-color="' . $setting . '" />';
-				break;
-
-			case 'file':
-				echo '<input type="hidden" name="themeplate[' . $id . ']" id="themeplate_' . $id . '" value="' . $setting . '" /><div id="themeplate_' . $id . '_files">';
-				if ( $setting ) {
-					$files = explode( ',', $setting );
-					foreach( $files as $file ) {
-						echo '<p>' . basename( get_attached_file( $file ) ) . '</p>';
-					}
-				}
-				echo '</div><input type="button" class="button" id="themeplate_' . $id . '_button" value="' . ( $setting ? 'Re-select' : 'Select' ) . '" ' . ( $param['multiple'] ? 'multiple' : '' ) . '/> <input type="' . ( $setting ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $id . '_remove" value="Remove" />';
-				break;
-
-			case 'date':
-				echo '<input type="date" name="themeplate[' . $id . ']" id="' . $id . '" value="' . $setting . '" />';
-				break;
-
-			case 'time':
-				echo '<input type="time" name="themeplate[' . $id . ']" id="' . $id . '" value="' . $setting . '" />';
-				break;
-
-			case 'number':
-				echo '<input type="number" name="themeplate[' . $id . ']" id="' . $id . '" value="' . $setting . '"';
-				if ( is_array( $param['options'] ) ) foreach( $param['options'] as $option => $value ) echo $option . '="' . $value . '"';
-				echo ' />';
-				break;
-
-			case 'editor':
-				$settings = array(
-					'textarea_name' => 'themeplate[' . $id . ']',
-					'textarea_rows' => 10
-				);
-				wp_editor( $setting, $id, $settings );
-				break;
-
-			case 'page':
-				echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
-				$pages = get_pages( array ( 'post_type' => $param['options'] ) );
-				foreach( $pages as $page ) {
-					echo '<option value="' . $page->ID . '"';
-					if ( in_array( $page->ID, (array) $setting ) ) echo ' selected="selected"';
-					echo '>' . $page->post_title . '</option>';
-				}
-				echo '</select>';
-				break;
-
-			case 'term':
-				echo '<select name="themeplate[' . $id . ']' . ( $param['multiple'] ? '[]' : '' ) . '" id="' . $id . '" ' . ( $param['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
-				$terms = get_terms( array ( 'taxonomy' => $param['options'] ) );
-				foreach( $terms as $term ) {
-					echo '<option value="' . $term->term_id . '"';
-					if ( in_array( $term->term_id, (array) $setting ) ) echo ' selected="selected"';
-					echo '>' . $term->name . '</option>';
-				}
-				echo '</select>';
-				break;
-		}
+		ThemePlate_Fields::instance()->render( $field );
 	}
 
 }
