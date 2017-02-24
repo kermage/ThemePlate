@@ -89,7 +89,7 @@ class ThemePlate_MetaBoxes {
 				return;
 		}
 
-		foreach( $_POST['themeplate_meta'] as $key => $val ) {
+		foreach( $_POST['themeplate'] as $key => $val ) {
 			update_post_meta( $post_id, $key, $val );
 		}
 	}
