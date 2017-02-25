@@ -65,10 +65,11 @@ class ThemePlate_Settings {
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
+							<?php $this->section( 'side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php $this->section( 'themeplate' ); ?>
+							<?php $this->section( 'normal' ); ?>
 						</div>
 					</div>
 				</div>
@@ -84,7 +85,7 @@ class ThemePlate_Settings {
 		if ( ! isset( $wp_settings_sections[$page] ) )
 			return;
 
-		echo '<div id="normal-sortables" class="meta-box-sortables">';
+		echo '<div id="' . $page . '-sortables" class="meta-box-sortables">';
 
 		foreach ( (array) $wp_settings_sections[$page] as $section ) {
 			printf( '<div id="%s-box" class="postbox">', $section['id'] );
@@ -120,7 +121,7 @@ class ThemePlate_Settings {
 			$param['id'],
 			$param['title'],
 			$param['description'],
-			'themeplate'
+			( $param['context'] ? $param['context'] : 'normal' )
 		);
 
 		foreach ( $param['fields'] as $id => $field ) {
@@ -128,7 +129,7 @@ class ThemePlate_Settings {
 				$param['id'] . '_' . $id,
 				'<strong>' . $field['name'] . '</strong><span>' . $field['desc'] . '</span>',
 				array( $this, 'create' ),
-				'themeplate',
+				( $param['context'] ? $param['context'] : 'normal' ),
 				$param['id'],
 				array(
 					'label_for' => $param['id'] . '_' . $id,
