@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Setup meta boxes
+ * Setup post meta boxes
  *
  * @package ThemePlate
  * @since 0.1.0
  */
 
 
-class ThemePlate_MetaBoxes {
+class ThemePlate_PostMeta {
 
 	private static $instance;
 

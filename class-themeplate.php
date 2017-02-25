@@ -24,17 +24,17 @@ class ThemePlate {
 
 	private function __construct() {
 
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.fields.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.meta-boxes.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.post-types.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.settings.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.taxonomies.php' );
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-cpt.php' );
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-fields.php' );
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-postmeta.php' );
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-settings.php' );
+		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-termmeta.php' );
 
+		ThemePlate_CPT::instance();
 		ThemePlate_Fields::instance();
-		ThemePlate_MetaBoxes::instance();
-		ThemePlate_PostTypes::instance();
+		ThemePlate_PostMeta::instance();
 		ThemePlate_Settings::instance();
-		ThemePlate_Taxonomies::instance();
+		ThemePlate_TermMeta::instance();
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 

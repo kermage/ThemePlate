@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Setup custom post types
+ * Setup custom posts and taxonomies
  *
  * @package ThemePlate
  * @since 0.1.0
  */
 
 
-class ThemePlate_PostTypes {
+class ThemePlate_CPT {
 
 	private static $instance;
 

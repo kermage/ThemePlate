@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Setup taxonomies
+ * Setup term meta boxes
  *
  * @package ThemePlate
  * @since 0.1.0
  */
 
 
-class ThemePlate_Taxonomies {
+class ThemePlate_TermMeta {
 
 	protected $meta_box;
 
