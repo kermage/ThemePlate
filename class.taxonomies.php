@@ -99,5 +99,3 @@ class ThemePlate_Taxonomies {
 	}
 
 }
-
-ThemePlate_Taxonomies::instance();

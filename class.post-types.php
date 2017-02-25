@@ -116,5 +116,3 @@ class ThemePlate_PostTypes {
 	}
 
 }
-
-ThemePlate_PostTypes::instance();

@@ -148,5 +148,3 @@ class ThemePlate_Fields {
 	}
 
 }
-
-ThemePlate_Fields::instance();

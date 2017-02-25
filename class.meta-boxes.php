@@ -95,5 +95,3 @@ class ThemePlate_MetaBoxes {
 	}
 
 }
-
-ThemePlate_MetaBoxes::instance();

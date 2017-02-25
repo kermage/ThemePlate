@@ -157,5 +157,3 @@ class ThemePlate_Settings {
 	}
 
 }
-
-ThemePlate_Settings::instance();

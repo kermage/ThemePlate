@@ -30,6 +30,12 @@ class ThemePlate {
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.settings.php' );
 		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class.taxonomies.php' );
 
+		ThemePlate_Fields::instance();
+		ThemePlate_MetaBoxes::instance();
+		ThemePlate_PostTypes::instance();
+		ThemePlate_Settings::instance();
+		ThemePlate_Taxonomies::instance();
+
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 
 	}
