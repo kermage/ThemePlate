@@ -29,4 +29,4 @@ define( 'TP_URL',     plugin_dir_url( TP_FILE ) );
 define( 'TP_PATH',    plugin_dir_path( TP_FILE ) );
 
 // Load the ThemePlate plugin
-require_once TP_PATH . 'class.' . basename( TP_FILE );
+require_once( TP_PATH . 'class-' . basename( TP_FILE ) );
