@@ -43,7 +43,7 @@ class ThemePlate_Settings {
 							<div id="submitdiv" class="postbox">
 								<h2>Publish</h2>
 								<div id="major-publishing-actions">
-									<?php settings_fields( 'themeplate' ); ?>
+									<?php settings_fields( ThemePlate()->key ); ?>
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
@@ -131,7 +131,7 @@ class ThemePlate_Settings {
 
 		$field = $param;
 		$field['id'] = $param['label_for'];
-		$field['value'] = get_option( 'themeplate' );
+		$field['value'] = get_option( ThemePlate()->key );
 		$field['value'] = $field['value'][$field['id']];
 		$field['value'] = $field['value'] ? $field['value'] : $param['std'];
 

@@ -38,6 +38,8 @@ class ThemePlate_PostMeta {
 		if ( $meta_box['screen'] == 'post' )
 			$id .= '_post';
 
+		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
+
 		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 	}
 
@@ -88,7 +90,7 @@ class ThemePlate_PostMeta {
 				return;
 		}
 
-		foreach( $_POST['themeplate'] as $key => $val ) {
+		foreach( $_POST[ThemePlate()->key] as $key => $val ) {
 			update_post_meta( $post_id, $key, $val );
 		}
 	}

@@ -35,20 +35,22 @@ class ThemePlate_Fields {
 		if ( ! is_array( $field ) )
 			return false;
 
+		$field_name = ThemePlate()->key . '[' . $field['id'] . ']';
+
 		$list = false;
 
 		switch ( $field['type'] ) {
 			default:
 			case 'text':
-				echo '<input type="text" name="themeplate[' . $field['id'] . ']" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
+				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
 				break;
 
 			case 'textarea' :
-				echo '<textarea name="themeplate[' . $field['id'] . ']" id="' . $field['id'] . '" rows="4">' . $field['value'] . '</textarea>';
+				echo '<textarea name="' . $field_name . '" id="' . $field['id'] . '" rows="4">' . $field['value'] . '</textarea>';
 				break;
 
 			case 'select' :
-				echo '<select name="themeplate[' . $field['id'] . ']' . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
 				foreach( $field['options'] as $value => $option ) {
 					echo '<option value="' . ( $value + 1 ) . '"';
@@ -62,7 +64,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'radio' :
 				foreach( $field['options'] as $value => $option ) {
-					echo '<label><input type="radio" name="themeplate[' . $field['id'] . ']" value="' . ( $value + 1 ) . '"' . checked( $field['value'], ( $value + 1 ), false ) . ' />' . $option . '</label>';
+					echo '<label><input type="radio" name="' . $field_name . '" value="' . ( $value + 1 ) . '"' . checked( $field['value'], ( $value + 1 ), false ) . ' />' . $option . '</label>';
 					echo ( $list ? '<br>' : '' );
 				}
 				break;
@@ -70,25 +72,25 @@ class ThemePlate_Fields {
 			case 'checklist' :
 				$list = true;
 			case 'checkbox' :
-				echo '<input type="hidden" name="themeplate[' . $field['id'] . ']" />';
+				echo '<input type="hidden" name="' . $field_name . '" />';
 				if ( $field['options'] ) {
 					foreach( $field['options'] as $value => $option ) {
-						echo '<label><input type="checkbox" name="themeplate[' . $field['id'] . '][]" value="' . ( $value + 1 ) . '"';
+						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . ( $value + 1 ) . '"';
 						if ( in_array( ( $value + 1 ), (array) $field['value'] ) ) echo ' checked="checked"';
 						echo ' />' . $option . '</label>';
 						echo ( $list ? '<br>' : '' );
 					}
 				} else {
-					echo '<input type="checkbox" id="' . $field['id'] . '" name="themeplate[' . $field['id'] . ']" value="1"' . checked( $field['value'], 1, false ) . ' />';
+					echo '<input type="checkbox" id="' . $field['id'] . '" name="' . $field_name . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
 				}
 				break;
 
 			case 'color':
-				echo '<input type="text" name="themeplate[' . $field['id'] . ']" id="' . $field['id'] . '" class="wp-color-picker" value="' . $field['value'] . '" data-default-color="' . $field['value'] . '" />';
+				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" class="wp-color-picker" value="' . $field['value'] . '" data-default-color="' . $field['value'] . '" />';
 				break;
 
 			case 'file':
-				echo '<input type="hidden" name="themeplate[' . $field['id'] . ']" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" /><div id="themeplate_' . $field['id'] . '_files">';
+				echo '<input type="hidden" name="' . $field_name . '" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" /><div id="themeplate_' . $field['id'] . '_files">';
 				if ( $field['value'] ) {
 					$files = explode( ',', $field['value'] );
 					foreach( $files as $file ) {
@@ -99,29 +101,29 @@ class ThemePlate_Fields {
 				break;
 
 			case 'date':
-				echo '<input type="date" name="themeplate[' . $field['id'] . ']" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
+				echo '<input type="date" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
 				break;
 
 			case 'time':
-				echo '<input type="time" name="themeplate[' . $field['id'] . ']" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
+				echo '<input type="time" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
 				break;
 
 			case 'number':
-				echo '<input type="number" name="themeplate[' . $field['id'] . ']" id="' . $field['id'] . '" value="' . $field['value'] . '"';
+				echo '<input type="number" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
 				if ( is_array( $field['options'] ) ) foreach( $field['options'] as $option => $value ) echo $option . '="' . $value . '"';
 				echo ' />';
 				break;
 
 			case 'editor':
 				$settings = array(
-					'textarea_name' => 'themeplate[' . $field['id'] . ']',
+					'textarea_name' => $field_name,
 					'textarea_rows' => 10
 				);
 				wp_editor( $field['value'], $field['id'], $settings );
 				break;
 
 			case 'page':
-				echo '<select name="themeplate[' . $field['id'] . ']' . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
 				$pages = get_pages( array ( 'post_type' => $field['options'] ) );
 				foreach( $pages as $page ) {
@@ -133,7 +135,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'term':
-				echo '<select name="themeplate[' . $field['id'] . ']' . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
 				$terms = get_terms( array ( 'taxonomy' => $field['options'] ) );
 				foreach( $terms as $term ) {

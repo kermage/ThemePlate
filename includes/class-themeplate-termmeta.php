@@ -10,9 +10,9 @@
 
 class ThemePlate_TermMeta {
 
-	protected $meta_box;
+	private $meta_box;
 
-	protected $form_type;
+	private $form_type;
 
 
 	public static function instance() {
@@ -92,7 +92,7 @@ class ThemePlate_TermMeta {
 
 	public function save( $term_id ) {
 
-		foreach( $_POST['themeplate'] as $key => $val ) {
+		foreach( $_POST[ThemePlate()->key] as $key => $val ) {
 			update_term_meta( $term_id, $key, $val );
 		}
 

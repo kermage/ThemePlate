@@ -71,7 +71,7 @@ class ThemePlate {
 
 	public function admin_init() {
 
-		register_setting( 'themeplate', 'themeplate' );
+		register_setting( $this->key, $this->key );
 
 	}
 
@@ -93,5 +93,3 @@ function ThemePlate( $key = NULL ) {
 	return ThemePlate::instance( $key );
 
 }
-
-ThemePlate();
