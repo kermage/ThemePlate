@@ -54,7 +54,7 @@ class ThemePlate_MetaBoxes {
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		if ( is_array( $fields ) ) {
-			echo '<table class="themeplate-meta-table">';
+			echo '<table class="themeplate form-table">';
 
 			foreach ( $fields as $id => $field ) {
 				$field['id'] = $meta_box['args']['id'] . '_' . $id;
@@ -62,7 +62,7 @@ class ThemePlate_MetaBoxes {
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
 				echo '<tr>';
-					echo '<th><label for="' . $field['id'] . '"><strong>' . $field['name'] . '</strong><span>' . $field['desc'] . '</span></label></th>';
+					echo '<th scope="row"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></th>';
 					echo '<td>';
 						ThemePlate_Fields::instance()->render( $field );
 					echo '</td>';

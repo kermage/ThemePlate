@@ -59,6 +59,7 @@ class ThemePlate_Fields {
 			case 'radio' :
 				foreach( $field['options'] as $value => $option ) {
 					echo '<label class="radio-label"><input type="radio" name="themeplate[' . $field['id'] . ']" value="' . ( $value + 1 ) . '"' . checked( $field['value'], ( $value + 1 ), false ) . ' /> ' . $option . '</label>';
+					echo '<br>';
 				}
 				break;
 
@@ -69,6 +70,7 @@ class ThemePlate_Fields {
 						echo '<label class="radio-label"><input type="checkbox" name="themeplate[' . $field['id'] . '][]" value="' . ( $value + 1 ) . '"';
 						if ( in_array( ( $value + 1 ), (array) $field['value'] ) ) echo ' checked="checked"';
 						echo ' /> ' . $option . '</label>';
+						echo '<br>';
 					}
 				} else {
 					echo '<input type="checkbox" id="' . $field['id'] . '" name="themeplate[' . $field['id'] . ']" value="1"' . checked( $field['value'], 1, false ) . ' />';

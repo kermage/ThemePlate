@@ -102,7 +102,7 @@ class ThemePlate_Settings {
 			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) )
 				continue;
 
-			echo '<table class="themeplate-meta-table">';
+			echo '<table class="themeplate form-table">';
 			do_settings_fields( $page, $section['id'] );
 			echo '</table>';
 			echo '</div>';
@@ -127,7 +127,7 @@ class ThemePlate_Settings {
 		foreach ( $param['fields'] as $id => $field ) {
 			add_settings_field(
 				$param['id'] . '_' . $id,
-				'<strong>' . $field['name'] . '</strong><span>' . $field['desc'] . '</span>',
+				$field['name'] . '<span>' . $field['desc'] . '</span>',
 				array( $this, 'create' ),
 				( $param['context'] ? $param['context'] : 'normal' ),
 				$param['id'],
