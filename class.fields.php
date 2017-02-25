@@ -35,6 +35,8 @@ class ThemePlate_Fields {
 		if ( ! is_array( $field ) )
 			return false;
 
+		$list = false;
+
 		switch ( $field['type'] ) {
 			default:
 			case 'text':
@@ -56,21 +58,25 @@ class ThemePlate_Fields {
 				echo '</select>';
 				break;
 
+			case 'radiolist' :
+				$list = true;
 			case 'radio' :
 				foreach( $field['options'] as $value => $option ) {
-					echo '<label class="radio-label"><input type="radio" name="themeplate[' . $field['id'] . ']" value="' . ( $value + 1 ) . '"' . checked( $field['value'], ( $value + 1 ), false ) . ' /> ' . $option . '</label>';
-					echo '<br>';
+					echo '<label><input type="radio" name="themeplate[' . $field['id'] . ']" value="' . ( $value + 1 ) . '"' . checked( $field['value'], ( $value + 1 ), false ) . ' />' . $option . '</label>';
+					echo ( $list ? '<br>' : '' );
 				}
 				break;
 
+			case 'checklist' :
+				$list = true;
 			case 'checkbox' :
 				echo '<input type="hidden" name="themeplate[' . $field['id'] . ']" />';
 				if ( $field['options'] ) {
 					foreach( $field['options'] as $value => $option ) {
-						echo '<label class="radio-label"><input type="checkbox" name="themeplate[' . $field['id'] . '][]" value="' . ( $value + 1 ) . '"';
+						echo '<label><input type="checkbox" name="themeplate[' . $field['id'] . '][]" value="' . ( $value + 1 ) . '"';
 						if ( in_array( ( $value + 1 ), (array) $field['value'] ) ) echo ' checked="checked"';
-						echo ' /> ' . $option . '</label>';
-						echo '<br>';
+						echo ' />' . $option . '</label>';
+						echo ( $list ? '<br>' : '' );
 					}
 				} else {
 					echo '<input type="checkbox" id="' . $field['id'] . '" name="themeplate[' . $field['id'] . ']" value="1"' . checked( $field['value'], 1, false ) . ' />';
