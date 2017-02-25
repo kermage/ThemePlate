@@ -12,6 +12,8 @@ class ThemePlate_Taxonomies {
 
 	protected $meta_box;
 
+	protected $form_type;
+
 
 	public static function instance() {
 
@@ -33,34 +35,51 @@ class ThemePlate_Taxonomies {
 
 		$this->meta_box = $meta_box;
 
-		add_action( $meta_box['taxonomy'] . '_add_form_fields', array( $this, 'create' ) );
-		add_action( $meta_box['taxonomy'] . '_edit_form_fields', array( $this, 'create' ) );
+		add_action( $meta_box['taxonomy'] . '_add_form_fields', array( $this, 'add_form' ) );
+		add_action( $meta_box['taxonomy'] . '_edit_form_fields', array( $this, 'edit_form' ) );
 		add_action( 'created_' . $meta_box['taxonomy'], array( $this, 'save' ) );
 		add_action( 'edited_' . $meta_box['taxonomy'], array( $this, 'save' ) );
 
 	}
 
 
-	public function create( $tag ) {
+	public function add_form( $tag ) {
+
+		$this->form_type = 'add';
+		$this->create( $tag->term_id );
+
+	}
+
+
+	public function edit_form( $tag ) {
+
+		$this->form_type = 'edit';
+		$this->create( $tag->term_id );
+
+	}
+
+
+	public function create( $term_id ) {
 
 		wp_enqueue_media();
 
 		$meta_box = $this->meta_box;
+		$form_type = $this->form_type;
 		$fields = $meta_box['fields'];
 
 		if ( is_array( $fields ) ) {
 
 			foreach ( $fields as $id => $field ) {
 				$field['id'] = $meta_box['id'] . '_' . $id;
-				$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
+				$field['value'] = get_term_meta( $term_id, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-				echo '<tr class="form-field">';
-					echo '<th><label for="' . $field['id'] . '"><strong>' . $field['name'] . '</strong></label></th>';
-					echo '<td>';
+				echo '<' . ( $form_type == 'add' ? 'div' : 'tr' ) . ' class="form-field">';
+					echo ( $form_type == 'add' ? '' : '<th>' ) . '<label for="' . $field['id'] . '">' . $field['name'] . '</label>' . ( $form_type == 'add' ? '' : '</th>' );
+					echo ( $form_type == 'add' ? '' : '<td>' );
 						ThemePlate_Fields::instance()->render( $field );
-					echo '<p class="description">' . $field['desc'] . '</p></td>';
-				echo '</tr>';
+					echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
+				echo '</' . ( $form_type == 'add' ? 'div' : 'tr' ) . '>';
 			}
 			
 		}
