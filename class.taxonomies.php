@@ -55,7 +55,12 @@ class ThemePlate_Taxonomies {
 				$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-				ThemePlate_Fields::instance()->render( $field );
+				echo '<tr class="form-field">';
+					echo '<th><label for="' . $field['id'] . '"><strong>' . $field['name'] . '</strong></label></th>';
+					echo '<td>';
+						ThemePlate_Fields::instance()->render( $field );
+					echo '<p class="description">' . $field['desc'] . '</p></td>';
+				echo '</tr>';
 			}
 			
 		}
