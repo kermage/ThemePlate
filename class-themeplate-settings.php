@@ -26,25 +26,7 @@ class ThemePlate_Settings {
 
 	public function __construct() {
 
-		register_setting( 'themeplate', 'themeplate' );
-		add_action( 'admin_menu', array( $this, 'menu' ) );
 
-	}
-	
-
-	public function menu() {
-		add_menu_page(
-			// Page Title
-			'Theme Options',
-			// Menu Title
-			'Theme Options',
-			// Capability
-			'edit_theme_options',
-			// Menu Slug
-			'theme-options',
-			// Content Function
-			array( $this, 'page' )
-		);
 	}
 
 

@@ -36,7 +36,35 @@ class ThemePlate {
 		ThemePlate_Settings::instance();
 		ThemePlate_TermMeta::instance();
 
+		add_action( 'admin_menu', array( $this, 'menu' ) );
+		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
+
+	}
+	
+
+	public function menu() {
+
+		add_menu_page(
+			// Page Title
+			'Theme Options',
+			// Menu Title
+			'Theme Options',
+			// Capability
+			'edit_theme_options',
+			// Menu Slug
+			'theme-options',
+			// Content Function
+			array( ThemePlate_Settings::instance(), 'page' )
+		);
+
+	}
+	
+
+	public function init() {
+
+		register_setting( 'themeplate', 'themeplate' );
 
 	}
 

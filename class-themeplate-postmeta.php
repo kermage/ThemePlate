@@ -26,7 +26,6 @@ class ThemePlate_PostMeta {
 
 	public function __construct() {
 
-		add_action( 'save_post', array( $this, 'save' ) );
 
 	}
 
