@@ -84,7 +84,7 @@ class ThemePlate_TermMeta {
 					echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
 				echo '</' . ( $form_type == 'add' ? 'div' : 'tr' ) . '>';
 			}
-			
+
 		}
 
 	}

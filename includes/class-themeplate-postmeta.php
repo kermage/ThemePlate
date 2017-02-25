@@ -67,7 +67,7 @@ class ThemePlate_PostMeta {
 					echo '</td>';
 				echo '</tr>';
 			}
-			
+
 			echo '</table>';
 		}
 	}

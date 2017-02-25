@@ -24,9 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 Global constants
 ================================================== */
 define( 'TP_VERSION', '0.1.0' );
-define( 'TP_FILE',    __FILE__ );
-define( 'TP_URL',     plugin_dir_url( TP_FILE ) );
-define( 'TP_PATH',    plugin_dir_path( TP_FILE ) );
+define( 'TP_URL',     plugin_dir_url( __FILE__ ) );
+define( 'TP_PATH',    plugin_dir_path( __FILE__ ) );
 
 // Load the ThemePlate plugin
-require_once( TP_PATH . 'class-' . basename( TP_FILE ) );
+require_once( TP_PATH . 'includes/class-' . basename( __FILE__ ) );

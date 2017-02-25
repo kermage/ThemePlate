@@ -24,27 +24,30 @@ class ThemePlate {
 
 	private function __construct() {
 
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-cpt.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-fields.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-postmeta.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-settings.php' );
-		require_once( TP_PATH . DIRECTORY_SEPARATOR . 'class-themeplate-termmeta.php' );
+		if ( function_exists( 'spl_autoload_register' ) ) {
+			spl_autoload_register( array( $this, 'autoload' ) );
+		}
 
-		ThemePlate_CPT::instance();
-		ThemePlate_Fields::instance();
-		ThemePlate_PostMeta::instance();
-		ThemePlate_Settings::instance();
-		ThemePlate_TermMeta::instance();
-
-		add_action( 'admin_menu', array( $this, 'menu' ) );
-		add_action( 'admin_init', array( $this, 'init' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
 
 	}
-	
 
-	public function menu() {
+
+	private function autoload( $class ) {
+
+		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-' . strtolower( str_replace( '_', '-', $class ) ) . '.php';
+
+		if ( ! class_exists( $class ) && file_exists( $path ) ) {
+			require_once( $path );
+		}
+
+	}
+
+
+	public function admin_menu() {
 
 		add_menu_page(
 			// Page Title
@@ -60,9 +63,9 @@ class ThemePlate {
 		);
 
 	}
-	
 
-	public function init() {
+
+	public function admin_init() {
 
 		register_setting( 'themeplate', 'themeplate' );
 
@@ -73,8 +76,8 @@ class ThemePlate {
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker');
-		wp_enqueue_style( 'themeplate-style', TP_URL . 'themeplate.css', array(), TP_VERSION, false );
-		wp_enqueue_script( 'themeplate-script', TP_URL . 'themeplate.js', array(), TP_VERSION, true );
+		wp_enqueue_style( 'themeplate-style', TP_URL . 'assets/themeplate.css', array(), TP_VERSION, false );
+		wp_enqueue_script( 'themeplate-script', TP_URL . 'assets/themeplate.js', array(), TP_VERSION, true );
 
 	}
 
