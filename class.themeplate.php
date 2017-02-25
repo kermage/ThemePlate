@@ -46,4 +46,11 @@ class ThemePlate {
 
 }
 
-ThemePlate::instance();
+
+function ThemePlate() {
+
+	return ThemePlate::instance();
+
+}
+
+ThemePlate();
