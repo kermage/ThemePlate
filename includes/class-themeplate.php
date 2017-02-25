@@ -10,11 +10,13 @@ class ThemePlate {
 
 	private static $instance;
 
+	public $key;
 
-	public static function instance() {
+
+	public static function instance( $key = NULL ) {
 
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
+			self::$instance = new self( $key );
 		}
 
 		return self::$instance;
@@ -22,11 +24,13 @@ class ThemePlate {
 	}
 
 
-	private function __construct() {
+	private function __construct( $key ) {
 
 		if ( function_exists( 'spl_autoload_register' ) ) {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
+
+		$this->key = isset( $key ) ? $key : 'themeplate';
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -84,9 +88,9 @@ class ThemePlate {
 }
 
 
-function ThemePlate() {
+function ThemePlate( $key = NULL ) {
 
-	return ThemePlate::instance();
+	return ThemePlate::instance( $key );
 
 }
 
