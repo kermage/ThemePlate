@@ -1,38 +1,29 @@
-.themeplate-meta-table {
-	width: 100%;
-	margin-top: .5em;
+.themeplate.form-table tr {
+	border-top: 1px solid #ddd;
 }
 
-.themeplate-meta-table th,
-.themeplate-meta-table td {
-	border-top: 1px solid #eee;
-}
-
-.themeplate-meta-table th {
-	width: 200px;
-	padding: 20px 10px 20px 0;
-	text-align: left;
-	vertical-align: top;
-}
-
-.themeplate-meta-table td {
-	padding: 20px 0 20px 10px;
-}
-
-.themeplate-meta-table label span {
+.themeplate.form-table th span {
 	display: block;
-	padding-top: .25em;
-	color: #bbb;
+	padding-top: 0.5em;
+	color: #666;
 	font-weight: normal;
 }
 
-.themeplate-meta-table input[type="text"],
-.themeplate-meta-table textarea,
-.themeplate-meta-table select {
+.themeplate.form-table td label {
+	margin-right: 1em;
+}
+
+.themeplate.form-table input[type="text"],
+.themeplate.form-table textarea,
+.themeplate.form-table select {
 	width: 100%;
 }
 
-.themeplate-meta-table .radio-label {
-	display: block;
-	margin: .5em 0;
+@media screen and ( min-width: 851px ) {
+	#side-sortables .themeplate.form-table th, #side-sortables .themeplate.form-table td {
+		width: 100%;
+		display: block;
+		padding: 0;
+		margin: 1em 0;
+	}
 }
