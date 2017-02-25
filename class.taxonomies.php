@@ -34,11 +34,14 @@ class ThemePlate_Taxonomies {
 			return false;
 
 		$this->meta_box = $meta_box;
+		$taxonomies = (array) $meta_box['taxonomy'];
 
-		add_action( $meta_box['taxonomy'] . '_add_form_fields', array( $this, 'add_form' ) );
-		add_action( $meta_box['taxonomy'] . '_edit_form_fields', array( $this, 'edit_form' ) );
-		add_action( 'created_' . $meta_box['taxonomy'], array( $this, 'save' ) );
-		add_action( 'edited_' . $meta_box['taxonomy'], array( $this, 'save' ) );
+		foreach ( $taxonomies as $taxonomy ) {
+			add_action( $taxonomy . '_add_form_fields', array( $this, 'add_form' ) );
+			add_action( $taxonomy . '_edit_form_fields', array( $this, 'edit_form' ) );
+			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
+			add_action( 'edited_' . $taxonomy, array( $this, 'save' ) );
+		}
 
 	}
 
