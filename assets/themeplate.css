@@ -19,6 +19,10 @@
 	width: 100%;
 }
 
+.themeplate.form-table input[type="text"].wp-color-picker {
+	width: 65px;
+}
+
 @media screen and ( min-width: 851px ) {
 	#side-sortables .themeplate.form-table th, #side-sortables .themeplate.form-table td {
 		width: 100%;
