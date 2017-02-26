@@ -85,6 +85,41 @@ class ThemePlate {
 
 	}
 
+
+	public function post_type( $args ) {
+
+		ThemePlate_CPT::instance()->add_type( $args );
+
+	}
+
+
+	public function taxonomy( $args ) {
+
+		ThemePlate_CPT::instance()->add_tax( $args );
+
+	}
+
+
+	public function post_meta( $args ) {
+
+		ThemePlate_PostMeta::instance()->add( $args );
+
+	}
+
+
+	public function settings( $args ) {
+
+		ThemePlate_Settings::instance()->add( $args );
+
+	}
+
+
+	public function term_meta( $args ) {
+
+		ThemePlate_TermMeta::instance()->add( $args );
+
+	}
+
 }
 
 
