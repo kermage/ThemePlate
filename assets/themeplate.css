@@ -23,6 +23,29 @@
 	width: 65px;
 }
 
+.themeplate.form-table .file-preview {
+	position: relative;
+	width: 128px;
+	height: 128px;
+	float: left;
+	margin-right: 0.5em;
+	border: 1px solid #ddd;
+	background: #eee;
+}
+
+.themeplate.form-table .file-preview img {
+	position: absolute;
+	max-height: 90%;
+	max-width: 90%;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+}
+
+.themeplate.form-table .file-preview img + img {
+	margin-top: 0.5em;
+}
+
 @media screen and ( min-width: 851px ) {
 	#side-sortables .themeplate.form-table th, #side-sortables .themeplate.form-table td {
 		width: 100%;

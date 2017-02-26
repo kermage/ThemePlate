@@ -63,8 +63,12 @@ jQuery( document ).ready( function( $ ) {
 				selected.push( media.id );
 			});
 
+			$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
 			$( '#' + e.target.id.replace( '_button', '_files' ) ).html( '' );
+
 			selection.forEach( function( media ) {
+				preview = ( media.type == 'image' ? media.url : media.icon );
+				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( '<img src="' + preview + '"/>' );
 				$( '#' + e.target.id.replace( '_button', '_files' ) ).append( '<p>' + media.filename + '</p>' );
 			});
 
@@ -79,6 +83,7 @@ jQuery( document ).ready( function( $ ) {
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
+		$( '#' + e.target.id.replace( '_remove', '_preview' ) ).html( '' );
 		$( '#' + e.target.id.replace( '_remove', '_files' ) ).html( '' );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
