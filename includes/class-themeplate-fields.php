@@ -90,7 +90,18 @@ class ThemePlate_Fields {
 				break;
 
 			case 'file':
-				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '"></div>';
+				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '">';
+				if ( $field['value'] ) {
+					$files = explode( ',', $field['value'] );
+					foreach( $files as $file ) {
+						$name = basename( get_attached_file( $file ) );
+						$info = wp_check_filetype( $name );
+						$type = wp_ext2type( $info['ext'] );
+						$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
+						echo '<div class="file-preview"><img src="' . $preview . '"/></div>';
+					}
+				}
+				echo '</div>';
 				echo '<input type="hidden" name="' . $field_name . '" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" /><div id="themeplate_' . $field['id'] . '_files">';
 				if ( $field['value'] ) {
 					$files = explode( ',', $field['value'] );
