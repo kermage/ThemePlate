@@ -64,12 +64,14 @@ jQuery( document ).ready( function( $ ) {
 			});
 
 			$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
-			$( '#' + e.target.id.replace( '_button', '_files' ) ).html( '' );
 
 			selection.forEach( function( media ) {
-				preview = ( media.type == 'image' ? media.url : media.icon );
-				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( '<div class="file-preview"><img src="' + preview + '"/></div>' );
-				$( '#' + e.target.id.replace( '_button', '_files' ) ).append( '<p>' + media.filename + '</p>' );
+				src = ( media.type == 'image' ? media.url : media.icon );
+				centered = '<div class="centered"><img src="' + src + '"/></div>';
+				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
+
+				preview = '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename + '</div></div></div>';
+				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( preview );
 			});
 
 			$( '#' + e.target.id.replace( '_button', '' ) ).val( selected.join( "," ) );
@@ -84,7 +86,6 @@ jQuery( document ).ready( function( $ ) {
 		e.preventDefault();
 
 		$( '#' + e.target.id.replace( '_remove', '_preview' ) ).html( '' );
-		$( '#' + e.target.id.replace( '_remove', '_files' ) ).html( '' );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );

@@ -92,24 +92,35 @@ class ThemePlate_Fields {
 			case 'file':
 				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '">';
 				if ( $field['value'] ) {
-					$files = explode( ',', $field['value'] );
-					foreach( $files as $file ) {
+					if( $field['multiple'] ) {
+						echo '<ul class="attachments">';
+						$files = explode( ',', $field['value'] );
+						foreach( $files as $file ) {
+							$name = basename( get_attached_file( $file ) );
+							$info = wp_check_filetype( $name );
+							$type = wp_ext2type( $info['ext'] );
+							$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
+							echo '<li class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
+							echo '<div class="centered"><img src="' . $preview . '"/></div>';
+							echo '<div class="filename"><div>' . $name . '</div></div>';
+							echo '</div></div></li>';
+						}
+						echo '</ul>';
+					} else {
+						$file = $field['value'];
 						$name = basename( get_attached_file( $file ) );
 						$info = wp_check_filetype( $name );
 						$type = wp_ext2type( $info['ext'] );
 						$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-						echo '<div class="file-preview"><img src="' . $preview . '"/></div>';
+						echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
+						echo '<div class="centered"><img src="' . $preview . '"/></div>';
+						echo '<div class="filename"><div>' . $name . '</div></div>';
+						echo '</div></div></div>';
 					}
 				}
 				echo '</div>';
-				echo '<input type="hidden" name="' . $field_name . '" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" /><div id="themeplate_' . $field['id'] . '_files">';
-				if ( $field['value'] ) {
-					$files = explode( ',', $field['value'] );
-					foreach( $files as $file ) {
-						echo '<p>' . basename( get_attached_file( $file ) ) . '</p>';
-					}
-				}
-				echo '</div><input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" />';
+				echo '<input type="hidden" name="' . $field_name . '" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
+				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" />';
 				break;
 
 			case 'date':
