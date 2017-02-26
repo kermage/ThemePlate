@@ -68,7 +68,7 @@ jQuery( document ).ready( function( $ ) {
 
 			selection.forEach( function( media ) {
 				preview = ( media.type == 'image' ? media.url : media.icon );
-				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( '<img src="' + preview + '"/>' );
+				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( '<div class="file-preview"><img src="' + preview + '"/></div>' );
 				$( '#' + e.target.id.replace( '_button', '_files' ) ).append( '<p>' + media.filename + '</p>' );
 			});
 

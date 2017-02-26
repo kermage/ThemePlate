@@ -90,7 +90,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'file':
-				echo '<div id="themeplate_' . $field['id'] . '_preview" class="file-preview"></div>';
+				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '"></div>';
 				echo '<input type="hidden" name="' . $field_name . '" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" /><div id="themeplate_' . $field['id'] . '_files">';
 				if ( $field['value'] ) {
 					$files = explode( ',', $field['value'] );

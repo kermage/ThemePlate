@@ -1,3 +1,13 @@
+.themeplate.form-table {
+	box-sizing: border-box;
+}
+
+.themeplate.form-table *,
+.themeplate.form-table *:before,
+.themeplate.form-table *:after {
+    box-sizing: inherit;
+}
+
 .themeplate.form-table tr {
 	border-top: 1px solid #ddd;
 }
@@ -23,20 +33,47 @@
 	width: 65px;
 }
 
+.themeplate.form-table .preview-holder {
+	width: 144px;
+	min-height: 144px;
+	float: left;
+	margin-right: 0.5em;
+	padding: 0.5em;
+	border: 1px solid #ddd;
+}
+
+.themeplate.form-table .preview-holder:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.themeplate.form-table .preview-holder.multiple {
+	width: 100%;
+	min-height: 72px;
+	margin-right: 0;
+	margin-bottom: 0.5em;
+}
+
 .themeplate.form-table .file-preview {
 	position: relative;
 	width: 128px;
 	height: 128px;
 	float: left;
-	margin-right: 0.5em;
 	border: 1px solid #ddd;
 	background: #eee;
 }
 
+.themeplate.form-table .multiple .file-preview {
+	width: 23%;
+	height: 64px;
+	margin: 1%;
+}
+
 .themeplate.form-table .file-preview img {
 	position: absolute;
-	max-height: 90%;
-	max-width: 90%;
+	max-height: 100%;
+	max-width: 100%;
 	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50% );
