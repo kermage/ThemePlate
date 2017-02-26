@@ -100,7 +100,7 @@ class ThemePlate_Fields {
 							$info = wp_check_filetype( $name );
 							$type = wp_ext2type( $info['ext'] );
 							$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-							echo '<li class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
+							echo '<li id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 							echo '<div class="centered"><img src="' . $preview . '"/></div>';
 							echo '<div class="filename"><div>' . $name . '</div></div>';
 							echo '</div></div></li>';

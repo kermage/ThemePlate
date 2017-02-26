@@ -70,11 +70,11 @@ jQuery( document ).ready( function( $ ) {
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
 
-				preview = '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename + '</div></div></div>';
+				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename + '</div></div></div>';
 				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( preview );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '' ) ).val( selected.join( "," ) );
+			$( '#' + e.target.id.replace( '_button', '' ) ).val( selected.toString() );
 			$( '#' + e.target.id ).val( 'Re-select' );
 			$( '#' + e.target.id.replace( '_button', '_remove' ) ).attr( 'type', 'button' );
 		});
@@ -89,6 +89,15 @@ jQuery( document ).ready( function( $ ) {
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
+	});
+
+	$( 'div[id^="themeplate_"][id $="_preview"] .attachments' ).sortable( {
+		opacity: 0.75,
+		update: function( event, ui ) {
+			order = $( this ).sortable( 'toArray' ).toString().replace( /file-/g, '' );
+			field = $( this ).parent().attr( 'id' );
+			$( '#' + field.replace( '_preview', '' ) ).val( order );
+		}
 	});
 
 });
