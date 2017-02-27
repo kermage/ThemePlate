@@ -40,7 +40,13 @@ class ThemePlate_PostMeta {
 
 		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
 
-		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
+			( isset( $meta_box['show_on'] ) && in_array( $post_id, (array) $meta_box['show_on'] ) ) ||
+			( isset( $meta_box['hide_on'] ) && ! in_array( $post_id, (array) $meta_box['hide_on'] ) )
+		) {
+			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+		}
 	}
 
 
