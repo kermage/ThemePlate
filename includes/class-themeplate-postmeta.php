@@ -41,9 +41,14 @@ class ThemePlate_PostMeta {
 		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
 
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
+		$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
+		$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
 		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
-			( isset( $meta_box['show_on'] ) && in_array( $post_id, (array) $meta_box['show_on'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && ! in_array( $post_id, (array) $meta_box['hide_on'] ) )
+			( isset( $meta_box['show_on'] ) && in_array( $check, (array) $meta_box['show_on']['value'] ) ) ||
+			( isset( $meta_box['hide_on'] ) && ! in_array( $check, (array) $meta_box['hide_on']['value'] ) )
 		) {
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 		}
