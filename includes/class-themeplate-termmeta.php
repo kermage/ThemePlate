@@ -93,7 +93,14 @@ class ThemePlate_TermMeta {
 	public function save( $term_id ) {
 
 		foreach( $_POST[ThemePlate()->key] as $key => $val ) {
-			update_term_meta( $term_id, $key, $val );
+			$meta = get_term_meta( $term_id, $key, true );
+			if ( $val && ! $meta ) {
+				add_term_meta( $term_id, $key, $val, true );
+			} elseif ( $val && $val != $meta ) {
+				update_term_meta( $term_id, $key, $val, $meta );
+			} elseif ( ! $val && $meta ) {
+				delete_term_meta( $term_id, $key, $val );
+			}
 		}
 
 	}
