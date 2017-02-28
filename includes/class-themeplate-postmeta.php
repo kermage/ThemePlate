@@ -42,13 +42,23 @@ class ThemePlate_PostMeta {
 
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
+		$taxonomies = get_object_taxonomies( get_post_type() );
+		$allterms = array();
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = get_the_terms( $post_id, $taxonomy );
+			foreach ( (array) $terms as $term ) {
+				array_push( $allterms, $term->term_id );
+			}
+		}
 		$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
 		$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
+		$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );
 		$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
 		$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'term' ? $allterms : $check );
 		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
-			( isset( $meta_box['show_on'] ) && in_array( $check, (array) $meta_box['show_on']['value'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && ! in_array( $check, (array) $meta_box['hide_on']['value'] ) )
+			( isset( $meta_box['show_on'] ) && array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
+			( isset( $meta_box['hide_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
 		) {
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 		}
