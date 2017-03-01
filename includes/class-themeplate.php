@@ -34,6 +34,7 @@ class ThemePlate {
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
 
@@ -73,6 +74,14 @@ class ThemePlate {
 
 		register_setting( $this->key, $this->key );
 
+	}
+
+
+	public function admin_notices() {
+		if ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] === 'theme-options' &&
+			isset( $_REQUEST['settings-updated'] ) &&  $_REQUEST['settings-updated'] == true ) {
+			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
+		}
 	}
 
 
