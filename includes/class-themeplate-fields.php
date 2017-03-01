@@ -53,8 +53,8 @@ class ThemePlate_Fields {
 				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
 				foreach( $field['options'] as $value => $option ) {
-					echo '<option value="' . ( $value + 1 ) . '"';
-					if ( in_array( ( $value + 1 ), (array) $field['value'] ) ) echo ' selected="selected"';
+					echo '<option value="' . $value . '"';
+					if ( in_array( $value, (array) $field['value'] ) ) echo ' selected="selected"';
 					echo '>' . $option . '</option>';
 				}
 				echo '</select>';
@@ -64,7 +64,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'radio' :
 				foreach( $field['options'] as $value => $option ) {
-					echo '<label><input type="radio" name="' . $field_name . '" value="' . ( $value + 1 ) . '"' . checked( $field['value'], ( $value + 1 ), false ) . ' />' . $option . '</label>';
+					echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
 					echo ( $list ? '<br>' : '' );
 				}
 				break;
@@ -75,8 +75,8 @@ class ThemePlate_Fields {
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				if ( $field['options'] ) {
 					foreach( $field['options'] as $value => $option ) {
-						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . ( $value + 1 ) . '"';
-						if ( in_array( ( $value + 1 ), (array) $field['value'] ) ) echo ' checked="checked"';
+						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
+						if ( in_array( $value, (array) $field['value'] ) ) echo ' checked="checked"';
 						echo ' />' . $option . '</label>';
 						echo ( $list ? '<br>' : '' );
 					}
