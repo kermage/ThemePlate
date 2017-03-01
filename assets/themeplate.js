@@ -25,10 +25,10 @@ jQuery( document ).ready( function( $ ) {
 	$( 'input[id^="themeplate_"][id $="_button"]' ).click( function( e ) {
 		e.preventDefault();
 
-		if ( meta_media_frame ) {
-			meta_media_frame.open();
-			return;
-		}
+		// if ( meta_media_frame ) {
+		// 	meta_media_frame.open();
+		// 	return;
+		// }
 
 		var isMultiple = false;
 		if ( $( this ).attr( 'multiple' ) ) {
