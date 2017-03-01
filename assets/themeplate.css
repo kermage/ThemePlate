@@ -1,4 +1,4 @@
-.themeplate.form-table {
+/*.themeplate.form-table {
 	box-sizing: border-box;
 }
 
@@ -6,7 +6,7 @@
 .themeplate.form-table *:before,
 .themeplate.form-table *:after {
 	box-sizing: inherit;
-}
+}*/
 
 .themeplate.form-table tr {
 	border-top: 1px solid #ddd;
@@ -68,5 +68,9 @@
 		display: block;
 		padding: 0;
 		margin: 1em 0;
+	}
+
+	.themeplate.form-table .preview-holder.multiple {
+		min-height: 144px;
 	}
 }
