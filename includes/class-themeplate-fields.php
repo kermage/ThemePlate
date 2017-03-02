@@ -148,12 +148,18 @@ class ThemePlate_Fields {
 				wp_editor( $field['value'], $field['id'], $settings );
 				break;
 
+			case 'post':
+				$list = 'post';
 			case 'page':
 				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
-				$pages = get_pages( array ( 'post_type' => $field['options'] ) );
+				if ( $list == 'post' ){
+					$pages = get_posts( array ( 'post_type' => $field['options'] ) );
+				} else {
+					$pages = get_pages( array ( 'post_type' => $field['options'] ) );
+				}
 				foreach( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
 					if ( in_array( $page->ID, (array) $field['value'] ) ) echo ' selected="selected"';
