@@ -51,7 +51,9 @@ class ThemePlate_Fields {
 
 			case 'select' :
 				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
+				if ( ! $field['multiple'] ) {
+					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+				}
 				foreach( $field['options'] as $value => $option ) {
 					echo '<option value="' . $value . '"';
 					if ( in_array( $value, (array) $field['value'] ) ) echo ' selected="selected"';
@@ -147,7 +149,9 @@ class ThemePlate_Fields {
 
 			case 'page':
 				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
+				if ( ! $field['multiple'] ) {
+					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+				}
 				$pages = get_pages( array ( 'post_type' => $field['options'] ) );
 				foreach( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
@@ -159,7 +163,9 @@ class ThemePlate_Fields {
 
 			case 'term':
 				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				echo '<option disabled="disabled" selected="selected" hidden>' . __( '&mdash; Select &mdash;' ) . '</option>';
+				if ( ! $field['multiple'] ) {
+					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+				}
 				$terms = get_terms( array ( 'taxonomy' => $field['options'] ) );
 				foreach( $terms as $term ) {
 					echo '<option value="' . $term->term_id . '"';
