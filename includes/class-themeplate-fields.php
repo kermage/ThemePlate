@@ -55,6 +55,7 @@ class ThemePlate_Fields {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
 				foreach( $field['options'] as $value => $option ) {
+					$value = is_string( $value ) ? $value : ( $value + 1 );
 					echo '<option value="' . $value . '"';
 					if ( in_array( $value, (array) $field['value'] ) ) echo ' selected="selected"';
 					echo '>' . $option . '</option>';
