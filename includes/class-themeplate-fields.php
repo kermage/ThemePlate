@@ -96,19 +96,17 @@ class ThemePlate_Fields {
 				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '">';
 				if ( $field['value'] ) {
 					if( $field['multiple'] ) {
-						echo '<ul class="attachments">';
 						$files = explode( ',', $field['value'] );
 						foreach( $files as $file ) {
 							$name = basename( get_attached_file( $file ) );
 							$info = wp_check_filetype( $name );
 							$type = wp_ext2type( $info['ext'] );
 							$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-							echo '<li id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
+							echo '<div id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 							echo '<div class="centered"><img src="' . $preview . '"/></div>';
 							echo '<div class="filename"><div>' . $name . '</div></div>';
-							echo '</div></div></li>';
+							echo '</div></div></div>';
 						}
-						echo '</ul>';
 					} else {
 						$file = $field['value'];
 						$name = basename( get_attached_file( $file ) );

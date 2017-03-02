@@ -91,12 +91,13 @@ jQuery( document ).ready( function( $ ) {
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
 	});
 
-	$( 'div[id^="themeplate_"][id $="_preview"] .attachments' ).sortable( {
+	$( 'div[id^="themeplate_"][id $="_preview"].multiple' ).sortable( {
+		items: '.attachment',
 		opacity: 0.75,
 		update: function( event, ui ) {
 			order = $( this ).sortable( 'toArray' ).toString().replace( /file-/g, '' );
-			field = $( this ).parent().attr( 'id' );
-			$( '#' + field.replace( '_preview', '' ) ).val( order );
+			field = $( this ).attr( 'id' ).replace( '_preview', '' );
+			$( '#' + field ).val( order );
 		}
 	});
 
