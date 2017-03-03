@@ -96,8 +96,7 @@ class ThemePlate_Fields {
 				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '">';
 				if ( $field['value'] ) {
 					if( $field['multiple'] ) {
-						$files = explode( ',', $field['value'] );
-						foreach( $files as $file ) {
+						foreach( (array) $field['value'] as $file ) {
 							$name = basename( get_attached_file( $file ) );
 							$info = wp_check_filetype( $name );
 							$type = wp_ext2type( $info['ext'] );
@@ -105,7 +104,9 @@ class ThemePlate_Fields {
 							echo '<div id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 							echo '<div class="centered"><img src="' . $preview . '"/></div>';
 							echo '<div class="filename"><div>' . $name . '</div></div>';
-							echo '</div></div></div>';
+							echo '</div></div>';
+							echo '<input type="hidden" name="' . $field_name . '[]" value="' . $file . '" />';
+							echo '</div>';
 						}
 					} else {
 						$file = $field['value'];
@@ -120,8 +121,13 @@ class ThemePlate_Fields {
 					}
 				}
 				echo '</div>';
-				echo '<input type="hidden" name="' . $field_name . '" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
-				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" />';
+				if ( ! is_array( $field['value'] ) && ( strpos( $field['value'], ',' ) !== false ) ) {
+					$field['value'] = explode( ',', $field['value'] );
+				} elseif ( is_array( $field['value'] ) ) {
+					$field['value'] = implode( ',', $field['value'] );
+				}
+				echo '<input type="hidden" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
+				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . '/>';
 				break;
 
 			case 'date':

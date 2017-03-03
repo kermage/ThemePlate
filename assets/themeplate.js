@@ -63,15 +63,17 @@ jQuery( document ).ready( function( $ ) {
 				selected.push( media.id );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
+			$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' );
 
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
+				fieldname = 'themeplate[' + e.target.id.replace( 'themeplate_', '' ).replace( '_button', '' ) + ']' + ( isMultiple ? '[]' : '' );
+				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
 
-				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename + '</div></div></div>';
-				$( '#' + e.target.id.replace( '_button', '_preview' ) ).append( preview );
+				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + field + '</div>';
+				$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).append( preview );
 			});
 
 			$( '#' + e.target.id.replace( '_button', '' ) ).val( selected.toString() );
@@ -85,7 +87,12 @@ jQuery( document ).ready( function( $ ) {
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
-		$( '#' + e.target.id.replace( '_remove', '_preview' ) ).html( '' );
+		var isMultiple = false;
+		if ( $( this ).attr( 'multiple' ) ) {
+			isMultiple = true;
+		}
+
+		$( '#' + e.target.id.replace( '_remove', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
