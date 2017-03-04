@@ -1,4 +1,6 @@
-jQuery( document ).ready( function( $ ) {
+jQuery.noConflict();
+
+(function( $ ) {
 
 	function HideAll() {
 		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
@@ -108,4 +110,4 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
-});
+}( jQuery ));
