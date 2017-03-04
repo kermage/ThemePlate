@@ -1,26 +1,34 @@
-/*.themeplate.form-table {
-	box-sizing: border-box;
+.themeplate.form-table {
+	margin-top: 0;
 }
-
-.themeplate.form-table *,
-.themeplate.form-table *:before,
-.themeplate.form-table *:after {
-	box-sizing: inherit;
-}*/
 
 .themeplate.form-table tr {
 	border-top: 1px solid #ddd;
 }
 
-.themeplate.form-table th span {
+.themeplate.form-table.grouped td {
+	vertical-align: top;
+}
+
+.themeplate.form-table.grouped .label {
+	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+.themeplate.form-table.grouped .label label {
+	color: #23282d;
+	font-weight: 600;
+}
+
+.themeplate.form-table th span, .themeplate.form-table.grouped .label span {
 	display: block;
 	padding-top: 0.5em;
 	color: #666;
 	font-weight: normal;
 }
 
-.themeplate.form-table td label {
-	margin-right: 1em;
+.themeplate.form-table td label + label {
+	margin-left: 1em;
 }
 
 .themeplate.form-table input[type="text"],
@@ -41,12 +49,6 @@
 	border: 1px solid #ddd;
 }
 
-.themeplate.form-table .preview-holder:after {
-	content: '';
-	display: table;
-	clear: both;
-}
-
 .themeplate.form-table .preview-holder.multiple {
 	width: 100%;
 	min-height: 72px;
@@ -60,29 +62,6 @@
 
 .themeplate.form-table .preview-holder.multiple .attachment {
 	width: 25%;
-}
-
-.themeplate.form-table.grouped td {
-	vertical-align: top;
-}
-
-.themeplate.form-table.grouped .label {
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 15px;
-	padding-bottom: 15px;
-}
-
-.themeplate.form-table.grouped .label label {
-	margin-right: 0;
-	color: #23282d;
-	font-weight: 600;
-}
-
-.themeplate.form-table.grouped .label span {
-	display: block;
-	padding-top: 0.5em;
-	color: #666;
-	font-weight: normal;
 }
 
 @media screen and ( min-width: 851px ) {
