@@ -62,6 +62,29 @@
 	width: 25%;
 }
 
+.themeplate.form-table.grouped td {
+	vertical-align: top;
+}
+
+.themeplate.form-table.grouped .label {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+.themeplate.form-table.grouped .label label {
+	margin-right: 0;
+	color: #23282d;
+	font-weight: 600;
+}
+
+.themeplate.form-table.grouped .label span {
+	display: block;
+	padding-top: 0.5em;
+	color: #666;
+	font-weight: normal;
+}
+
 @media screen and ( min-width: 851px ) {
 	#side-sortables .themeplate.form-table th, #side-sortables .themeplate.form-table td {
 		width: 100%;
