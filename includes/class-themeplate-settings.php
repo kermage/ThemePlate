@@ -102,24 +102,31 @@ class ThemePlate_Settings {
 			return;
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
-			$class = '';
-
-			if ( ! empty( $field['args']['class'] ) ) {
-				$class = ' class="' . esc_attr( $field['args']['class'] ) . '"';
+			if ( $field['args']['group'] == 'start' && ! $grouped ) {
+				echo '</table><td><table class="themeplate form-table grouped"><tr>';
+				$grouped = true;
+			} elseif ( ! $grouped ) {
+				echo '<tr>';
 			}
 
-			echo "<tr{$class}>";
-
-			if ( ! empty( $field['args']['label_for'] ) ) {
-				echo '<th scope="row"><label for="' . esc_attr( $field['args']['label_for'] ) . '">' . $field['title'] . '</label></th>';
+			if ( $grouped ) {
+				echo '<td>';
+				echo '<div class="label"><label for="' . esc_attr( $field['args']['label_for'] ) . '">' . $field['title'] . '</label></div>';
+					call_user_func($field['callback'], $field['args']);
+				echo '</td>';
 			} else {
-				echo '<th scope="row">' . $field['title'] . '</th>';
+				echo '<th scope="row"><label for="' . esc_attr( $field['args']['label_for'] ) . '">' . $field['title'] . '</label></th>';
+				echo '<td>';
+					call_user_func($field['callback'], $field['args']);
+				echo '</td>';
 			}
 
-			echo '<td>';
-			call_user_func($field['callback'], $field['args']);
-			echo '</td>';
-			echo '</tr>';
+			if ( $field['args']['group'] == 'end' && $grouped ) {
+				echo '</tr></table></td><table class="themeplate form-table">';
+				$grouped = false;
+			} elseif ( ! $grouped ) {
+				echo '</tr>';
+			}
 		}
 	}
 
