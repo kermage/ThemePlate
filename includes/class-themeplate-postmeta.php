@@ -83,12 +83,31 @@ class ThemePlate_PostMeta {
 				$field['value'] = get_post_meta( $post->ID, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-				echo '<tr>';
+				if ( $field['group'] == 'start' && ! $grouped ) {
+					echo '</table><td><table class="themeplate form-table grouped"><tr>';
+					$grouped = true;
+				} elseif ( ! $grouped ) {
+					echo '<tr>';
+				}
+
+				if ( $grouped ) {
+					echo '<td>';
+					echo '<div class="label"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></div>';
+						ThemePlate_Fields::instance()->render( $field );
+					echo '</td>';
+				} else {
 					echo '<th scope="row"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></th>';
 					echo '<td>';
 						ThemePlate_Fields::instance()->render( $field );
 					echo '</td>';
-				echo '</tr>';
+				}
+
+				if ( $field['group'] == 'end' && $grouped ) {
+					echo '</tr></table></td><table class="themeplate form-table">';
+					$grouped = false;
+				} elseif ( ! $grouped ) {
+					echo '</tr>';
+				}
 			}
 
 			echo '</table>';
