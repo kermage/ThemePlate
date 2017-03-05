@@ -35,7 +35,7 @@ jQuery.noConflict();
 	$( 'input[id^="themeplate_"][id $="_button"]' ).click( function( e ) {
 		e.preventDefault();
 
-		multiple = false;
+		isMultiple = false;
 		if ( $( this ).attr( 'multiple' ) ) {
 			isMultiple = true;
 		}
@@ -92,7 +92,7 @@ jQuery.noConflict();
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
-		multiple = false;
+		isMultiple = false;
 		if ( $( this ).attr( 'multiple' ) ) {
 			isMultiple = true;
 		}
