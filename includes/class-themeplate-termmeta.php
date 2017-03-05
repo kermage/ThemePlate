@@ -81,7 +81,8 @@ class ThemePlate_TermMeta {
 					echo ( $form_type == 'add' ? '' : '<th>' ) . '<label for="' . $field['id'] . '">' . $field['name'] . '</label>' . ( $form_type == 'add' ? '' : '</th>' );
 					echo ( $form_type == 'add' ? '' : '<td>' );
 						ThemePlate_Fields::instance()->render( $field );
-					echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
+					if ( $field['desc'] )
+						echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
 				echo '</' . ( $form_type == 'add' ? 'div' : 'tr' ) . '>';
 			}
 

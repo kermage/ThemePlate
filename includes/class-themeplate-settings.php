@@ -143,9 +143,11 @@ class ThemePlate_Settings {
 		);
 
 		foreach ( $param['fields'] as $id => $field ) {
+			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
+
 			add_settings_field(
 				$param['id'] . '_' . $id,
-				$field['name'] . '<span>' . $field['desc'] . '</span>',
+				$label,
 				array( $this, 'create' ),
 				( $param['context'] ? $param['context'] : 'normal' ),
 				$param['id'],

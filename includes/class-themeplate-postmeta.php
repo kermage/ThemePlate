@@ -90,13 +90,15 @@ class ThemePlate_PostMeta {
 					echo '<tr>';
 				}
 
+				$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+
 				if ( $grouped ) {
 					echo '<td>';
-					echo '<div class="label"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></div>';
+					echo '<div class="label">' . $label . '</div>';
 						ThemePlate_Fields::instance()->render( $field );
 					echo '</td>';
 				} else {
-					echo '<th scope="row"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></th>';
+					echo '<th scope="row">' . $label . '</th>';
 					echo '<td>';
 						ThemePlate_Fields::instance()->render( $field );
 					echo '</td>';
