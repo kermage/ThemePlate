@@ -129,7 +129,8 @@ class ThemePlate_Fields {
 					$field['value'] = implode( ',', $field['value'] );
 				}
 				echo '<input type="hidden" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
-				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' /> <input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . '/>';
+				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' />';
+				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' />';
 				break;
 
 			case 'date':
@@ -162,9 +163,9 @@ class ThemePlate_Fields {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
 				if ( $list == 'post' ){
-					$pages = get_posts( array ( 'post_type' => $field['options'] ) );
+					$pages = get_posts( array( 'post_type' => $field['options'] ) );
 				} else {
-					$pages = get_pages( array ( 'post_type' => $field['options'] ) );
+					$pages = get_pages( array( 'post_type' => $field['options'] ) );
 				}
 				foreach( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
@@ -179,7 +180,7 @@ class ThemePlate_Fields {
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
-				$terms = get_terms( array ( 'taxonomy' => $field['options'] ) );
+				$terms = get_terms( array( 'taxonomy' => $field['options'] ) );
 				foreach( $terms as $term ) {
 					echo '<option value="' . $term->term_id . '"';
 					if ( in_array( $term->term_id, (array) $field['value'] ) ) echo ' selected="selected"';
