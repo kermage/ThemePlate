@@ -117,7 +117,9 @@ class ThemePlate_Fields {
 						echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 						echo '<div class="centered"><img src="' . $preview . '"/></div>';
 						echo '<div class="filename"><div>' . $name . '</div></div>';
-						echo '</div></div></div>';
+						echo '</div></div>';
+						echo '<input type="hidden" name="' . $field_name . '" value="' . $file . '" />';
+						echo '</div>';
 					}
 				}
 				echo '</div>';
