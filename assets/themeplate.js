@@ -2,6 +2,9 @@ jQuery.noConflict();
 
 (function( $ ) {
 
+	'use strict';
+
+
 	function HideAll() {
 		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
 	};
@@ -21,18 +24,18 @@ jQuery.noConflict();
 		}
 	});
 
+
 	$( '.wp-color-picker' ).wpColorPicker();
 
-	var meta_media_frame;
+
+	var meta_media_frame, isMultiple;
+	var selection, selected, attachment;
+	var src, centered, filename, fieldname, field, preview, order;
+
 	$( 'input[id^="themeplate_"][id $="_button"]' ).click( function( e ) {
 		e.preventDefault();
 
-		// if ( meta_media_frame ) {
-		// 	meta_media_frame.open();
-		// 	return;
-		// }
-
-		var isMultiple = false;
+		multiple = false;
 		if ( $( this ).attr( 'multiple' ) ) {
 			isMultiple = true;
 		}
@@ -43,8 +46,8 @@ jQuery.noConflict();
 		});
 
 		meta_media_frame.on( 'open', function() {
-			var selection = meta_media_frame.state().get( 'selection' );
-			var selected = $( '#' + e.target.id.replace( '_button', '' ) ).val();
+			selection = meta_media_frame.state().get( 'selection' );
+			selected = $( '#' + e.target.id.replace( '_button', '' ) ).val();
 
 			if ( selected && isMultiple ) {
 				selected = selected.split( ',' );
@@ -58,8 +61,8 @@ jQuery.noConflict();
 		});
 
 		meta_media_frame.on( 'select', function() {
-			var selection = meta_media_frame.state().get( 'selection' ).toJSON();
-			var selected = [];
+			selection = meta_media_frame.state().get( 'selection' ).toJSON();
+			selected = [];
 
 			selection.map( function( media ) {
 				selected.push( media.id );
@@ -89,7 +92,7 @@ jQuery.noConflict();
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
-		var isMultiple = false;
+		multiple = false;
 		if ( $( this ).attr( 'multiple' ) ) {
 			isMultiple = true;
 		}
