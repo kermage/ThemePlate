@@ -40,6 +40,8 @@ jQuery.noConflict();
 			isMultiple = true;
 		}
 
+		fieldname = $( this ).data( 'key' ) + '[' + e.target.id.replace( 'themeplate_', '' ).replace( '_button', '' ) + ']' + ( isMultiple ? '[]' : '' );
+
 		meta_media_frame = wp.media.frames.meta_media_frame = wp.media({
 			title: 'Select Media',
 			multiple: isMultiple
@@ -74,7 +76,6 @@ jQuery.noConflict();
 				src = ( media.type == 'image' ? media.url : media.icon );
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
-				fieldname = 'themeplate[' + e.target.id.replace( 'themeplate_', '' ).replace( '_button', '' ) + ']' + ( isMultiple ? '[]' : '' );
 				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
 
 				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + field + '</div>';
