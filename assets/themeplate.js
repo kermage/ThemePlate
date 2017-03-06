@@ -70,7 +70,7 @@ jQuery.noConflict();
 				selected.push( media.id );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' );
+			$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
 
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
@@ -93,12 +93,7 @@ jQuery.noConflict();
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
-		isMultiple = false;
-		if ( $( this ).attr( 'multiple' ) ) {
-			isMultiple = true;
-		}
-
-		$( '#' + e.target.id.replace( '_remove', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' );
+		$( '#' + e.target.id.replace( '_remove', '_preview' ) ).html( '' );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
