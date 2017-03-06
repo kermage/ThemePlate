@@ -64,6 +64,19 @@
 	width: 25%;
 }
 
+.themeplate.form-table .attachment .filename {
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY( 20px );
+	transition: all 0.2s ease-in-out;
+}
+
+.themeplate.form-table .attachment:hover .filename {
+	visibility: visible;
+	opacity: 1;
+	transform: initial;
+}
+
 @media screen and ( min-width: 851px ) {
 	#side-sortables .themeplate.form-table th, #side-sortables .themeplate.form-table td {
 		width: 100%;
