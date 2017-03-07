@@ -113,7 +113,7 @@ class ThemePlate_Settings {
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
-					echo '<td>';
+					echo '<td' . ( $field['args']['width'] ? ' style="width: ' . $field['args']['width'] . '"' : '' ) . '>';
 				}
 
 				if ( $field['args']['stack'] && ! $stacking ) {

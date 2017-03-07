@@ -95,7 +95,7 @@ class ThemePlate_PostMeta {
 
 				if ( $grouped ) {
 					if ( ! $stacking ) {
-						echo '<td>';
+						echo '<td' . ( $field['width'] ? ' style="width: ' . $field['width'] . '"' : '' ) . '>';
 					}
 
 					if ( $field['stack'] && ! $stacking ) {
