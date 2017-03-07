@@ -65,19 +65,6 @@ class ThemePlate_CPT {
 			'description' => __( $param['description'], 'themeplate' )
 		);
 
-		if ( is_array( $param['tax'] ) ) {
-			foreach ( $param['tax'] as $tax_name => $tax ) {
-				themeplate_add_taxonomy( array(
-					'name'        => $tax_name,
-					'plural'      => __( $tax['plural'], 'themeplate' ),
-					'singular'    => __( $tax['singular'], 'themeplate' ),
-					'description' => __( $tax['description'], 'themeplate' ),
-					'type'        => $name,
-					'args'        => $tax['args']
-				) );
-			}
-		}
-
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
 	}
 

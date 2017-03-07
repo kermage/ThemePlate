@@ -34,9 +34,8 @@ class ThemePlate_TermMeta {
 			return false;
 
 		$this->meta_box = $meta_box;
-		$taxonomies = (array) $meta_box['taxonomy'];
 
-		foreach ( $taxonomies as $taxonomy ) {
+		foreach ( (array) $meta_box['taxonomy'] as $taxonomy ) {
 			add_action( $taxonomy . '_add_form_fields', array( $this, 'add_form' ) );
 			add_action( $taxonomy . '_edit_form_fields', array( $this, 'edit_form' ) );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
@@ -81,7 +80,8 @@ class ThemePlate_TermMeta {
 					echo ( $form_type == 'add' ? '' : '<th>' ) . '<label for="' . $field['id'] . '">' . $field['name'] . '</label>' . ( $form_type == 'add' ? '' : '</th>' );
 					echo ( $form_type == 'add' ? '' : '<td>' );
 						ThemePlate_Fields::instance()->render( $field );
-					echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
+					if ( $field['desc'] )
+						echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
 				echo '</' . ( $form_type == 'add' ? 'div' : 'tr' ) . '>';
 			}
 

@@ -109,13 +109,15 @@ class ThemePlate_Settings {
 				echo '<tr>';
 			}
 
+			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . ( $field['args']['desc'] ? '<span>' . $field['args']['desc'] . '</span>' : '' ) . '</label>';
+
 			if ( $grouped ) {
 				echo '<td>';
-				echo '<div class="label"><label for="' . esc_attr( $field['args']['label_for'] ) . '">' . $field['title'] . '</label></div>';
+				echo '<div class="label">' . $label . '</div>';
 					call_user_func($field['callback'], $field['args']);
 				echo '</td>';
 			} else {
-				echo '<th scope="row"><label for="' . esc_attr( $field['args']['label_for'] ) . '">' . $field['title'] . '</label></th>';
+				echo '<th scope="row">' . $label . '</th>';
 				echo '<td>';
 					call_user_func($field['callback'], $field['args']);
 				echo '</td>';
@@ -143,19 +145,16 @@ class ThemePlate_Settings {
 		);
 
 		foreach ( $param['fields'] as $id => $field ) {
+			$field['id'] = $param['id'] . '_' . $id;
+			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
+
 			add_settings_field(
-				$param['id'] . '_' . $id,
-				$field['name'] . '<span>' . $field['desc'] . '</span>',
+				$field['id'],
+				$label,
 				array( $this, 'create' ),
 				( $param['context'] ? $param['context'] : 'normal' ),
 				$param['id'],
-				array(
-					'label_for' => $param['id'] . '_' . $id,
-					'type'      => $field['type'],
-					'std'       => $field['std'],
-					'options'   => $field['options'],
-					'multiple'  => $field['multiple']
-				)
+				$field
 			);
 		}
 	}
@@ -166,7 +165,6 @@ class ThemePlate_Settings {
 			return false;
 
 		$field = $param;
-		$field['id'] = $param['label_for'];
 		$field['value'] = get_option( ThemePlate()->key );
 		$field['value'] = $field['value'][$field['id']];
 		$field['value'] = $field['value'] ? $field['value'] : $param['std'];

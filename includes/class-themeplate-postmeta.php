@@ -34,12 +34,6 @@ class ThemePlate_PostMeta {
 		if ( ! is_array( $meta_box ) )
 			return false;
 
-		$id = 'themeplate_' . $meta_box['id'];
-		if ( $meta_box['screen'] == 'post' )
-			$id .= '_post';
-
-		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
 		$taxonomies = get_object_taxonomies( get_post_type() );
@@ -50,16 +44,23 @@ class ThemePlate_PostMeta {
 				array_push( $allterms, $term->term_id );
 			}
 		}
+
 		$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
 		$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
 		$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );
 		$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
 		$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
 		$check = ( $meta_box['hide_on']['key'] == 'term' ? $allterms : $check );
+
 		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
 			( isset( $meta_box['show_on'] ) && array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
 			( isset( $meta_box['hide_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
 		) {
+			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
+			$id = 'themeplate_' . $meta_box['id'];
+			if ( $meta_box['screen'] == 'post' )
+				$id .= '_post';
+
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 		}
 	}
@@ -90,13 +91,15 @@ class ThemePlate_PostMeta {
 					echo '<tr>';
 				}
 
+				$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+
 				if ( $grouped ) {
 					echo '<td>';
-					echo '<div class="label"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></div>';
+					echo '<div class="label">' . $label . '</div>';
 						ThemePlate_Fields::instance()->render( $field );
 					echo '</td>';
 				} else {
-					echo '<th scope="row"><label for="' . $field['id'] . '">' . $field['name'] . '<span>' . $field['desc'] . '</span></label></th>';
+					echo '<th scope="row">' . $label . '</th>';
 					echo '<td>';
 						ThemePlate_Fields::instance()->render( $field );
 					echo '</td>';

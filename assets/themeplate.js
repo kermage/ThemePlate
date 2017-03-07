@@ -1,4 +1,9 @@
-jQuery( document ).ready( function( $ ) {
+jQuery.noConflict();
+
+(function( $ ) {
+
+	'use strict';
+
 
 	function HideAll() {
 		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
@@ -19,21 +24,23 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
+
 	$( '.wp-color-picker' ).wpColorPicker();
 
-	var meta_media_frame;
+
+	var meta_media_frame, isMultiple;
+	var selection, selected, attachment;
+	var src, centered, filename, fieldname, field, preview, order;
+
 	$( 'input[id^="themeplate_"][id $="_button"]' ).click( function( e ) {
 		e.preventDefault();
 
-		// if ( meta_media_frame ) {
-		// 	meta_media_frame.open();
-		// 	return;
-		// }
-
-		var isMultiple = false;
+		isMultiple = false;
 		if ( $( this ).attr( 'multiple' ) ) {
 			isMultiple = true;
 		}
+
+		fieldname = $( this ).data( 'key' ) + '[' + e.target.id.replace( 'themeplate_', '' ).replace( '_button', '' ) + ']' + ( isMultiple ? '[]' : '' );
 
 		meta_media_frame = wp.media.frames.meta_media_frame = wp.media({
 			title: 'Select Media',
@@ -41,8 +48,8 @@ jQuery( document ).ready( function( $ ) {
 		});
 
 		meta_media_frame.on( 'open', function() {
-			var selection = meta_media_frame.state().get( 'selection' );
-			var selected = $( '#' + e.target.id.replace( '_button', '' ) ).val();
+			selection = meta_media_frame.state().get( 'selection' );
+			selected = $( '#' + e.target.id.replace( '_button', '' ) ).val();
 
 			if ( selected && isMultiple ) {
 				selected = selected.split( ',' );
@@ -56,20 +63,19 @@ jQuery( document ).ready( function( $ ) {
 		});
 
 		meta_media_frame.on( 'select', function() {
-			var selection = meta_media_frame.state().get( 'selection' ).toJSON();
-			var selected = [];
+			selection = meta_media_frame.state().get( 'selection' ).toJSON();
+			selected = [];
 
 			selection.map( function( media ) {
 				selected.push( media.id );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' );
+			$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
 
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
-				fieldname = 'themeplate[' + e.target.id.replace( 'themeplate_', '' ).replace( '_button', '' ) + ']' + ( isMultiple ? '[]' : '' );
 				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
 
 				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + field + '</div>';
@@ -87,12 +93,7 @@ jQuery( document ).ready( function( $ ) {
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
-		var isMultiple = false;
-		if ( $( this ).attr( 'multiple' ) ) {
-			isMultiple = true;
-		}
-
-		$( '#' + e.target.id.replace( '_remove', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' );
+		$( '#' + e.target.id.replace( '_remove', '_preview' ) ).html( '' );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
@@ -108,4 +109,4 @@ jQuery( document ).ready( function( $ ) {
 		}
 	});
 
-});
+}( jQuery ));
