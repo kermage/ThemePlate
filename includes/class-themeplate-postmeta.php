@@ -94,10 +94,30 @@ class ThemePlate_PostMeta {
 				$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
 
 				if ( $grouped ) {
-					echo '<td>';
+					if ( ! $stacking ) {
+						echo '<td>';
+					}
+
+					if ( $field['stack'] && ! $stacking ) {
+						echo '<div class="stacked">';
+						$stacking = true;
+					}
+
 					echo '<div class="label">' . $label . '</div>';
-						ThemePlate_Fields::instance()->render( $field );
-					echo '</td>';
+					ThemePlate_Fields::instance()->render( $field );
+
+					if ( $stacking ) {
+						echo '</div>';
+
+						if ( $field['stack'] ) {
+							echo '<div class="stacked">';
+						} else {
+							echo '</td>';
+							$stacking = false;
+						}
+					} else {
+						echo '</td>';
+					}
 				} else {
 					echo '<th scope="row">' . $label . '</th>';
 					echo '<td>';
