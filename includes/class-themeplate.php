@@ -36,6 +36,7 @@ class ThemePlate {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
 
 	}
@@ -91,6 +92,23 @@ class ThemePlate {
 		wp_enqueue_script( 'wp-color-picker');
 		wp_enqueue_style( 'themeplate-style', TP_URL . 'assets/themeplate.css', array(), TP_VERSION, false );
 		wp_enqueue_script( 'themeplate-script', TP_URL . 'assets/themeplate.js', array(), TP_VERSION, true );
+
+	}
+
+
+	function clean_walker( $args ) {
+
+		if ( empty( $args['container_class'] ) && empty( $args['container_id'] ) ) {
+			$args['container'] = false;
+		}
+
+		if ( empty( $args['walker'] ) ) {
+			$args['walker'] = new ThemePlate_NavWalker();
+		}
+
+		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+
+		return $args;
 
 	}
 
