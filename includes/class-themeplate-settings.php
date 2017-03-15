@@ -112,10 +112,30 @@ class ThemePlate_Settings {
 			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . ( $field['args']['desc'] ? '<span>' . $field['args']['desc'] . '</span>' : '' ) . '</label>';
 
 			if ( $grouped ) {
-				echo '<td>';
+				if ( ! $stacking ) {
+					echo '<td' . ( $field['args']['width'] ? ' style="width: ' . $field['args']['width'] . '"' : '' ) . '>';
+				}
+
+				if ( $field['args']['stack'] && ! $stacking ) {
+					echo '<div class="stacked">';
+					$stacking = true;
+				}
+
 				echo '<div class="label">' . $label . '</div>';
-					call_user_func($field['callback'], $field['args']);
-				echo '</td>';
+				call_user_func($field['callback'], $field['args']);
+
+				if ( $stacking ) {
+					echo '</div>';
+
+					if ( $field['args']['stack'] ) {
+						echo '<div class="stacked">';
+					} else {
+						echo '</td>';
+						$stacking = false;
+					}
+				} else {
+					echo '</td>';
+				}
 			} else {
 				echo '<th scope="row">' . $label . '</th>';
 				echo '<td>';
