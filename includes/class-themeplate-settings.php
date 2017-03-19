@@ -47,11 +47,11 @@ class ThemePlate_Settings {
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
-							<?php $this->section( 'side' ); ?>
+							<?php $this->section( get_current_screen()->id . '-side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php $this->section( 'normal' ); ?>
+							<?php $this->section( get_current_screen()->id . '-normal' ); ?>
 						</div>
 					</div>
 				</div>
@@ -157,11 +157,14 @@ class ThemePlate_Settings {
 		if ( ! is_array( $param ) )
 			return false;
 
+		$page = ( $param['page'] ? 'theme-options_page_' . $param['page'] : 'toplevel_page_theme-options' );
+		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
+
 		add_settings_section(
 			$param['id'],
 			$param['title'],
 			$param['description'],
-			( $param['context'] ? $param['context'] : 'normal' )
+			$page
 		);
 
 		foreach ( $param['fields'] as $id => $field ) {
@@ -172,7 +175,7 @@ class ThemePlate_Settings {
 				$field['id'],
 				$label,
 				array( $this, 'create' ),
-				( $param['context'] ? $param['context'] : 'normal' ),
+				$page,
 				$param['id'],
 				$field
 			);

@@ -10,13 +10,13 @@ class ThemePlate {
 
 	private static $instance;
 
-	public $key;
+	public $key, $pages;
 
 
-	public static function instance( $key = NULL ) {
+	public static function instance( $key = NULL, $pages = NULL ) {
 
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self( $key );
+			self::$instance = new self( $key, $pages );
 		}
 
 		return self::$instance;
@@ -24,13 +24,14 @@ class ThemePlate {
 	}
 
 
-	private function __construct( $key ) {
+	private function __construct( $key, $pages ) {
 
 		if ( function_exists( 'spl_autoload_register' ) ) {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
 		$this->key = isset( $key ) ? $key : 'themeplate';
+		$this->pages = isset( $pages ) ? $pages : '';
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -67,6 +68,16 @@ class ThemePlate {
 			// Content Function
 			array( ThemePlate_Settings::instance(), 'page' )
 		);
+
+		if ( $this->pages ) {
+			add_submenu_page( 'theme-options', $this->pages[0], $this->pages[0], 'edit_theme_options', 'theme-options', array( ThemePlate_Settings::instance(), 'page' ) );
+			array_shift( $this->pages );
+
+			foreach ( $this->pages as $page ) {
+				$slug = sanitize_title( $page );
+				add_submenu_page( 'theme-options', $page, $page, 'edit_theme_options', $slug, array( ThemePlate_Settings::instance(), 'page' ) );
+			}
+		}
 
 	}
 
@@ -150,8 +161,8 @@ class ThemePlate {
 }
 
 
-function ThemePlate( $key = NULL ) {
+function ThemePlate( $key = NULL, $pages = NULL ) {
 
-	return ThemePlate::instance( $key );
+	return ThemePlate::instance( $key, $pages );
 
 }
