@@ -85,7 +85,7 @@ class ThemePlate_PostMeta {
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
 				if ( $field['group'] == 'start' && ! $grouped ) {
-					echo '</table><td><table class="themeplate form-table grouped"><tr>';
+					echo '</table><table class="themeplate form-table grouped"><tr>';
 					$grouped = true;
 				} elseif ( ! $grouped ) {
 					echo '<tr>';
@@ -126,7 +126,7 @@ class ThemePlate_PostMeta {
 				}
 
 				if ( $field['group'] == 'end' && $grouped ) {
-					echo '</tr></table></td><table class="themeplate form-table">';
+					echo '</tr></table><table class="themeplate form-table">';
 					$grouped = false;
 				} elseif ( ! $grouped ) {
 					echo '</tr>';
