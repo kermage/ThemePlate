@@ -103,7 +103,7 @@ class ThemePlate_Settings {
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
 			if ( $field['args']['group'] == 'start' && ! $grouped ) {
-				echo '</table><td><table class="themeplate form-table grouped"><tr>';
+				echo '</table><table class="themeplate form-table grouped"><tr>';
 				$grouped = true;
 			} elseif ( ! $grouped ) {
 				echo '<tr>';
@@ -144,7 +144,7 @@ class ThemePlate_Settings {
 			}
 
 			if ( $field['args']['group'] == 'end' && $grouped ) {
-				echo '</tr></table></td><table class="themeplate form-table">';
+				echo '</tr></table><table class="themeplate form-table">';
 				$grouped = false;
 			} elseif ( ! $grouped ) {
 				echo '</tr>';
