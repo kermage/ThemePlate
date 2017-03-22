@@ -162,7 +162,7 @@ class ThemePlate_Fields {
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
-				if ( $list == 'post' ){
+				if ( $list == 'post' ) {
 					$pages = get_posts( array( 'post_type' => $field['options'] ) );
 				} else {
 					$pages = get_pages( array( 'post_type' => $field['options'] ) );
@@ -171,6 +171,20 @@ class ThemePlate_Fields {
 					echo '<option value="' . $page->ID . '"';
 					if ( in_array( $page->ID, (array) $field['value'] ) ) echo ' selected="selected"';
 					echo '>' . $page->post_title . '</option>';
+				}
+				echo '</select>';
+				break;
+
+			case 'user':
+				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				if ( ! $field['multiple'] ) {
+					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+				}
+				$users = get_users( array( 'role' => $field['options'] ) );
+				foreach( $users as $user ) {
+					echo '<option value="' . $user->ID . '"';
+					if ( in_array( $user->ID, (array) $field['value'] ) ) echo ' selected="selected"';
+					echo '>' . $user->display_name . '</option>';
 				}
 				echo '</select>';
 				break;
