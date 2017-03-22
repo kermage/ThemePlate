@@ -71,12 +71,11 @@ class ThemePlate {
 		);
 
 		if ( $this->pages ) {
-			add_submenu_page( 'theme-options', $this->pages[0], $this->pages[0], 'edit_theme_options', 'theme-options', array( ThemePlate_Settings::instance(), 'page' ) );
-			array_shift( $this->pages );
+			$title = array_shift( $this->pages );
+			add_submenu_page( 'theme-options', $title, $title, 'edit_theme_options', 'theme-options', array( ThemePlate_Settings::instance(), 'page' ) );
 
-			foreach ( $this->pages as $page ) {
-				$slug = sanitize_title( $page );
-				add_submenu_page( 'theme-options', $page, $page, 'edit_theme_options', $slug, array( ThemePlate_Settings::instance(), 'page' ) );
+			foreach ( $this->pages as $id => $title ) {
+				add_submenu_page( 'theme-options', $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
 			}
 		}
 
