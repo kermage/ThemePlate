@@ -85,7 +85,7 @@ class ThemePlate {
 
 	public function admin_init() {
 
-		register_setting( $this->key, $this->key );
+		register_setting( $this->key . '-options', $this->key . '-options' );
 
 		if ( $this->pages ) {
 			foreach ( $this->pages as $id => $title ) {
@@ -97,10 +97,14 @@ class ThemePlate {
 
 
 	public function admin_notices() {
-		if ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] === 'theme-options' &&
+
+		$page = str_replace( ThemePlate()->key . '-', '', $_REQUEST['page'] );
+
+		if ( isset( $_REQUEST['page'] ) && ( $_REQUEST['page'] === $this->key . '-options' || array_key_exists( $page, $this->pages ) ) &&
 			isset( $_REQUEST['settings-updated'] ) &&  $_REQUEST['settings-updated'] == true ) {
 			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
 		}
+
 	}
 
 
