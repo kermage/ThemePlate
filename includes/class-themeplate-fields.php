@@ -130,8 +130,8 @@ class ThemePlate_Fields {
 					$field['value'] = implode( ',', $field['value'] );
 				}
 				echo '<input type="hidden" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
-				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ThemePlate()->key . '" />';
-				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" />';
+				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( $field['prefix'] ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( $field['prefix'] ? $field['prefix'] : ThemePlate()->key ) . '" />';
 				break;
 
 			case 'date':
