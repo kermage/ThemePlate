@@ -35,7 +35,8 @@ class ThemePlate_Fields {
 		if ( ! is_array( $field ) )
 			return false;
 
-		$field_name = ThemePlate()->key . '[' . $field['id'] . ']';
+		$field_name = ( $field['prefix'] ? $field['prefix'] : ThemePlate()->key );
+		$field_name .= '[' . $field['id'] . ']';
 
 		$list = false;
 
