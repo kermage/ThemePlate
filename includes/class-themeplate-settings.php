@@ -121,7 +121,15 @@ class ThemePlate_Settings {
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
-					echo '<td' . ( $field['args']['width'] ? ' style="width: ' . $field['args']['width'] . '"' : '' ) . '>';
+					$width = '';
+					if ( $field['args']['width'] ) {
+						if ( preg_match( '/\d+(%|px|r?em)/', $field['args']['width'] ) ) {
+							$width = ' style="width:' . $field['args']['width'] . '"';
+						} else {
+							$width = ' class="' . $field['args']['width'] . '"';
+						}
+					}
+					echo '<td' . ( $width ? $width : '' ) . '>';
 				}
 
 				if ( $field['args']['stack'] && ! $stacking ) {

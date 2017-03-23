@@ -95,7 +95,15 @@ class ThemePlate_PostMeta {
 
 				if ( $grouped ) {
 					if ( ! $stacking ) {
-						echo '<td' . ( $field['width'] ? ' style="width: ' . $field['width'] . '"' : '' ) . '>';
+						$width = '';
+						if ( $field['width'] ) {
+							if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
+								$width = ' style="width:' . $field['width'] . '"';
+							} else {
+								$width = ' class="' . $field['width'] . '"';
+							}
+						}
+						echo '<td' . ( $width ? $width : '' ) . '>';
 					}
 
 					if ( $field['stack'] && ! $stacking ) {

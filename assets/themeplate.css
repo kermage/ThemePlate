@@ -10,6 +10,26 @@
 	vertical-align: top;
 }
 
+.themeplate.form-table.grouped .one-half {
+	width: 50%;
+}
+
+.themeplate.form-table.grouped .one-third {
+	width: 33.33%;
+}
+
+.themeplate.form-table.grouped .two-third {
+	width: 66.66%;
+}
+
+.themeplate.form-table.grouped .one-fourth {
+	width: 25%;
+}
+
+.themeplate.form-table.grouped .three-fourth {
+	width: 75%;
+}
+
 .themeplate.form-table.grouped .stacked + .stacked {
 	padding-top: 1.5em;
 }
