@@ -86,6 +86,12 @@ class ThemePlate {
 
 		register_setting( $this->key, $this->key );
 
+		if ( $this->pages ) {
+			foreach ( $this->pages as $id => $title ) {
+				register_setting( $this->key . '-' . $id, $this->key . '-' . $id );
+			}
+		}
+
 	}
 
 
