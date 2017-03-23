@@ -10,7 +10,7 @@ class ThemePlate {
 
 	private static $instance;
 
-	public $key, $pages;
+	public $key, $title, $pages;
 
 
 	public static function instance( $key = NULL, $pages = NULL ) {
@@ -30,7 +30,8 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		$this->key = isset( $key ) ? $key : 'themeplate';
+		$this->title = isset( $key ) ? $key : 'ThemePlate';
+		$this->key = strtolower( $this->title );
 		$this->pages = isset( $pages ) ? $pages : '';
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -59,23 +60,23 @@ class ThemePlate {
 
 		add_menu_page(
 			// Page Title
-			'Theme Options',
+			$this->title . ' Options',
 			// Menu Title
-			'Theme Options',
+			$this->title . ' Options',
 			// Capability
 			'edit_theme_options',
 			// Menu Slug
-			'theme-options',
+			$this->key . '-options',
 			// Content Function
 			array( ThemePlate_Settings::instance(), 'page' )
 		);
 
 		if ( $this->pages ) {
 			$title = array_shift( $this->pages );
-			add_submenu_page( 'theme-options', $title, $title, 'edit_theme_options', 'theme-options', array( ThemePlate_Settings::instance(), 'page' ) );
+			add_submenu_page( $this->key . '-options', $title, $title, 'edit_theme_options', $this->key . '-options', array( ThemePlate_Settings::instance(), 'page' ) );
 
 			foreach ( $this->pages as $id => $title ) {
-				add_submenu_page( 'theme-options', $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
+				add_submenu_page( $this->key . '-options', $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
 			}
 		}
 
