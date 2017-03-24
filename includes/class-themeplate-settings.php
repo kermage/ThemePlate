@@ -208,7 +208,7 @@ class ThemePlate_Settings {
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
 		$field['value'] = get_option( $field['prefix'] );
 		$field['value'] = $field['value'][$field['id']];
-		$field['value'] = $field['value'] ? $field['value'] : $param['std'];
+		$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
 		ThemePlate_Fields::instance()->render( $field );
 	}
