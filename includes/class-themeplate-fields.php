@@ -68,6 +68,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'radio' :
 				foreach( $field['options'] as $value => $option ) {
+					$value = is_string( $value ) ? $value : ( $value + 1 );
 					echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
 					echo ( $list ? '<br>' : '' );
 				}
@@ -79,6 +80,7 @@ class ThemePlate_Fields {
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				if ( $field['options'] ) {
 					foreach( $field['options'] as $value => $option ) {
+						$value = is_string( $value ) ? $value : ( $value + 1 );
 						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
 						if ( in_array( $value, (array) $field['value'] ) ) echo ' checked="checked"';
 						echo ' />' . $option . '</label>';
