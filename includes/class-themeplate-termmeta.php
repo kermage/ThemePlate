@@ -72,7 +72,7 @@ class ThemePlate_TermMeta {
 		if ( is_array( $fields ) ) {
 
 			foreach ( $fields as $id => $field ) {
-				$field['id'] = $meta_box['id'] . '_' . $id;
+				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 				$field['value'] = get_term_meta( $term_id, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
