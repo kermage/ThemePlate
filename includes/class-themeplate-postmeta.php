@@ -31,6 +31,7 @@ class ThemePlate_PostMeta {
 
 
 	public function add( $meta_box ) {
+
 		if ( ! is_array( $meta_box ) )
 			return false;
 
@@ -63,10 +64,12 @@ class ThemePlate_PostMeta {
 
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 		}
+
 	}
 
 
 	public function create( $post, $meta_box ) {
+
 		if ( ! is_array( $meta_box ) )
 			return false;
 
@@ -143,10 +146,12 @@ class ThemePlate_PostMeta {
 
 			echo '</table>';
 		}
+
 	}
 
 
 	public function save( $post_id ) {
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			return;
 
@@ -161,7 +166,7 @@ class ThemePlate_PostMeta {
 				return;
 		}
 
-		foreach( $_POST[ThemePlate()->key] as $key => $val ) {
+		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
 			$meta = get_post_meta( $post_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_post_meta( $post_id, $key, $val, true );
@@ -171,6 +176,7 @@ class ThemePlate_PostMeta {
 				delete_post_meta( $post_id, $key, $meta );
 			}
 		}
+
 	}
 
 }

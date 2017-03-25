@@ -31,6 +31,7 @@ class ThemePlate_Settings {
 
 
 	public function page() {
+
 		$page = get_current_screen()->id;
 		$page = str_replace( ThemePlate()->key . '-options', '', $page );
 		$page = str_replace( 'toplevel', '', $page );
@@ -66,10 +67,12 @@ class ThemePlate_Settings {
 			</form>
 		</div>
 		<?php
+
 	}
 
 
 	public function section( $page ) {
+
 		global $wp_settings_sections, $wp_settings_fields;
 
 		if ( ! isset( $wp_settings_sections[$page] ) )
@@ -100,10 +103,12 @@ class ThemePlate_Settings {
 		}
 
 		echo '</div>';
+
 	}
 
 
 	public function fields( $page, $section ) {
+
 		global $wp_settings_fields;
 
 		if ( ! isset( $wp_settings_fields[$page][$section] ) )
@@ -166,10 +171,12 @@ class ThemePlate_Settings {
 				echo '</tr>';
 			}
 		}
+
 	}
 
 
 	public function add( $param ) {
+
 		if ( ! is_array( $param ) )
 			return false;
 
@@ -197,10 +204,12 @@ class ThemePlate_Settings {
 				$field
 			);
 		}
+
 	}
 
 
 	public function create( $param ) {
+
 		if ( ! is_array( $param ) )
 			return false;
 
@@ -211,6 +220,7 @@ class ThemePlate_Settings {
 		$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
 		ThemePlate_Fields::instance()->render( $field );
+
 	}
 
 }

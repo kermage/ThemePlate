@@ -87,55 +87,69 @@ class ThemePlate_Cleaner {
 
 
 	public function query_strings( $src ) {
+
 		return remove_query_arg( 'ver', $src );
+
 	}
 
 
 	public function style_tag( $input ) {
+
 		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches );
 		// Only display media if it is meaningful
 		$media = $matches[3][0] !== '' && $matches[3][0] !== 'all' ? ' media="' . $matches[3][0] . '"' : '';
 		return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
+
 	}
 
 
 	public function script_tag( $input ) {
+
 		$input = str_replace( "type='text/javascript' ", '', $input );
 		return str_replace( "'", '"', $input );
+
 	}
 
 
 	public function body_class( $classes ) {
+
 		$match = '(^(postid|attachmentid|page-id|parent-pageid|category|tag|term)-\d+$|(attachment|page-parent|page-child)$)';
 		$match .= '|(^(page|post|single|category|tag|archive|post-type-archive)$)';
 		$match .= '|(^.*-(template(-default)?(-page-templates)?(-[\w-]+-php)?)$)';
 		$match = '/' . $match . '/';
 		foreach ( $classes as $key => $value ) {
-			if( preg_match( $match, $value ) ) unset( $classes[$key] );
+			if ( preg_match( $match, $value ) ) unset( $classes[$key] );
 		}
 		return $classes;
+
 	}
 
 
 	public function post_class( $classes ) {
+
 		$match = '/(post-\d+$|(type|status|format)-[\w-]+$)/';
 		foreach ( $classes as $key => $value ) {
-			if( preg_match( $match, $value ) ) unset( $classes[$key] );
+			if ( preg_match( $match, $value ) ) unset( $classes[$key] );
 		}
 		return $classes;
+
 	}
 
 
 	public function recent_comments_style() {
+
 		global $wp_widget_factory;
-		if( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
+		if ( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
 			remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
 		}
+
 	}
 
 
 	public function tag_cloud_inline_style( $tag_string ) {
+
 		return preg_replace( "/style='font-size:.+pt;'/", '', $tag_string );
+
 	}
 
 }

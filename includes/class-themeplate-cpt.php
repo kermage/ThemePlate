@@ -31,6 +31,7 @@ class ThemePlate_CPT {
 
 
 	public function add_type( $param ) {
+
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -66,10 +67,12 @@ class ThemePlate_CPT {
 		);
 
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
+
 	}
 
 
 	public function add_tax( $param ) {
+
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -100,6 +103,7 @@ class ThemePlate_CPT {
 		);
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
+
 	}
 
 }
