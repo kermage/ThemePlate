@@ -44,9 +44,23 @@ class ThemePlate_UserMeta {
 
 	public function create( $user ) {
 
+		$meta_box = $this->meta_box;
+
+		$check = ( $meta_box['show_on']['key'] == 'id' ? $user->ID : $check );
+		$check = ( $meta_box['show_on']['key'] == 'role' ? $user->roles : $check );
+		$check = ( $meta_box['show_on']['key'] == 'capability' ? $user->allcaps : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'id' ? $user->ID : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'role' ? $user->roles : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'capability' ? $user->allcaps : $check );
+
+		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
+			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
+		) {
+			return;
+		}
+
 		wp_enqueue_media();
 
-		$meta_box = $this->meta_box;
 		$fields = $meta_box['fields'];
 
 		echo '<h2>' . $meta_box['title'] . '</h2>';
