@@ -2,6 +2,7 @@
 > *"A framework to handle everything related in developing a full-featured WordPress theme"*
 
 It includes adding custom metaboxes to posts and terms, registering custom post types and taxonomies, and creating theme settings/options page.
+Also comes with a markup cleaner and a clean navwalker.
 
 ## Features
 - Work similarly to native WordPress function/methods
@@ -16,11 +17,12 @@ It includes adding custom metaboxes to posts and terms, registering custom post 
 ####2. Add to theme's `functions.php` file
 ```php
 if ( class_exists( 'ThemePlate' ) ) :
-	ThemePlate( 'your_key_here' );
+	ThemePlate( 'theme_key' );
 	require_once( 'post-types.php' );
 	require_once( 'settings.php' );
 	require_once( 'post-meta.php' );
 	require_once( 'term-meta.php' );
+	require_once( 'user-meta.php' );
 endif;
 ```
 - Initialize ThemePlate with own theme key; used in options group and prefixed in metabox fields
@@ -32,3 +34,4 @@ endif;
 - `ThemePlate()->settings( $args );`
 - `ThemePlate()->post_meta( $args );`
 - `ThemePlate()->term_meta( $args );`
+- `ThemePlate()->user_meta( $args );`
