@@ -118,7 +118,9 @@ class ThemePlate_Cleaner {
 		$match .= '|(^.*-(template(-default)?(-page-templates)?(-[\w-]+-php)?)$)';
 		$match = '/' . $match . '/';
 		foreach ( $classes as $key => $value ) {
-			if ( preg_match( $match, $value ) ) unset( $classes[$key] );
+			if ( preg_match( $match, $value ) ) {
+				unset( $classes[$key] );
+			}
 		}
 		return $classes;
 
@@ -129,7 +131,9 @@ class ThemePlate_Cleaner {
 
 		$match = '/(post-\d+$|(type|status|format)-[\w-]+$)/';
 		foreach ( $classes as $key => $value ) {
-			if ( preg_match( $match, $value ) ) unset( $classes[$key] );
+			if ( preg_match( $match, $value ) ) {
+				unset( $classes[$key] );
+			}
 		}
 		return $classes;
 

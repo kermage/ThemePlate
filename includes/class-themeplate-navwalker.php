@@ -49,8 +49,12 @@ class ThemePlate_NavWalker extends Walker {
 
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes = preg_replace( '/current[-_](menu|page)[-_](item|parent|ancestor)|(menu|page)[-_\w+]+/', '', $classes );
-		if ( $args->walker->has_children ) $classes[] = $this->class['has-sub'];
-		if ( $item->current ) $classes[] = $this->class['active'];
+		if ( $args->walker->has_children ) {
+			$classes[] = $this->class['has-sub'];
+		}
+		if ( $item->current ) {
+			$classes[] = $this->class['active'];
+		}
 		$classes = join( ' ', array_filter( $classes ) );
 		$output .= '<li' . ( ( $classes ) ? ' class="' . esc_attr( $classes ) . '"' : '' ) . '>';
 

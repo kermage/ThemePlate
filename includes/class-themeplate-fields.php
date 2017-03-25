@@ -60,7 +60,9 @@ class ThemePlate_Fields {
 				foreach ( $field['options'] as $value => $option ) {
 					$value = is_string( $value ) ? $value : ( $value + 1 );
 					echo '<option value="' . $value . '"';
-					if ( in_array( $value, (array) $field['value'] ) ) echo ' selected="selected"';
+					if ( in_array( $value, (array) $field['value'] ) ) {
+						echo ' selected="selected"';
+					}
 					echo '>' . $option . '</option>';
 				}
 				echo '</select>';
@@ -84,7 +86,9 @@ class ThemePlate_Fields {
 					foreach ( $field['options'] as $value => $option ) {
 						$value = is_string( $value ) ? $value : ( $value + 1 );
 						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
-						if ( in_array( $value, (array) $field['value'] ) ) echo ' checked="checked"';
+						if ( in_array( $value, (array) $field['value'] ) ) {
+							echo ' checked="checked"';
+						}
 						echo ' />' . $option . '</label>';
 						echo ( $list ? '<br>' : '' );
 					}
@@ -148,7 +152,11 @@ class ThemePlate_Fields {
 
 			case 'number':
 				echo '<input type="number" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
-				if ( is_array( $field['options'] ) ) foreach ( $field['options'] as $option => $value ) echo $option . '="' . $value . '"';
+				if ( is_array( $field['options'] ) ) {
+					foreach ( $field['options'] as $option => $value ) {
+						echo $option . '="' . $value . '"';
+					}
+				}
 				echo ' />';
 				break;
 
@@ -176,7 +184,9 @@ class ThemePlate_Fields {
 				}
 				foreach ( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
-					if ( in_array( $page->ID, (array) $field['value'] ) ) echo ' selected="selected"';
+					if ( in_array( $page->ID, (array) $field['value'] ) ) {
+						echo ' selected="selected"';
+					}
 					echo '>' . $page->post_title . '</option>';
 				}
 				echo '</select>';
@@ -192,7 +202,9 @@ class ThemePlate_Fields {
 				$users = get_users( array( 'role' => $field['options'] ) );
 				foreach ( $users as $user ) {
 					echo '<option value="' . $user->ID . '"';
-					if ( in_array( $user->ID, (array) $field['value'] ) ) echo ' selected="selected"';
+					if ( in_array( $user->ID, (array) $field['value'] ) ) {
+						echo ' selected="selected"';
+					}
 					echo '>' . $user->display_name . '</option>';
 				}
 				echo '</select>';
@@ -208,7 +220,9 @@ class ThemePlate_Fields {
 				$terms = get_terms( array( 'taxonomy' => $field['options'] ) );
 				foreach ( $terms as $term ) {
 					echo '<option value="' . $term->term_id . '"';
-					if ( in_array( $term->term_id, (array) $field['value'] ) ) echo ' selected="selected"';
+					if ( in_array( $term->term_id, (array) $field['value'] ) ) {
+						echo ' selected="selected"';
+					}
 					echo '>' . $term->name . '</option>';
 				}
 				echo '</select>';
