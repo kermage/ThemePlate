@@ -169,6 +169,13 @@ class ThemePlate {
 
 	}
 
+
+	public function user_meta( $args ) {
+
+		ThemePlate_UserMeta::instance()->add( $args );
+
+	}
+
 }
 
 
