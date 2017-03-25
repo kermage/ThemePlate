@@ -49,16 +49,31 @@ class ThemePlate_UserMeta {
 		$meta_box = $this->meta_box;
 		$fields = $meta_box['fields'];
 
+		echo '<h2>' . $meta_box['title'] . '</h2>';
+
+		if ( ! empty( $meta_box['description'] ) ) {
+			echo '<p>' . $meta_box['description'] . '</p>';
+		}
+
 		if ( is_array( $fields ) ) {
+			echo '<table class="form-table">';
 
 			foreach ( $fields as $id => $field ) {
 				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 				$field['value'] = get_user_meta( $user->ID, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-				ThemePlate_Fields::instance()->render( $field );
+				echo '<tr>';
+					echo '<th>';
+						echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+					echo '</th>';
+					echo '<td>';
+						ThemePlate_Fields::instance()->render( $field );
+					echo '</td>';
+				echo '</tr>';
 			}
 
+			echo '</table>';
 		}
 
 	}
