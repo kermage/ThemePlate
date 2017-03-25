@@ -60,9 +60,19 @@ class ThemePlate_TermMeta {
 
 	public function create( $term_id, $form_type ) {
 
+		$meta_box = $this->meta_box;
+
+		$check = ( $meta_box['show_on']['key'] == 'id' ? $term_id : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'id' ? $term_id : $check );
+
+		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
+			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
+		) {
+			return;
+		}
+
 		wp_enqueue_media();
 
-		$meta_box = $this->meta_box;
 		$fields = $meta_box['fields'];
 
 		if ( is_array( $fields ) ) {
