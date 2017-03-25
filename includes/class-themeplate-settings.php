@@ -75,8 +75,9 @@ class ThemePlate_Settings {
 
 		global $wp_settings_sections, $wp_settings_fields;
 
-		if ( ! isset( $wp_settings_sections[$page] ) )
+		if ( ! isset( $wp_settings_sections[$page] ) ) {
 			return;
+		}
 
 		echo '<div id="' . $page . '-sortables" class="meta-box-sortables">';
 
@@ -89,11 +90,13 @@ class ThemePlate_Settings {
 			echo '<h2 class="hndle"><span>' . $section['title'] . '</span></h2>';
 			echo '<div class="inside">';
 
-			if ( $section['callback'] )
+			if ( $section['callback'] ) {
 				echo '<p>' . $section['callback'] . '</p>';
+			}
 
-			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) )
+			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) ) {
 				continue;
+			}
 
 			echo '<table class="themeplate form-table">';
 			$this->fields( $page, $section['id'] );
@@ -111,8 +114,9 @@ class ThemePlate_Settings {
 
 		global $wp_settings_fields;
 
-		if ( ! isset( $wp_settings_fields[$page][$section] ) )
+		if ( ! isset( $wp_settings_fields[$page][$section] ) ) {
 			return;
+		}
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
 			if ( $field['args']['group'] == 'start' && ! $grouped ) {
@@ -177,8 +181,9 @@ class ThemePlate_Settings {
 
 	public function add( $param ) {
 
-		if ( ! is_array( $param ) )
+		if ( ! is_array( $param ) ) {
 			return false;
+		}
 
 		$page = ThemePlate()->key . ( $param['page'] ? '-' . $param['page'] : '-options' );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
@@ -210,8 +215,9 @@ class ThemePlate_Settings {
 
 	public function create( $param ) {
 
-		if ( ! is_array( $param ) )
+		if ( ! is_array( $param ) ) {
 			return false;
+		}
 
 		$field = $param;
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
