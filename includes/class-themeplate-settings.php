@@ -31,6 +31,14 @@ class ThemePlate_Settings {
 
 
 	public function page() {
+		$page = get_current_screen()->id;
+		$page = str_replace( ThemePlate()->key . '-options', '', $page );
+		$page = str_replace( 'toplevel', '', $page );
+		$page = str_replace( '_page_', '', $page );
+		if ( ! $page ) {
+			$page = ThemePlate()->key . '-options';
+		}
+
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 		?>
@@ -43,15 +51,15 @@ class ThemePlate_Settings {
 							<div id="submitdiv" class="postbox">
 								<h2>Publish</h2>
 								<div id="major-publishing-actions">
-									<?php settings_fields( ThemePlate()->key ); ?>
+									<?php settings_fields( $page ); ?>
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
-							<?php $this->section( get_current_screen()->id . '-side' ); ?>
+							<?php $this->section( $page . '-side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php $this->section( get_current_screen()->id . '-normal' ); ?>
+							<?php $this->section( $page . '-normal' ); ?>
 						</div>
 					</div>
 				</div>
@@ -113,7 +121,15 @@ class ThemePlate_Settings {
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
-					echo '<td' . ( $field['args']['width'] ? ' style="width: ' . $field['args']['width'] . '"' : '' ) . '>';
+					$width = '';
+					if ( $field['args']['width'] ) {
+						if ( preg_match( '/\d+(%|px|r?em)/', $field['args']['width'] ) ) {
+							$width = ' style="width:' . $field['args']['width'] . '"';
+						} else {
+							$width = ' class="' . $field['args']['width'] . '"';
+						}
+					}
+					echo '<td' . ( $width ? $width : '' ) . '>';
 				}
 
 				if ( $field['args']['stack'] && ! $stacking ) {
@@ -157,7 +173,7 @@ class ThemePlate_Settings {
 		if ( ! is_array( $param ) )
 			return false;
 
-		$page = ( $param['page'] ? 'theme-options_page_' . $param['page'] : 'toplevel_page_theme-options' );
+		$page = ThemePlate()->key . ( $param['page'] ? '-' . $param['page'] : '-options' );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
 
 		add_settings_section(
@@ -169,6 +185,7 @@ class ThemePlate_Settings {
 
 		foreach ( $param['fields'] as $id => $field ) {
 			$field['id'] = $param['id'] . '_' . $id;
+			$field['page'] = ( $param['page'] ? $param['page'] : 'options' );
 			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
 
 			add_settings_field(
@@ -188,9 +205,10 @@ class ThemePlate_Settings {
 			return false;
 
 		$field = $param;
-		$field['value'] = get_option( ThemePlate()->key );
+		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
+		$field['value'] = get_option( $field['prefix'] );
 		$field['value'] = $field['value'][$field['id']];
-		$field['value'] = $field['value'] ? $field['value'] : $param['std'];
+		$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
 		ThemePlate_Fields::instance()->render( $field );
 	}

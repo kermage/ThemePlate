@@ -72,7 +72,7 @@ class ThemePlate_TermMeta {
 		if ( is_array( $fields ) ) {
 
 			foreach ( $fields as $id => $field ) {
-				$field['id'] = $meta_box['id'] . '_' . $id;
+				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 				$field['value'] = get_term_meta( $term_id, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
@@ -96,10 +96,10 @@ class ThemePlate_TermMeta {
 			$meta = get_term_meta( $term_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_term_meta( $term_id, $key, $val, true );
-			} elseif ( $val && $val != $meta ) {
+			} elseif ( $val[0] && $val != $meta ) {
 				update_term_meta( $term_id, $key, $val, $meta );
-			} elseif ( ! $val && isset( $meta ) ) {
-				delete_term_meta( $term_id, $key, $val );
+			} elseif ( ! $val[0] && isset( $meta ) ) {
+				delete_term_meta( $term_id, $key, $meta );
 			}
 		}
 

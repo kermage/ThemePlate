@@ -93,7 +93,15 @@ jQuery.noConflict();
 	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
 		e.preventDefault();
 
-		$( '#' + e.target.id.replace( '_remove', '_preview' ) ).html( '' );
+		isMultiple = false;
+		if ( $( this ).attr( 'multiple' ) ) {
+			isMultiple = true;
+		}
+
+		fieldname = $( this ).data( 'key' ) + '[' + e.target.id.replace( 'themeplate_', '' ).replace( '_remove', '' ) + ']' + ( isMultiple ? '[]' : '' );
+		field = '<input type="hidden" name="' + fieldname + '" value="">';
+
+		$( '#' + e.target.id.replace( '_remove', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' ).append( field );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );

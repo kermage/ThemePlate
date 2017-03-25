@@ -95,7 +95,15 @@ class ThemePlate_PostMeta {
 
 				if ( $grouped ) {
 					if ( ! $stacking ) {
-						echo '<td' . ( $field['width'] ? ' style="width: ' . $field['width'] . '"' : '' ) . '>';
+						$width = '';
+						if ( $field['width'] ) {
+							if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
+								$width = ' style="width:' . $field['width'] . '"';
+							} else {
+								$width = ' class="' . $field['width'] . '"';
+							}
+						}
+						echo '<td' . ( $width ? $width : '' ) . '>';
 					}
 
 					if ( $field['stack'] && ! $stacking ) {
@@ -157,10 +165,10 @@ class ThemePlate_PostMeta {
 			$meta = get_post_meta( $post_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_post_meta( $post_id, $key, $val, true );
-			} elseif ( $val && $val != $meta ) {
+			} elseif ( $val[0] && $val != $meta ) {
 				update_post_meta( $post_id, $key, $val, $meta );
-			} elseif ( ! $val && isset( $meta ) ) {
-				delete_post_meta( $post_id, $key, $val );
+			} elseif ( ! $val[0] && isset( $meta ) ) {
+				delete_post_meta( $post_id, $key, $meta );
 			}
 		}
 	}
