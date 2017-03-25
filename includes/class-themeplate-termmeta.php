@@ -12,8 +12,6 @@ class ThemePlate_TermMeta {
 
 	private $meta_box;
 
-	private $form_type;
-
 
 	public static function instance() {
 
@@ -48,26 +46,23 @@ class ThemePlate_TermMeta {
 
 	public function add_form( $tag ) {
 
-		$this->form_type = 'add';
-		$this->create( $tag->term_id );
+		$this->create( $tag->term_id, 'add' );
 
 	}
 
 
 	public function edit_form( $tag ) {
 
-		$this->form_type = 'edit';
-		$this->create( $tag->term_id );
+		$this->create( $tag->term_id, 'edit' );
 
 	}
 
 
-	public function create( $term_id ) {
+	public function create( $term_id, $form_type ) {
 
 		wp_enqueue_media();
 
 		$meta_box = $this->meta_box;
-		$form_type = $this->form_type;
 		$fields = $meta_box['fields'];
 
 		if ( is_array( $fields ) ) {
