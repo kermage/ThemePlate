@@ -81,6 +81,10 @@ class ThemePlate_UserMeta {
 
 	public function save( $user_id ) {
 
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+			return;
+		}
+
 		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
 			$meta = get_user_meta( $user_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {

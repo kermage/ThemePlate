@@ -89,6 +89,10 @@ class ThemePlate_TermMeta {
 
 	public function save( $term_id ) {
 
+		if ( ! current_user_can( 'edit_term', $term_id ) ) {
+			return;
+		}
+
 		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
 			$meta = get_term_meta( $term_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
