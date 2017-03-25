@@ -12,8 +12,6 @@ class ThemePlate_TermMeta {
 
 	private $meta_box;
 
-	private $form_type;
-
 
 	public static function instance() {
 
@@ -30,8 +28,9 @@ class ThemePlate_TermMeta {
 
 	public function add( $meta_box ) {
 
-		if ( ! is_array( $meta_box ) )
+		if ( ! is_array( $meta_box ) ) {
 			return false;
+		}
 
 		$this->meta_box = $meta_box;
 
@@ -47,26 +46,23 @@ class ThemePlate_TermMeta {
 
 	public function add_form( $tag ) {
 
-		$this->form_type = 'add';
-		$this->create( $tag->term_id );
+		$this->create( $tag->term_id, 'add' );
 
 	}
 
 
 	public function edit_form( $tag ) {
 
-		$this->form_type = 'edit';
-		$this->create( $tag->term_id );
+		$this->create( $tag->term_id, 'edit' );
 
 	}
 
 
-	public function create( $term_id ) {
+	public function create( $term_id, $form_type ) {
 
 		wp_enqueue_media();
 
 		$meta_box = $this->meta_box;
-		$form_type = $this->form_type;
 		$fields = $meta_box['fields'];
 
 		if ( is_array( $fields ) ) {
@@ -80,8 +76,9 @@ class ThemePlate_TermMeta {
 					echo ( $form_type == 'add' ? '' : '<th>' ) . '<label for="' . $field['id'] . '">' . $field['name'] . '</label>' . ( $form_type == 'add' ? '' : '</th>' );
 					echo ( $form_type == 'add' ? '' : '<td>' );
 						ThemePlate_Fields::instance()->render( $field );
-					if ( $field['desc'] )
+					if ( $field['desc'] ) {
 						echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
+					}
 				echo '</' . ( $form_type == 'add' ? 'div' : 'tr' ) . '>';
 			}
 
@@ -92,7 +89,7 @@ class ThemePlate_TermMeta {
 
 	public function save( $term_id ) {
 
-		foreach( $_POST[ThemePlate()->key] as $key => $val ) {
+		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
 			$meta = get_term_meta( $term_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_term_meta( $term_id, $key, $val, true );

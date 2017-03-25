@@ -31,8 +31,10 @@ class ThemePlate_PostMeta {
 
 
 	public function add( $meta_box ) {
-		if ( ! is_array( $meta_box ) )
+
+		if ( ! is_array( $meta_box ) ) {
 			return false;
+		}
 
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
@@ -58,20 +60,25 @@ class ThemePlate_PostMeta {
 		) {
 			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
 			$id = 'themeplate_' . $meta_box['id'];
-			if ( $meta_box['screen'] == 'post' )
+			if ( $meta_box['screen'] == 'post' ) {
 				$id .= '_post';
+			}
 
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 		}
+
 	}
 
 
 	public function create( $post, $meta_box ) {
-		if ( ! is_array( $meta_box ) )
-			return false;
 
-		if ( ! empty( $meta_box['args']['description'] ) )
+		if ( ! is_array( $meta_box ) ) {
+			return false;
+		}
+
+		if ( ! empty( $meta_box['args']['description'] ) ) {
 			echo '<p>' . $meta_box['args']['description'] . '</p>';
+		}
 
 		$fields = $meta_box['args']['fields'];
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
@@ -143,25 +150,31 @@ class ThemePlate_PostMeta {
 
 			echo '</table>';
 		}
+
 	}
 
 
 	public function save( $post_id ) {
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-			return;
 
-		if ( ! isset( $_POST['themeplate_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_meta_box_nonce'], basename( __FILE__ ) ) )
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
-
-		if ( 'page' == $_POST['post_type'] ) {
-			if ( ! current_user_can( 'edit_page', $post_id ) )
-				return;
-		} else {
-			if ( ! current_user_can( 'edit_post', $post_id ) )
-				return;
 		}
 
-		foreach( $_POST[ThemePlate()->key] as $key => $val ) {
+		if ( ! isset( $_POST['themeplate_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_meta_box_nonce'], basename( __FILE__ ) ) ) {
+			return;
+		}
+
+		if ( 'page' == $_POST['post_type'] ) {
+			if ( ! current_user_can( 'edit_page', $post_id ) ) {
+				return;
+			}
+		} else {
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return;
+			}
+		}
+
+		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
 			$meta = get_post_meta( $post_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_post_meta( $post_id, $key, $val, true );
@@ -171,6 +184,7 @@ class ThemePlate_PostMeta {
 				delete_post_meta( $post_id, $key, $meta );
 			}
 		}
+
 	}
 
 }

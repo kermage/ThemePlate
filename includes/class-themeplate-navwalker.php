@@ -24,26 +24,37 @@ class ThemePlate_NavWalker extends Walker {
 
 
 	public function attributes( $item, $args ) {
+
 		$atts = array();
 		return $atts;
+
 	}
 
 
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
+
 		$output .= '<ul class="' . $this->class['sub-menu'] . '">';
+
 	}
 
 
 	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+
 		$output .= '</ul>';
+
 	}
 
 
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes = preg_replace( '/current[-_](menu|page)[-_](item|parent|ancestor)|(menu|page)[-_\w+]+/', '', $classes );
-		if ( $args->walker->has_children ) $classes[] = $this->class['has-sub'];
-		if ( $item->current ) $classes[] = $this->class['active'];
+		if ( $args->walker->has_children ) {
+			$classes[] = $this->class['has-sub'];
+		}
+		if ( $item->current ) {
+			$classes[] = $this->class['active'];
+		}
 		$classes = join( ' ', array_filter( $classes ) );
 		$output .= '<li' . ( ( $classes ) ? ' class="' . esc_attr( $classes ) . '"' : '' ) . '>';
 
@@ -68,10 +79,13 @@ class ThemePlate_NavWalker extends Walker {
 		$output .= $args->link_before . $item->title . $args->link_after;
 		$output .= '</a>';
 		$output .= $args->after;
+
 	}
 
 
 	public function end_el( &$output, $item, $depth = 0, $args = array() ) {
+
 		$output .= '</li>';
+
 	}
 }
