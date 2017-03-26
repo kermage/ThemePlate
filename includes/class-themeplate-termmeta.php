@@ -35,8 +35,8 @@ class ThemePlate_TermMeta {
 		$this->meta_box = $meta_box;
 
 		foreach ( (array) $meta_box['taxonomy'] as $taxonomy ) {
-			add_action( $taxonomy . '_add_form_fields', array( $this, 'add_form' ) );
-			add_action( $taxonomy . '_edit_form_fields', array( $this, 'edit_form' ) );
+			add_action( $taxonomy . '_add_form', array( $this, 'create' ) );
+			add_action( $taxonomy . '_edit_form', array( $this, 'create' ) );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
 			add_action( 'edited_' . $taxonomy, array( $this, 'save' ) );
 		}
@@ -44,26 +44,12 @@ class ThemePlate_TermMeta {
 	}
 
 
-	public function add_form( $tag ) {
-
-		$this->create( $tag->term_id, 'add' );
-
-	}
-
-
-	public function edit_form( $tag ) {
-
-		$this->create( $tag->term_id, 'edit' );
-
-	}
-
-
-	public function create( $term_id, $form_type ) {
+	public function create( $tag ) {
 
 		$meta_box = $this->meta_box;
 
-		$check = ( $meta_box['show_on']['key'] == 'id' ? $term_id : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'id' ? $term_id : $check );
+		$check = ( $meta_box['show_on']['key'] == 'id' ? $tag->term_id : $check );
+		$check = ( $meta_box['hide_on']['key'] == 'id' ? $tag->term_id : $check );
 
 		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
 			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
@@ -71,28 +57,46 @@ class ThemePlate_TermMeta {
 			return;
 		}
 
+		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
+
+		printf( '<div id="%s-box" class="postbox">', ThemePlate()->key . '_' . $meta_box['id'] );
+		echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
+		echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) . '</span>';
+		echo '<span class="toggle-indicator" aria-hidden="true"></span>';
+		echo '</button>';
+		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
+		echo '<div class="inside">';
 
 		$fields = $meta_box['fields'];
 
+		if ( ! empty( $meta_box['description'] ) ) {
+			echo '<p>' . $meta_box['description'] . '</p>';
+		}
+
 		if ( is_array( $fields ) ) {
+			echo '<table class="themeplate form-table">';
 
 			foreach ( $fields as $id => $field ) {
 				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-				$field['value'] = get_term_meta( $term_id, $field['id'], true );
+				$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
 				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-				echo '<' . ( $form_type == 'add' ? 'div' : 'tr' ) . ' class="form-field">';
-					echo ( $form_type == 'add' ? '' : '<th>' ) . '<label for="' . $field['id'] . '">' . $field['name'] . '</label>' . ( $form_type == 'add' ? '' : '</th>' );
-					echo ( $form_type == 'add' ? '' : '<td>' );
+				echo '<tr>';
+					echo '<th>';
+						echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+					echo '</th>';
+					echo '<td>';
 						ThemePlate_Fields::instance()->render( $field );
-					if ( $field['desc'] ) {
-						echo '<p class="description">' . $field['desc'] . '</p>' . ( $form_type == 'add' ? '' : '<td>' );
-					}
-				echo '</' . ( $form_type == 'add' ? 'div' : 'tr' ) . '>';
+					echo '</td>';
+				echo '</tr>';
 			}
 
+			echo '</table>';
 		}
+
+		echo '</div>';
+		echo '</div>';
 
 	}
 
