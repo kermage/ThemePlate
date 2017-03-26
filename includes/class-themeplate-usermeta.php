@@ -59,18 +59,25 @@ class ThemePlate_UserMeta {
 			return;
 		}
 
+		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
-		$fields = $meta_box['fields'];
+		printf( '<div id="%s-box" class="postbox">', ThemePlate()->key . '_' . $meta_box['id'] );
+		echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
+		echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) . '</span>';
+		echo '<span class="toggle-indicator" aria-hidden="true"></span>';
+		echo '</button>';
+		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
+		echo '<div class="inside">';
 
-		echo '<h2>' . $meta_box['title'] . '</h2>';
+		$fields = $meta_box['fields'];
 
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p>' . $meta_box['description'] . '</p>';
 		}
 
 		if ( is_array( $fields ) ) {
-			echo '<table class="form-table">';
+			echo '<table class="themeplate form-table">';
 
 			foreach ( $fields as $id => $field ) {
 				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
@@ -89,6 +96,9 @@ class ThemePlate_UserMeta {
 
 			echo '</table>';
 		}
+
+		echo '</div>';
+		echo '</div>';
 
 	}
 
