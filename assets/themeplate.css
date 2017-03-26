@@ -120,6 +120,14 @@
 	margin-left: 0.5em;
 }
 
+.edit-tags-php .themeplate.form-table th,
+.edit-tags-php .themeplate.form-table td {
+	width: 100%;
+	display: block;
+	padding: 0;
+	margin: 1em 0;
+}
+
 .edit-tags-php .postbox,
 .term-php .postbox,
 .profile-php .postbox,
