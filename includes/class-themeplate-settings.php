@@ -185,6 +185,10 @@ class ThemePlate_Settings {
 			return false;
 		}
 
+		if ( ! is_array( $param['fields'] ) ) {
+			return false;
+		}
+
 		$page = ThemePlate()->key . ( $param['page'] ? '-' . $param['page'] : '-options' );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
 
@@ -214,10 +218,6 @@ class ThemePlate_Settings {
 
 
 	public function create( $param ) {
-
-		if ( ! is_array( $param ) ) {
-			return false;
-		}
 
 		$field = $param;
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];

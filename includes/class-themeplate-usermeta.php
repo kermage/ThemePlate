@@ -32,6 +32,10 @@ class ThemePlate_UserMeta {
 			return false;
 		}
 
+		if ( ! is_array( $meta_box['fields'] ) ) {
+			return false;
+		}
+
 		$this->meta_box = $meta_box;
 
 		add_action( 'show_user_profile', array( $this, 'create' ) );
@@ -76,26 +80,24 @@ class ThemePlate_UserMeta {
 			echo '<p>' . $meta_box['description'] . '</p>';
 		}
 
-		if ( is_array( $fields ) ) {
-			echo '<table class="themeplate form-table">';
+		echo '<table class="themeplate form-table">';
 
-			foreach ( $fields as $id => $field ) {
-				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-				$field['value'] = get_user_meta( $user->ID, $field['id'], true );
-				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+		foreach ( $fields as $id => $field ) {
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+			$field['value'] = get_user_meta( $user->ID, $field['id'], true );
+			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-				echo '<tr>';
-					echo '<th>';
-						echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
-					echo '</th>';
-					echo '<td>';
-						ThemePlate_Fields::instance()->render( $field );
-					echo '</td>';
-				echo '</tr>';
-			}
-
-			echo '</table>';
+			echo '<tr>';
+				echo '<th>';
+					echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+				echo '</th>';
+				echo '<td>';
+					ThemePlate_Fields::instance()->render( $field );
+				echo '</td>';
+			echo '</tr>';
 		}
+
+		echo '</table>';
 
 		echo '</div>';
 		echo '</div>';
