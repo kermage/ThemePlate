@@ -120,6 +120,51 @@
 	margin-left: 0.5em;
 }
 
+.edit-tags-php .themeplate.form-table th,
+.edit-tags-php .themeplate.form-table td {
+	width: 100%;
+	display: block;
+	padding: 0;
+	margin: 1em 0;
+}
+
+.edit-tags-php .postbox,
+.term-php .postbox,
+.profile-php .postbox,
+.user-edit-php .postbox {
+	margin-top: 20px;
+}
+
+.edit-tags-php .postbox .inside,
+.term-php .postbox .inside,
+.profile-php .postbox .inside,
+.user-edit-php .postbox .inside {
+	margin: 6px 0 0;
+}
+
+.edit-tags-php .postbox .hndle,
+.term-php .postbox .hndle,
+.profile-php .postbox .hndle,
+.user-edit-php .postbox .hndle {
+	font-size: 14px;
+	padding: 8px 12px;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.edit-tags-php .postbox .toggle-indicator::before,
+.term-php .postbox .toggle-indicator::before,
+.profile-php .postbox .toggle-indicator::before,
+.user-edit-php .postbox .toggle-indicator::before {
+	content: "\f142";
+	display: inline-block;
+	font: 400 20px/1 dashicons;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate.form-table th,
 	[id $="side-sortables"] .themeplate.form-table td {
