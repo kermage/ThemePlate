@@ -120,6 +120,35 @@
 	margin-left: 0.5em;
 }
 
+.profile-php .postbox,
+.user-edit-php .postbox {
+	margin-top: 20px;
+}
+
+.profile-php .postbox .inside,
+.user-edit-php .postbox .inside {
+	margin: 6px 0 0;
+}
+
+.profile-php .postbox .hndle,
+.user-edit-php .postbox .hndle {
+	font-size: 14px;
+	padding: 8px 12px;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.profile-php .postbox .toggle-indicator::before,
+.user-edit-php .postbox .toggle-indicator::before {
+	content: "\f142";
+	display: inline-block;
+	font: 400 20px/1 dashicons;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none!important;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate.form-table th,
 	[id $="side-sortables"] .themeplate.form-table td {
