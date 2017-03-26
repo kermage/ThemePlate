@@ -120,16 +120,22 @@
 	margin-left: 0.5em;
 }
 
+.edit-tags-php .postbox,
+.term-php .postbox,
 .profile-php .postbox,
 .user-edit-php .postbox {
 	margin-top: 20px;
 }
 
+.edit-tags-php .postbox .inside,
+.term-php .postbox .inside,
 .profile-php .postbox .inside,
 .user-edit-php .postbox .inside {
 	margin: 6px 0 0;
 }
 
+.edit-tags-php .postbox .hndle,
+.term-php .postbox .hndle,
 .profile-php .postbox .hndle,
 .user-edit-php .postbox .hndle {
 	font-size: 14px;
@@ -138,6 +144,8 @@
 	line-height: 1.4;
 }
 
+.edit-tags-php .postbox .toggle-indicator::before,
+.term-php .postbox .toggle-indicator::before,
 .profile-php .postbox .toggle-indicator::before,
 .user-edit-php .postbox .toggle-indicator::before {
 	content: "\f142";
