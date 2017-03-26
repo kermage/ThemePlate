@@ -32,6 +32,10 @@ class ThemePlate_CPT {
 
 	public function add_type( $param ) {
 
+		if ( ! is_array( $param ) ) {
+			return false;
+		}
+
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -72,6 +76,10 @@ class ThemePlate_CPT {
 
 
 	public function add_tax( $param ) {
+
+		if ( ! is_array( $param ) ) {
+			return false;
+		}
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];

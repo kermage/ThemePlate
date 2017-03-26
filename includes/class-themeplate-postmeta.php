@@ -80,12 +80,11 @@ class ThemePlate_PostMeta {
 			echo '<p>' . $meta_box['args']['description'] . '</p>';
 		}
 
-		$fields = $meta_box['args']['fields'];
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		echo '<table class="themeplate form-table">';
 
-		foreach ( $fields as $id => $field ) {
+		foreach ( $meta_box['args']['fields'] as $id => $field ) {
 			$field['id'] = $meta_box['args']['id'] . '_' . $id;
 			$field['value'] = get_post_meta( $post->ID, $field['id'], true );
 			$field['value'] = $field['value'] ? $field['value'] : $field['std'];

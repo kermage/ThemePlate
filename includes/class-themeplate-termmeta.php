@@ -72,15 +72,13 @@ class ThemePlate_TermMeta {
 		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
 		echo '<div class="inside">';
 
-		$fields = $meta_box['fields'];
-
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p>' . $meta_box['description'] . '</p>';
 		}
 
 		echo '<table class="themeplate form-table">';
 
-		foreach ( $fields as $id => $field ) {
+		foreach ( $meta_box['fields'] as $id => $field ) {
 			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 			$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
 			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
