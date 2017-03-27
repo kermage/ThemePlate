@@ -32,7 +32,7 @@ class ThemePlate_CPT {
 
 	public function add_type( $param ) {
 
-		if ( ! is_array( $param ) ) {
+		if ( ! is_array( $param ) || empty( $param ) ) {
 			return false;
 		}
 
@@ -77,7 +77,7 @@ class ThemePlate_CPT {
 
 	public function add_tax( $param ) {
 
-		if ( ! is_array( $param ) ) {
+		if ( ! is_array( $param ) || empty( $param ) ) {
 			return false;
 		}
 

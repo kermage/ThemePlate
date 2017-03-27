@@ -181,11 +181,11 @@ class ThemePlate_Settings {
 
 	public function add( $param ) {
 
-		if ( ! is_array( $param ) ) {
+		if ( ! is_array( $param ) || empty( $param ) ) {
 			return false;
 		}
 
-		if ( ! is_array( $param['fields'] ) ) {
+		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
 			return false;
 		}
 

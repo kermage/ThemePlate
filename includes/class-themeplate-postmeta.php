@@ -32,11 +32,11 @@ class ThemePlate_PostMeta {
 
 	public function add( $meta_box ) {
 
-		if ( ! is_array( $meta_box ) ) {
+		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
 			return false;
 		}
 
-		if ( ! is_array( $meta_box['fields'] ) ) {
+		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
 			return false;
 		}
 
