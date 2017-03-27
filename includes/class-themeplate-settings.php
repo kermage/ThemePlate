@@ -200,6 +200,10 @@ class ThemePlate_Settings {
 		);
 
 		foreach ( $param['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
 			$field['id'] = $param['id'] . '_' . $id;
 			$field['page'] = ( $param['page'] ? $param['page'] : 'options' );
 			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );

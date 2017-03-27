@@ -85,6 +85,10 @@ class ThemePlate_PostMeta {
 		echo '<table class="themeplate form-table">';
 
 		foreach ( $meta_box['args']['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
 			$field['id'] = $meta_box['args']['id'] . '_' . $id;
 			$field['value'] = get_post_meta( $post->ID, $field['id'], true );
 			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
