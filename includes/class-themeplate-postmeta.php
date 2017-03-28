@@ -40,6 +40,12 @@ class ThemePlate_PostMeta {
 			return false;
 		}
 
+		$defaults = array(
+			'context'  => 'advanced',
+			'priority' => 'default'
+		);
+		$meta_box = wp_parse_args( $meta_box, $defaults );
+
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
 		$taxonomies = get_object_taxonomies( get_post_type() );

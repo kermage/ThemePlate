@@ -67,7 +67,8 @@ class ThemePlate_CPT {
 		$defaults = array(
 			'label'       => __( $plural, 'themeplate' ),
 			'labels'      => $labels,
-			'description' => __( $param['description'], 'themeplate' )
+			'description' => __( $param['description'], 'themeplate' ),
+			'public'      => true
 		);
 
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
@@ -107,7 +108,8 @@ class ThemePlate_CPT {
 		$defaults = array(
 			'label'       => __( $plural, 'themeplate' ),
 			'labels'      => $labels,
-			'description' => __( $param['description'], 'themeplate' )
+			'description' => __( $param['description'], 'themeplate' ),
+			'public'      => true
 		);
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
