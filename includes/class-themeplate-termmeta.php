@@ -32,6 +32,10 @@ class ThemePlate_TermMeta {
 			return false;
 		}
 
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
 		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
 			return false;
 		}

@@ -36,6 +36,13 @@ class ThemePlate_CPT {
 			return false;
 		}
 
+		if ( ! array_key_exists( 'name', $param ) ||
+			! array_key_exists( 'plural', $param ) ||
+			! array_key_exists( 'singular', $param )
+		) {
+			return false;
+		}
+
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -79,6 +86,14 @@ class ThemePlate_CPT {
 	public function add_tax( $param ) {
 
 		if ( ! is_array( $param ) || empty( $param ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'name', $param ) ||
+			! array_key_exists( 'type', $param ) ||
+			! array_key_exists( 'plural', $param ) ||
+			! array_key_exists( 'singular', $param )
+		) {
 			return false;
 		}
 
