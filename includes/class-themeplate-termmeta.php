@@ -38,7 +38,15 @@ class ThemePlate_TermMeta {
 
 		$this->meta_box = $meta_box;
 
-		foreach ( (array) $meta_box['taxonomy'] as $taxonomy ) {
+		if ( empty( $meta_box['taxonomy'] ) ) {
+			$taxonomies = get_taxonomies( array( '_builtin' => false ) );
+			$taxonomies['category'] = 'category';
+			$taxonomies['post_tag'] = 'post_tag';
+		} else {
+			$taxonomies = $meta_box['taxonomy'];
+		}
+
+		foreach ( $taxonomies as $taxonomy ) {
 			add_action( $taxonomy . '_add_form', array( $this, 'create' ) );
 			add_action( $taxonomy . '_edit_form', array( $this, 'create' ) );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
