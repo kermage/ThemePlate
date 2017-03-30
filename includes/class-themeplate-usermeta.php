@@ -32,7 +32,7 @@ class ThemePlate_UserMeta {
 			return false;
 		}
 
-		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+		if ( ! array_key_exists( 'id', $meta_box ) || ! array_key_exists( 'title', $meta_box ) ) {
 			return false;
 		}
 
