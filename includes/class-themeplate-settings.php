@@ -181,7 +181,15 @@ class ThemePlate_Settings {
 
 	public function add( $param ) {
 
-		if ( ! is_array( $param ) ) {
+		if ( ! is_array( $param ) || empty( $param ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
 			return false;
 		}
 
@@ -196,6 +204,10 @@ class ThemePlate_Settings {
 		);
 
 		foreach ( $param['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
 			$field['id'] = $param['id'] . '_' . $id;
 			$field['page'] = ( $param['page'] ? $param['page'] : 'options' );
 			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
@@ -214,10 +226,6 @@ class ThemePlate_Settings {
 
 
 	public function create( $param ) {
-
-		if ( ! is_array( $param ) ) {
-			return false;
-		}
 
 		$field = $param;
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];

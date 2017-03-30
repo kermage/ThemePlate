@@ -32,7 +32,7 @@ class ThemePlate_Fields {
 
 	public function render( $field ) {
 
-		if ( ! is_array( $field ) ) {
+		if ( ! is_array( $field ) || empty( $field ) ) {
 			return false;
 		}
 

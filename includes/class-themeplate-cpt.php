@@ -32,6 +32,17 @@ class ThemePlate_CPT {
 
 	public function add_type( $param ) {
 
+		if ( ! is_array( $param ) || empty( $param ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'name', $param ) ||
+			! array_key_exists( 'plural', $param ) ||
+			! array_key_exists( 'singular', $param )
+		) {
+			return false;
+		}
+
 		$plural = $param['plural'];
 		$singular = $param['singular'];
 		$args = $param['args'];
@@ -63,7 +74,8 @@ class ThemePlate_CPT {
 		$defaults = array(
 			'label'       => __( $plural, 'themeplate' ),
 			'labels'      => $labels,
-			'description' => __( $param['description'], 'themeplate' )
+			'description' => __( $param['description'], 'themeplate' ),
+			'public'      => true
 		);
 
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
@@ -72,6 +84,18 @@ class ThemePlate_CPT {
 
 
 	public function add_tax( $param ) {
+
+		if ( ! is_array( $param ) || empty( $param ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'name', $param ) ||
+			! array_key_exists( 'type', $param ) ||
+			! array_key_exists( 'plural', $param ) ||
+			! array_key_exists( 'singular', $param )
+		) {
+			return false;
+		}
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
@@ -99,7 +123,8 @@ class ThemePlate_CPT {
 		$defaults = array(
 			'label'       => __( $plural, 'themeplate' ),
 			'labels'      => $labels,
-			'description' => __( $param['description'], 'themeplate' )
+			'description' => __( $param['description'], 'themeplate' ),
+			'public'      => true
 		);
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );

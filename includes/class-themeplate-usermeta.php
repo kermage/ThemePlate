@@ -28,7 +28,15 @@ class ThemePlate_UserMeta {
 
 	public function add( $meta_box ) {
 
-		if ( ! is_array( $meta_box ) ) {
+		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
 			return false;
 		}
 
@@ -70,32 +78,32 @@ class ThemePlate_UserMeta {
 		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
 		echo '<div class="inside">';
 
-		$fields = $meta_box['fields'];
-
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p>' . $meta_box['description'] . '</p>';
 		}
 
-		if ( is_array( $fields ) ) {
-			echo '<table class="themeplate form-table">';
+		echo '<table class="themeplate form-table">';
 
-			foreach ( $fields as $id => $field ) {
-				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-				$field['value'] = get_user_meta( $user->ID, $field['id'], true );
-				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
-
-				echo '<tr>';
-					echo '<th>';
-						echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
-					echo '</th>';
-					echo '<td>';
-						ThemePlate_Fields::instance()->render( $field );
-					echo '</td>';
-				echo '</tr>';
+		foreach ( $meta_box['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
 			}
 
-			echo '</table>';
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+			$field['value'] = get_user_meta( $user->ID, $field['id'], true );
+			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+			echo '<tr>';
+				echo '<th>';
+					echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+				echo '</th>';
+				echo '<td>';
+					ThemePlate_Fields::instance()->render( $field );
+				echo '</td>';
+			echo '</tr>';
 		}
+
+		echo '</table>';
 
 		echo '</div>';
 		echo '</div>';

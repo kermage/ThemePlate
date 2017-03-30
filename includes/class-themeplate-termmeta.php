@@ -28,13 +28,29 @@ class ThemePlate_TermMeta {
 
 	public function add( $meta_box ) {
 
-		if ( ! is_array( $meta_box ) ) {
+		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
 			return false;
 		}
 
 		$this->meta_box = $meta_box;
 
-		foreach ( (array) $meta_box['taxonomy'] as $taxonomy ) {
+		if ( empty( $meta_box['taxonomy'] ) ) {
+			$taxonomies = get_taxonomies( array( '_builtin' => false ) );
+			$taxonomies['category'] = 'category';
+			$taxonomies['post_tag'] = 'post_tag';
+		} else {
+			$taxonomies = $meta_box['taxonomy'];
+		}
+
+		foreach ( $taxonomies as $taxonomy ) {
 			add_action( $taxonomy . '_add_form', array( $this, 'create' ) );
 			add_action( $taxonomy . '_edit_form', array( $this, 'create' ) );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
@@ -68,32 +84,32 @@ class ThemePlate_TermMeta {
 		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
 		echo '<div class="inside">';
 
-		$fields = $meta_box['fields'];
-
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p>' . $meta_box['description'] . '</p>';
 		}
 
-		if ( is_array( $fields ) ) {
-			echo '<table class="themeplate form-table">';
+		echo '<table class="themeplate form-table">';
 
-			foreach ( $fields as $id => $field ) {
-				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-				$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
-				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
-
-				echo '<tr>';
-					echo '<th>';
-						echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
-					echo '</th>';
-					echo '<td>';
-						ThemePlate_Fields::instance()->render( $field );
-					echo '</td>';
-				echo '</tr>';
+		foreach ( $meta_box['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
 			}
 
-			echo '</table>';
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+			$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
+			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+			echo '<tr>';
+				echo '<th>';
+					echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+				echo '</th>';
+				echo '<td>';
+					ThemePlate_Fields::instance()->render( $field );
+				echo '</td>';
+			echo '</tr>';
 		}
+
+		echo '</table>';
 
 		echo '</div>';
 		echo '</div>';

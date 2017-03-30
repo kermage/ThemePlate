@@ -32,9 +32,23 @@ class ThemePlate_PostMeta {
 
 	public function add( $meta_box ) {
 
-		if ( ! is_array( $meta_box ) ) {
+		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
 			return false;
 		}
+
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
+			return false;
+		}
+
+		$defaults = array(
+			'context'  => 'advanced',
+			'priority' => 'default'
+		);
+		$meta_box = wp_parse_args( $meta_box, $defaults );
 
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
@@ -72,84 +86,81 @@ class ThemePlate_PostMeta {
 
 	public function create( $post, $meta_box ) {
 
-		if ( ! is_array( $meta_box ) ) {
-			return false;
-		}
-
 		if ( ! empty( $meta_box['args']['description'] ) ) {
 			echo '<p>' . $meta_box['args']['description'] . '</p>';
 		}
 
-		$fields = $meta_box['args']['fields'];
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
-		if ( is_array( $fields ) ) {
-			echo '<table class="themeplate form-table">';
+		echo '<table class="themeplate form-table">';
 
-			foreach ( $fields as $id => $field ) {
-				$field['id'] = $meta_box['args']['id'] . '_' . $id;
-				$field['value'] = get_post_meta( $post->ID, $field['id'], true );
-				$field['value'] = $field['value'] ? $field['value'] : $field['std'];
-
-				if ( $field['group'] == 'start' && ! $grouped ) {
-					echo '</table><table class="themeplate form-table grouped"><tr>';
-					$grouped = true;
-				} elseif ( ! $grouped ) {
-					echo '<tr>';
-				}
-
-				$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
-
-				if ( $grouped ) {
-					if ( ! $stacking ) {
-						$width = '';
-						if ( $field['width'] ) {
-							if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
-								$width = ' style="width:' . $field['width'] . '"';
-							} else {
-								$width = ' class="' . $field['width'] . '"';
-							}
-						}
-						echo '<td' . ( $width ? $width : '' ) . '>';
-					}
-
-					if ( $field['stack'] && ! $stacking ) {
-						echo '<div class="stacked">';
-						$stacking = true;
-					}
-
-					echo '<div class="label">' . $label . '</div>';
-					ThemePlate_Fields::instance()->render( $field );
-
-					if ( $stacking ) {
-						echo '</div>';
-
-						if ( $field['stack'] ) {
-							echo '<div class="stacked">';
-						} else {
-							echo '</td>';
-							$stacking = false;
-						}
-					} else {
-						echo '</td>';
-					}
-				} else {
-					echo '<th scope="row">' . $label . '</th>';
-					echo '<td>';
-						ThemePlate_Fields::instance()->render( $field );
-					echo '</td>';
-				}
-
-				if ( $field['group'] == 'end' && $grouped ) {
-					echo '</tr></table><table class="themeplate form-table">';
-					$grouped = false;
-				} elseif ( ! $grouped ) {
-					echo '</tr>';
-				}
+		foreach ( $meta_box['args']['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
 			}
 
-			echo '</table>';
+			$field['id'] = $meta_box['args']['id'] . '_' . $id;
+			$field['value'] = get_post_meta( $post->ID, $field['id'], true );
+			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+			if ( $field['group'] == 'start' && ! $grouped ) {
+				echo '</table><table class="themeplate form-table grouped"><tr>';
+				$grouped = true;
+			} elseif ( ! $grouped ) {
+				echo '<tr>';
+			}
+
+			$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+
+			if ( $grouped ) {
+				if ( ! $stacking ) {
+					$width = '';
+					if ( $field['width'] ) {
+						if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
+							$width = ' style="width:' . $field['width'] . '"';
+						} else {
+							$width = ' class="' . $field['width'] . '"';
+						}
+					}
+					echo '<td' . ( $width ? $width : '' ) . '>';
+				}
+
+				if ( $field['stack'] && ! $stacking ) {
+					echo '<div class="stacked">';
+					$stacking = true;
+				}
+
+				echo '<div class="label">' . $label . '</div>';
+				ThemePlate_Fields::instance()->render( $field );
+
+				if ( $stacking ) {
+					echo '</div>';
+
+					if ( $field['stack'] ) {
+						echo '<div class="stacked">';
+					} else {
+						echo '</td>';
+						$stacking = false;
+					}
+				} else {
+					echo '</td>';
+				}
+			} else {
+				echo '<th scope="row">' . $label . '</th>';
+				echo '<td>';
+					ThemePlate_Fields::instance()->render( $field );
+				echo '</td>';
+			}
+
+			if ( $field['group'] == 'end' && $grouped ) {
+				echo '</tr></table><table class="themeplate form-table">';
+				$grouped = false;
+			} elseif ( ! $grouped ) {
+				echo '</tr>';
+			}
 		}
+
+		echo '</table>';
 
 	}
 
