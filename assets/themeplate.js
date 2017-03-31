@@ -11,15 +11,15 @@ jQuery.noConflict();
 
 	HideAll();
 
-	$( '#themeplate_' + $( 'input[name=post_format]:checked' ).val() + '_post' ).show();
+	$( 'div[id^="themeplate_"][id $="' + $( 'input[name=post_format]:checked' ).val() + '_post"]' ).show();
 
 	$( '#post-formats-select input' ).change( function() {
 		HideAll();
-		if ( $( '#themeplate_' + $( this ).val() + '_post' ).length ) {
-			$( '#themeplate_' + $( this ).val() + '_post' ).show();
+		if ( $( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]' ).length ) {
+			$( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]' ).show();
 
 			$( 'html,body' ).animate({
-				scrollTop: $( '#themeplate_' + $( this ).val() + '_post' ).offset().top
+				scrollTop: $( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]').offset().top - 50
 			});
 		}
 	});

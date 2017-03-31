@@ -73,9 +73,9 @@ class ThemePlate_PostMeta {
 			( isset( $meta_box['hide_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
 		) {
 			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-			$id = 'themeplate_' . $meta_box['id'];
+			$id = $meta_box['id'];
 			if ( $meta_box['screen'] == 'post' ) {
-				$id .= '_post';
+				$id = 'themeplate_' . $meta_box['id'] . '_post';
 			}
 
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
