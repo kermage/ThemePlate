@@ -32,7 +32,7 @@ class ThemePlate {
 
 		$this->title = isset( $key ) ? $key : 'ThemePlate';
 		$this->key = strtolower( $this->title );
-		$this->pages = isset( $pages ) ? $pages : '';
+		$this->pages = isset( $pages ) ? $pages : array();
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
