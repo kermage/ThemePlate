@@ -32,7 +32,7 @@ jQuery.noConflict();
 	var selection, selected, attachment;
 	var src, centered, filename, fieldname, field, preview, order;
 
-	$( 'input[id^="themeplate_"][id $="_button"]' ).click( function( e ) {
+	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_button"]', function( e ) {
 		e.preventDefault();
 
 		isMultiple = false;
@@ -90,7 +90,7 @@ jQuery.noConflict();
 		meta_media_frame.open();
 	});
 
-	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
+	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_remove"]', function( e ) {
 		e.preventDefault();
 
 		isMultiple = false;
