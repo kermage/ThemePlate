@@ -30,8 +30,14 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		$this->title = isset( $key ) ? $key : 'ThemePlate';
-		$this->key = strtolower( $this->title );
+		if( is_array( $key ) ) {
+			$this->title = $key[0];
+			$this->key = $key[1];
+		} else {
+			$this->title = isset( $key ) ? $key : 'ThemePlate';
+			$this->key = strtolower( $this->title );
+		}
+
 		$this->pages = isset( $pages ) ? $pages : '';
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
