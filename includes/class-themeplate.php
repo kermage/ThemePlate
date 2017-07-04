@@ -30,7 +30,7 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		if( is_array( $key ) ) {
+		if( is_array( $key ) && ! empty( $key ) ) {
 			$this->title = $key[0];
 			$this->key = $key[1];
 		} else {
