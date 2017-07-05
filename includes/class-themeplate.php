@@ -35,7 +35,7 @@ class ThemePlate {
 			$this->key = $key[1];
 		} else {
 			$this->title = isset( $key ) ? $key : 'ThemePlate';
-			$this->key = strtolower( $this->title );
+			$this->key = sanitize_title( $this->title );
 		}
 
 		$this->pages = isset( $pages ) ? $pages : '';
