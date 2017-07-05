@@ -30,15 +30,17 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		if( is_array( $key ) && ! empty( $key ) ) {
-			$this->title = $key[0];
-			$this->key = $key[1];
+		if ( is_array( $key ) && ! empty( $key ) ) {
+			$this->title = array_shift( $key );
+			$this->key = array_shift( $key );
 		} else {
-			$this->title = isset( $key ) ? $key : 'ThemePlate';
-			$this->key = sanitize_title( $this->title );
+			$this->title = $key;
+			$this->key = $this->title;
 		}
 
-		$this->pages = isset( $pages ) ? $pages : '';
+		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate';
+		$this->key = sanitize_title( ! empty( $this->key ) ? $this->key : $this->title );
+		$this->pages = isset( $pages ) ? $pages : array();
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
