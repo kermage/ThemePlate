@@ -97,7 +97,9 @@ class ThemePlate_Cleaner {
 
 		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches );
 		// Only display media if it is meaningful
-		$media = $matches[3][0] !== '' && $matches[3][0] !== 'all' ? ' media="' . $matches[3][0] . '"' : '';
+		if ( $matches[3][0] !== '' && $matches[3][0] !== 'all' ) {
+			$media = ' media="' . $matches[3][0] . '"';
+		}
 		return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
 
 	}
