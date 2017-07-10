@@ -50,7 +50,7 @@ class ThemePlate_TermMeta {
 			$taxonomies = $meta_box['taxonomy'];
 		}
 
-		foreach ( $taxonomies as $taxonomy ) {
+		foreach ( (array) $taxonomies as $taxonomy ) {
 			add_action( $taxonomy . '_add_form', array( $this, 'create' ) );
 			add_action( $taxonomy . '_edit_form', array( $this, 'create' ) );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
