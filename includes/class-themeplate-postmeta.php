@@ -74,7 +74,7 @@ class ThemePlate_PostMeta {
 		) {
 			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
 			$id = $meta_box['id'];
-			if ( $meta_box['screen'] == 'post' ) {
+			if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
 				$id = 'themeplate_' . $meta_box['id'] . '_post';
 			}
 
