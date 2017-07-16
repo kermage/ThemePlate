@@ -86,11 +86,11 @@ class ThemePlate_PostMeta {
 
 	public function create( $post, $meta_box ) {
 
+		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
+
 		if ( ! empty( $meta_box['args']['description'] ) ) {
 			echo '<p>' . $meta_box['args']['description'] . '</p>';
 		}
-
-		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		echo '<table class="themeplate form-table">';
 
