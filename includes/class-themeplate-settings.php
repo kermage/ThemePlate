@@ -209,6 +209,7 @@ class ThemePlate_Settings {
 			}
 
 			$field['id'] = $param['id'] . '_' . $id;
+			$field['page'] = ( $param['page'] ? $param['page'] : 'options' );
 			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
 
 			add_settings_field(
