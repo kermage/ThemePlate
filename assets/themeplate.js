@@ -11,6 +11,9 @@ jQuery.noConflict();
 
 	function HideAll() {
 		$.each( post_formats, function( i, val ) {
+			if ( val == 0 ) {
+				val = 'standard';
+			}
 			$( 'div[id^="themeplate_"][id $="' + val + '_post"]' ).hide();
 		});
 	};
