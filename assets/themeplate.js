@@ -10,7 +10,9 @@ jQuery.noConflict();
 	}).get()
 
 	function HideAll() {
-		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
+		$.each( post_formats, function( i, val ) {
+			$( 'div[id^="themeplate_"][id $="' + val + '_post"]' ).hide();
+		});
 	};
 
 	HideAll();
