@@ -33,7 +33,8 @@ class ThemePlate_Settings {
 	public function page() {
 
 		$page = get_current_screen()->id;
-		$page = str_replace( ThemePlate()->key . '-options', '', $page );
+		$title = sanitize_title( ThemePlate()->title );
+		$page = str_replace( $title . '-options', '', $page );
 		$page = str_replace( 'toplevel', '', $page );
 		$page = str_replace( '_page_', '', $page );
 		if ( ! $page ) {
