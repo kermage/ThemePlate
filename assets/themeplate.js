@@ -5,6 +5,10 @@ jQuery.noConflict();
 	'use strict';
 
 
+	var post_formats = $( 'input[name=post_format]' ).map( function() {
+		return this.value
+	}).get()
+
 	function HideAll() {
 		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
 	};
