@@ -126,7 +126,7 @@ class ThemePlate {
 	}
 
 
-	function clean_walker( $args ) {
+	public function clean_walker( $args ) {
 
 		if ( empty( $args['container_class'] ) && empty( $args['container_id'] ) ) {
 			$args['container'] = false;
