@@ -143,6 +143,13 @@ class ThemePlate {
 	}
 
 
+	public function menu( $id, $title ) {
+
+		$this->pages = array_merge( $this->pages, array( $id => $title ) );
+
+	}
+
+
 	public function post_type( $args ) {
 
 		ThemePlate_CPT::instance()->add_type( $args );
