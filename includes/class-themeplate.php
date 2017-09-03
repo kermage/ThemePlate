@@ -145,6 +145,10 @@ class ThemePlate {
 
 	public function menu( $id, $title ) {
 
+		if ( ! $this->pages ) {
+			$this->pages = array( $this->key . '-options' => $this->title . ' Options' );
+		}
+
 		$this->pages = array_merge( $this->pages, array( $id => $title ) );
 
 	}
