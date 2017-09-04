@@ -83,6 +83,9 @@ class ThemePlate_Cleaner {
 		// Remove URL where emoji SVG images are hosted
 		add_filter( 'emoji_svg_url', '__return_false' );
 
+		// Wrap embedded media for easier responsive styling
+		add_filter( 'embed_oembed_html', array( $this, 'embed_wrap' ) );
+
 	}
 
 
@@ -145,6 +148,13 @@ class ThemePlate_Cleaner {
 	public function tag_cloud_inline_style( $tag_string ) {
 
 		return preg_replace( "/style='font-size:.+pt;'/", '', $tag_string );
+
+	}
+
+
+	public function embed_wrap( $cache ) {
+
+		return '<div class="embed-responsive">' . $cache . '</div>';
 
 	}
 
