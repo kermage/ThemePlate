@@ -72,7 +72,7 @@ class ThemePlate_Cleaner {
 		add_filter( 'post_class', array( $this, 'post_class' ) );
 
 		// Remove injected recent comments sidebar widget style
-		add_action( 'widgets_init', array( $this, 'recent_comments_style' ) );
+		add_filter( 'show_recent_comments_widget_style', '__return_false' );
 
 		// Remove tag cloud inline style
 		add_filter( 'wp_generate_tag_cloud', array( $this, 'tag_cloud_inline_style' ) );
@@ -138,16 +138,6 @@ class ThemePlate_Cleaner {
 			}
 		}
 		return $classes;
-
-	}
-
-
-	public function recent_comments_style() {
-
-		global $wp_widget_factory;
-		if ( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
-			remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
-		}
 
 	}
 
