@@ -59,6 +59,9 @@ class ThemePlate_Cleaner {
 		// Remove the WordPress version from RSS feeds
 		add_filter( 'the_generator', '__return_false' );
 
+		// Remove the link to comments feed
+		add_filter( 'feed_links_show_comments_feed', '__return_false' );
+
 		// Query strings from static resources
 		add_filter( 'style_loader_src', array( $this, 'query_strings' ), 15 );
 		add_filter( 'script_loader_src', array( $this, 'query_strings' ), 15 );
