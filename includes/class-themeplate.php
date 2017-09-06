@@ -38,7 +38,7 @@ class ThemePlate {
 			$this->key = $this->title;
 		}
 
-		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate';
+		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate Options';
 		$this->key = sanitize_title( ! empty( $this->key ) ? $this->key : $this->title );
 		$this->pages = isset( $pages ) ? $pages : array();
 
@@ -68,9 +68,9 @@ class ThemePlate {
 
 		add_menu_page(
 			// Page Title
-			$this->title . ' Options',
+			$this->title,
 			// Menu Title
-			$this->title . ' Options',
+			$this->title,
 			// Capability
 			'edit_theme_options',
 			// Menu Slug
@@ -146,7 +146,7 @@ class ThemePlate {
 	public function menu( $id, $title ) {
 
 		if ( ! $this->pages ) {
-			$this->pages = array( $this->key . '-options' => $this->title . ' Options' );
+			$this->pages = array( $this->key . '-options' => $this->title );
 		}
 
 		$this->pages = array_merge( $this->pages, array( $id => $title ) );
