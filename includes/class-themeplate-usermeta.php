@@ -32,7 +32,7 @@ class ThemePlate_UserMeta {
 			return false;
 		}
 
-		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+		if ( ! array_key_exists( 'id', $meta_box ) || ! array_key_exists( 'title', $meta_box ) ) {
 			return false;
 		}
 
@@ -93,14 +93,61 @@ class ThemePlate_UserMeta {
 			$field['value'] = get_user_meta( $user->ID, $field['id'], true );
 			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-			echo '<tr>';
-				echo '<th>';
-					echo '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
-				echo '</th>';
+			if ( $field['group'] == 'start' && ! $grouped ) {
+				echo '</table><table class="themeplate form-table grouped"><tr>';
+				$grouped = true;
+			} elseif ( ! $grouped ) {
+				echo '<tr>';
+			}
+
+			$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+
+			if ( $grouped ) {
+				if ( ! $stacking ) {
+					$width = '';
+					if ( $field['width'] ) {
+						if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
+							$width = ' style="width:' . $field['width'] . '"';
+						} else {
+							$width = ' class="' . $field['width'] . '"';
+						}
+					}
+					echo '<td' . ( $width ? $width : '' ) . '>';
+				}
+
+				if ( $field['stack'] && ! $stacking ) {
+					echo '<div class="stacked">';
+					$stacking = true;
+				}
+
+				echo '<div class="label">' . $label . '</div>';
+				ThemePlate_Fields::instance()->render( $field );
+
+				if ( $stacking ) {
+					echo '</div>';
+
+					if ( $field['stack'] ) {
+						echo '<div class="stacked">';
+					} else {
+						echo '</td>';
+						$stacking = false;
+					}
+				} else {
+					echo '</td>';
+				}
+			} else {
+				echo '<th scope="row">' . $label . '</th>';
 				echo '<td>';
 					ThemePlate_Fields::instance()->render( $field );
 				echo '</td>';
-			echo '</tr>';
+			}
+
+			if ( $field['group'] == 'end' && $grouped ) {
+				echo '</tr></table><table class="themeplate form-table">';
+				$grouped = false;
+			} elseif ( ! $grouped ) {
+				echo '</tr>';
+			}
 		}
 
 		echo '</table>';

@@ -40,6 +40,10 @@ class ThemePlate_Fields {
 		$field_name .= '[' . $field['id'] . ']';
 
 		$list = false;
+		$seq = false;
+		if ( is_array( $field['options'] ) && array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
+			$seq = true;
+		}
 
 		switch ( $field['type'] ) {
 			default:
@@ -59,7 +63,7 @@ class ThemePlate_Fields {
 					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				foreach ( $field['options'] as $value => $option ) {
-					$value = is_string( $value ) ? $value : ( $value + 1 );
+					$value = ( $seq ? $value + 1 : $value );
 					echo '<option value="' . $value . '"';
 					if ( in_array( $value, (array) $field['value'] ) ) {
 						echo ' selected="selected"';
@@ -73,7 +77,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'radio' :
 				foreach ( $field['options'] as $value => $option ) {
-					$value = is_string( $value ) ? $value : ( $value + 1 );
+					$value = ( $seq ? $value + 1 : $value );
 					echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
 					echo ( $list ? '<br>' : '' );
 				}
@@ -85,7 +89,7 @@ class ThemePlate_Fields {
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				if ( $field['options'] ) {
 					foreach ( $field['options'] as $value => $option ) {
-						$value = is_string( $value ) ? $value : ( $value + 1 );
+						$value = ( $seq ? $value + 1 : $value );
 						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
 						if ( in_array( $value, (array) $field['value'] ) ) {
 							echo ' checked="checked"';

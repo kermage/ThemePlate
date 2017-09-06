@@ -59,6 +59,9 @@ class ThemePlate_Cleaner {
 		// Remove the WordPress version from RSS feeds
 		add_filter( 'the_generator', '__return_false' );
 
+		// Remove the link to comments feed
+		add_filter( 'feed_links_show_comments_feed', '__return_false' );
+
 		// Query strings from static resources
 		add_filter( 'style_loader_src', array( $this, 'query_strings' ), 15 );
 		add_filter( 'script_loader_src', array( $this, 'query_strings' ), 15 );
@@ -72,7 +75,7 @@ class ThemePlate_Cleaner {
 		add_filter( 'post_class', array( $this, 'post_class' ) );
 
 		// Remove injected recent comments sidebar widget style
-		add_action( 'widgets_init', array( $this, 'recent_comments_style' ) );
+		add_filter( 'show_recent_comments_widget_style', '__return_false' );
 
 		// Remove tag cloud inline style
 		add_filter( 'wp_generate_tag_cloud', array( $this, 'tag_cloud_inline_style' ) );
@@ -82,6 +85,9 @@ class ThemePlate_Cleaner {
 
 		// Remove URL where emoji SVG images are hosted
 		add_filter( 'emoji_svg_url', '__return_false' );
+
+		// Wrap embedded media for easier responsive styling
+		add_filter( 'embed_oembed_html', array( $this, 'embed_wrap' ) );
 
 	}
 
@@ -97,7 +103,9 @@ class ThemePlate_Cleaner {
 
 		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches );
 		// Only display media if it is meaningful
-		$media = $matches[3][0] !== '' && $matches[3][0] !== 'all' ? ' media="' . $matches[3][0] . '"' : '';
+		if ( $matches[3][0] !== '' && $matches[3][0] !== 'all' ) {
+			$media = ' media="' . $matches[3][0] . '"';
+		}
 		return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
 
 	}
@@ -140,19 +148,16 @@ class ThemePlate_Cleaner {
 	}
 
 
-	public function recent_comments_style() {
+	public function tag_cloud_inline_style( $tag_string ) {
 
-		global $wp_widget_factory;
-		if ( isset( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'] ) ) {
-			remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
-		}
+		return preg_replace( "/style='font-size:.+pt;'/", '', $tag_string );
 
 	}
 
 
-	public function tag_cloud_inline_style( $tag_string ) {
+	public function embed_wrap( $cache ) {
 
-		return preg_replace( "/style='font-size:.+pt;'/", '', $tag_string );
+		return '<div class="embed-responsive">' . $cache . '</div>';
 
 	}
 

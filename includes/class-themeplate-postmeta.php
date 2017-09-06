@@ -36,7 +36,7 @@ class ThemePlate_PostMeta {
 			return false;
 		}
 
-		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+		if ( ! array_key_exists( 'id', $meta_box ) || ! array_key_exists( 'title', $meta_box ) ) {
 			return false;
 		}
 
@@ -73,9 +73,9 @@ class ThemePlate_PostMeta {
 			( isset( $meta_box['hide_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
 		) {
 			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-			$id = 'themeplate_' . $meta_box['id'];
-			if ( $meta_box['screen'] == 'post' ) {
-				$id .= '_post';
+			$id = $meta_box['id'];
+			if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
+				$id = 'themeplate_' . $meta_box['id'] . '_post';
 			}
 
 			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
@@ -86,11 +86,11 @@ class ThemePlate_PostMeta {
 
 	public function create( $post, $meta_box ) {
 
+		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
+
 		if ( ! empty( $meta_box['args']['description'] ) ) {
 			echo '<p>' . $meta_box['args']['description'] . '</p>';
 		}
-
-		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		echo '<table class="themeplate form-table">';
 

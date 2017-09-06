@@ -126,7 +126,7 @@ class ThemePlate {
 	}
 
 
-	function clean_walker( $args ) {
+	public function clean_walker( $args ) {
 
 		if ( empty( $args['container_class'] ) && empty( $args['container_id'] ) ) {
 			$args['container'] = false;
@@ -139,6 +139,17 @@ class ThemePlate {
 		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
 
 		return $args;
+
+	}
+
+
+	public function menu( $id, $title ) {
+
+		if ( ! $this->pages ) {
+			$this->pages = array( $this->key . '-options' => $this->title . ' Options' );
+		}
+
+		$this->pages = array_merge( $this->pages, array( $id => $title ) );
 
 	}
 

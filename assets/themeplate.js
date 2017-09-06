@@ -5,21 +5,30 @@ jQuery.noConflict();
 	'use strict';
 
 
+	var post_formats = $( 'input[name=post_format]' ).map( function() {
+		return this.value
+	}).get()
+
 	function HideAll() {
-		$( 'div[id^="themeplate_"][id $="_post"]' ).hide();
+		$.each( post_formats, function( i, val ) {
+			if ( val == 0 ) {
+				val = 'standard';
+			}
+			$( 'div[id^="themeplate_"][id $="' + val + '_post"]' ).hide();
+		});
 	};
 
 	HideAll();
 
-	$( '#themeplate_' + $( 'input[name=post_format]:checked' ).val() + '_post' ).show();
+	$( 'div[id^="themeplate_"][id $="' + $( 'input[name=post_format]:checked' ).val() + '_post"]' ).show();
 
 	$( '#post-formats-select input' ).change( function() {
 		HideAll();
-		if ( $( '#themeplate_' + $( this ).val() + '_post' ).length ) {
-			$( '#themeplate_' + $( this ).val() + '_post' ).show();
+		if ( $( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]' ).length ) {
+			$( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]' ).show();
 
 			$( 'html,body' ).animate({
-				scrollTop: $( '#themeplate_' + $( this ).val() + '_post' ).offset().top
+				scrollTop: $( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]').offset().top - 50
 			});
 		}
 	});
@@ -32,7 +41,7 @@ jQuery.noConflict();
 	var selection, selected, attachment;
 	var src, centered, filename, fieldname, field, preview, order;
 
-	$( 'input[id^="themeplate_"][id $="_button"]' ).click( function( e ) {
+	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_button"]', function( e ) {
 		e.preventDefault();
 
 		isMultiple = false;
@@ -90,7 +99,7 @@ jQuery.noConflict();
 		meta_media_frame.open();
 	});
 
-	$( 'input[id^="themeplate_"][id $="_remove"]' ).click( function( e ) {
+	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_remove"]', function( e ) {
 		e.preventDefault();
 
 		isMultiple = false;
