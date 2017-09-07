@@ -48,33 +48,33 @@ class ThemePlate_CPT {
 		$args = $param['args'];
 
 		$labels = array(
-			'name'                  => _x( $plural, 'Post Type General Name', 'themeplate' ),
-			'singular_name'         => _x( $singular, 'Post Type Singular Name', 'themeplate' ),
-			'add_new'               => __( 'Add New ' . $singular, 'themeplate' ),
-			'add_new_item'          => __( 'Add New ' . $singular, 'themeplate' ),
-			'edit_item'             => __( 'Edit ' . $singular, 'themeplate' ),
-			'new_item'              => __( 'New ' . $singular, 'themeplate' ),
-			'view_item'             => __( 'View ' . $singular, 'themeplate' ),
-			'update_item'           => __( 'Update ' . $singular, 'themeplate' ),
-			'search_items'          => __( 'Search ' . $singular, 'themeplate' ),
-			'not_found'             => __( $singular . ' not found', 'themeplate' ),
-			'not_found_in_trash'    => __( $singular . ' not found in Trash', 'themeplate' ),
-			'parent_item_colon'     => __( 'Parent ' . $singular . ':', 'themeplate' ),
-			'all_items'             => __( 'All ' . $plural, 'themeplate' ),
-			'archives'              => __( $singular . ' Archives', 'themeplate' ),
-			'insert_into_item'      => __( 'Insert into ' . $singular, 'themeplate' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this ' . $singular, 'themeplate' ),
-			'featured_image'        => __( $singular . ' Featured Image', 'themeplate' ),
-			'set_featured_image'    => __( 'Set ' . $singular . ' Featured Image', 'themeplate' ),
-			'remove_featured_image' => __( 'Remove ' . $singular . ' Featured Image', 'themeplate' ),
-			'use_featured_image'    => __( 'Use as ' . $singular . ' Featured Image', 'themeplate' ),
-			'menu_name'             => __( $plural, 'themeplate' ),
-			'name_admin_bar'        => __( $plural, 'themeplate' )
+			'name'                  => $plural,
+			'singular_name'         => $singular,
+			'add_new'               => 'Add New ' . $singular,
+			'add_new_item'          => 'Add New ' . $singular,
+			'edit_item'             => 'Edit ' . $singular,
+			'new_item'              => 'New ' . $singular,
+			'view_item'             => 'View ' . $singular,
+			'update_item'           => 'Update ' . $singular,
+			'search_items'          => 'Search ' . $singular,
+			'not_found'             => $singular . ' not found',
+			'not_found_in_trash'    => $singular . ' not found in Trash',
+			'parent_item_colon'     => 'Parent ' . $singular . ':',
+			'all_items'             => 'All ' . $plural,
+			'archives'              => $singular . ' Archives',
+			'insert_into_item'      => 'Insert into ' . $singular,
+			'uploaded_to_this_item' => 'Uploaded to this ' . $singular,
+			'featured_image'        => $singular . ' Featured Image',
+			'set_featured_image'    => 'Set ' . $singular . ' Featured Image',
+			'remove_featured_image' => 'Remove ' . $singular . ' Featured Image',
+			'use_featured_image'    => 'Use as ' . $singular . ' Featured Image',
+			'menu_name'             => $plural,
+			'name_admin_bar'        => $plural
 		);
 		$defaults = array(
-			'label'       => __( $plural, 'themeplate' ),
+			'label'       => $plural,
 			'labels'      => $labels,
-			'description' => __( $param['description'], 'themeplate' ),
+			'description' => $param['description'],
 			'public'      => true
 		);
 
@@ -102,28 +102,28 @@ class ThemePlate_CPT {
 		$args = $param['args'];
 
 		$labels = array(
-			'name'                       => _x( $plural, 'Taxonomy General Name', 'themeplate' ),
-			'singular_name'              => _x( $singular, 'Taxonomy Singular Name', 'themeplate' ),
-			'menu_name'                  => __( $plural, 'themeplate' ),
-			'all_items'                  => __( 'All ' . $plural, 'themeplate' ),
-			'edit_item'                  => __( 'Edit ' . $singular, 'themeplate' ),
-			'view_item'                  => __( 'View ' . $singular, 'themeplate' ),
-			'update_item'                => __( 'Update ' . $singular, 'themeplate' ),
-			'add_new_item'               => __( 'Add New ' . $singular, 'themeplate' ),
-			'new_item_name'              => __( 'New ' . $singular . ' Name', 'themeplate' ),
-			'parent_item'                => __( 'Parent ' . $singular, 'themeplate' ),
-			'parent_item_colon'          => __( 'Parent ' . $singular . ':', 'themeplate' ),
-			'search_items'               => __( 'Search ' . $singular, 'themeplate' ),
-			'popular_items'              => __( 'Popular ' . $singular, 'themeplate' ),
-			'separate_items_with_commas' => __( 'Separate ' . $plural . ' with commas', 'themeplate' ),
-			'add_or_remove_items'        => __( 'Add or remove ' . $plural, 'themeplate' ),
-			'choose_from_most_used'      => __( 'Choose from the most used ' . $singular, 'themeplate' ),
-			'not_found'                  => __( $singular . ' not found', 'themeplate' )
+			'name'                       => $plural,
+			'singular_name'              => $singular,
+			'menu_name'                  => $plural,
+			'all_items'                  => 'All ' . $plural,
+			'edit_item'                  => 'Edit ' . $singular,
+			'view_item'                  => 'View ' . $singular,
+			'update_item'                => 'Update ' . $singular,
+			'add_new_item'               => 'Add New ' . $singular,
+			'new_item_name'              => 'New ' . $singular . ' Name',
+			'parent_item'                => 'Parent ' . $singular,
+			'parent_item_colon'          => 'Parent ' . $singular . ':',
+			'search_items'               => 'Search ' . $singular,
+			'popular_items'              => 'Popular ' . $singular,
+			'separate_items_with_commas' => 'Separate ' . $plural . ' with commas',
+			'add_or_remove_items'        => 'Add or remove ' . $plural,
+			'choose_from_most_used'      => 'Choose from the most used ' . $singular,
+			'not_found'                  => $singular . ' not found'
 		);
 		$defaults = array(
-			'label'       => __( $plural, 'themeplate' ),
+			'label'       => $plural,
 			'labels'      => $labels,
-			'description' => __( $param['description'], 'themeplate' ),
+			'description' => $param['description'],
 			'public'      => true
 		);
 
