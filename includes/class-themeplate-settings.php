@@ -148,7 +148,7 @@ class ThemePlate_Settings {
 				}
 
 				echo '<div class="label">' . $label . '</div>';
-				call_user_func($field['callback'], $field['args']);
+				call_user_func( $field['callback'], $field['args'] );
 
 				if ( $stacking ) {
 					echo '</div>';
@@ -165,7 +165,7 @@ class ThemePlate_Settings {
 			} else {
 				echo '<th scope="row">' . $label . '</th>';
 				echo '<td>';
-					call_user_func($field['callback'], $field['args']);
+					call_user_func( $field['callback'], $field['args'] );
 				echo '</td>';
 			}
 
