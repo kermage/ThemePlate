@@ -10,10 +10,10 @@
  * Plugin URI:  https://github.com/kermage/ThemePlate
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  mailto:genealyson.torcende@gmail.com
- * Description: A ThemePlate framework.
+ * Description: A framework to handle everything related in developing a full-featured WordPress theme.
  * Version:     0.1.0
- * License:     GNU General Public License v2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License:     GNU General Public License v3.0
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 // Accessed directly
