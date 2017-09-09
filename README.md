@@ -34,3 +34,7 @@ endif;
 - `ThemePlate()->post_meta( $args );`
 - `ThemePlate()->term_meta( $args );`
 - `ThemePlate()->user_meta( $args );`
+
+---
+### Yeoman Generator
+Check [generator-themeplate](https://www.npmjs.com/package/generator-themeplate) to kickstart a **ThemePlate** powered WP Theme project.
