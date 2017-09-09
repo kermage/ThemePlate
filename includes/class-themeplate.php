@@ -10,7 +10,7 @@ class ThemePlate {
 
 	private static $instance;
 
-	public $key, $title, $pages;
+	public $key, $title, $slug, $pages;
 
 
 	public static function instance( $key = NULL, $pages = NULL ) {
@@ -38,9 +38,10 @@ class ThemePlate {
 			$this->key = $this->title;
 		}
 
-		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate';
+		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate Options';
 		$this->key = sanitize_title( ! empty( $this->key ) ? $this->key : $this->title );
 		$this->pages = isset( $pages ) ? $pages : array();
+		$this->slug = isset( $pages ) ? key( $pages ) : 'options';
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -68,23 +69,23 @@ class ThemePlate {
 
 		add_menu_page(
 			// Page Title
-			$this->title . ' Options',
+			$this->title,
 			// Menu Title
-			$this->title . ' Options',
+			$this->title,
 			// Capability
 			'edit_theme_options',
 			// Menu Slug
-			$this->key . '-options',
+			$this->key . '-' . $this->slug,
 			// Content Function
 			array( ThemePlate_Settings::instance(), 'page' )
 		);
 
 		if ( $this->pages ) {
 			$title = array_shift( $this->pages );
-			add_submenu_page( $this->key . '-options', $title, $title, 'edit_theme_options', $this->key . '-options', array( ThemePlate_Settings::instance(), 'page' ) );
+			add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $this->slug, array( ThemePlate_Settings::instance(), 'page' ) );
 
 			foreach ( $this->pages as $id => $title ) {
-				add_submenu_page( $this->key . '-options', $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
+				add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
 			}
 		}
 
@@ -93,7 +94,7 @@ class ThemePlate {
 
 	public function admin_init() {
 
-		register_setting( $this->key . '-options', $this->key . '-options' );
+		register_setting( $this->key . '-' . $this->slug, $this->key . '-' . $this->slug );
 
 		if ( $this->pages ) {
 			foreach ( $this->pages as $id => $title ) {
@@ -108,7 +109,7 @@ class ThemePlate {
 
 		$page = str_replace( ThemePlate()->key . '-', '', $_REQUEST['page'] );
 
-		if ( isset( $_REQUEST['page'] ) && ( $_REQUEST['page'] === $this->key . '-options' || array_key_exists( $page, $this->pages ) ) &&
+		if ( isset( $_REQUEST['page'] ) && ( $_REQUEST['page'] === $this->key . '-' . $this->slug || array_key_exists( $page, $this->pages ) ) &&
 			isset( $_REQUEST['settings-updated'] ) &&  $_REQUEST['settings-updated'] == true ) {
 			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
 		}
@@ -146,7 +147,7 @@ class ThemePlate {
 	public function menu( $id, $title ) {
 
 		if ( ! $this->pages ) {
-			$this->pages = array( $this->key . '-options' => $this->title . ' Options' );
+			$this->pages = array( $this->key . '-' . $this->slug => $this->title );
 		}
 
 		$this->pages = array_merge( $this->pages, array( $id => $title ) );

@@ -34,11 +34,11 @@ class ThemePlate_Settings {
 
 		$page = get_current_screen()->id;
 		$title = sanitize_title( ThemePlate()->title );
-		$page = str_replace( $title . '-options', '', $page );
+		$page = str_replace( $title . '-' . ThemePlate()->slug, '', $page );
 		$page = str_replace( 'toplevel', '', $page );
 		$page = str_replace( '_page_', '', $page );
 		if ( ! $page ) {
-			$page = ThemePlate()->key . '-options';
+			$page = ThemePlate()->key . '-' . ThemePlate()->slug;
 		}
 
 		wp_enqueue_script( 'post' );
@@ -148,7 +148,7 @@ class ThemePlate_Settings {
 				}
 
 				echo '<div class="label">' . $label . '</div>';
-				call_user_func($field['callback'], $field['args']);
+				call_user_func( $field['callback'], $field['args'] );
 
 				if ( $stacking ) {
 					echo '</div>';
@@ -165,7 +165,7 @@ class ThemePlate_Settings {
 			} else {
 				echo '<th scope="row">' . $label . '</th>';
 				echo '<td>';
-					call_user_func($field['callback'], $field['args']);
+					call_user_func( $field['callback'], $field['args'] );
 				echo '</td>';
 			}
 
@@ -194,7 +194,7 @@ class ThemePlate_Settings {
 			return false;
 		}
 
-		$page = ThemePlate()->key . ( $param['page'] ? '-' . $param['page'] : '-options' );
+		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
 
 		add_settings_section(
@@ -210,7 +210,7 @@ class ThemePlate_Settings {
 			}
 
 			$field['id'] = $param['id'] . '_' . $id;
-			$field['page'] = ( $param['page'] ? $param['page'] : 'options' );
+			$field['page'] = ( $param['page'] ? $param['page'] : ThemePlate()->slug );
 			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
 
 			add_settings_field(
