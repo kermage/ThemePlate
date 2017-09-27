@@ -34,12 +34,8 @@ class ThemePlate_Settings {
 
 		$page = get_current_screen()->id;
 		$title = sanitize_title( ThemePlate()->title );
-		$page = str_replace( $title, '', $page );
-		$page = str_replace( 'toplevel', '', $page );
-		$page = str_replace( '_page_', '', $page );
-		if ( ! $page ) {
-			$page = ThemePlate()->key . '-' . ThemePlate()->slug;
-		}
+		$page = str_replace( 'toplevel_page_', '', $page );
+		$page = str_replace( $title . '_page_', '', $page );
 
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
