@@ -1,16 +1,28 @@
 <?php
 
 /**
+ * A drop-in library for WordPress themes or plugins to manage updates
+ *
+ * self-hosted...can't be submitted to official WordPress repository...
+ * non-GPL licensed...custom-made...commercial...etc.
+ *
  * @package External Update Manager
- * @since 0.1.0
+ * @link    https://github.com/kermage/External-Update-Manager
+ * @author  Gene Alyson Fortunado Torcende
+ * @version 1.0.0
+ * @license GPL-3.0
  */
 
 if ( ! class_exists( 'External_Update_Manager' ) ) :
+
+/**
+ * @package External Update Manager
+ * @since   0.1.0
+ */
 class External_Update_Manager {
 
 	private $full_path;
 	private $update_url;
-	private $is_github;
 	private $item_type;
 	private $item_slug;
 	private $item_key;
@@ -20,10 +32,9 @@ class External_Update_Manager {
 	private $transient = 'eum_';
 	private $update_data = null;
 
-	public function __construct( $full_path, $update_url, $is_github = false ) {
+	public function __construct( $full_path, $update_url ) {
 		$this->full_path = $full_path;
 		$this->update_url = $update_url;
-		$this->is_github = $is_github;
 		$this->get_file_details( $full_path );
 		$this->transient .= $this->item_type . '_' . $this->item_slug;
 
@@ -107,24 +118,11 @@ class External_Update_Manager {
 		$data = get_site_transient( $this->transient );
 
 		if ( ! is_object( $data ) ) {
-			$args = array();
-
-			if ( ! $this->is_github ) {
-				$args = array(
-					'type' => $this->item_type,
-					'slug' => $this->item_slug
-				);
-			}
-
+			$args = array(
+				'type' => $this->item_type,
+				'slug' => $this->item_slug
+			);
 			$data = $this->call_remote_api( $args );
-
-			if ( $this->is_github ) {
-				$processed = new StdClass;
-				$processed->new_version = ltrim( $data->tag_name, 'v' );
-				$processed->package = $data->zipball_url;
-				$data = $processed;
-			}
-
 			set_site_transient( $this->transient, $data, HOUR_IN_SECONDS );
 		}
 
