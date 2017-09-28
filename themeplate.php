@@ -10,10 +10,10 @@
  * Plugin URI:  https://github.com/kermage/ThemePlate
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  mailto:genealyson.torcende@gmail.com
- * Description: A ThemePlate framework.
- * Version:     0.1.0
- * License:     GNU General Public License v2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Description: A framework to handle everything related in developing a full-featured WordPress theme.
+ * Version:     1.0.0
+ * License:     GNU General Public License v3.0
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 // Accessed directly
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /* ==================================================
 Global constants
 ================================================== */
-define( 'TP_VERSION', '0.1.0' );
+define( 'TP_VERSION', '1.0.0' );
 define( 'TP_URL',     plugin_dir_url( __FILE__ ) );
 define( 'TP_PATH',    plugin_dir_path( __FILE__ ) );
 
