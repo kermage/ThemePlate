@@ -150,7 +150,7 @@ class ThemePlate_Cleaner {
 
 	public function tag_cloud_inline_style( $tag_string ) {
 
-		return preg_replace( "/style='font-size:.+pt;'/", '', $tag_string );
+		return preg_replace( '/style="font-size:.+pt;"/', '', $tag_string );
 
 	}
 
