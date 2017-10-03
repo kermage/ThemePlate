@@ -49,7 +49,7 @@ class ThemePlate {
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
-		add_action( 'after_setup_theme', array( ThemePlate_Cleaner::instance(), '__construct' ) );
+		add_action( 'after_setup_theme', array( $this, 'clean_markup' ) );
 
 	}
 
@@ -140,6 +140,13 @@ class ThemePlate {
 		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
 
 		return $args;
+
+	}
+
+
+	public function clean_markup() {
+
+		 ThemePlate_Cleaner::instance();
 
 	}
 
