@@ -10,22 +10,13 @@
 
 class ThemePlate_CPT {
 
-	private static $instance;
+	public function __construct( $kind, $param ) {
 
-
-	public static function instance() {
-
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
+		if ( $kind == 'type' ) {
+			register_post_type( $param['name'], $this->add_type( $param ) );
+		} elseif ( $kind == 'tax' ) {
+			register_taxonomy( $param['name'], $param['type'], $this->add_tax( $param ) );
 		}
-
-		return self::$instance;
-
-	}
-
-
-	public function __construct() {
-
 
 	}
 
@@ -78,7 +69,7 @@ class ThemePlate_CPT {
 			'public'      => true
 		);
 
-		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
+		return wp_parse_args( $args, $defaults );
 
 	}
 
@@ -127,7 +118,7 @@ class ThemePlate_CPT {
 			'public'      => true
 		);
 
-		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
+		return wp_parse_args( $args, $defaults );
 
 	}
 

@@ -164,14 +164,14 @@ class ThemePlate {
 
 	public function post_type( $args ) {
 
-		ThemePlate_CPT::instance()->add_type( $args );
+		new ThemePlate_CPT( 'type', $args );
 
 	}
 
 
 	public function taxonomy( $args ) {
 
-		ThemePlate_CPT::instance()->add_tax( $args );
+		new ThemePlate_CPT( 'tax', $args );
 
 	}
 
