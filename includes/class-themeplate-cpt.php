@@ -12,17 +12,6 @@ class ThemePlate_CPT {
 
 	public function __construct( $kind, $param ) {
 
-		if ( $kind == 'type' ) {
-			register_post_type( $param['name'], $this->add_type( $param ) );
-		} elseif ( $kind == 'tax' ) {
-			register_taxonomy( $param['name'], $param['type'], $this->add_tax( $param ) );
-		}
-
-	}
-
-
-	public function add_type( $param ) {
-
 		if ( ! is_array( $param ) || empty( $param ) ) {
 			return false;
 		}
@@ -33,6 +22,21 @@ class ThemePlate_CPT {
 		) {
 			return false;
 		}
+
+		if ( $kind == 'type' ) {
+			register_post_type( $param['name'], $this->add_type( $param ) );
+		} elseif ( $kind == 'tax' ) {
+			if ( ! array_key_exists( 'type', $param ) ) {
+				return false;
+			}
+
+			register_taxonomy( $param['name'], $param['type'], $this->add_tax( $param ) );
+		}
+
+	}
+
+
+	public function add_type( $param ) {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
@@ -75,18 +79,6 @@ class ThemePlate_CPT {
 
 
 	public function add_tax( $param ) {
-
-		if ( ! is_array( $param ) || empty( $param ) ) {
-			return false;
-		}
-
-		if ( ! array_key_exists( 'name', $param ) ||
-			! array_key_exists( 'type', $param ) ||
-			! array_key_exists( 'plural', $param ) ||
-			! array_key_exists( 'singular', $param )
-		) {
-			return false;
-		}
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
