@@ -23,20 +23,20 @@ class ThemePlate_CPT {
 			return false;
 		}
 
-		if ( $kind == 'type' ) {
-			register_post_type( $param['name'], $this->add_type( $param ) );
-		} elseif ( $kind == 'tax' ) {
+		if ( $kind == 'post_type' ) {
+			register_post_type( $param['name'], $this->post_type( $param ) );
+		} elseif ( $kind == 'taxonomy' ) {
 			if ( ! array_key_exists( 'type', $param ) ) {
 				return false;
 			}
 
-			register_taxonomy( $param['name'], $param['type'], $this->add_tax( $param ) );
+			register_taxonomy( $param['name'], $param['type'], $this->taxonomy( $param ) );
 		}
 
 	}
 
 
-	public function add_type( $param ) {
+	public function post_type( $param ) {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
@@ -78,7 +78,7 @@ class ThemePlate_CPT {
 	}
 
 
-	public function add_tax( $param ) {
+	public function taxonomy( $param ) {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
