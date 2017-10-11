@@ -192,14 +192,14 @@ class ThemePlate {
 
 	public function term_meta( $args ) {
 
-		ThemePlate_TermMeta::instance()->add( $args );
+		new ThemePlate_TermMeta( $args );
 
 	}
 
 
 	public function user_meta( $args ) {
 
-		ThemePlate_UserMeta::instance()->add( $args );
+		new ThemePlate_UserMeta( $args );
 
 	}
 
