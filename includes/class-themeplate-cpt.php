@@ -23,15 +23,11 @@ class ThemePlate_CPT {
 			return false;
 		}
 
-		if ( $kind == 'post_type' ) {
-			register_post_type( $param['name'], $this->post_type( $param ) );
-		} elseif ( $kind == 'taxonomy' ) {
-			if ( ! array_key_exists( 'type', $param ) ) {
-				return false;
-			}
-
-			register_taxonomy( $param['name'], $param['type'], $this->taxonomy( $param ) );
+		if ( $kind == 'taxonomy' && ! array_key_exists( 'type', $param ) ) {
+			return false;
 		}
+
+		$this->$kind( $param );
 
 	}
 
@@ -73,7 +69,7 @@ class ThemePlate_CPT {
 			'public'      => true
 		);
 
-		return wp_parse_args( $args, $defaults );
+		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
 
 	}
 
@@ -110,7 +106,7 @@ class ThemePlate_CPT {
 			'public'      => true
 		);
 
-		return wp_parse_args( $args, $defaults );
+		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
 
 	}
 
