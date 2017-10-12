@@ -26,6 +26,51 @@ class ThemePlate_Settings {
 
 	public function __construct() {
 
+	}
+
+
+	public function add( $param ) {
+
+		if ( ! is_array( $param ) || empty( $param ) ) {
+			return false;
+		}
+
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
+			return false;
+		}
+
+		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
+		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
+
+		add_settings_section(
+			$param['id'],
+			$param['title'],
+			$param['description'],
+			$page
+		);
+
+		foreach ( $param['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
+			$field['id'] = $param['id'] . '_' . $id;
+			$field['page'] = ( $param['page'] ? $param['page'] : ThemePlate()->slug );
+			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
+
+			add_settings_field(
+				$field['id'],
+				$label,
+				array( $this, 'create' ),
+				$page,
+				$param['id'],
+				$field
+			);
+		}
 
 	}
 
@@ -171,52 +216,6 @@ class ThemePlate_Settings {
 			} elseif ( ! $grouped ) {
 				echo '</tr>';
 			}
-		}
-
-	}
-
-
-	public function add( $param ) {
-
-		if ( ! is_array( $param ) || empty( $param ) ) {
-			return false;
-		}
-
-		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
-			return false;
-		}
-
-		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
-			return false;
-		}
-
-		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
-		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
-
-		add_settings_section(
-			$param['id'],
-			$param['title'],
-			$param['description'],
-			$page
-		);
-
-		foreach ( $param['fields'] as $id => $field ) {
-			if ( ! is_array( $field ) || empty( $field ) ) {
-				continue;
-			}
-
-			$field['id'] = $param['id'] . '_' . $id;
-			$field['page'] = ( $param['page'] ? $param['page'] : ThemePlate()->slug );
-			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
-
-			add_settings_field(
-				$field['id'],
-				$label,
-				array( $this, 'create' ),
-				$page,
-				$param['id'],
-				$field
-			);
 		}
 
 	}
