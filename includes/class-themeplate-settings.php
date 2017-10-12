@@ -10,26 +10,7 @@
 
 class ThemePlate_Settings {
 
-	private static $instance;
-
-
-	public static function instance() {
-
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-
-	}
-
-
-	public function __construct() {
-
-	}
-
-
-	public function add( $param ) {
+	public function __construct( $param ) {
 
 		if ( ! is_array( $param ) || empty( $param ) ) {
 			return false;

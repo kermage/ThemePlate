@@ -10,27 +10,7 @@
 
 class ThemePlate_PostMeta {
 
-	private static $instance;
-
-
-	public static function instance() {
-
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-
-	}
-
-
-	public function __construct() {
-
-
-	}
-
-
-	public function add( $meta_box ) {
+	public function __construct( $meta_box ) {
 
 		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
 			return false;

@@ -178,14 +178,14 @@ class ThemePlate {
 
 	public function post_meta( $args ) {
 
-		ThemePlate_PostMeta::instance()->add( $args );
+		new ThemePlate_PostMeta( $args );
 
 	}
 
 
 	public function settings( $args ) {
 
-		ThemePlate_Settings::instance()->add( $args );
+		new ThemePlate_Settings( $args );
 
 	}
 
