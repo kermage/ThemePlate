@@ -56,7 +56,7 @@ class ThemePlate_Settings {
 	}
 
 
-	public function page() {
+	public static function page() {
 
 		$page = get_current_screen()->id;
 		$title = sanitize_title( ThemePlate()->title );
@@ -79,11 +79,11 @@ class ThemePlate_Settings {
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
-							<?php $this->section( $page . '-side' ); ?>
+							<?php self::section( $page . '-side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php $this->section( $page . '-normal' ); ?>
+							<?php self::section( $page . '-normal' ); ?>
 						</div>
 					</div>
 				</div>
@@ -94,7 +94,7 @@ class ThemePlate_Settings {
 	}
 
 
-	public function section( $page ) {
+	public static function section( $page ) {
 
 		global $wp_settings_sections, $wp_settings_fields;
 
@@ -122,7 +122,7 @@ class ThemePlate_Settings {
 			}
 
 			echo '<table class="themeplate form-table">';
-			$this->fields( $page, $section['id'] );
+			self::fields( $page, $section['id'] );
 			echo '</table>';
 			echo '</div>';
 			echo '</div>';
@@ -133,7 +133,7 @@ class ThemePlate_Settings {
 	}
 
 
-	public function fields( $page, $section ) {
+	public static function fields( $page, $section ) {
 
 		global $wp_settings_fields;
 

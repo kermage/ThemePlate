@@ -48,7 +48,7 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
-		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
+		add_action( 'save_post', array( 'ThemePlate_PostMeta', 'save' ) );
 		add_action( 'after_setup_theme', array( $this, 'clean_markup' ) );
 
 	}
@@ -77,15 +77,15 @@ class ThemePlate {
 			// Menu Slug
 			$this->key . '-' . $this->slug,
 			// Content Function
-			array( ThemePlate_Settings::instance(), 'page' )
+			array( 'ThemePlate_Settings', 'page' )
 		);
 
 		if ( $this->pages ) {
 			$title = array_shift( $this->pages );
-			add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $this->slug, array( ThemePlate_Settings::instance(), 'page' ) );
+			add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $this->slug, array( 'ThemePlate_Settings', 'page' ) );
 
 			foreach ( $this->pages as $id => $title ) {
-				add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
+				add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( 'ThemePlate_Settings', 'page' ) );
 			}
 		}
 
