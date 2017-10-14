@@ -216,9 +216,8 @@ class ThemePlate_Settings {
 	}
 
 
-	public function create( $param ) {
+	public function create( $field ) {
 
-		$field = $param;
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
 		$field['value'] = get_option( $field['prefix'] );
 		$field['value'] = $field['value'][$field['id']];
