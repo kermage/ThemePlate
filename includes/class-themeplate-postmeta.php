@@ -160,7 +160,7 @@ class ThemePlate_PostMeta {
 	}
 
 
-	public static function save( $post_id ) {
+	public function save( $post_id ) {
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;

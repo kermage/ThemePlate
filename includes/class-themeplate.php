@@ -48,7 +48,6 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
-		add_action( 'save_post', array( 'ThemePlate_PostMeta', 'save' ) );
 		add_action( 'after_setup_theme', array( $this, 'clean_markup' ) );
 
 	}
