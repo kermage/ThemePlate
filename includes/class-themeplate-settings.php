@@ -10,6 +10,9 @@
 
 class ThemePlate_Settings {
 
+	private $param;
+
+
 	public function __construct( $param ) {
 
 		if ( ! is_array( $param ) || empty( $param ) ) {
@@ -23,6 +26,17 @@ class ThemePlate_Settings {
 		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
 			return false;
 		}
+
+		$this->param = $param;
+
+		add_action( 'admin_init', array( $this, 'add' ) );
+
+	}
+
+
+	public static function add() {
+
+		$param = $this->param;
 
 		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
