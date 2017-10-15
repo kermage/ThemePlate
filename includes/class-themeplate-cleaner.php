@@ -24,7 +24,7 @@ class ThemePlate_Cleaner {
 	}
 
 
-	public function __construct() {
+	private function __construct() {
 
 		// // Cleanup wp_head()
 		// Display the links to the extra feeds such as category feeds.
