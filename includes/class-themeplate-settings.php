@@ -34,7 +34,7 @@ class ThemePlate_Settings {
 	}
 
 
-	public static function add() {
+	public function add() {
 
 		$param = $this->param;
 
