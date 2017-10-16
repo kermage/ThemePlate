@@ -48,7 +48,7 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
-		add_action( 'after_setup_theme', array( $this, 'clean_markup' ) );
+		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
 	}
 
@@ -139,13 +139,6 @@ class ThemePlate {
 		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
 
 		return $args;
-
-	}
-
-
-	public function clean_markup() {
-
-		 ThemePlate_Cleaner::instance();
 
 	}
 
