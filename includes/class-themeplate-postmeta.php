@@ -10,27 +10,10 @@
 
 class ThemePlate_PostMeta {
 
-	private static $instance;
+	private $meta_box;
 
 
-	public static function instance() {
-
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-
-	}
-
-
-	public function __construct() {
-
-
-	}
-
-
-	public function add( $meta_box ) {
+	public function __construct( $meta_box ) {
 
 		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
 			return false;
@@ -43,6 +26,18 @@ class ThemePlate_PostMeta {
 		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
 			return false;
 		}
+
+		$this->meta_box = $meta_box;
+
+		add_action( 'add_meta_boxes', array( $this, 'add' ) );
+		add_action( 'save_post', array( $this, 'save' ) );
+
+	}
+
+
+	public function add() {
+
+		$meta_box = $this->meta_box;
 
 		$defaults = array(
 			'context'  => 'advanced',

@@ -13,20 +13,7 @@ class ThemePlate_TermMeta {
 	private $meta_box;
 
 
-	public static function instance() {
-
-		return new self();
-
-	}
-
-
-	public function __construct() {
-
-
-	}
-
-
-	public function add( $meta_box ) {
+	public function __construct( $meta_box ) {
 
 		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
 			return false;

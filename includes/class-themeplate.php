@@ -48,8 +48,7 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
-		add_action( 'save_post', array( ThemePlate_PostMeta::instance(), 'save' ) );
-		add_action( 'after_setup_theme', array( $this, 'clean_markup' ) );
+		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
 	}
 
@@ -77,15 +76,15 @@ class ThemePlate {
 			// Menu Slug
 			$this->key . '-' . $this->slug,
 			// Content Function
-			array( ThemePlate_Settings::instance(), 'page' )
+			array( 'ThemePlate_Settings', 'page' )
 		);
 
 		if ( $this->pages ) {
 			$title = array_shift( $this->pages );
-			add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $this->slug, array( ThemePlate_Settings::instance(), 'page' ) );
+			add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $this->slug, array( 'ThemePlate_Settings', 'page' ) );
 
 			foreach ( $this->pages as $id => $title ) {
-				add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( ThemePlate_Settings::instance(), 'page' ) );
+				add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( 'ThemePlate_Settings', 'page' ) );
 			}
 		}
 
@@ -144,13 +143,6 @@ class ThemePlate {
 	}
 
 
-	public function clean_markup() {
-
-		 ThemePlate_Cleaner::instance();
-
-	}
-
-
 	public function menu( $id, $title ) {
 
 		if ( ! $this->pages ) {
@@ -164,42 +156,42 @@ class ThemePlate {
 
 	public function post_type( $args ) {
 
-		ThemePlate_CPT::instance()->add_type( $args );
+		new ThemePlate_CPT( 'post_type', $args );
 
 	}
 
 
 	public function taxonomy( $args ) {
 
-		ThemePlate_CPT::instance()->add_tax( $args );
+		new ThemePlate_CPT( 'taxonomy', $args );
 
 	}
 
 
 	public function post_meta( $args ) {
 
-		ThemePlate_PostMeta::instance()->add( $args );
+		new ThemePlate_PostMeta( $args );
 
 	}
 
 
 	public function settings( $args ) {
 
-		ThemePlate_Settings::instance()->add( $args );
+		new ThemePlate_Settings( $args );
 
 	}
 
 
 	public function term_meta( $args ) {
 
-		ThemePlate_TermMeta::instance()->add( $args );
+		new ThemePlate_TermMeta( $args );
 
 	}
 
 
 	public function user_meta( $args ) {
 
-		ThemePlate_UserMeta::instance()->add( $args );
+		new ThemePlate_UserMeta( $args );
 
 	}
 

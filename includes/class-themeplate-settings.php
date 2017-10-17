@@ -10,27 +10,67 @@
 
 class ThemePlate_Settings {
 
-	private static $instance;
+	private $param;
 
 
-	public static function instance() {
+	public function __construct( $param ) {
 
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
+		if ( ! is_array( $param ) || empty( $param ) ) {
+			return false;
 		}
 
-		return self::$instance;
+		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
+			return false;
+		}
+
+		$this->param = $param;
+
+		add_action( 'admin_init', array( $this, 'add' ) );
 
 	}
 
 
-	public function __construct() {
+	public function add() {
 
+		$param = $this->param;
+
+		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
+		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
+
+		add_settings_section(
+			$param['id'],
+			$param['title'],
+			$param['description'],
+			$page
+		);
+
+		foreach ( $param['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
+			$field['id'] = $param['id'] . '_' . $id;
+			$field['page'] = ( $param['page'] ? $param['page'] : ThemePlate()->slug );
+			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
+
+			add_settings_field(
+				$field['id'],
+				$label,
+				array( $this, 'create' ),
+				$page,
+				$param['id'],
+				$field
+			);
+		}
 
 	}
 
 
-	public function page() {
+	public static function page() {
 
 		$page = get_current_screen()->id;
 		$title = sanitize_title( ThemePlate()->title );
@@ -53,11 +93,11 @@ class ThemePlate_Settings {
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
-							<?php $this->section( $page . '-side' ); ?>
+							<?php self::section( $page . '-side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php $this->section( $page . '-normal' ); ?>
+							<?php self::section( $page . '-normal' ); ?>
 						</div>
 					</div>
 				</div>
@@ -68,7 +108,7 @@ class ThemePlate_Settings {
 	}
 
 
-	public function section( $page ) {
+	public static function section( $page ) {
 
 		global $wp_settings_sections, $wp_settings_fields;
 
@@ -96,7 +136,7 @@ class ThemePlate_Settings {
 			}
 
 			echo '<table class="themeplate form-table">';
-			$this->fields( $page, $section['id'] );
+			self::fields( $page, $section['id'] );
 			echo '</table>';
 			echo '</div>';
 			echo '</div>';
@@ -107,7 +147,7 @@ class ThemePlate_Settings {
 	}
 
 
-	public function fields( $page, $section ) {
+	public static function fields( $page, $section ) {
 
 		global $wp_settings_fields;
 
@@ -176,55 +216,8 @@ class ThemePlate_Settings {
 	}
 
 
-	public function add( $param ) {
+	public function create( $field ) {
 
-		if ( ! is_array( $param ) || empty( $param ) ) {
-			return false;
-		}
-
-		if ( ! array_key_exists( 'id', $param ) || ! array_key_exists( 'title', $param ) ) {
-			return false;
-		}
-
-		if ( ! is_array( $param['fields'] ) || empty( $param['fields'] ) ) {
-			return false;
-		}
-
-		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
-		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
-
-		add_settings_section(
-			$param['id'],
-			$param['title'],
-			$param['description'],
-			$page
-		);
-
-		foreach ( $param['fields'] as $id => $field ) {
-			if ( ! is_array( $field ) || empty( $field ) ) {
-				continue;
-			}
-
-			$field['id'] = $param['id'] . '_' . $id;
-			$field['page'] = ( $param['page'] ? $param['page'] : ThemePlate()->slug );
-			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
-
-			add_settings_field(
-				$field['id'],
-				$label,
-				array( $this, 'create' ),
-				$page,
-				$param['id'],
-				$field
-			);
-		}
-
-	}
-
-
-	public function create( $param ) {
-
-		$field = $param;
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
 		$field['value'] = get_option( $field['prefix'] );
 		$field['value'] = $field['value'][$field['id']];
