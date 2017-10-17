@@ -1,5 +1,5 @@
 # ThemePlate --
-> *"A framework to handle everything related in developing a full-featured WordPress theme"*
+> *"A toolkit to handle everything related in developing a full-featured WordPress theme"*
 
 It includes adding custom metaboxes to posts, terms, and users, registering custom post types and taxonomies, and creating theme settings/options page. Also comes with a markup cleaner and a clean navwalker.
 
@@ -9,7 +9,7 @@ It includes adding custom metaboxes to posts, terms, and users, registering cust
 - Easy, simple, and straightforward as much as possible
 
 ## Getting Started
-#### 1. Install ThemePlate framework
+#### 1. Install the ThemePlate toolkit
 - As a theme required plugin: Refer [here](http://tgmpluginactivation.com/installation/)
 - As a must-use plugin: Refer [here](https://codex.wordpress.org/Must_Use_Plugins)
 
