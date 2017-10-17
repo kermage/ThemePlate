@@ -1,13 +1,13 @@
 {
-  "new_version"  : "1.2.2",
+  "new_version"  : "2.0.0",
   "url"          : "https://github.com/kermage/ThemePlate",
   "package"      : "https://github.com/kermage/ThemePlate/archive/master.zip",
-  "last_updated" : "2017-10-03",
-  "author"       : "Gene Alyson Fortunado Torcende",
+  "last_updated" : "2017-10-17",
+  "author_name"  : "Gene Alyson Fortunado Torcende",
   "author_url"   : "mailto:genealyson.torcende@gmail.com",
   "requires"     : "4.6.0",
   "tested"       : "4.8.2",
   "sections"     : {
-    "description" : "A framework to handle everything related in developing a full-featured WordPress theme."
+    "description" : "A toolkit to handle everything related in developing a full-featured WordPress theme."
   }
 }
