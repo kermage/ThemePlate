@@ -90,6 +90,9 @@ class ThemePlate_PostMeta {
 
 		echo '<table class="themeplate form-table">';
 
+		$grouped = false;
+		$stacking = false;
+
 		foreach ( $meta_box['args']['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
 				continue;
