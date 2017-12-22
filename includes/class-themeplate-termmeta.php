@@ -51,6 +51,7 @@ class ThemePlate_TermMeta {
 
 		$meta_box = $this->meta_box;
 
+		$check = '';
 		$check = ( $meta_box['show_on']['key'] == 'id' ? $tag->term_id : $check );
 		$check = ( $meta_box['hide_on']['key'] == 'id' ? $tag->term_id : $check );
 
@@ -76,6 +77,9 @@ class ThemePlate_TermMeta {
 		}
 
 		echo '<table class="themeplate form-table">';
+
+		$grouped = false;
+		$stacking = false;
 
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {

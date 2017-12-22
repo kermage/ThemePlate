@@ -41,6 +41,7 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->meta_box;
 
+		$check = '';
 		$check = ( $meta_box['show_on']['key'] == 'id' ? $user->ID : $check );
 		$check = ( $meta_box['show_on']['key'] == 'role' ? $user->roles : $check );
 		$check = ( $meta_box['show_on']['key'] == 'capability' ? $user->allcaps : $check );
@@ -70,6 +71,9 @@ class ThemePlate_UserMeta {
 		}
 
 		echo '<table class="themeplate form-table">';
+
+		$grouped = false;
+		$stacking = false;
 
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {

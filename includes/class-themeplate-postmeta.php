@@ -56,6 +56,7 @@ class ThemePlate_PostMeta {
 			}
 		}
 
+		$check = '';
 		$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
 		$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
 		$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );

@@ -155,6 +155,9 @@ class ThemePlate_Settings {
 			return;
 		}
 
+		$grouped = false;
+		$stacking = false;
+
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
 			if ( $field['args']['group'] == 'start' && ! $grouped ) {
 				echo '</table><table class="themeplate form-table grouped"><tr>';
