@@ -36,13 +36,19 @@ class ThemePlate_Fields {
 			return false;
 		}
 
-		$field_name = ( $field['prefix'] ? $field['prefix'] : ThemePlate()->key );
+		$field_name = isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key;
 		$field_name .= '[' . $field['id'] . ']';
+
+		$field['multiple'] = false;
+		$field['none'] = false;
 
 		$list = false;
 		$seq = false;
-		if ( is_array( $field['options'] ) && array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
-			$seq = true;
+
+		if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+			if( array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
+				$seq = true;
+			}
 		}
 
 		switch ( $field['type'] ) {
@@ -76,10 +82,12 @@ class ThemePlate_Fields {
 			case 'radiolist' :
 				$list = true;
 			case 'radio' :
-				foreach ( $field['options'] as $value => $option ) {
-					$value = ( $seq ? $value + 1 : $value );
-					echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
-					echo ( $list ? '<br>' : '' );
+				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+					foreach ( $field['options'] as $value => $option ) {
+						$value = ( $seq ? $value + 1 : $value );
+						echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
+						echo ( $list ? '<br>' : '' );
+					}
 				}
 				break;
 
@@ -87,7 +95,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'checkbox' :
 				echo '<input type="hidden" name="' . $field_name . '" />';
-				if ( $field['options'] ) {
+				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
@@ -143,8 +151,8 @@ class ThemePlate_Fields {
 					$field['value'] = implode( ',', $field['value'] );
 				}
 				echo '<input type="hidden" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
-				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( $field['prefix'] ? $field['prefix'] : ThemePlate()->key ) . '" />';
-				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( $field['prefix'] ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
 				break;
 
 			case 'date':
@@ -157,7 +165,7 @@ class ThemePlate_Fields {
 
 			case 'number':
 				echo '<input type="number" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
-				if ( is_array( $field['options'] ) ) {
+				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					foreach ( $field['options'] as $option => $value ) {
 						echo $option . '="' . $value . '"';
 					}
