@@ -166,7 +166,9 @@ class ThemePlate_Settings {
 				echo '<tr>';
 			}
 
-			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . ( $field['args']['desc'] ? '<span>' . $field['args']['desc'] . '</span>' : '' ) . '</label>';
+
+			$desc = isset( $field['args']['desc'] ) ? '<span>' . $field['args']['desc'] . '</span>' : '';
+			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
@@ -222,9 +224,10 @@ class ThemePlate_Settings {
 	public function create( $field ) {
 
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
-		$field['value'] = get_option( $field['prefix'] );
-		$field['value'] = $field['value'][$field['id']];
-		$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+		$default = isset( $field['std'] ) ? $field['std'] : '';
+		$stored = get_option( $field['prefix'] )[$field['id']];
+		$field['value'] = $stored ? $stored : $default;
 
 		ThemePlate_Fields::instance()->render( $field );
 

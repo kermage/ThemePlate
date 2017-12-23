@@ -105,8 +105,10 @@ class ThemePlate_PostMeta {
 			}
 
 			$field['id'] = $meta_box['args']['id'] . '_' . $id;
-			$field['value'] = get_post_meta( $post->ID, $field['id'], true );
-			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+			$default = isset( $field['std'] ) ? $field['std'] : '';
+			$stored = get_post_meta( $post->ID, $field['id'], true );
+			$field['value'] = $stored ? $stored : $default;
 
 			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
 				echo '</table><table class="themeplate form-table grouped"><tr>';
@@ -115,7 +117,8 @@ class ThemePlate_PostMeta {
 				echo '<tr>';
 			}
 
-			$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+			$desc = isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
+			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {

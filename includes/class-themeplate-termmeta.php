@@ -93,8 +93,10 @@ class ThemePlate_TermMeta {
 			}
 
 			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-			$field['value'] = get_term_meta( $tag->term_id, $field['id'], true );
-			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+			$default = isset( $field['std'] ) ? $field['std'] : '';
+			$stored = get_term_meta( $tag->term_id, $field['id'], true );
+			$field['value'] = $stored ? $stored : $default;
 
 			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
 				echo '</table><table class="themeplate form-table grouped"><tr>';
@@ -103,7 +105,8 @@ class ThemePlate_TermMeta {
 				echo '<tr>';
 			}
 
-			$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+			$desc = isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
+			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
