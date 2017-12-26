@@ -41,12 +41,19 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->meta_box;
 
-		$check = ( $meta_box['show_on']['key'] == 'id' ? $user->ID : $check );
-		$check = ( $meta_box['show_on']['key'] == 'role' ? $user->roles : $check );
-		$check = ( $meta_box['show_on']['key'] == 'capability' ? $user->allcaps : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'id' ? $user->ID : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'role' ? $user->roles : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'capability' ? $user->allcaps : $check );
+		$check = '';
+
+		if ( isset( $meta_box['show_on'] ) ) {
+			$check = ( $meta_box['show_on']['key'] == 'id' ? $user->ID : $check );
+			$check = ( $meta_box['show_on']['key'] == 'role' ? $user->roles : $check );
+			$check = ( $meta_box['show_on']['key'] == 'capability' ? $user->allcaps : $check );
+		}
+
+		if ( isset( $meta_box['hide_on'] ) ) {
+			$check = ( $meta_box['hide_on']['key'] == 'id' ? $user->ID : $check );
+			$check = ( $meta_box['hide_on']['key'] == 'role' ? $user->roles : $check );
+			$check = ( $meta_box['hide_on']['key'] == 'capability' ? $user->allcaps : $check );
+		}
 
 		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
 			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
@@ -71,28 +78,34 @@ class ThemePlate_UserMeta {
 
 		echo '<table class="themeplate form-table">';
 
+		$grouped = false;
+		$stacking = false;
+
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
 				continue;
 			}
 
 			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-			$field['value'] = get_user_meta( $user->ID, $field['id'], true );
-			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-			if ( $field['group'] == 'start' && ! $grouped ) {
+			$default = isset( $field['std'] ) ? $field['std'] : '';
+			$stored = get_user_meta( $user->ID, $field['id'], true );
+			$field['value'] = $stored ? $stored : $default;
+
+			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
 				echo '</table><table class="themeplate form-table grouped"><tr>';
 				$grouped = true;
 			} elseif ( ! $grouped ) {
 				echo '<tr>';
 			}
 
-			$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+			$desc = isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
+			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
 					$width = '';
-					if ( $field['width'] ) {
+					if ( isset( $field['width'] ) ) {
 						if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
 							$width = ' style="width:' . $field['width'] . '"';
 						} else {
@@ -102,7 +115,7 @@ class ThemePlate_UserMeta {
 					echo '<td' . ( $width ? $width : '' ) . '>';
 				}
 
-				if ( $field['stack'] && ! $stacking ) {
+				if ( isset( $field['stack'] ) && ! $stacking ) {
 					echo '<div class="stacked">';
 					$stacking = true;
 				}
@@ -113,7 +126,7 @@ class ThemePlate_UserMeta {
 				if ( $stacking ) {
 					echo '</div>';
 
-					if ( $field['stack'] ) {
+					if ( isset( $field['stack'] ) ) {
 						echo '<div class="stacked">';
 					} else {
 						echo '</td>';
@@ -129,7 +142,7 @@ class ThemePlate_UserMeta {
 				echo '</td>';
 			}
 
-			if ( $field['group'] == 'end' && $grouped ) {
+			if ( isset( $field['group'] ) && $field['group'] == 'end' && $grouped ) {
 				echo '</tr></table><table class="themeplate form-table">';
 				$grouped = false;
 			} elseif ( ! $grouped ) {

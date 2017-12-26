@@ -106,10 +106,13 @@ class ThemePlate {
 
 	public function admin_notices() {
 
+		if ( ! isset( $_REQUEST['page'] ) || ! isset( $_REQUEST['settings-updated'] ) ) {
+			return;
+		}
+
 		$page = str_replace( ThemePlate()->key . '-', '', $_REQUEST['page'] );
 
-		if ( isset( $_REQUEST['page'] ) && ( $_REQUEST['page'] === $this->key . '-' . $this->slug || array_key_exists( $page, $this->pages ) ) &&
-			isset( $_REQUEST['settings-updated'] ) &&  $_REQUEST['settings-updated'] == true ) {
+		if ( ( $_REQUEST['page'] === $this->key . '-' . $this->slug || array_key_exists( $page, $this->pages ) ) && $_REQUEST['settings-updated'] == true ) {
 			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
 		}
 

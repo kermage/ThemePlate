@@ -56,12 +56,19 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
-		$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
-		$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
-		$check = ( $meta_box['hide_on']['key'] == 'term' ? $allterms : $check );
+		$check = '';
+
+		if ( isset( $meta_box['show_on'] ) ) {
+			$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
+			$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
+			$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );
+		}
+
+		if ( isset( $meta_box['hide_on'] ) ) {
+			$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
+			$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
+			$check = ( $meta_box['hide_on']['key'] == 'term' ? $allterms : $check );
+		}
 
 		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
 			( isset( $meta_box['show_on'] ) && array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
@@ -89,28 +96,34 @@ class ThemePlate_PostMeta {
 
 		echo '<table class="themeplate form-table">';
 
+		$grouped = false;
+		$stacking = false;
+
 		foreach ( $meta_box['args']['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
 				continue;
 			}
 
 			$field['id'] = $meta_box['args']['id'] . '_' . $id;
-			$field['value'] = get_post_meta( $post->ID, $field['id'], true );
-			$field['value'] = $field['value'] ? $field['value'] : $field['std'];
 
-			if ( $field['group'] == 'start' && ! $grouped ) {
+			$default = isset( $field['std'] ) ? $field['std'] : '';
+			$stored = get_post_meta( $post->ID, $field['id'], true );
+			$field['value'] = $stored ? $stored : $default;
+
+			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
 				echo '</table><table class="themeplate form-table grouped"><tr>';
 				$grouped = true;
 			} elseif ( ! $grouped ) {
 				echo '<tr>';
 			}
 
-			$label = '<label for="' . $field['id'] . '">' . $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' ) . '</label>';
+			$desc = isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
+			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
 					$width = '';
-					if ( $field['width'] ) {
+					if ( isset( $field['width'] ) ) {
 						if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
 							$width = ' style="width:' . $field['width'] . '"';
 						} else {
@@ -120,7 +133,7 @@ class ThemePlate_PostMeta {
 					echo '<td' . ( $width ? $width : '' ) . '>';
 				}
 
-				if ( $field['stack'] && ! $stacking ) {
+				if ( isset( $field['stack'] ) && ! $stacking ) {
 					echo '<div class="stacked">';
 					$stacking = true;
 				}
@@ -131,7 +144,7 @@ class ThemePlate_PostMeta {
 				if ( $stacking ) {
 					echo '</div>';
 
-					if ( $field['stack'] ) {
+					if ( isset( $field['stack'] ) ) {
 						echo '<div class="stacked">';
 					} else {
 						echo '</td>';
@@ -147,7 +160,7 @@ class ThemePlate_PostMeta {
 				echo '</td>';
 			}
 
-			if ( $field['group'] == 'end' && $grouped ) {
+			if ( isset( $field['group'] ) && $field['group'] == 'end' && $grouped ) {
 				echo '</tr></table><table class="themeplate form-table">';
 				$grouped = false;
 			} elseif ( ! $grouped ) {

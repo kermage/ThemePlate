@@ -103,6 +103,7 @@ class ThemePlate_Cleaner {
 
 		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches );
 		// Only display media if it is meaningful
+		$media = '';
 		if ( $matches[3][0] !== '' && $matches[3][0] !== 'all' ) {
 			$media = ' media="' . $matches[3][0] . '"';
 		}

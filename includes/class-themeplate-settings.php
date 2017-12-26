@@ -38,13 +38,13 @@ class ThemePlate_Settings {
 
 		$param = $this->param;
 
-		$page = ThemePlate()->key . '-' . ( $param['page'] ? $param['page'] : ThemePlate()->slug );
+		$page = ThemePlate()->key . '-' . ( isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
 
 		add_settings_section(
 			$param['id'],
 			$param['title'],
-			$param['description'],
+			isset( $param['description'] ) ? $param['description'] : '',
 			$page
 		);
 
@@ -54,8 +54,8 @@ class ThemePlate_Settings {
 			}
 
 			$field['id'] = $param['id'] . '_' . $id;
-			$field['page'] = ( $param['page'] ? $param['page'] : ThemePlate()->slug );
-			$label = $field['name'] . ( $field['desc'] ? '<span>' . $field['desc'] . '</span>' : '' );
+			$field['page'] = isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug;
+			$label = $field['name'] . ( isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '' );
 
 			add_settings_field(
 				$field['id'],
@@ -155,20 +155,25 @@ class ThemePlate_Settings {
 			return;
 		}
 
+		$grouped = false;
+		$stacking = false;
+
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
-			if ( $field['args']['group'] == 'start' && ! $grouped ) {
+			if ( isset( $field['args']['group'] ) && $field['args']['group'] == 'start' && ! $grouped ) {
 				echo '</table><table class="themeplate form-table grouped"><tr>';
 				$grouped = true;
 			} elseif ( ! $grouped ) {
 				echo '<tr>';
 			}
 
-			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . ( $field['args']['desc'] ? '<span>' . $field['args']['desc'] . '</span>' : '' ) . '</label>';
+
+			$desc = isset( $field['args']['desc'] ) ? '<span>' . $field['args']['desc'] . '</span>' : '';
+			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
 					$width = '';
-					if ( $field['args']['width'] ) {
+					if ( isset( $field['args']['width'] ) ) {
 						if ( preg_match( '/\d+(%|px|r?em)/', $field['args']['width'] ) ) {
 							$width = ' style="width:' . $field['args']['width'] . '"';
 						} else {
@@ -178,7 +183,7 @@ class ThemePlate_Settings {
 					echo '<td' . ( $width ? $width : '' ) . '>';
 				}
 
-				if ( $field['args']['stack'] && ! $stacking ) {
+				if ( isset( $field['args']['stack'] ) && ! $stacking ) {
 					echo '<div class="stacked">';
 					$stacking = true;
 				}
@@ -189,7 +194,7 @@ class ThemePlate_Settings {
 				if ( $stacking ) {
 					echo '</div>';
 
-					if ( $field['args']['stack'] ) {
+					if ( isset( $field['args']['stack'] ) ) {
 						echo '<div class="stacked">';
 					} else {
 						echo '</td>';
@@ -205,7 +210,7 @@ class ThemePlate_Settings {
 				echo '</td>';
 			}
 
-			if ( $field['args']['group'] == 'end' && $grouped ) {
+			if ( isset( $field['args']['group'] ) && $field['args']['group'] == 'end' && $grouped ) {
 				echo '</tr></table><table class="themeplate form-table">';
 				$grouped = false;
 			} elseif ( ! $grouped ) {
@@ -219,9 +224,10 @@ class ThemePlate_Settings {
 	public function create( $field ) {
 
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
-		$field['value'] = get_option( $field['prefix'] );
-		$field['value'] = $field['value'][$field['id']];
-		$field['value'] = $field['value'] ? $field['value'] : $field['std'];
+
+		$default = isset( $field['std'] ) ? $field['std'] : '';
+		$stored = get_option( $field['prefix'] )[$field['id']];
+		$field['value'] = $stored ? $stored : $default;
 
 		ThemePlate_Fields::instance()->render( $field );
 
