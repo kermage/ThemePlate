@@ -39,8 +39,7 @@ class ThemePlate_Fields {
 		$field_name = isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key;
 		$field_name .= '[' . $field['id'] . ']';
 
-		$field['multiple'] = false;
-		$field['none'] = false;
+		$field = array_merge( array( 'multiple' => false, 'none' => false ), $field );
 
 		$list = false;
 		$seq = false;
