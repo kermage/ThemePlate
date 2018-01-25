@@ -52,7 +52,9 @@ class ThemePlate_PostMeta {
 		foreach ( $taxonomies as $taxonomy ) {
 			$terms = get_the_terms( $post_id, $taxonomy );
 			foreach ( (array) $terms as $term ) {
-				array_push( $allterms, $term->term_id );
+				if ( isset( $term->term_id ) ) {
+					array_push( $allterms, $term->term_id );
+				}
 			}
 		}
 
