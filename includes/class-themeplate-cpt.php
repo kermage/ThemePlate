@@ -125,8 +125,8 @@ class ThemePlate_CPT {
 		$messages[$this->param['name']] = array(
 			 0 => '',
 			 1 => $this->param['singular'] . ' updated.',
-			 2 => '',
-			 3 => '',
+			 2 => 'Custom field updated.',
+			 3 => 'Custom field deleted.',
 			 4 => $this->param['singular'] . ' updated.',
 			 5 => $this->param['singular'] . ' restored to revision.',
 			 6 => $this->param['singular'] . ' published.',
