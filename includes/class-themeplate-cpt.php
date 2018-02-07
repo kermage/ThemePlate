@@ -10,6 +10,9 @@
 
 class ThemePlate_CPT {
 
+	private $param;
+
+
 	public function __construct( $kind, $param ) {
 
 		if ( ! is_array( $param ) || empty( $param ) ) {
@@ -28,6 +31,10 @@ class ThemePlate_CPT {
 		}
 
 		$this->$kind( $param );
+
+		$this->param = $param;
+
+		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
 
 	}
 
@@ -107,6 +114,29 @@ class ThemePlate_CPT {
 		);
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
+
+	}
+
+
+	public function custom_messages( $messages ) {
+
+		global $post, $post_ID;
+
+		$messages[$this->param['name']] = array(
+			 0 => '',
+			 1 => $this->param['singular'] . ' updated. <a href="' . esc_url( get_permalink( $post_ID ) ) . '">View ' . $this->param['singular'] . '</a>',
+			 2 => 'Custom field updated.',
+			 3 => 'Custom field deleted.',
+			 4 => $this->param['singular'] . ' updated.',
+			 5 => isset( $_GET['revision'] ) ? $this->param['singular'] . ' restored to revision from ' . wp_post_revision_title( (int) $_GET['revision'], false ) . '.' : false,
+			 6 => $this->param['singular'] . ' published. <a href="' . esc_url( get_permalink( $post_ID ) ) . '"">View ' . $this->param['singular'] . '</a>',
+			 7 => $this->param['singular'] . ' saved.',
+			 8 => $this->param['singular'] . ' submitted. <a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '"">Preview ' . $this->param['singular'] . '</a>',
+			 9 => $this->param['singular'] . ' scheduled for: <strong>' . date( 'M j, Y @ H:i', strtotime( $post->post_date ) ) . '</strong>. <a href="' . esc_url( get_permalink( $post_ID ) ) . '"">Preview ' . $this->param['singular'] . '</a>',
+			10 => $this->param['singular'] . ' draft updated. <a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '"">Preview ' . $this->param['singular'] . '</a>'
+		);
+
+		return $messages;
 
 	}
 
