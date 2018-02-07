@@ -10,6 +10,9 @@
 
 class ThemePlate_CPT {
 
+	private $param;
+
+
 	public function __construct( $kind, $param ) {
 
 		if ( ! is_array( $param ) || empty( $param ) ) {
@@ -28,6 +31,10 @@ class ThemePlate_CPT {
 		}
 
 		$this->$kind( $param );
+
+		$this->param = $param;
+
+		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
 
 	}
 
@@ -107,6 +114,29 @@ class ThemePlate_CPT {
 		);
 
 		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
+
+	}
+
+
+	public function custom_messages( $messages ) {
+
+		global $post, $post_ID;
+
+		$messages[$this->param['name']] = array(
+			 0 => '',
+			 1 => $this->param['singular'] . ' updated.',
+			 2 => '',
+			 3 => '',
+			 4 => $this->param['singular'] . ' updated.',
+			 5 => $this->param['singular'] . ' restored to revision.',
+			 6 => $this->param['singular'] . ' published.',
+			 7 => $this->param['singular'] . ' saved.',
+			 8 => $this->param['singular'] . ' submitted.',
+			 9 => $this->param['singular'] . ' scheduled.',
+			10 => $this->param['singular'] . ' draft updated.'
+		);
+
+		return $messages;
 
 	}
 
