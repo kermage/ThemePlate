@@ -34,8 +34,6 @@ class ThemePlate_CPT {
 
 		$this->param = $param;
 
-		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
-
 	}
 
 
@@ -77,6 +75,8 @@ class ThemePlate_CPT {
 		);
 
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
+
+		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
 
 	}
 
