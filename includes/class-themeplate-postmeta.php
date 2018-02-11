@@ -40,6 +40,7 @@ class ThemePlate_PostMeta {
 		$meta_box = $this->meta_box;
 
 		$defaults = array(
+			'screen'   => '',
 			'context'  => 'advanced',
 			'priority' => 'default'
 		);
