@@ -53,11 +53,11 @@ class ThemePlate_Fields {
 		switch ( $field['type'] ) {
 			default:
 			case 'text':
-				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
+				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
 				break;
 
 			case 'textarea' :
-				echo '<textarea name="' . $field_name . '" id="' . $field['id'] . '" rows="4">' . $field['value'] . '</textarea>';
+				echo '<textarea name="' . $field_name . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
 				break;
 
 			case 'select' :
