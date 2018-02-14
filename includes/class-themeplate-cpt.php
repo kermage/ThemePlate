@@ -132,8 +132,6 @@ class ThemePlate_CPT {
 			$permalink = '';
 		}
 
-		$messages = array();
-
 		$preview_post_link_html = $scheduled_post_link_html = $view_post_link_html = '';
 		$preview_url = get_preview_post_link( $post );
 		$viewable = is_post_type_viewable( $post_type_object );
