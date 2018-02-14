@@ -120,23 +120,55 @@ class ThemePlate_CPT {
 
 	public function custom_messages( $messages ) {
 
-		global $post, $post_ID;
+		global $post_type_object, $post;
 
 		$name = $this->param['name'];
 		$singular = $this->param['singular'];
 
+		$post_ID = isset( $post_ID ) ? (int) $post_ID : 0;
+		$permalink = get_permalink( $post_ID );
+
+		if ( ! $permalink ) {
+			$permalink = '';
+		}
+
+		$messages = array();
+
+		$preview_post_link_html = $scheduled_post_link_html = $view_post_link_html = '';
+		$preview_url = get_preview_post_link( $post );
+		$viewable = is_post_type_viewable( $post_type_object );
+
+		if ( $viewable ) {
+			$preview_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
+				esc_url( $preview_url ),
+				__( 'Preview ' . $singular )
+			);
+
+			$scheduled_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
+				esc_url( $permalink ),
+				__( 'Preview ' . $singular )
+			);
+
+			$view_post_link_html = sprintf( ' <a href="%1$s">%2$s</a>',
+				esc_url( $permalink ),
+				__( 'View ' . $singular )
+			);
+		}
+
+		$scheduled_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $post->post_date ) );
+
 		$messages[$name] = array(
-			 0 => '',
-			 1 => $singular . ' updated. <a href="' . esc_url( get_permalink( $post_ID ) ) . '">View ' . $singular . '</a>',
-			 2 => 'Custom field updated.',
-			 3 => 'Custom field deleted.',
-			 4 => $singular . ' updated.',
-			 5 => isset( $_GET['revision'] ) ? $singular . ' restored to revision from ' . wp_post_revision_title( (int) $_GET['revision'], false ) . '.' : false,
-			 6 => $singular . ' published. <a href="' . esc_url( get_permalink( $post_ID ) ) . '"">View ' . $singular . '</a>',
-			 7 => $singular . ' saved.',
-			 8 => $singular . ' submitted. <a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '"">Preview ' . $singular . '</a>',
-			 9 => $singular . ' scheduled for: <strong>' . date( 'M j, Y @ H:i', strtotime( $post->post_date ) ) . '</strong>. <a href="' . esc_url( get_permalink( $post_ID ) ) . '"">Preview ' . $singular . '</a>',
-			10 => $singular . ' draft updated. <a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '"">Preview ' . $singular . '</a>'
+			 0 => '', // Unused. Messages start at index 1.
+			 1 => __( $singular . ' updated.' ) . $view_post_link_html,
+			 2 => __( 'Custom field updated.' ),
+			 3 => __( 'Custom field deleted.' ),
+			 4 => __( $singular . ' updated.' ),
+			 5 => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			 6 => __( $singular . ' published.' ) . $view_post_link_html,
+			 7 => __( $singular . ' saved.' ),
+			 8 => __( $singular . ' submitted.' ) . $preview_post_link_html,
+			 9 => sprintf( __( $singular . ' scheduled for: %s.' ), '<strong>' . $scheduled_date . '</strong>' ) . $scheduled_post_link_html,
+			10 => __( $singular . ' draft updated.' ) . $preview_post_link_html
 		);
 
 		return $messages;
