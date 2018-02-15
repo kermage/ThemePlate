@@ -67,9 +67,11 @@ class ThemePlate_CPT {
 			'menu_name'             => $plural,
 			'name_admin_bar'        => $plural
 		);
+
+		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+
 		$defaults = array(
 			'label'       => $plural,
-			'labels'      => $labels,
 			'description' => $param['description'],
 			'public'      => true
 		);
@@ -107,9 +109,11 @@ class ThemePlate_CPT {
 			'choose_from_most_used'      => 'Choose from the most used ' . $singular,
 			'not_found'                  => $singular . ' not found'
 		);
+
+		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+
 		$defaults = array(
 			'label'       => $plural,
-			'labels'      => $labels,
 			'description' => $param['description'],
 			'public'      => true
 		);
