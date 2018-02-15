@@ -77,6 +77,7 @@ class ThemePlate_CPT {
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
 
 		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
+		add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_custom_messages' ), 10, 2 );
 
 	}
 
@@ -167,6 +168,25 @@ class ThemePlate_CPT {
 			 8 => __( $singular . ' submitted.' ) . $preview_post_link_html,
 			 9 => sprintf( __( $singular . ' scheduled for: %s.' ), '<strong>' . $scheduled_date . '</strong>' ) . $scheduled_post_link_html,
 			10 => __( $singular . ' draft updated.' ) . $preview_post_link_html
+		);
+
+		return $messages;
+
+	}
+
+
+	public function bulk_custom_messages( $messages, $counts ) {
+
+		$name = $this->param['name'];
+		$singular = $this->param['singular'];
+		$plural = $this->param['plural'];
+
+		$messages[$name] = array(
+			'updated'   => _n( '%s ' . $singular . ' updated.', '%s ' . $plural . ' updated.', $counts['updated'] ),
+			'locked'    => _n( '%s ' . $singular . ' not updated, somebody is editing it.', '%s ' . $plural . ' not updated, somebody is editing them.', $counts['locked'] ),
+			'deleted'   => _n( '%s ' . $singular . ' permanently deleted.', '%s ' . $plural . ' permanently deleted.', $counts['deleted'] ),
+			'trashed'   => _n( '%s ' . $singular . ' moved to the Trash.', '%s ' . $plural . ' moved to the Trash.', $counts['trashed'] ),
+			'untrashed' => _n( '%s ' . $singular . ' restored from the Trash.', '%s ' . $plural . ' restored from the Trash.', $counts['untrashed'] )
 		);
 
 		return $messages;
