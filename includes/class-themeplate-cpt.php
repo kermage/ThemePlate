@@ -67,9 +67,11 @@ class ThemePlate_CPT {
 			'menu_name'             => $plural,
 			'name_admin_bar'        => $plural
 		);
+
+		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+
 		$defaults = array(
 			'label'       => $plural,
-			'labels'      => $labels,
 			'description' => $param['description'],
 			'public'      => true
 		);
@@ -77,6 +79,7 @@ class ThemePlate_CPT {
 		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
 
 		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
+		add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_custom_messages' ), 10, 2 );
 
 	}
 
@@ -106,9 +109,11 @@ class ThemePlate_CPT {
 			'choose_from_most_used'      => 'Choose from the most used ' . $singular,
 			'not_found'                  => $singular . ' not found'
 		);
+
+		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+
 		$defaults = array(
 			'label'       => $plural,
-			'labels'      => $labels,
 			'description' => $param['description'],
 			'public'      => true
 		);
@@ -120,23 +125,72 @@ class ThemePlate_CPT {
 
 	public function custom_messages( $messages ) {
 
-		global $post, $post_ID;
+		global $post_type_object, $post;
 
 		$name = $this->param['name'];
 		$singular = $this->param['singular'];
 
+		$post_ID = isset( $post_ID ) ? (int) $post_ID : 0;
+		$permalink = get_permalink( $post_ID );
+
+		if ( ! $permalink ) {
+			$permalink = '';
+		}
+
+		$preview_post_link_html = $scheduled_post_link_html = $view_post_link_html = '';
+		$preview_url = get_preview_post_link( $post );
+		$viewable = is_post_type_viewable( $post_type_object );
+
+		if ( $viewable ) {
+			$preview_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
+				esc_url( $preview_url ),
+				__( 'Preview ' . $singular )
+			);
+
+			$scheduled_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
+				esc_url( $permalink ),
+				__( 'Preview ' . $singular )
+			);
+
+			$view_post_link_html = sprintf( ' <a href="%1$s">%2$s</a>',
+				esc_url( $permalink ),
+				__( 'View ' . $singular )
+			);
+		}
+
+		$scheduled_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $post->post_date ) );
+
 		$messages[$name] = array(
-			 0 => '',
-			 1 => $singular . ' updated. <a href="' . esc_url( get_permalink( $post_ID ) ) . '">View ' . $singular . '</a>',
-			 2 => 'Custom field updated.',
-			 3 => 'Custom field deleted.',
-			 4 => $singular . ' updated.',
-			 5 => isset( $_GET['revision'] ) ? $singular . ' restored to revision from ' . wp_post_revision_title( (int) $_GET['revision'], false ) . '.' : false,
-			 6 => $singular . ' published. <a href="' . esc_url( get_permalink( $post_ID ) ) . '"">View ' . $singular . '</a>',
-			 7 => $singular . ' saved.',
-			 8 => $singular . ' submitted. <a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '"">Preview ' . $singular . '</a>',
-			 9 => $singular . ' scheduled for: <strong>' . date( 'M j, Y @ H:i', strtotime( $post->post_date ) ) . '</strong>. <a href="' . esc_url( get_permalink( $post_ID ) ) . '"">Preview ' . $singular . '</a>',
-			10 => $singular . ' draft updated. <a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '"">Preview ' . $singular . '</a>'
+			 0 => '', // Unused. Messages start at index 1.
+			 1 => __( $singular . ' updated.' ) . $view_post_link_html,
+			 2 => __( 'Custom field updated.' ),
+			 3 => __( 'Custom field deleted.' ),
+			 4 => __( $singular . ' updated.' ),
+			 5 => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			 6 => __( $singular . ' published.' ) . $view_post_link_html,
+			 7 => __( $singular . ' saved.' ),
+			 8 => __( $singular . ' submitted.' ) . $preview_post_link_html,
+			 9 => sprintf( __( $singular . ' scheduled for: %s.' ), '<strong>' . $scheduled_date . '</strong>' ) . $scheduled_post_link_html,
+			10 => __( $singular . ' draft updated.' ) . $preview_post_link_html
+		);
+
+		return $messages;
+
+	}
+
+
+	public function bulk_custom_messages( $messages, $counts ) {
+
+		$name = $this->param['name'];
+		$singular = $this->param['singular'];
+		$plural = $this->param['plural'];
+
+		$messages[$name] = array(
+			'updated'   => _n( '%s ' . $singular . ' updated.', '%s ' . $plural . ' updated.', $counts['updated'] ),
+			'locked'    => _n( '%s ' . $singular . ' not updated, somebody is editing it.', '%s ' . $plural . ' not updated, somebody is editing them.', $counts['locked'] ),
+			'deleted'   => _n( '%s ' . $singular . ' permanently deleted.', '%s ' . $plural . ' permanently deleted.', $counts['deleted'] ),
+			'trashed'   => _n( '%s ' . $singular . ' moved to the Trash.', '%s ' . $plural . ' moved to the Trash.', $counts['trashed'] ),
+			'untrashed' => _n( '%s ' . $singular . ' restored from the Trash.', '%s ' . $plural . ' restored from the Trash.', $counts['untrashed'] )
 		);
 
 		return $messages;
