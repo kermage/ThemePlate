@@ -59,24 +59,37 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		$check = '';
+		$check = false;
 
 		if ( isset( $meta_box['show_on'] ) ) {
-			$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
-			$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
-			$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );
+			foreach ( (array) $meta_box['show_on'] as $show_on ) {
+				if ( $show_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+				if ( $show_on['key'] == 'template' && array_intersect( (array) $template, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+				if ( $show_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+			}
 		}
 
 		if ( isset( $meta_box['hide_on'] ) ) {
-			$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
-			$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
-			$check = ( $meta_box['hide_on']['key'] == 'term' ? $allterms : $check );
+			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
+				if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+				if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+				if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+			}
 		}
 
-		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
-			( isset( $meta_box['show_on'] ) && array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
-		) {
+		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) || $check ) {
 			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
 			$id = $meta_box['id'];
 			if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
