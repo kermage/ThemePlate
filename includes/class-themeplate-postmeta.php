@@ -97,15 +97,17 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) || $check ) {
-			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-			$id = $meta_box['id'];
-			if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
-				$id = 'themeplate_' . $meta_box['id'] . '_post';
-			}
-
-			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+		if ( ( isset( $meta_box['show_on'] ) && ! $check ) || ( isset( $meta_box['hide_on'] ) && $check ) ) {
+			return;
 		}
+
+		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
+		$id = $meta_box['id'];
+		if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
+			$id = 'themeplate_' . $meta_box['id'] . '_post';
+		}
+
+		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 
 	}
 
