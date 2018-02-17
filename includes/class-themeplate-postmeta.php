@@ -39,13 +39,6 @@ class ThemePlate_PostMeta {
 
 		$meta_box = $this->meta_box;
 
-		$defaults = array(
-			'screen'   => '',
-			'context'  => 'advanced',
-			'priority' => 'default'
-		);
-		$meta_box = wp_parse_args( $meta_box, $defaults );
-
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
 		$taxonomies = get_object_taxonomies( get_post_type() );
@@ -100,6 +93,13 @@ class ThemePlate_PostMeta {
 		if ( ( isset( $meta_box['show_on'] ) && ! $check ) || ( isset( $meta_box['hide_on'] ) && $check ) ) {
 			return;
 		}
+
+		$defaults = array(
+			'screen'   => '',
+			'context'  => 'advanced',
+			'priority' => 'default'
+		);
+		$meta_box = wp_parse_args( $meta_box, $defaults );
 
 		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
 		$id = $meta_box['id'];
