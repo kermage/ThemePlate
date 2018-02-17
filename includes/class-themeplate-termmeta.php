@@ -77,7 +77,7 @@ class ThemePlate_TermMeta {
 			}
 		}
 
-		if ( ! $check ) {
+		if ( ( isset( $meta_box['show_on'] ) && ! $check ) || ( isset( $meta_box['hide_on'] ) && $check ) ) {
 			return;
 		}
 
