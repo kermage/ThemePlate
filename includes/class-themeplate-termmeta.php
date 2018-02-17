@@ -51,19 +51,33 @@ class ThemePlate_TermMeta {
 
 		$meta_box = $this->meta_box;
 
-		$check = '';
+		$check = false;
 
 		if ( isset( $meta_box['show_on'] ) ) {
-			$check = ( $meta_box['show_on']['key'] == 'id' ? $tag->term_id : $check );
+			if ( array_keys( $meta_box['show_on'] ) !== range( 0, count( $meta_box['show_on'] ) - 1 ) ) {
+				$meta_box['show_on'] = array( $meta_box['show_on'] );
+			}
+
+			foreach ( (array) $meta_box['show_on'] as $show_on ) {
+				if ( $show_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+			}
 		}
 
 		if ( isset( $meta_box['hide_on'] ) ) {
-			$check = ( $meta_box['hide_on']['key'] == 'id' ? $tag->term_id : $check );
+			if ( array_keys( $meta_box['hide_on'] ) !== range( 0, count( $meta_box['hide_on'] ) - 1 ) ) {
+				$meta_box['hide_on'] = array( $meta_box['hide_on'] );
+			}
+
+			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
+				if ( $hide_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+			}
 		}
 
-		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
-		) {
+		if ( ! $check ) {
 			return;
 		}
 
