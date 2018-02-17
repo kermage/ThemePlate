@@ -72,7 +72,7 @@ class ThemePlate_TermMeta {
 
 			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
 				if ( $hide_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 			}
 		}

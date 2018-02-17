@@ -68,13 +68,13 @@ class ThemePlate_UserMeta {
 
 			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
 				if ( $hide_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 				if ( $hide_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 				if ( $hide_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 			}
 		}

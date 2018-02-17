@@ -79,13 +79,13 @@ class ThemePlate_PostMeta {
 
 			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
 				if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 				if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 				if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
-					$check = false;
+					$check = true;
 				}
 			}
 		}
