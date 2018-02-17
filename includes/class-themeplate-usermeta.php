@@ -41,23 +41,45 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->meta_box;
 
-		$check = '';
+		$check = false;
 
 		if ( isset( $meta_box['show_on'] ) ) {
-			$check = ( $meta_box['show_on']['key'] == 'id' ? $user->ID : $check );
-			$check = ( $meta_box['show_on']['key'] == 'role' ? $user->roles : $check );
-			$check = ( $meta_box['show_on']['key'] == 'capability' ? $user->allcaps : $check );
+			if ( array_keys( $meta_box['show_on'] ) !== range( 0, count( $meta_box['show_on'] ) - 1 ) ) {
+				$meta_box['show_on'] = array( $meta_box['show_on'] );
+			}
+
+			foreach ( (array) $meta_box['show_on'] as $show_on ) {
+				if ( $show_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+				if ( $show_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+				if ( $show_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $show_on['value'] ) ) {
+					$check = true;
+				}
+			}
 		}
 
 		if ( isset( $meta_box['hide_on'] ) ) {
-			$check = ( $meta_box['hide_on']['key'] == 'id' ? $user->ID : $check );
-			$check = ( $meta_box['hide_on']['key'] == 'role' ? $user->roles : $check );
-			$check = ( $meta_box['hide_on']['key'] == 'capability' ? $user->allcaps : $check );
+			if ( array_keys( $meta_box['hide_on'] ) !== range( 0, count( $meta_box['hide_on'] ) - 1 ) ) {
+				$meta_box['hide_on'] = array( $meta_box['hide_on'] );
+			}
+
+			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
+				if ( $hide_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+				if ( $hide_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+				if ( $hide_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $hide_on['value'] ) ) {
+					$check = false;
+				}
+			}
 		}
 
-		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
-		) {
+		if ( ( isset( $meta_box['show_on'] ) && ! $check ) || ( isset( $meta_box['hide_on'] ) && $check ) ) {
 			return;
 		}
 
