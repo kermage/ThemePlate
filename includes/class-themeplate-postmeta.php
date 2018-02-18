@@ -39,13 +39,6 @@ class ThemePlate_PostMeta {
 
 		$meta_box = $this->meta_box;
 
-		$defaults = array(
-			'screen'   => '',
-			'context'  => 'advanced',
-			'priority' => 'default'
-		);
-		$meta_box = wp_parse_args( $meta_box, $defaults );
-
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
 		$taxonomies = get_object_taxonomies( get_post_type() );
@@ -59,32 +52,82 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		$check = '';
+		$first = true;
+		$check = true;
 
-		if ( isset( $meta_box['show_on'] ) ) {
-			$check = ( $meta_box['show_on']['key'] == 'id' ? $post_id : $check );
-			$check = ( $meta_box['show_on']['key'] == 'template' ? $template : $check );
-			$check = ( $meta_box['show_on']['key'] == 'term' ? $allterms : $check );
-		}
+		foreach ( $meta_box as $key => $value ) {
+			if ( $key == 'show_on' ) {
+				if ( $first ) {
+					$first = false;
+					$check = false;
+				}
 
-		if ( isset( $meta_box['hide_on'] ) ) {
-			$check = ( $meta_box['hide_on']['key'] == 'id' ? $post_id : $check );
-			$check = ( $meta_box['hide_on']['key'] == 'template' ? $template : $check );
-			$check = ( $meta_box['hide_on']['key'] == 'term' ? $allterms : $check );
-		}
+				if ( is_callable( $value ) ) {
+					$check = call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
 
-		if ( ( ! isset( $meta_box['show_on'] ) && ! isset( $meta_box['hide_on'] ) ) ||
-			( isset( $meta_box['show_on'] ) && array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
-		) {
-			$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-			$id = $meta_box['id'];
-			if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
-				$id = 'themeplate_' . $meta_box['id'] . '_post';
+					foreach ( (array) $value as $show_on ) {
+						if ( $show_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+						if ( $show_on['key'] == 'template' && array_intersect( (array) $template, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+						if ( $show_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+					}
+				}
 			}
 
-			add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+			if ( $key == 'hide_on' ) {
+				if ( $first ) {
+					$first = false;
+				}
+
+				if ( is_callable( $value ) ) {
+					$check = ! call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
+
+					foreach ( (array) $value as $hide_on ) {
+						if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+					}
+				}
+			}
 		}
+
+		if ( ! $check ) {
+			return;
+		}
+
+		$defaults = array(
+			'screen'   => '',
+			'context'  => 'advanced',
+			'priority' => 'default'
+		);
+		$meta_box = wp_parse_args( $meta_box, $defaults );
+
+		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
+		$id = $meta_box['id'];
+		if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
+			$id = 'themeplate_' . $meta_box['id'] . '_post';
+		}
+
+		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 
 	}
 

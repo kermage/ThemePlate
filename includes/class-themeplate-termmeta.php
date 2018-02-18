@@ -51,19 +51,53 @@ class ThemePlate_TermMeta {
 
 		$meta_box = $this->meta_box;
 
-		$check = '';
+		$first = true;
+		$check = true;
 
-		if ( isset( $meta_box['show_on'] ) ) {
-			$check = ( $meta_box['show_on']['key'] == 'id' ? $tag->term_id : $check );
+		foreach ( $meta_box as $key => $value ) {
+			if ( $key == 'show_on' ) {
+				if ( $first ) {
+					$first = false;
+					$check = false;
+				}
+
+				if ( is_callable( $value ) ) {
+					$check = call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
+
+					foreach ( (array) $value as $show_on ) {
+						if ( $show_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+					}
+				}
+			}
+
+			if ( $key == 'hide_on' ) {
+				if ( $first ) {
+					$first = false;
+				}
+
+				if ( is_callable( $value ) ) {
+					$check = ! call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
+
+					foreach ( (array) $value as $hide_on ) {
+						if ( $hide_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+					}
+				}
+			}
 		}
 
-		if ( isset( $meta_box['hide_on'] ) ) {
-			$check = ( $meta_box['hide_on']['key'] == 'id' ? $tag->term_id : $check );
-		}
-
-		if ( ( isset( $meta_box['show_on'] ) && ! array_intersect( (array) $check, (array) $meta_box['show_on']['value'] ) ) ||
-			( isset( $meta_box['hide_on'] ) && array_intersect( (array) $check, (array) $meta_box['hide_on']['value'] ) )
-		) {
+		if ( ! $check ) {
 			return;
 		}
 
