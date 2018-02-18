@@ -52,45 +52,58 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		$check = false;
+		$first = true;
+		$check = true;
 
-		if ( isset( $meta_box['show_on'] ) ) {
-			if ( array_keys( $meta_box['show_on'] ) !== range( 0, count( $meta_box['show_on'] ) - 1 ) ) {
-				$meta_box['show_on'] = array( $meta_box['show_on'] );
+		foreach ( $meta_box as $key => $value ) {
+			if ( $key == 'show_on' ) {
+				if ( $first ) {
+					$first = false;
+					$check = false;
+				}
+
+				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+					$value = array( $value );
+
+				}
+
+				foreach ( (array) $value as $show_on ) {
+					if ( $show_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $show_on['value'] ) ) {
+						$check = true;
+					}
+					if ( $show_on['key'] == 'template' && array_intersect( (array) $template, (array) $show_on['value'] ) ) {
+						$check = true;
+					}
+					if ( $show_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $show_on['value'] ) ) {
+						$check = true;
+					}
+				}
 			}
 
-			foreach ( (array) $meta_box['show_on'] as $show_on ) {
-				if ( $show_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $show_on['value'] ) ) {
-					$check = true;
+			if ( $key == 'hide_on' ) {
+				if ( $first ) {
+					$first = false;
 				}
-				if ( $show_on['key'] == 'template' && array_intersect( (array) $template, (array) $show_on['value'] ) ) {
-					$check = true;
+
+				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+					$value = array( $value );
 				}
-				if ( $show_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $show_on['value'] ) ) {
-					$check = true;
+
+				foreach ( (array) $value as $hide_on ) {
+					if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
+						$check = false;
+					}
+					if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
+						$check = false;
+					}
+					if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
+						$check = false;
+					}
 				}
 			}
 		}
 
-		if ( isset( $meta_box['hide_on'] ) ) {
-			if ( array_keys( $meta_box['hide_on'] ) !== range( 0, count( $meta_box['hide_on'] ) - 1 ) ) {
-				$meta_box['hide_on'] = array( $meta_box['hide_on'] );
-			}
-
-			foreach ( (array) $meta_box['hide_on'] as $hide_on ) {
-				if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
-					$check = true;
-				}
-				if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
-					$check = true;
-				}
-				if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
-					$check = true;
-				}
-			}
-		}
-
-		if ( ( isset( $meta_box['show_on'] ) && ! $check ) || ( isset( $meta_box['hide_on'] ) && $check ) ) {
+		if ( ! $check ) {
 			return;
 		}
 
