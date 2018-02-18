@@ -51,20 +51,23 @@ class ThemePlate_UserMeta {
 					$check = false;
 				}
 
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-					$value = array( $value );
-
-				}
-
-				foreach ( (array) $value as $show_on ) {
-					if ( $show_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $show_on['value'] ) ) {
-						$check = true;
+				if ( is_callable( $value ) ) {
+					$check = call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
 					}
-					if ( $show_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $show_on['value'] ) ) {
-						$check = true;
-					}
-					if ( $show_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $show_on['value'] ) ) {
-						$check = true;
+
+					foreach ( (array) $value as $show_on ) {
+						if ( $show_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+						if ( $show_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+						if ( $show_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
 					}
 				}
 			}
@@ -74,19 +77,23 @@ class ThemePlate_UserMeta {
 					$first = false;
 				}
 
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-					$value = array( $value );
-				}
+				if ( is_callable( $value ) ) {
+					$check = ! call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
 
-				foreach ( (array) $value as $hide_on ) {
-					if ( $hide_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $hide_on['value'] ) ) {
-						$check = false;
-					}
-					if ( $hide_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $hide_on['value'] ) ) {
-						$check = false;
-					}
-					if ( $hide_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $hide_on['value'] ) ) {
-						$check = false;
+					foreach ( (array) $value as $hide_on ) {
+						if ( $hide_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
 					}
 				}
 			}

@@ -62,20 +62,23 @@ class ThemePlate_PostMeta {
 					$check = false;
 				}
 
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-					$value = array( $value );
-
-				}
-
-				foreach ( (array) $value as $show_on ) {
-					if ( $show_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $show_on['value'] ) ) {
-						$check = true;
+				if ( is_callable( $value ) ) {
+					$check = call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
 					}
-					if ( $show_on['key'] == 'template' && array_intersect( (array) $template, (array) $show_on['value'] ) ) {
-						$check = true;
-					}
-					if ( $show_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $show_on['value'] ) ) {
-						$check = true;
+
+					foreach ( (array) $value as $show_on ) {
+						if ( $show_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+						if ( $show_on['key'] == 'template' && array_intersect( (array) $template, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
+						if ( $show_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
 					}
 				}
 			}
@@ -85,19 +88,23 @@ class ThemePlate_PostMeta {
 					$first = false;
 				}
 
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-					$value = array( $value );
-				}
+				if ( is_callable( $value ) ) {
+					$check = ! call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
 
-				foreach ( (array) $value as $hide_on ) {
-					if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
-						$check = false;
-					}
-					if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
-						$check = false;
-					}
-					if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
-						$check = false;
+					foreach ( (array) $value as $hide_on ) {
+						if ( $hide_on['key'] == 'id' && array_intersect( (array) $post_id, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'template' && array_intersect( (array) $template, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'term' && array_intersect( (array) $allterms, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
 					}
 				}
 			}

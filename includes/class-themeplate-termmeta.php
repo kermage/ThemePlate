@@ -61,14 +61,17 @@ class ThemePlate_TermMeta {
 					$check = false;
 				}
 
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-					$value = array( $value );
+				if ( is_callable( $value ) ) {
+					$check = call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
 
-				}
-
-				foreach ( (array) $value as $show_on ) {
-					if ( $show_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $show_on['value'] ) ) {
-						$check = true;
+					foreach ( (array) $value as $show_on ) {
+						if ( $show_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
 					}
 				}
 			}
@@ -78,13 +81,17 @@ class ThemePlate_TermMeta {
 					$first = false;
 				}
 
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-					$value = array( $value );
-				}
+				if ( is_callable( $value ) ) {
+					$check = ! call_user_func( $value );
+				} elseif ( is_array( $value ) ) {
+					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+						$value = array( $value );
+					}
 
-				foreach ( (array) $value as $hide_on ) {
-					if ( $hide_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $hide_on['value'] ) ) {
-						$check = false;
+					foreach ( (array) $value as $hide_on ) {
+						if ( $hide_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
 					}
 				}
 			}
