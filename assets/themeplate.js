@@ -128,11 +128,28 @@ jQuery.noConflict();
 
 
 	$( document ).on( 'ready', function() {
-		$( '.themeplate-select2' ).select2( {
-			allowClear: true,
-			placeholder: '',
-			dropdownCssClass: 'themeplate',
-			containerCssClass: 'themeplate'
+		$( '.themeplate-select2' ).each( function() {
+			var $select = $( this );
+
+			$select.select2( {
+				allowClear: true,
+				placeholder: '',
+				dropdownCssClass: 'themeplate',
+				containerCssClass: 'themeplate'
+			});
+
+			if ( $select.attr( 'multiple' ) ) {
+				var $ul = $select.next( '.select2-container' ).find( 'ul' );
+
+				$ul.sortable( {
+					stop: function() {
+						$ul.find( '.select2-selection__choice' ).each( function() {
+							var $option = $( $( this ).data( 'data' ).element );
+							$option.detach().appendTo( $select );
+						});
+					}
+				});
+			}
 		});
 	});
 
