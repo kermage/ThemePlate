@@ -125,6 +125,12 @@
 	margin-bottom: 0;
 }
 
+.themeplate.select2-selection--single .select2-selection__clear {
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: -2px;
+}
+
 .edit-tags-php .themeplate.form-table th,
 .edit-tags-php .themeplate.form-table td {
 	width: 100%;

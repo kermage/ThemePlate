@@ -128,7 +128,9 @@ jQuery.noConflict();
 
 
 	$( document ).on( 'ready', function() {
-		$( '.themeplate select' ).select2( {
+		$( '.themeplate-select2' ).select2( {
+			allowClear: true,
+			placeholder: '',
 			dropdownCssClass: 'themeplate',
 			containerCssClass: 'themeplate'
 		});
