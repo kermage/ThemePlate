@@ -120,6 +120,11 @@
 	margin-left: 0.5em;
 }
 
+.themeplate.select2-selection li,
+.themeplate.select2-dropdown li {
+	margin-bottom: 0;
+}
+
 .edit-tags-php .themeplate.form-table th,
 .edit-tags-php .themeplate.form-table td {
 	width: 100%;

@@ -128,7 +128,10 @@ jQuery.noConflict();
 
 
 	$( document ).on( 'ready', function() {
-		$( '.themeplate-select2' ).select2();
+		$( '.themeplate select' ).select2( {
+			dropdownCssClass: 'themeplate',
+			containerCssClass: 'themeplate'
+		});
 	});
 
 }( jQuery ));
