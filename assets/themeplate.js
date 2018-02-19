@@ -126,6 +126,9 @@ jQuery.noConflict();
 		}
 	});
 
-	$( '.themeplate-select2' ).select2();
+
+	$( document ).on( 'ready', function() {
+		$( '.themeplate-select2' ).select2();
+	});
 
 }( jQuery ));
