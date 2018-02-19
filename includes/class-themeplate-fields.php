@@ -61,7 +61,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'select' :
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
@@ -183,7 +183,7 @@ class ThemePlate_Fields {
 			case 'post':
 				$list = 'post';
 			case 'page':
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
@@ -205,7 +205,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'user':
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
@@ -223,7 +223,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'term':
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
