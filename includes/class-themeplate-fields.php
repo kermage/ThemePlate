@@ -207,10 +207,11 @@ class ThemePlate_Fields {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
 						$key = array_search( $value, array_column( $pages, 'ID' ) );
-						$ordered[$key] = $pages[$key];
+						$ordered[] = $pages[$key];
 						unset( $pages[$key] );
+						$pages = array_values( $pages );
 					}
-					$pages = $ordered + $pages;
+					$pages = array_merge( $ordered, $pages );
 				}
 				foreach ( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
