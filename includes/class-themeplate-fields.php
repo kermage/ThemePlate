@@ -203,6 +203,15 @@ class ThemePlate_Fields {
 				} else {
 					$pages = get_pages( array( 'post_type' => $field['options'] ) );
 				}
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$key = array_search( $value, array_column( $pages, 'ID' ) );
+						$ordered[$key] = $pages[$key];
+						unset( $pages[$key] );
+					}
+					$pages = $ordered + $pages;
+				}
 				foreach ( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
 					if ( in_array( $page->ID, (array) $field['value'] ) ) {
