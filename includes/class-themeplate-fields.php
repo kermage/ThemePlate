@@ -70,10 +70,11 @@ class ThemePlate_Fields {
 				if ( $field['multiple'] ) {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
+						$value = ( $seq ? $value - 1 : $value );
 						$ordered[$value] = $field['options'][$value];
 						unset( $field['options'][$value] );
 					}
-					$field['options'] = array_merge( $ordered, $field['options'] );
+					$field['options'] = $ordered + $field['options'];
 				}
 				foreach ( $field['options'] as $value => $option ) {
 					$value = ( $seq ? $value + 1 : $value );
