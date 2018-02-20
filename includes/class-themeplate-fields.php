@@ -67,6 +67,14 @@ class ThemePlate_Fields {
 				} elseif ( $field['none'] && $field['value'] ) {
 					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
+				if ( $field['multiple'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$ordered[$value] = $field['options'][$value];
+						unset( $field['options'][$value] );
+					}
+					$field['options'] = array_merge( $ordered, $field['options'] );
+				}
 				foreach ( $field['options'] as $value => $option ) {
 					$value = ( $seq ? $value + 1 : $value );
 					echo '<option value="' . $value . '"';
