@@ -231,6 +231,16 @@ class ThemePlate_Fields {
 					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				$users = get_users( array( 'role' => $field['options'] ) );
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$key = array_search( $value, array_column( $users, 'ID' ) );
+						$ordered[] = $users[$key];
+						unset( $users[$key] );
+						$users = array_values( $users );
+					}
+					$users = array_merge( $ordered, $users );
+				}
 				foreach ( $users as $user ) {
 					echo '<option value="' . $user->ID . '"';
 					if ( in_array( $user->ID, (array) $field['value'] ) ) {
@@ -249,6 +259,16 @@ class ThemePlate_Fields {
 					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				$terms = get_terms( array( 'taxonomy' => $field['options'] ) );
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$key = array_search( $value, array_column( $terms, 'term_id' ) );
+						$ordered[] = $terms[$key];
+						unset( $terms[$key] );
+						$terms = array_values( $terms );
+					}
+					$terms = array_merge( $ordered, $terms );
+				}
 				foreach ( $terms as $term ) {
 					echo '<option value="' . $term->term_id . '"';
 					if ( in_array( $term->term_id, (array) $field['value'] ) ) {
