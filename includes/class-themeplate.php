@@ -48,6 +48,7 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
+		add_filter( 'edit_form_after_title', array( $this, 'after_title' ) );
 		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
 	}
@@ -144,6 +145,17 @@ class ThemePlate {
 		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
 
 		return $args;
+
+	}
+
+
+	public function after_title() {
+
+		global $post, $wp_meta_boxes;
+
+		do_meta_boxes( get_current_screen(), 'after_title', $post );
+
+		unset( $wp_meta_boxes['post']['after_title'] );
 
 	}
 
