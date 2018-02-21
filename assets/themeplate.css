@@ -131,6 +131,10 @@
 	margin-top: -2px;
 }
 
+.themeplate .select2-results__option[aria-disabled='true'] {
+	display: none;
+}
+
 .edit-tags-php .themeplate.form-table th,
 .edit-tags-php .themeplate.form-table td {
 	width: 100%;
