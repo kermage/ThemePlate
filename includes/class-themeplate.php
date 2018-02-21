@@ -48,7 +48,7 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
-		add_filter( 'edit_form_after_title', array( $this, 'after_title' ) );
+		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
 	}
