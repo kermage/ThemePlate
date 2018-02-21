@@ -65,7 +65,7 @@ class ThemePlate_Fields {
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				if ( $field['multiple'] && $field['value'] ) {
 					$ordered = array();
@@ -196,7 +196,7 @@ class ThemePlate_Fields {
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				if ( $list == 'post' ) {
 					$pages = get_posts( array( 'post_type' => $field['options'] ) );
@@ -228,7 +228,7 @@ class ThemePlate_Fields {
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				$users = get_users( array( 'role' => $field['options'] ) );
 				if ( $field['multiple'] && $field['value'] ) {
@@ -256,7 +256,7 @@ class ThemePlate_Fields {
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				$terms = get_terms( array( 'taxonomy' => $field['options'] ) );
 				if ( $field['multiple'] && $field['value'] ) {
