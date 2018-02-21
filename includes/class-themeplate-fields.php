@@ -61,11 +61,20 @@ class ThemePlate_Fields {
 				break;
 
 			case 'select' :
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
-					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
+				}
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$value = ( $seq ? $value - 1 : $value );
+						$ordered[$value] = $field['options'][$value];
+						unset( $field['options'][$value] );
+					}
+					$field['options'] = $ordered + $field['options'];
 				}
 				foreach ( $field['options'] as $value => $option ) {
 					$value = ( $seq ? $value + 1 : $value );
@@ -183,16 +192,26 @@ class ThemePlate_Fields {
 			case 'post':
 				$list = 'post';
 			case 'page':
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
-					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				if ( $list == 'post' ) {
 					$pages = get_posts( array( 'post_type' => $field['options'] ) );
 				} else {
 					$pages = get_pages( array( 'post_type' => $field['options'] ) );
+				}
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$key = array_search( $value, array_column( $pages, 'ID' ) );
+						$ordered[] = $pages[$key];
+						unset( $pages[$key] );
+						$pages = array_values( $pages );
+					}
+					$pages = array_merge( $ordered, $pages );
 				}
 				foreach ( $pages as $page ) {
 					echo '<option value="' . $page->ID . '"';
@@ -205,13 +224,23 @@ class ThemePlate_Fields {
 				break;
 
 			case 'user':
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
-					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				$users = get_users( array( 'role' => $field['options'] ) );
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$key = array_search( $value, array_column( $users, 'ID' ) );
+						$ordered[] = $users[$key];
+						unset( $users[$key] );
+						$users = array_values( $users );
+					}
+					$users = array_merge( $ordered, $users );
+				}
 				foreach ( $users as $user ) {
 					echo '<option value="' . $user->ID . '"';
 					if ( in_array( $user->ID, (array) $field['value'] ) ) {
@@ -223,13 +252,23 @@ class ThemePlate_Fields {
 				break;
 
 			case 'term':
-				echo '<select name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
-					echo '<option' . ( $field['none'] ? ' value="">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
+					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
 				} elseif ( $field['none'] && $field['value'] ) {
-					echo '<option value="">' . __( '&mdash; None &mdash;' ) . '</option>';
+					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				$terms = get_terms( array( 'taxonomy' => $field['options'] ) );
+				if ( $field['multiple'] && $field['value'] ) {
+					$ordered = array();
+					foreach ( (array) $field['value'] as $value ) {
+						$key = array_search( $value, array_column( $terms, 'term_id' ) );
+						$ordered[] = $terms[$key];
+						unset( $terms[$key] );
+						$terms = array_values( $terms );
+					}
+					$terms = array_merge( $ordered, $terms );
+				}
 				foreach ( $terms as $term ) {
 					echo '<option value="' . $term->term_id . '"';
 					if ( in_array( $term->term_id, (array) $field['value'] ) ) {

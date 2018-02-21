@@ -243,9 +243,9 @@ class ThemePlate_PostMeta {
 			$meta = get_post_meta( $post_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_post_meta( $post_id, $key, $val, true );
-			} elseif ( isset( $val[0] ) && $val != $meta ) {
+			} elseif ( isset( $val[0] ) && $val[0] && $val != $meta ) {
 				update_post_meta( $post_id, $key, $val, $meta );
-			} elseif ( ! isset( $val[0] ) && isset( $meta ) ) {
+			} elseif ( ( ! isset( $val[0] ) || ! $val[0] ) && isset( $meta ) ) {
 				delete_post_meta( $post_id, $key, $meta );
 			}
 		}

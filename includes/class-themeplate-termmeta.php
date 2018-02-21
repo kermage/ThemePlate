@@ -208,9 +208,9 @@ class ThemePlate_TermMeta {
 			$meta = get_term_meta( $term_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_term_meta( $term_id, $key, $val, true );
-			} elseif ( isset( $val[0] ) && $val != $meta ) {
+			} elseif ( isset( $val[0] ) && $val[0] && $val != $meta ) {
 				update_term_meta( $term_id, $key, $val, $meta );
-			} elseif ( ! isset( $val[0] ) && isset( $meta ) ) {
+			} elseif ( ( ! isset( $val[0] ) || ! $val[0] ) && isset( $meta ) ) {
 				delete_term_meta( $term_id, $key, $meta );
 			}
 		}
