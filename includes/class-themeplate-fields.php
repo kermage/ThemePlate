@@ -119,7 +119,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'color':
-				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" class="wp-color-picker" value="' . $field['value'] . '"' . ( isset( $field['std'] ) ? ' data-default-color="' . $field['std'] . '"' : '' ) . ' />';
+				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( isset( $field['std'] ) ? ' data-default-color="' . $field['std'] . '"' : '' ) . ' />';
 				break;
 
 			case 'file':

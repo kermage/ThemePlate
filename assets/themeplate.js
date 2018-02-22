@@ -34,7 +34,7 @@ jQuery.noConflict();
 	});
 
 
-	$( '.wp-color-picker' ).wpColorPicker();
+	$( '.themeplate-color-picker' ).wpColorPicker();
 
 
 	var meta_media_frame, isMultiple;
