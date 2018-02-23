@@ -139,13 +139,7 @@ class ThemePlate_Fields {
 					}
 				}
 				echo '</div>';
-				if ( ! is_array( $field['value'] ) && ( strpos( $field['value'], ',' ) !== false ) ) {
-					$field['value'] = explode( ',', $field['value'] );
-				} elseif ( is_array( $field['value'] ) ) {
-					$field['value'] = implode( ',', $field['value'] );
-				}
-				echo '<input type="hidden" id="themeplate_' . $field['id'] . '" value="' . $field['value'] . '" />';
-				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="' . ( $field['value'] ? 'Re-select' : 'Select' ) . '" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" ' . ( $field['multiple'] ? 'multiple value="Add"' : ( $field['value'] ? 'value="Re-select"' : 'value="Select"' ) ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
 				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
 				break;
 

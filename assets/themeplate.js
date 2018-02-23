@@ -93,7 +93,7 @@ jQuery.noConflict();
 
 		$( '#' + e.target.id.replace( '_remove', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' ).append( field );
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
-		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( 'Select' );
+		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( isMultiple ? 'Add' : 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
 	});
 
