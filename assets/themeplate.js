@@ -39,7 +39,7 @@ jQuery.noConflict();
 
 	var meta_media_frame, isMultiple;
 	var selection, selected, attachment;
-	var src, centered, filename, fieldname, field, preview, order;
+	var src, centered, filename, fieldname, field, close, preview, order;
 
 	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_button"]', function( e ) {
 		e.preventDefault();
@@ -69,8 +69,9 @@ jQuery.noConflict();
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
 				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
+				close = '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 
-				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + field + '</div>';
+				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
 				$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).append( preview );
 			});
 
@@ -95,6 +96,12 @@ jQuery.noConflict();
 		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
 		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( isMultiple ? 'Add' : 'Select' );
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
+	});
+
+	$( document ).on( 'click', '.attachment .remove', function( e ) {
+		e.preventDefault();
+
+		$( this ).parents( '.attachment' ).remove();
 	});
 
 	$( 'div[id^="themeplate_"][id $="_preview"].multiple' ).sortable( {

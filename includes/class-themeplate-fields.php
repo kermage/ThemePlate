@@ -134,6 +134,7 @@ class ThemePlate_Fields {
 						echo '<div class="centered"><img src="' . $preview . '"/></div>';
 						echo '<div class="filename"><div>' . $name . '</div></div>';
 						echo '</div></div>';
+						echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 						echo '<input type="hidden" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
 						echo '</div>';
 					}
