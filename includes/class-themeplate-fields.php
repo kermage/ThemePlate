@@ -125,30 +125,16 @@ class ThemePlate_Fields {
 			case 'file':
 				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '">';
 				if ( $field['value'] ) {
-					if ( $field['multiple'] ) {
-						foreach ( (array) $field['value'] as $file ) {
-							$name = basename( get_attached_file( $file ) );
-							$info = wp_check_filetype( $name );
-							$type = wp_ext2type( $info['ext'] );
-							$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-							echo '<div id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
-							echo '<div class="centered"><img src="' . $preview . '"/></div>';
-							echo '<div class="filename"><div>' . $name . '</div></div>';
-							echo '</div></div>';
-							echo '<input type="hidden" name="' . $field_name . '[]" value="' . $file . '" />';
-							echo '</div>';
-						}
-					} else {
-						$file = $field['value'];
+					foreach ( (array) $field['value'] as $file ) {
 						$name = basename( get_attached_file( $file ) );
 						$info = wp_check_filetype( $name );
 						$type = wp_ext2type( $info['ext'] );
 						$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-						echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
+						echo '<div id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 						echo '<div class="centered"><img src="' . $preview . '"/></div>';
 						echo '<div class="filename"><div>' . $name . '</div></div>';
 						echo '</div></div>';
-						echo '<input type="hidden" name="' . $field_name . '" value="' . $file . '" />';
+						echo '<input type="hidden" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
 						echo '</div>';
 					}
 				}

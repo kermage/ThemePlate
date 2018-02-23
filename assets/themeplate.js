@@ -56,30 +56,13 @@ jQuery.noConflict();
 			multiple: isMultiple
 		});
 
-		meta_media_frame.on( 'open', function() {
-			selection = meta_media_frame.state().get( 'selection' );
-			selected = $( '#' + e.target.id.replace( '_button', '' ) ).val();
-
-			if ( selected && isMultiple ) {
-				selected = selected.split( ',' );
-				selected.forEach( function( id ) {
-					attachment = wp.media.attachment( id );
-					selection.add( attachment );
-				});
-			} else if ( selected && !isMultiple ) {
-				selection.add( wp.media.attachment( selected ) );
-			}
-		});
-
 		meta_media_frame.on( 'select', function() {
 			selection = meta_media_frame.state().get( 'selection' ).toJSON();
-			selected = [];
 
-			selection.map( function( media ) {
-				selected.push( media.id );
-			});
-
-			$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
+			if ( ! isMultiple ) {
+				$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
+				$( '#' + e.target.id ).val( 'Re-select' );
+			}
 
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
@@ -91,8 +74,6 @@ jQuery.noConflict();
 				$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).append( preview );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '' ) ).val( selected.toString() );
-			$( '#' + e.target.id ).val( 'Re-select' );
 			$( '#' + e.target.id.replace( '_button', '_remove' ) ).attr( 'type', 'button' );
 		});
 
