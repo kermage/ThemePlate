@@ -98,7 +98,7 @@ jQuery.noConflict();
 		$( '#' + e.target.id ).attr( 'type', 'hidden' );
 	});
 
-	$( document ).on( 'click', '.attachment .remove', function( e ) {
+	$( document ).on( 'click', '.themeplate .attachment-close', function( e ) {
 		e.preventDefault();
 
 		$( this ).parents( '.attachment' ).remove();
