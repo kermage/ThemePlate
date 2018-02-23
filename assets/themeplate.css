@@ -103,6 +103,16 @@
 	width: 25%;
 }
 
+.themeplate.form-table .attachment .attachment-close {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.themeplate.form-table .attachment:hover .attachment-close {
+	visibility: visible;
+	opacity: 1;
+}
+
 .themeplate.form-table .attachment .filename {
 	visibility: hidden;
 	opacity: 0;
