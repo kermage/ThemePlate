@@ -123,7 +123,8 @@ class ThemePlate_Fields {
 				break;
 
 			case 'file':
-				echo '<div id="themeplate_' . $field['id'] . '_preview" class="preview-holder' . ( $field['multiple'] ? ' multiple' : '' ) . '">';
+				echo '<div id="' . $field['id'] . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '">';
+				echo '<div class="preview-holder">';
 				if ( $field['value'] ) {
 					foreach ( (array) $field['value'] as $file ) {
 						$name = basename( get_attached_file( $file ) );
@@ -139,14 +140,17 @@ class ThemePlate_Fields {
 						echo '</div>';
 					}
 				}
-				if ( ! $field['multiple'] ) {
-					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" id="themeplate_' . $field['id'] . '_button" value="Select" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				if ( $field['multiple'] ) {
+					echo '</div>';
+					echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="Add" />';
+					echo '<input type="button" class="button' . ( empty( $field['value'][0] ) ? ' hidden' : '' ) . '" id="themeplate_' . $field['id'] . '_remove" value="Clear" />';
+				} else {
+					echo '<div class="attachment placeholder">';
+					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" id="themeplate_' . $field['id'] . '_button" value="Select" />';
+					echo '</div>';
+					echo '</div>';
 				}
 				echo '</div>';
-				if ( $field['multiple'] ) {
-					echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" multiple value="Add" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
-					echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Clear" multiple data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
-				}
 				break;
 
 			case 'date':

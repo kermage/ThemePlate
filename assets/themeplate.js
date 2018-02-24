@@ -38,18 +38,20 @@ jQuery.noConflict();
 
 
 	var meta_media_frame, isMultiple;
-	var selection, selected, attachment;
+	var parent, selection, selected, attachment;
 	var src, centered, filename, fieldname, field, close, preview, order;
 
 	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_button"]', function( e ) {
 		e.preventDefault();
 
+		parent = $( this ).parents( '.themeplate-file' );
+
 		isMultiple = false;
-		if ( $( this ).attr( 'multiple' ) ) {
+		if ( parent.hasClass( 'multiple' ) ) {
 			isMultiple = true;
 		}
 
-		fieldname = $( this ).data( 'key' ) + '[' + e.target.id.replace( 'themeplate_', '' ).replace( '_button', '' ) + ']' + ( isMultiple ? '[]' : '' );
+		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
 
 		meta_media_frame = wp.media.frames.meta_media_frame = wp.media({
 			title: 'Select Media',
@@ -60,7 +62,7 @@ jQuery.noConflict();
 			selection = meta_media_frame.state().get( 'selection' ).toJSON();
 
 			if ( ! isMultiple ) {
-				$( '#' + e.target.id ).hide();
+				$( '#' + e.target.id ).addClass( 'hidden' );
 			}
 
 			selection.forEach( function( media ) {
@@ -71,10 +73,10 @@ jQuery.noConflict();
 				close = '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 
 				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
-				$( '#' + e.target.id.replace( '_button', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).append( preview );
+				parent.find( '.preview-holder' ).append( preview );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '_remove' ) ).attr( 'type', 'button' );
+			$( '#' + e.target.id.replace( '_button', '_remove' ) ).removeClass( 'hidden' );
 		});
 
 		meta_media_frame.open();
@@ -83,28 +85,47 @@ jQuery.noConflict();
 	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_remove"]', function( e ) {
 		e.preventDefault();
 
+		parent = $( this ).parents( '.themeplate-file' );
+
 		isMultiple = false;
-		if ( $( this ).attr( 'multiple' ) ) {
+		if ( parent.hasClass( 'multiple' ) ) {
 			isMultiple = true;
 		}
 
-		fieldname = $( this ).data( 'key' ) + '[' + e.target.id.replace( 'themeplate_', '' ).replace( '_remove', '' ) + ']' + ( isMultiple ? '[]' : '' );
+		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
 		field = '<input type="hidden" name="' + fieldname + '" value="">';
 
-		$( '#' + e.target.id.replace( '_remove', '_preview' ) + ( isMultiple ? '.multiple' : '' ) ).html( '' ).append( field );
-		$( '#' + e.target.id.replace( '_remove', '' ) ).val('');
-		$( '#' + e.target.id.replace( '_remove', '_button' ) ).val( isMultiple ? 'Add' : 'Select' );
-		$( '#' + e.target.id ).attr( 'type', 'hidden' );
+		parent.find( '.preview-holder' ).html( '' ).append( field );
+		$( '#' + e.target.id ).addClass( 'hidden' );
 	});
 
 	$( document ).on( 'click', '.themeplate .attachment-close', function( e ) {
 		e.preventDefault();
 
-		if ( ! $( this ).parents( '.preview-holder' ).hasClass( 'multiple' ) ) {
-			$( this ).parents( '.attachment' ).siblings().show();
+		parent = $( this ).parents( '.themeplate-file' );
+
+		isMultiple = false;
+		if ( parent.hasClass( 'multiple' ) ) {
+			isMultiple = true;
 		}
 
-		$( this ).parents( '.attachment' ).remove();
+		attachment = $( this ).parents( '.attachment' );
+
+		if ( ! isMultiple ) {
+			attachment.siblings( '.placeholder' ).find( '.attachment-add' ).removeClass( 'hidden' );
+		}
+
+		attachment.remove();
+
+		if ( ! parent.find( '.preview-holder' ).html().length ) {
+			$( '#themeplate_' + parent.attr( 'id' ) + '_remove' ).addClass( 'hidden' );
+		}
+
+		if ( ! parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
+			fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
+			field = '<input type="hidden" name="' + fieldname + '" value="">';
+			parent.find( '.preview-holder' ).append( field );
+		}
 	});
 
 	$( 'div[id^="themeplate_"][id $="_preview"].multiple' ).sortable( {
