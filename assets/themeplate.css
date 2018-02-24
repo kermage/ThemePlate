@@ -6,6 +6,15 @@
 	border-top: 1px solid #ddd;
 }
 
+.themeplate .form-table.grouped {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.themeplate .form-table.grouped + .form-table {
+	margin-top: -2px;
+}
+
 .themeplate .form-table.grouped td {
 	vertical-align: top;
 }
