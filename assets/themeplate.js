@@ -41,7 +41,7 @@ jQuery.noConflict();
 	var parent, selection, selected, attachment;
 	var src, centered, filename, fieldname, field, close, preview, order;
 
-	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_button"]', function( e ) {
+	$( document ).on( 'click', '.themeplate-file .attachment-add', function( e ) {
 		e.preventDefault();
 
 		parent = $( this ).parents( '.themeplate-file' );
@@ -62,7 +62,7 @@ jQuery.noConflict();
 			selection = meta_media_frame.state().get( 'selection' ).toJSON();
 
 			if ( ! isMultiple ) {
-				$( '#' + e.target.id ).addClass( 'hidden' );
+				parent.find( '.attachment-add' ).addClass( 'hidden' );
 			}
 
 			selection.forEach( function( media ) {
@@ -72,17 +72,17 @@ jQuery.noConflict();
 				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
 				close = '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 
-				preview = '<div id="file-' + media.id + '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
+				preview = '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
 				parent.find( '.preview-holder' ).append( preview );
 			});
 
-			$( '#' + e.target.id.replace( '_button', '_remove' ) ).removeClass( 'hidden' );
+			parent.find( '.attachments-clear' ).removeClass( 'hidden' );
 		});
 
 		meta_media_frame.open();
 	});
 
-	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_remove"]', function( e ) {
+	$( document ).on( 'click', '.themeplate-file .attachments-clear', function( e ) {
 		e.preventDefault();
 
 		parent = $( this ).parents( '.themeplate-file' );
@@ -96,7 +96,7 @@ jQuery.noConflict();
 		field = '<input type="hidden" name="' + fieldname + '" value="">';
 
 		parent.find( '.preview-holder' ).html( '' ).append( field );
-		$( '#' + e.target.id ).addClass( 'hidden' );
+		$( this ).addClass( 'hidden' );
 	});
 
 	$( document ).on( 'click', '.themeplate .attachment-close', function( e ) {
@@ -118,7 +118,7 @@ jQuery.noConflict();
 		attachment.remove();
 
 		if ( ! parent.find( '.preview-holder' ).html().length ) {
-			$( '#themeplate_' + parent.attr( 'id' ) + '_remove' ).addClass( 'hidden' );
+			parent.find( '.attachments-clear' ).addClass( 'hidden' );
 		}
 
 		if ( ! parent.find( '.preview-holder' ).html().length || ! isMultiple ) {

@@ -131,7 +131,7 @@ class ThemePlate_Fields {
 						$info = wp_check_filetype( $name );
 						$type = wp_ext2type( $info['ext'] );
 						$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-						echo '<div id="file-' . $file . '" class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
+						echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 						echo '<div class="centered"><img src="' . $preview . '"/></div>';
 						echo '<div class="filename"><div>' . $name . '</div></div>';
 						echo '</div></div>';
@@ -142,11 +142,11 @@ class ThemePlate_Fields {
 				}
 				if ( $field['multiple'] ) {
 					echo '</div>';
-					echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" value="Add" />';
-					echo '<input type="button" class="button' . ( empty( $field['value'][0] ) ? ' hidden' : '' ) . '" id="themeplate_' . $field['id'] . '_remove" value="Clear" />';
+					echo '<input type="button" class="button attachment-add" value="Add" />';
+					echo '<input type="button" class="button attachments-clear' . ( empty( $field['value'][0] ) ? ' hidden' : '' ) . '" value="Clear" />';
 				} else {
 					echo '<div class="attachment placeholder">';
-					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" id="themeplate_' . $field['id'] . '_button" value="Select" />';
+					echo '<input type="button" class="button attachment-add"' . ( $field['value'] ? ' hidden' : '' ) . ' value="Select" />';
 					echo '</div>';
 					echo '</div>';
 				}
