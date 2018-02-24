@@ -146,7 +146,7 @@ class ThemePlate_Fields {
 					echo '<input type="button" class="button attachments-clear' . ( empty( $field['value'][0] ) ? ' hidden' : '' ) . '" value="Clear" />';
 				} else {
 					echo '<div class="attachment placeholder">';
-					echo '<input type="button" class="button attachment-add"' . ( $field['value'] ? ' hidden' : '' ) . ' value="Select" />';
+					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" value="Select" />';
 					echo '</div>';
 					echo '</div>';
 				}
