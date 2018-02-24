@@ -1,81 +1,81 @@
-.themeplate.form-table {
+.themeplate .form-table {
 	margin-top: 0;
 }
 
-.themeplate.form-table tr {
+.themeplate .form-table tr {
 	border-top: 1px solid #ddd;
 }
 
-.themeplate.form-table.grouped td {
+.themeplate .form-table.grouped td {
 	vertical-align: top;
 }
 
-.themeplate.form-table.grouped td:first-child {
+.themeplate .form-table.grouped td:first-child {
 	padding-left: 0;
 }
 
-.themeplate.form-table.grouped td:last-child {
+.themeplate .form-table.grouped td:last-child {
 	padding-right: 0;
 }
 
-.themeplate.form-table.grouped .one-half {
+.themeplate .form-table.grouped .one-half {
 	width: 50%;
 }
 
-.themeplate.form-table.grouped .one-third {
+.themeplate .form-table.grouped .one-third {
 	width: 33.33%;
 }
 
-.themeplate.form-table.grouped .two-third {
+.themeplate .form-table.grouped .two-third {
 	width: 66.66%;
 }
 
-.themeplate.form-table.grouped .one-fourth {
+.themeplate .form-table.grouped .one-fourth {
 	width: 25%;
 }
 
-.themeplate.form-table.grouped .three-fourth {
+.themeplate .form-table.grouped .three-fourth {
 	width: 75%;
 }
 
-.themeplate.form-table.grouped .stacked + .stacked {
+.themeplate .form-table.grouped .stacked + .stacked {
 	padding-top: 1.5em;
 }
 
-.themeplate.form-table.grouped .label {
+.themeplate .form-table.grouped .label {
 	margin-bottom: 0.5em;
 	padding-bottom: 0.5em;
 }
 
-.themeplate.form-table.grouped .label label {
+.themeplate .form-table.grouped .label label {
 	color: #23282d;
 	font-weight: 600;
 }
 
-.themeplate.form-table th span,
-.themeplate.form-table.grouped .label span {
+.themeplate .form-table th span,
+.themeplate .form-table.grouped .label span {
 	display: block;
 	padding-top: 0.5em;
 	color: #666;
 	font-weight: normal;
 }
 
-.themeplate.form-table td label + label {
+.themeplate .form-table td label + label {
 	margin-left: 1em;
 }
 
-.themeplate.form-table input[type="text"],
-.themeplate.form-table textarea,
-.themeplate.form-table select {
+.themeplate .form-table input[type="text"],
+.themeplate .form-table textarea,
+.themeplate .form-table select {
 	width: 100%;
 }
 
-.themeplate.form-table input[type="text"].wp-color-picker {
+.themeplate .form-table input[type="text"].wp-color-picker {
 	width: 65px;
 	float: left;
 }
 
-.themeplate.form-table .iris-picker {
+.themeplate .form-table .iris-picker {
 	position: absolute;
 	z-index: 1001;
 }
@@ -147,8 +147,8 @@
 	display: none;
 }
 
-.edit-tags-php .themeplate.form-table th,
-.edit-tags-php .themeplate.form-table td {
+.edit-tags-php .themeplate .form-table th,
+.edit-tags-php .themeplate .form-table td {
 	width: 100%;
 	display: block;
 	padding: 0;
@@ -194,8 +194,8 @@
 }
 
 @media screen and ( min-width: 851px ) {
-	[id $="side-sortables"] .themeplate.form-table th,
-	[id $="side-sortables"] .themeplate.form-table td {
+	[id $="side-sortables"] .themeplate .form-table th,
+	[id $="side-sortables"] .themeplate .form-table td {
 		width: 100%;
 		display: block;
 		padding: 0;
@@ -204,30 +204,30 @@
 }
 
 @media screen and ( max-width: 782px ) {
-	.themeplate.form-table th {
+	.themeplate .form-table th {
 		margin-bottom: 0.5em;
 		padding-bottom: 0.5em;
 	}
 
-	.themeplate.form-table.grouped .label {
+	.themeplate .form-table.grouped .label {
 		padding-top: 6px;
 	}
 
-	.themeplate.form-table.grouped td {
+	.themeplate .form-table.grouped td {
 		width: 100% !important;
 		padding-right: 0;
 	}
 
-	.themeplate.form-table.grouped .stacked + .stacked {
+	.themeplate .form-table.grouped .stacked + .stacked {
 		margin-top: 6px;
 		padding-top: 0;
 	}
 
-	.themeplate.form-table .wp-picker-container {
+	.themeplate .form-table .wp-picker-container {
 		width: 100%;
 	}
 
-	#wpbody .themeplate.form-table select[multiple] {
+	#wpbody .themeplate .form-table select[multiple] {
 		height: auto;
 	}
 }
