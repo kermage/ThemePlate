@@ -60,7 +60,7 @@
 	font-weight: normal;
 }
 
-.themeplate .form-table td label + label {
+.themeplate .form-table label + label {
 	margin-left: 1em;
 }
 
@@ -75,7 +75,7 @@
 	float: left;
 }
 
-.themeplate .form-table .iris-picker {
+.themeplate .iris-picker {
 	position: absolute;
 	z-index: 1001;
 }
@@ -147,8 +147,8 @@
 	display: none;
 }
 
-.edit-tags-php .themeplate .form-table th,
-.edit-tags-php .themeplate .form-table td {
+.edit-tags-php .themeplate th,
+.edit-tags-php .themeplate td {
 	width: 100%;
 	display: block;
 	padding: 0;
