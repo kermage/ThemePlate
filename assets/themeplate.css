@@ -81,17 +81,16 @@
 }
 
 .themeplate.form-table .preview-holder {
+	position: relative;
 	width: 144px;
 	min-height: 144px;
 	float: left;
-	margin-right: 0.5em;
 	border: 1px solid #ddd;
 }
 
 .themeplate.form-table .preview-holder.multiple {
 	width: 100%;
 	min-height: 72px;
-	margin-right: 0;
 	margin-bottom: 0.5em;
 }
 
@@ -101,6 +100,13 @@
 
 .themeplate.form-table .preview-holder.multiple .attachment {
 	width: 25%;
+}
+
+.themeplate.form-table .preview-holder .attachment-add {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
 }
 
 .themeplate.form-table .attachment .attachment-close {

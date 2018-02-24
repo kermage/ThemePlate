@@ -60,8 +60,7 @@ jQuery.noConflict();
 			selection = meta_media_frame.state().get( 'selection' ).toJSON();
 
 			if ( ! isMultiple ) {
-				$( '#' + e.target.id.replace( '_button', '_preview' ) ).html( '' );
-				$( '#' + e.target.id ).val( 'Re-select' );
+				$( '#' + e.target.id ).hide();
 			}
 
 			selection.forEach( function( media ) {
@@ -100,6 +99,10 @@ jQuery.noConflict();
 
 	$( document ).on( 'click', '.themeplate .attachment-close', function( e ) {
 		e.preventDefault();
+
+		if ( ! $( this ).parents( '.preview-holder' ).hasClass( 'multiple' ) ) {
+			$( this ).parents( '.attachment' ).siblings().show();
+		}
 
 		$( this ).parents( '.attachment' ).remove();
 	});

@@ -139,9 +139,14 @@ class ThemePlate_Fields {
 						echo '</div>';
 					}
 				}
+				if ( ! $field['multiple'] ) {
+					echo '<input type="button" class="button attachment-add" id="themeplate_' . $field['id'] . '_button" value="Add" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				}
 				echo '</div>';
-				echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" ' . ( $field['multiple'] ? 'multiple value="Add"' : ( $field['value'] ? 'value="Re-select"' : 'value="Select"' ) ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
-				echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Remove" ' . ( $field['multiple'] ? 'multiple' : '' ) . ' data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				if ( $field['multiple'] ) {
+					echo '<input type="button" class="button" id="themeplate_' . $field['id'] . '_button" multiple value="Add" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+					echo '<input type="' . ( $field['value'] ? 'button' : 'hidden' ) . '" class="button" id="themeplate_' . $field['id'] . '_remove" value="Clear" multiple data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+				}
 				break;
 
 			case 'date':
