@@ -65,6 +65,8 @@ jQuery.noConflict();
 				parent.find( '.attachment-add' ).addClass( 'hidden' );
 			}
 
+			parent.find( '> input[type="hidden"]' ).remove();
+
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
@@ -95,7 +97,8 @@ jQuery.noConflict();
 		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
 		field = '<input type="hidden" name="' + fieldname + '" value="">';
 
-		parent.find( '.preview-holder' ).html( '' ).append( field );
+		parent.find( '.preview-holder' ).html( '' )
+		parent.append( field );
 		$( this ).addClass( 'hidden' );
 	});
 
@@ -124,7 +127,7 @@ jQuery.noConflict();
 		if ( ! parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
 			fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
 			field = '<input type="hidden" name="' + fieldname + '" value="">';
-			parent.find( '.preview-holder' ).append( field );
+			parent.append( field );
 		}
 	});
 
