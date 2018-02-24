@@ -65,7 +65,7 @@ jQuery.noConflict();
 				parent.find( '.attachment-add' ).addClass( 'hidden' );
 			}
 
-			parent.find( '> input[type="hidden"]' ).remove();
+			parent.find( '.hidden.placeholder' ).remove();
 
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
@@ -95,7 +95,7 @@ jQuery.noConflict();
 		}
 
 		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
-		field = '<input type="hidden" name="' + fieldname + '" value="">';
+		field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 
 		parent.find( '.preview-holder' ).html( '' )
 		parent.append( field );
@@ -126,7 +126,7 @@ jQuery.noConflict();
 
 		if ( ! parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
 			fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
-			field = '<input type="hidden" name="' + fieldname + '" value="">';
+			field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 			parent.append( field );
 		}
 	});
