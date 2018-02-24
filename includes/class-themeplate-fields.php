@@ -140,7 +140,7 @@ class ThemePlate_Fields {
 					}
 				}
 				if ( ! $field['multiple'] ) {
-					echo '<input type="button" class="button attachment-add" id="themeplate_' . $field['id'] . '_button" value="Select" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
+					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" id="themeplate_' . $field['id'] . '_button" value="Select" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '" />';
 				}
 				echo '</div>';
 				if ( $field['multiple'] ) {
