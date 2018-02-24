@@ -128,7 +128,7 @@ jQuery.noConflict();
 		}
 	});
 
-	$( 'div[id^="themeplate_"][id $="_preview"].multiple' ).sortable( {
+	$( '.themeplate-file.multiple' ).sortable( {
 		items: '.attachment',
 		opacity: 0.75,
 		update: function( event, ui ) {
