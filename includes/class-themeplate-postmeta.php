@@ -122,9 +122,9 @@ class ThemePlate_PostMeta {
 		$meta_box = wp_parse_args( $meta_box, $defaults );
 
 		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-		$id = $meta_box['id'];
+		$id = 'themeplate_' . $meta_box['id'];
 		if ( in_array( 'post', (array) $meta_box['screen'] ) ) {
-			$id = 'themeplate_' . $meta_box['id'] . '_post';
+			$id .= '_post';
 		}
 
 		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );

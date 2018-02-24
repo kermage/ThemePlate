@@ -5,6 +5,8 @@ jQuery.noConflict();
 	'use strict';
 
 
+	$( 'div[id^="themeplate_"].postbox' ).addClass( 'themeplate' );
+
 	var post_formats = $( 'input[name=post_format]' ).map( function() {
 		return this.value
 	}).get()
