@@ -39,7 +39,7 @@ class ThemePlate_PostMeta {
 
 		$meta_box = $this->meta_box;
 
-		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'];
+		$post_id = get_the_ID();
 		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
 		$taxonomies = get_object_taxonomies( get_post_type() );
 		$allterms = array();
