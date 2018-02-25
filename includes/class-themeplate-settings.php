@@ -226,7 +226,8 @@ class ThemePlate_Settings {
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
 
 		$default = isset( $field['std'] ) ? $field['std'] : '';
-		$stored = get_option( $field['prefix'] )[$field['id']];
+		$options = get_option( $field['prefix'] );
+		$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
 		$field['value'] = $stored ? $stored : $default;
 
 		ThemePlate_Fields::instance()->render( $field );
