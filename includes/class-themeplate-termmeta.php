@@ -118,7 +118,7 @@ class ThemePlate_TermMeta {
 			echo '<p>' . $meta_box['description'] . '</p>';
 		}
 
-		echo '<table class="themeplate form-table">';
+		echo '<table class="form-table">';
 
 		$grouped = false;
 		$stacking = false;
@@ -135,7 +135,7 @@ class ThemePlate_TermMeta {
 			$field['value'] = $stored ? $stored : $default;
 
 			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
-				echo '</table><table class="themeplate form-table grouped"><tr>';
+				echo '</table><table class="form-table grouped"><tr>';
 				$grouped = true;
 			} elseif ( ! $grouped ) {
 				echo '<tr>';
@@ -185,7 +185,7 @@ class ThemePlate_TermMeta {
 			}
 
 			if ( isset( $field['group'] ) && $field['group'] == 'end' && $grouped ) {
-				echo '</tr></table><table class="themeplate form-table">';
+				echo '</tr></table><table class="form-table">';
 				$grouped = false;
 			} elseif ( ! $grouped ) {
 				echo '</tr>';

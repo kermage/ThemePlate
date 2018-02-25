@@ -135,7 +135,7 @@ class ThemePlate_Settings {
 				continue;
 			}
 
-			echo '<table class="themeplate form-table">';
+			echo '<table class="form-table">';
 			self::fields( $page, $section['id'] );
 			echo '</table>';
 			echo '</div>';
@@ -160,7 +160,7 @@ class ThemePlate_Settings {
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
 			if ( isset( $field['args']['group'] ) && $field['args']['group'] == 'start' && ! $grouped ) {
-				echo '</table><table class="themeplate form-table grouped"><tr>';
+				echo '</table><table class="form-table grouped"><tr>';
 				$grouped = true;
 			} elseif ( ! $grouped ) {
 				echo '<tr>';
@@ -211,7 +211,7 @@ class ThemePlate_Settings {
 			}
 
 			if ( isset( $field['args']['group'] ) && $field['args']['group'] == 'end' && $grouped ) {
-				echo '</tr></table><table class="themeplate form-table">';
+				echo '</tr></table><table class="form-table">';
 				$grouped = false;
 			} elseif ( ! $grouped ) {
 				echo '</tr>';
