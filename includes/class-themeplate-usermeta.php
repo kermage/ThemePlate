@@ -65,7 +65,7 @@ class ThemePlate_UserMeta {
 						if ( $show_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $show_on['value'] ) ) {
 							$check = true;
 						}
-						if ( $show_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $show_on['value'] ) ) {
+						if ( $show_on['key'] == 'capability' && array_intersect( array_keys( (array) $user->allcaps ), (array) $show_on['value'] ) ) {
 							$check = true;
 						}
 					}
@@ -91,7 +91,7 @@ class ThemePlate_UserMeta {
 						if ( $hide_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $hide_on['value'] ) ) {
 							$check = false;
 						}
-						if ( $hide_on['key'] == 'capability' && array_intersect( (array) $user->allcaps, (array) $hide_on['value'] ) ) {
+						if ( $hide_on['key'] == 'capability' && array_intersect( array_keys( (array) $user->allcaps ), (array) $hide_on['value'] ) ) {
 							$check = false;
 						}
 					}
