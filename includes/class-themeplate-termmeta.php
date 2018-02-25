@@ -131,7 +131,7 @@ class ThemePlate_TermMeta {
 			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = get_term_meta( $tag->term_id, $field['id'], true );
+			$stored = is_object( $tag ) ? get_term_meta( $tag->term_id, $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
 
 			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
