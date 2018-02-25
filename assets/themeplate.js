@@ -61,7 +61,9 @@ jQuery.noConflict();
 		meta_media_frame.on( 'select', function() {
 			selection = meta_media_frame.state().get( 'selection' ).toJSON();
 
-			if ( ! isMultiple ) {
+			if ( isMultiple ) {
+				parent.find( '.attachments-clear' ).removeClass( 'hidden' );
+			} else {
 				parent.find( '.attachment-add' ).addClass( 'hidden' );
 			}
 
@@ -77,8 +79,6 @@ jQuery.noConflict();
 				preview = '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
 				parent.find( '.preview-holder' ).append( preview );
 			});
-
-			parent.find( '.attachments-clear' ).removeClass( 'hidden' );
 		});
 
 		meta_media_frame.open();
