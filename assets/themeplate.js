@@ -102,7 +102,7 @@ jQuery.noConflict();
 		$( this ).addClass( 'hidden' );
 	});
 
-	$( document ).on( 'click', '.themeplate .attachment-close', function( e ) {
+	$( document ).on( 'click', '.themeplate-file .attachment-close', function( e ) {
 		e.preventDefault();
 
 		parent = $( this ).parents( '.themeplate-file' );
