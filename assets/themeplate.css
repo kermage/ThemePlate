@@ -162,6 +162,7 @@
 .edit-tags-php .postbox .hndle,
 .term-php .postbox .hndle,
 .profile-php .postbox .hndle,
+.user-new-php .postbox .hndle,
 .user-edit-php .postbox .hndle {
 	font-size: 14px;
 	padding: 8px 12px;
@@ -172,6 +173,7 @@
 .edit-tags-php .postbox .toggle-indicator::before,
 .term-php .postbox .toggle-indicator::before,
 .profile-php .postbox .toggle-indicator::before,
+.user-new-php .postbox .toggle-indicator::before,
 .user-edit-php .postbox .toggle-indicator::before {
 	content: "\f142";
 	display: inline-block;
