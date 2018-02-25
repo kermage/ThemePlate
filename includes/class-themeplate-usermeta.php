@@ -43,6 +43,7 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->meta_box;
 
+		if ( is_object( $user ) ) :
 		$first = true;
 		$check = true;
 
@@ -104,6 +105,7 @@ class ThemePlate_UserMeta {
 		if ( ! $check ) {
 			return;
 		}
+		endif;
 
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
@@ -133,7 +135,7 @@ class ThemePlate_UserMeta {
 			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = get_user_meta( $user->ID, $field['id'], true );
+			$stored = is_object( $user ) ? get_user_meta( $user->ID, $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
 
 			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
