@@ -31,8 +31,10 @@ class ThemePlate_UserMeta {
 
 		add_action( 'show_user_profile', array( $this, 'create' ) );
 		add_action( 'edit_user_profile', array( $this, 'create' ) );
+		add_action( 'user_new_form', array( $this, 'create' ) );
 		add_action( 'personal_options_update', array( $this, 'save' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'save' ) );
+		add_action( 'user_register', array( $this, 'save' ) );
 
 	}
 
