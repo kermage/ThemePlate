@@ -51,6 +51,7 @@ class ThemePlate_TermMeta {
 
 		$meta_box = $this->meta_box;
 
+		if ( is_object( $tag ) ) :
 		$first = true;
 		$check = true;
 
@@ -100,6 +101,7 @@ class ThemePlate_TermMeta {
 		if ( ! $check ) {
 			return;
 		}
+		endif;
 
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
