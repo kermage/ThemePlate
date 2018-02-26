@@ -145,7 +145,7 @@ class ThemePlate_UserMeta {
 				echo '<tr>';
 			}
 
-			$desc = isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
+			$desc = ! empty( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
 			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {

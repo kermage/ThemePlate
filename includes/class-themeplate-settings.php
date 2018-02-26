@@ -167,7 +167,7 @@ class ThemePlate_Settings {
 			}
 
 
-			$desc = isset( $field['args']['desc'] ) ? '<span>' . $field['args']['desc'] . '</span>' : '';
+			$desc = ! empty( $field['args']['desc'] ) ? '<span>' . $field['args']['desc'] . '</span>' : '';
 			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
