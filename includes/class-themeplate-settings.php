@@ -128,7 +128,7 @@ class ThemePlate_Settings {
 			echo '<div class="inside">';
 
 			if ( $section['callback'] ) {
-				echo '<p>' . $section['callback'] . '</p>';
+				echo '<p class="description">' . $section['callback'] . '</p>';
 			}
 
 			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) ) {
@@ -167,8 +167,8 @@ class ThemePlate_Settings {
 			}
 
 
-			$desc = ! empty( $field['args']['desc'] ) ? '<span>' . $field['args']['desc'] . '</span>' : '';
-			$label = '<label for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
+			$desc = ! empty( $field['args']['desc'] ) ? '<span class="description">' . $field['args']['desc'] . '</span>' : '';
+			$label = '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
@@ -188,7 +188,7 @@ class ThemePlate_Settings {
 					$stacking = true;
 				}
 
-				echo '<div class="label">' . $label . '</div>';
+				echo '<div>' . $label . '</div>';
 				call_user_func( $field['callback'], $field['args'] );
 
 				if ( $stacking ) {

@@ -137,7 +137,7 @@ class ThemePlate_PostMeta {
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		if ( ! empty( $meta_box['args']['description'] ) ) {
-			echo '<p>' . $meta_box['args']['description'] . '</p>';
+			echo '<p class="description">' . $meta_box['args']['description'] . '</p>';
 		}
 
 		echo '<table class="form-table">';
@@ -163,8 +163,8 @@ class ThemePlate_PostMeta {
 				echo '<tr>';
 			}
 
-			$desc = ! empty( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
-			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
+			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';
+			$label = '<label class="label" for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
@@ -184,7 +184,7 @@ class ThemePlate_PostMeta {
 					$stacking = true;
 				}
 
-				echo '<div class="label">' . $label . '</div>';
+				echo '<div>' . $label . '</div>';
 				ThemePlate_Fields::instance()->render( $field );
 
 				if ( $stacking ) {

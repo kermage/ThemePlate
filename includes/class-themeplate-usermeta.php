@@ -119,7 +119,7 @@ class ThemePlate_UserMeta {
 		echo '<div class="inside">';
 
 		if ( ! empty( $meta_box['description'] ) ) {
-			echo '<p>' . $meta_box['description'] . '</p>';
+			echo '<p class="description">' . $meta_box['description'] . '</p>';
 		}
 
 		echo '<table class="form-table">';
@@ -145,8 +145,8 @@ class ThemePlate_UserMeta {
 				echo '<tr>';
 			}
 
-			$desc = ! empty( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '';
-			$label = '<label for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
+			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';
+			$label = '<label class="label" for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
 			if ( $grouped ) {
 				if ( ! $stacking ) {
@@ -166,7 +166,7 @@ class ThemePlate_UserMeta {
 					$stacking = true;
 				}
 
-				echo '<div class="label">' . $label . '</div>';
+				echo '<div>' . $label . '</div>';
 				ThemePlate_Fields::instance()->render( $field );
 
 				if ( $stacking ) {
