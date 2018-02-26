@@ -1,3 +1,22 @@
+.themeplate .label {
+	display: block;
+}
+
+.themeplate .label .description {
+	padding-top: 0.5em;
+}
+
+.themeplate .description {
+	display: block;
+	color: #666;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.themeplate .inside > .description {
+	margin: 1em 0;
+}
+
 .themeplate .form-table {
 	margin-top: 0;
 }
@@ -34,19 +53,8 @@
 .themeplate .form-table.grouped .label {
 	margin-bottom: 0.5em;
 	padding-bottom: 0.5em;
-}
-
-.themeplate .form-table.grouped .label label {
 	color: #23282d;
 	font-weight: 600;
-}
-
-.themeplate .form-table th span,
-.themeplate .form-table.grouped .label span {
-	display: block;
-	padding-top: 0.5em;
-	color: #666;
-	font-weight: normal;
 }
 
 .themeplate .form-table label + label {
