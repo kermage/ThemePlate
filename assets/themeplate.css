@@ -73,11 +73,6 @@
 	width: 100%;
 }
 
-.themeplate input[type="text"].wp-color-picker {
-	width: 65px;
-	float: left;
-}
-
 .themeplate .iris-picker {
 	position: absolute;
 	z-index: 1001;
@@ -232,13 +227,5 @@
 	.themeplate .grouped .stacked + .stacked {
 		margin-top: 6px;
 		padding-top: 0;
-	}
-
-	.themeplate .wp-picker-container {
-		width: 100%;
-	}
-
-	#wpbody .themeplate select[multiple] {
-		height: auto;
 	}
 }
