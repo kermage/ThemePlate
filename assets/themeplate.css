@@ -23,57 +23,57 @@
 	margin-top: 0;
 }
 
-.themeplate .form-table tr {
+.themeplate tr {
 	border-top: 1px solid #ddd;
 }
 
-.themeplate .form-table tr:first-of-type {
+.themeplate tr:first-of-type {
 	border-top: 0;
 }
 
-.themeplate .form-table.grouped {
+.themeplate .grouped {
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
 
-.themeplate .form-table.grouped + .form-table {
+.themeplate .grouped + .form-table {
 	margin-top: -2px;
 }
 
-.themeplate .form-table.grouped td {
+.themeplate .grouped td {
 	vertical-align: top;
 }
 
-.themeplate .form-table.grouped td:first-child {
+.themeplate .grouped td:first-child {
 	padding-left: 0;
 }
 
-.themeplate .form-table.grouped td:last-child {
+.themeplate .grouped td:last-child {
 	padding-right: 0;
 }
 
-.themeplate .form-table.grouped .stacked + .stacked {
+.themeplate .grouped .stacked + .stacked {
 	padding-top: 1.5em;
 }
 
-.themeplate .form-table.grouped .label {
+.themeplate .grouped .label {
 	margin-bottom: 0.5em;
 	padding-bottom: 0.5em;
 	color: #23282d;
 	font-weight: 600;
 }
 
-.themeplate .form-table label + label {
+.themeplate label + label {
 	margin-left: 1em;
 }
 
-.themeplate .form-table input[type="text"],
-.themeplate .form-table textarea,
-.themeplate .form-table select {
+.themeplate input[type="text"],
+.themeplate textarea,
+.themeplate select {
 	width: 100%;
 }
 
-.themeplate .form-table input[type="text"].wp-color-picker {
+.themeplate input[type="text"].wp-color-picker {
 	width: 65px;
 	float: left;
 }
@@ -185,60 +185,60 @@
 }
 
 @media screen and ( min-width: 851px ) {
-	[id $="side-sortables"] .themeplate .form-table th,
-	[id $="side-sortables"] .themeplate .form-table td {
+	[id $="side-sortables"] .themeplate th,
+	[id $="side-sortables"] .themeplate td {
 		width: 100%;
 		display: block;
 		padding: 0;
 		margin: 1em 0;
 	}
 
-	.themeplate .form-table.grouped .one-half {
+	.themeplate .grouped .one-half {
 		width: 50%;
 	}
 
-	.themeplate .form-table.grouped .one-third {
+	.themeplate .grouped .one-third {
 		width: 33.33%;
 	}
 
-	.themeplate .form-table.grouped .two-third {
+	.themeplate .grouped .two-third {
 		width: 66.66%;
 	}
 
-	.themeplate .form-table.grouped .one-fourth {
+	.themeplate .grouped .one-fourth {
 		width: 25%;
 	}
 
-	.themeplate .form-table.grouped .three-fourth {
+	.themeplate .grouped .three-fourth {
 		width: 75%;
 	}
 }
 
 @media screen and ( max-width: 782px ) {
-	.themeplate .form-table th {
+	.themeplate th {
 		margin-bottom: 0.5em;
 		padding-bottom: 0.5em;
 	}
 
-	.themeplate .form-table.grouped .label {
+	.themeplate .grouped .label {
 		padding-top: 6px;
 	}
 
-	.themeplate .form-table.grouped td {
+	.themeplate .grouped td {
 		width: 100% !important;
 		padding-right: 0;
 	}
 
-	.themeplate .form-table.grouped .stacked + .stacked {
+	.themeplate .grouped .stacked + .stacked {
 		margin-top: 6px;
 		padding-top: 0;
 	}
 
-	.themeplate .form-table .wp-picker-container {
+	.themeplate .wp-picker-container {
 		width: 100%;
 	}
 
-	#wpbody .themeplate .form-table select[multiple] {
+	#wpbody .themeplate select[multiple] {
 		height: auto;
 	}
 }
