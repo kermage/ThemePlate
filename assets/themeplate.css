@@ -14,7 +14,9 @@
 }
 
 .themeplate .inside > .description {
-	margin: 1em 0;
+	margin: 1em 0 0;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #ddd;
 }
 
 .themeplate .form-table {
@@ -23,6 +25,10 @@
 
 .themeplate .form-table tr {
 	border-top: 1px solid #ddd;
+}
+
+.themeplate .form-table tr:first-of-type {
+	border-top: 0;
 }
 
 .themeplate .form-table.grouped {
