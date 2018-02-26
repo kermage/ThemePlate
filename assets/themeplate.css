@@ -159,36 +159,22 @@
 }
 
 #after_title-sortables,
-.edit-tags-php .postbox,
-.term-php .postbox,
-.profile-php .postbox,
-.user-edit-php .postbox {
+.themeplate.postbox {
 	margin-top: 20px;
 }
 
-.edit-tags-php .postbox .inside,
-.term-php .postbox .inside,
-.profile-php .postbox .inside,
-.user-edit-php .postbox .inside {
+.themeplate .inside {
 	margin: 6px 0 0;
 }
 
-.edit-tags-php .postbox .hndle,
-.term-php .postbox .hndle,
-.profile-php .postbox .hndle,
-.user-new-php .postbox .hndle,
-.user-edit-php .postbox .hndle {
+.themeplate .hndle {
 	font-size: 14px;
 	padding: 8px 12px;
 	margin: 0;
 	line-height: 1.4;
 }
 
-.edit-tags-php .postbox .toggle-indicator::before,
-.term-php .postbox .toggle-indicator::before,
-.profile-php .postbox .toggle-indicator::before,
-.user-new-php .postbox .toggle-indicator::before,
-.user-edit-php .postbox .toggle-indicator::before {
+.themeplate .toggle-indicator::before {
 	content: "\f142";
 	display: inline-block;
 	font: 400 20px/1 dashicons;
