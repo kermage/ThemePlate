@@ -210,22 +210,13 @@
 }
 
 @media screen and ( max-width: 782px ) {
-	.themeplate th {
-		margin-bottom: 0.5em;
-		padding-bottom: 0.5em;
+	.themeplate th,
+	.themeplate td {
+		padding: 0;
+		margin: 1.5em 0;
 	}
 
-	.themeplate .grouped .label {
-		padding-top: 6px;
-	}
-
-	.themeplate .grouped td {
-		width: 100% !important;
-		padding-right: 0;
-	}
-
-	.themeplate .grouped .stacked + .stacked {
-		margin-top: 6px;
-		padding-top: 0;
+	.themeplate .form-table .description {
+		display: block;
 	}
 }
