@@ -189,7 +189,7 @@ class ThemePlate_Fields {
 					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
 				if ( $list == 'post' ) {
-					$pages = get_posts( array( 'post_type' => $field['options'] ) );
+					$pages = get_posts( array( 'post_type' => $field['options'], 'numberposts' => -1 ) );
 				} else {
 					$pages = get_pages( array( 'post_type' => $field['options'] ) );
 				}
