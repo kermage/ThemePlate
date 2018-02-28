@@ -78,6 +78,12 @@
 	z-index: 1001;
 }
 
+.themeplate-file::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
 .themeplate-file .preview-holder {
 	position: relative;
 	min-width: 144px;
