@@ -91,11 +91,13 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'radio' :
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+					echo '<fieldset>';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
 						echo ( $list ? '<br>' : '' );
 					}
+					echo '</fieldset>';
 				}
 				break;
 
@@ -104,6 +106,7 @@ class ThemePlate_Fields {
 			case 'checkbox' :
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+					echo '<fieldset>';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
@@ -113,6 +116,7 @@ class ThemePlate_Fields {
 						echo ' />' . $option . '</label>';
 						echo ( $list ? '<br>' : '' );
 					}
+					echo '</fieldset>';
 				} else {
 					echo '<input type="checkbox" id="' . $field['id'] . '" name="' . $field_name . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
 				}
