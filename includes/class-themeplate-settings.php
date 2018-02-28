@@ -40,11 +40,13 @@ class ThemePlate_Settings {
 
 		$page = ThemePlate()->key . '-' . ( isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
+		$description = isset( $param['description'] ) ? $param['description'] : '';
+		$style = isset( $param['style'] ) ? $param['style'] : '';
 
 		add_settings_section(
 			$param['id'],
 			$param['title'],
-			isset( $param['description'] ) ? $param['description'] : '',
+			array( 'description' => $description, 'style' => $style ),
 			$page
 		);
 
@@ -127,15 +129,17 @@ class ThemePlate_Settings {
 			echo '<h2 class="hndle"><span>' . $section['title'] . '</span></h2>';
 			echo '<div class="inside">';
 
-			if ( $section['callback'] ) {
-				echo '<p class="description">' . $section['callback'] . '</p>';
+			if ( $section['callback']['description'] ) {
+				echo '<p class="description">' . $section['callback']['description'] . '</p>';
 			}
 
 			if ( ! isset( $wp_settings_fields ) || !isset( $wp_settings_fields[$page] ) || !isset( $wp_settings_fields[$page][$section['id']] ) ) {
 				continue;
 			}
 
-			echo '<table class="form-table">';
+			$style = isset( $section['callback']['style'] ) ? $section['callback']['style'] : '';
+
+			echo '<table class="form-table ' . $style . '">';
 			self::fields( $page, $section['id'] );
 			echo '</table>';
 			echo '</div>';
