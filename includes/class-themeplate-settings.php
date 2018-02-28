@@ -40,13 +40,11 @@ class ThemePlate_Settings {
 
 		$page = ThemePlate()->key . '-' . ( isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug );
 		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
-		$description = isset( $param['description'] ) ? $param['description'] : '';
-		$style = isset( $param['style'] ) ? $param['style'] : '';
 
 		add_settings_section(
 			$param['id'],
 			$param['title'],
-			array( 'description' => $description, 'style' => $style ),
+			$param,
 			$page
 		);
 
