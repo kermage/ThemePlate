@@ -36,6 +36,14 @@
 	border-bottom: 1px solid #ddd;
 }
 
+.themeplate .grouped:first-of-type {
+	border-top: 0;
+}
+
+.themeplate .grouped:last-of-type {
+	border-bottom: 0;
+}
+
 .themeplate .grouped + .form-table {
 	margin-top: -2px;
 }
