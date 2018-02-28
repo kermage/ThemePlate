@@ -140,7 +140,9 @@ class ThemePlate_PostMeta {
 			echo '<p class="description">' . $meta_box['args']['description'] . '</p>';
 		}
 
-		echo '<table class="form-table">';
+		$style = isset( $meta_box['args']['style'] ) ? $meta_box['args']['style'] : '';
+
+		echo '<table class="form-table ' . $style . '">';
 
 		$grouped = false;
 		$stacking = false;
