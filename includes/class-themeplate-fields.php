@@ -94,8 +94,9 @@ class ThemePlate_Fields {
 					echo '<fieldset>';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
+						echo '<' . ( $list ? 'p' : 'span' ) . '>';
 						echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
-						echo ( $list ? '<br>' : '' );
+						echo '</' . ( $list ? 'p' : 'span' ) . '>';
 					}
 					echo '</fieldset>';
 				}
@@ -109,12 +110,13 @@ class ThemePlate_Fields {
 					echo '<fieldset>';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
+						echo '<' . ( $list ? 'p' : 'span' ) . '>';
 						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
 						if ( in_array( $value, (array) $field['value'] ) ) {
 							echo ' checked="checked"';
 						}
 						echo ' />' . $option . '</label>';
-						echo ( $list ? '<br>' : '' );
+						echo '</' . ( $list ? 'p' : 'span' ) . '>';
 					}
 					echo '</fieldset>';
 				} else {
