@@ -193,6 +193,12 @@
 	text-decoration: none!important;
 }
 
+.themeplate.seamless {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate th,
 	[id $="side-sortables"] .themeplate td {
