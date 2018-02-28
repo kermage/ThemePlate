@@ -118,7 +118,9 @@ class ThemePlate_TermMeta {
 			echo '<p class="description">' . $meta_box['description'] . '</p>';
 		}
 
-		echo '<table class="form-table">';
+		$style = isset( $meta_box['style'] ) ? $meta_box['style'] : '';
+
+		echo '<table class="form-table ' . $style . '">';
 
 		$grouped = false;
 		$stacking = false;
