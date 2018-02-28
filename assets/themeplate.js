@@ -7,6 +7,9 @@ jQuery.noConflict();
 
 	$( 'div[id^="themeplate_"].postbox' ).addClass( 'themeplate' );
 
+	$( '.themeplate .form-table:empty' ).remove();
+
+
 	var post_formats = $( 'input[name=post_format]' ).map( function() {
 		return this.value
 	}).get()
