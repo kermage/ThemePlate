@@ -41,7 +41,7 @@ class ThemePlate_CPT {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
-		$args = $param['args'];
+		$args = isset( $param['args'] ) ? $param['args'] : array();
 
 		$labels = array(
 			'name'                  => $plural,
@@ -88,7 +88,7 @@ class ThemePlate_CPT {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
-		$args = $param['args'];
+		$args = isset( $param['args'] ) ? $param['args'] : array();
 
 		$labels = array(
 			'name'                       => $plural,
