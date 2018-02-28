@@ -71,7 +71,7 @@
 	font-weight: 600;
 }
 
-.themeplate label + label {
+.themeplate fieldset span + span {
 	margin-left: 1em;
 }
 
