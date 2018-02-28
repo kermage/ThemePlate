@@ -127,7 +127,7 @@ class ThemePlate_Settings {
 			echo '<h2 class="hndle"><span>' . $section['title'] . '</span></h2>';
 			echo '<div class="inside">';
 
-			if ( isset( $section['callback']['description'] ) ) {
+			if ( ! empty( $section['callback']['description'] ) ) {
 				echo '<p class="description">' . $section['callback']['description'] . '</p>';
 			}
 
