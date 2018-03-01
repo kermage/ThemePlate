@@ -73,6 +73,9 @@ class ThemePlate_TermMeta {
 						if ( $show_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $show_on['value'] ) ) {
 							$check = true;
 						}
+						if ( $show_on['key'] == 'parent' && array_intersect( (array) $tag->parent, (array) $show_on['value'] ) ) {
+							$check = true;
+						}
 					}
 				}
 			}
@@ -91,6 +94,9 @@ class ThemePlate_TermMeta {
 
 					foreach ( (array) $value as $hide_on ) {
 						if ( $hide_on['key'] == 'id' && array_intersect( (array) $tag->term_id, (array) $hide_on['value'] ) ) {
+							$check = false;
+						}
+						if ( $hide_on['key'] == 'parent' && array_intersect( (array) $tag->parent, (array) $hide_on['value'] ) ) {
 							$check = false;
 						}
 					}
