@@ -70,7 +70,7 @@ class ThemePlate_Fields {
 				if ( $field['multiple'] && $field['value'] ) {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
-						$value = ( $seq ? $value - 1 : $value );
+						$value = ( $seq ? (int) $value - 1 : $value );
 						$ordered[$value] = $field['options'][$value];
 						unset( $field['options'][$value] );
 					}
