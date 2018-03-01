@@ -122,6 +122,12 @@ class ThemePlate {
 
 	public function scripts_styles() {
 
+		$screen = get_current_screen()->base;
+
+		if ( $screen != 'post' && $screen != 'edit-tags' && $screen != 'term' && $screen != 'user' && $screen != 'profile' ) {
+			return;
+		}
+
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker');
 		wp_enqueue_style( 'themeplate-style', TP_URL . 'assets/themeplate.css', array(), TP_VERSION, false );
