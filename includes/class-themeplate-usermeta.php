@@ -43,9 +43,10 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->meta_box;
 
+		$check = true;
+
 		if ( is_object( $user ) ) :
 		$first = true;
-		$check = true;
 
 		foreach ( $meta_box as $key => $value ) {
 			if ( $key == 'show_on' ) {
@@ -101,11 +102,13 @@ class ThemePlate_UserMeta {
 				}
 			}
 		}
+		elseif ( isset( $meta_box['show_on'] ) || isset( $meta_box['hide_on'] ) ) :
+			$check = false;
+		endif;
 
 		if ( ! $check ) {
 			return;
 		}
-		endif;
 
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
