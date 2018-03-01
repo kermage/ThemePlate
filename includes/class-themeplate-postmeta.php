@@ -137,7 +137,7 @@ class ThemePlate_PostMeta {
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		if ( isset( $meta_box['args']['show_on'] ) ) {
-			$show_on = $meta_box['args']['show_on']['value'];
+			$show_on = json_encode( $meta_box['args']['show_on']['value'] );
 			echo '<div class="themeplate-show" data-template="' . esc_attr( $show_on ) . '"></div>';
 		}
 

@@ -24,7 +24,7 @@
 		var current = $pageTemplate.val();
 		current = current.substr( current.lastIndexOf( '/' ) + 1 );
 
-		if ( current == value ) {
+		if ( $.inArray( current, value ) > -1 ) {
 			$metabox.show();
 		} else {
 			$metabox.hide();
