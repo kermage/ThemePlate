@@ -141,6 +141,11 @@ class ThemePlate_PostMeta {
 			echo '<div class="themeplate-show" data-template="' . esc_attr( $show_on ) . '"></div>';
 		}
 
+		if ( isset( $meta_box['args']['hide_on'] ) ) {
+			$hide_on = json_encode( $meta_box['args']['hide_on']['value'] );
+			echo '<div class="themeplate-hide" data-template="' . esc_attr( $hide_on ) . '"></div>';
+		}
+
 		if ( ! empty( $meta_box['args']['description'] ) ) {
 			echo '<p class="description">' . $meta_box['args']['description'] . '</p>';
 		}
