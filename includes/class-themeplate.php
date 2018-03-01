@@ -122,9 +122,16 @@ class ThemePlate {
 
 	public function scripts_styles() {
 
-		$screen = get_current_screen()->base;
+		$screen = get_current_screen();
+		$wanted_base = array( 'post', 'edit-tags', 'term', 'user', 'profile' );
+		$wanted_id = array_map(
+			function( $value ) {
+				return sanitize_title( $this->title ) . '_page_' . $this->key . '-' . $value;
+			}, array_keys( $this->pages )
+		);
+		array_push( $wanted_id, 'toplevel_page_' . $this->key . '-' . $this->slug );
 
-		if ( $screen != 'post' && $screen != 'edit-tags' && $screen != 'term' && $screen != 'user' && $screen != 'profile' ) {
+		if ( ! in_array( $screen->base, $wanted_base ) && ! in_array( $screen->id, $wanted_id ) ) {
 			return;
 		}
 
