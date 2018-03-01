@@ -131,6 +131,11 @@ class ThemePlate_Fields {
 			case 'file':
 				echo '<div id="' . $field['id'] . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '">';
 				echo '<div class="preview-holder">';
+				if ( ! $field['multiple'] ) {
+					echo '<div class="attachment placeholder">';
+					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" value="Select" />';
+					echo '</div>';
+				}
 				if ( $field['value'] ) {
 					foreach ( (array) $field['value'] as $file ) {
 						$name = basename( get_attached_file( $file ) );
@@ -146,15 +151,10 @@ class ThemePlate_Fields {
 						echo '</div>';
 					}
 				}
+				echo '</div>';
 				if ( $field['multiple'] ) {
-					echo '</div>';
 					echo '<input type="button" class="button attachment-add" value="Add" />';
 					echo '<input type="button" class="button attachments-clear' . ( empty( $field['value'][0] ) ? ' hidden' : '' ) . '" value="Clear" />';
-				} else {
-					echo '<div class="attachment placeholder">';
-					echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" value="Select" />';
-					echo '</div>';
-					echo '</div>';
 				}
 				echo '</div>';
 				break;
