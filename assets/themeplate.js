@@ -7,7 +7,9 @@ jQuery.noConflict();
 
 	$( 'div[id^="themeplate_"].postbox' ).addClass( 'themeplate' );
 
-	$( '.themeplate .form-table.seamless' ).removeClass( 'seamless' ).parents( '.themeplate' ).addClass( 'seamless' );
+	$( '.themeplate .form-table.seamless' ).removeClass( 'seamless' )
+		.parents( '.themeplate' ).addClass( 'seamless' )
+		.find( '.hndle' ).removeClass();
 
 	$( '.themeplate .form-table:empty' ).remove();
 

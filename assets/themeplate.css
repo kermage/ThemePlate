@@ -199,6 +199,10 @@
 	box-shadow: none;
 }
 
+.themeplate.seamless .handlediv {
+	display: none;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate th,
 	[id $="side-sortables"] .themeplate td {
