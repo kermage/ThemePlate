@@ -6,6 +6,11 @@
 	var $pageTemplate = $( '#page_template' ),
 		$postFormat = $( 'input[name="post_format"]' );
 
+	var checkersElements = {
+		'template': $pageTemplate,
+		'format': $postFormat
+	};
+
 	var checkCallbacks = {
 		template: function( value ) {
 			var current = $pageTemplate.val();
@@ -58,10 +63,22 @@
 		addEventListener( $this.parents( '.themeplate' ), 'hide', conditions );
 	});
 
+	function isAvailable( checker ) {
+		if ( checkersElements[checker].length ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	function isMet( conditions ) {
 		var result;
 
 		for ( var i in conditions ) {
+			if ( ! isAvailable( conditions[i]['key'] ) ) {
+				continue;
+			}
+
 			result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
 		}
 
