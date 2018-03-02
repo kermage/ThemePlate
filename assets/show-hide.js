@@ -39,10 +39,10 @@
 			return;
 		}
 
-		var condition = $this.data( 'show' );
+		var conditions = $this.data( 'show' );
 
-		maybeShowHide( $this.parents( '.themeplate' ), 'show', condition );
-		addEventListener( $this.parents( '.themeplate' ), 'show', condition );
+		maybeShowHide( $this.parents( '.themeplate' ), 'show', conditions );
+		addEventListener( $this.parents( '.themeplate' ), 'show', conditions );
 	});
 
 	$( '.themeplate-hide' ).each( function() {
@@ -52,30 +52,34 @@
 			return;
 		}
 
-		var condition = $this.data( 'hide' );
+		var conditions = $this.data( 'hide' );
 
-		maybeShowHide( $this.parents( '.themeplate' ), 'hide', condition );
-		addEventListener( $this.parents( '.themeplate' ), 'hide', condition );
+		maybeShowHide( $this.parents( '.themeplate' ), 'hide', conditions );
+		addEventListener( $this.parents( '.themeplate' ), 'hide', conditions );
 	});
 
-	function isMet( condition ) {
-		for ( var key in condition ) {
-			return checkCallbacks[key]( condition[key] );
+	function isMet( conditions ) {
+		var result;
+
+		for ( var i in conditions ) {
+			result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
 		}
+
+		return result;
 	}
 
-	function maybeShowHide( $metabox, type, condition ) {
+	function maybeShowHide( $metabox, type, conditions ) {
 		if ( type == 'show' ) {
-			isMet( condition ) ? $metabox.show() : $metabox.hide();
+			isMet( conditions ) ? $metabox.show() : $metabox.hide();
 		} else {
-			isMet( condition ) ? $metabox.hide() : $metabox.show();
+			isMet( conditions ) ? $metabox.hide() : $metabox.show();
 		}
 	}
 
-	function addEventListener( $metabox, type, condition ) {
-		for ( var key in condition ) {
-			eventListeners[key]( function() {
-				maybeShowHide( $metabox, type, condition );
+	function addEventListener( $metabox, type, conditions ) {
+		for ( var i in conditions ) {
+			eventListeners[conditions[i]['key']]( function() {
+				maybeShowHide( $metabox, type, conditions );
 			});
 		}
 	}
