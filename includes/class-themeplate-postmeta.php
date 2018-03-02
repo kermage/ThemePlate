@@ -128,25 +128,27 @@ class ThemePlate_PostMeta {
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		if ( isset( $meta_box['args']['show_on'] ) ) {
-			$show_on = $meta_box['args']['show_on']['value'];
+			$key = $meta_box['args']['show_on']['key'];
+			$value = $meta_box['args']['show_on']['value'];
 
-			if ( ! is_array( $show_on ) ) {
-				$show_on = array( $show_on );
+			if ( ! is_array( $value ) ) {
+				$value = array( $value );
 			}
 
-			$show_on = json_encode( $show_on );
-			echo '<div class="themeplate-show" data-' . $meta_box['args']['show_on']['key'] . '="' . esc_attr( $show_on ) . '"></div>';
+			$show_on = json_encode( array( $key => $value ) );
+			echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
 		}
 
 		if ( isset( $meta_box['args']['hide_on'] ) ) {
-			$hide_on = $meta_box['args']['hide_on']['value'];
+			$key = $meta_box['args']['hide_on']['key'];
+			$value = $meta_box['args']['hide_on']['value'];
 
-			if ( ! is_array( $hide_on ) ) {
-				$hide_on = array( $hide_on );
+			if ( ! is_array( $value ) ) {
+				$value = array( $value );
 			}
 
-			$hide_on = json_encode( $hide_on );
-			echo '<div class="themeplate-hide" data-' . $meta_box['args']['hide_on']['key'] . '="' . esc_attr( $hide_on ) . '"></div>';
+			$hide_on = json_encode( array( $key => $value ) );
+			echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
 		}
 
 		if ( ! empty( $meta_box['args']['description'] ) ) {

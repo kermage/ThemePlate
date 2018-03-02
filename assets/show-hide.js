@@ -6,78 +6,77 @@
 	var $pageTemplate = $( '#page_template' ),
 		$postFormat = $( 'input[name="post_format"]' );
 
+	var checkCallbacks = {
+		template: function( value ) {
+			var current = $pageTemplate.val();
+			current = current.substr( current.lastIndexOf( '/' ) + 1 );
+
+			return $.inArray( current, value ) > -1;
+		},
+		format: function( value ) {
+			var current = $postFormat.filter( ':checked' ).val();
+			if ( current == 0 ) {
+				current = 'standard';
+			}
+
+			return $.inArray( current, value ) > -1;
+		}
+	};
+
+	var eventListeners = {
+		template: function( callback ) {
+			$pageTemplate.on( 'change', callback );
+		},
+		format: function( callback ) {
+			$postFormat.on( 'change', callback );
+		}
+	}
+
 	$( '.themeplate-show' ).each( function() {
 		var $this = $( this );
 
-		if ( $this.data( 'template' ) ) {
-			var template = $this.data( 'template' );
-
-			maybeShowHide( $this.parents( '.themeplate' ), 'show', 'template', template );
-
-			$pageTemplate.on( 'change', function() {
-				maybeShowHide( $this.parents( '.themeplate' ), 'show', 'template', template );
-			});
+		if ( ! $this.data( 'show' ) ) {
+			return;
 		}
 
-		if ( $this.data( 'format' ) ) {
-			var format = $this.data( 'format' );
+		var condition = $this.data( 'show' );
 
-			maybeShowHide( $this.parents( '.themeplate' ), 'show', 'format', format );
-
-			$postFormat.on( 'change', function() {
-				maybeShowHide( $this.parents( '.themeplate' ), 'show', 'format', format );
-			});
-		}
-
+		maybeShowHide( $this.parents( '.themeplate' ), 'show', condition );
+		addEventListener( $this.parents( '.themeplate' ), 'show', condition );
 	});
 
 	$( '.themeplate-hide' ).each( function() {
 		var $this = $( this );
 
-		if ( $this.data( 'template' ) ) {
-			var template = $this.data( 'template' );
-
-			maybeShowHide( $this.parents( '.themeplate' ), 'hide', 'template', template );
-
-			$pageTemplate.on( 'change', function() {
-				maybeShowHide( $this.parents( '.themeplate' ), 'hide', 'template', template );
-			});
+		if ( ! $this.data( 'hide' ) ) {
+			return;
 		}
 
-		if ( $this.data( 'format' ) ) {
-			var format = $this.data( 'format' );
+		var condition = $this.data( 'hide' );
 
-			maybeShowHide( $this.parents( '.themeplate' ), 'hide', 'format', format );
-
-			$postFormat.on( 'change', function() {
-				maybeShowHide( $this.parents( '.themeplate' ), 'hide', 'format', format );
-			});
-		}
-
+		maybeShowHide( $this.parents( '.themeplate' ), 'hide', condition );
+		addEventListener( $this.parents( '.themeplate' ), 'hide', condition );
 	});
 
-	function isMet( check, value ) {
-		var current;
-
-		if ( check == 'template' ) {
-			current = $pageTemplate.val();
-			current = current.substr( current.lastIndexOf( '/' ) + 1 );
-		} else {
-			current = $postFormat.filter( ':checked' ).val();
-
-			if ( current == 0 ) {
-				current = 'standard';
-			}
+	function isMet( condition ) {
+		for ( var key in condition ) {
+			return checkCallbacks[key]( condition[key] );
 		}
-
-		return $.inArray( current, value ) > -1;
 	}
 
-	function maybeShowHide( $metabox, type, check, condition ) {
+	function maybeShowHide( $metabox, type, condition ) {
 		if ( type == 'show' ) {
-			isMet( check, condition ) ? $metabox.show() : $metabox.hide();
+			isMet( condition ) ? $metabox.show() : $metabox.hide();
 		} else {
-			isMet( check, condition ) ? $metabox.hide() : $metabox.show();
+			isMet( condition ) ? $metabox.hide() : $metabox.show();
+		}
+	}
+
+	function addEventListener( $metabox, type, condition ) {
+		for ( var key in condition ) {
+			eventListeners[key]( function() {
+				maybeShowHide( $metabox, type, condition );
+			});
 		}
 	}
 
