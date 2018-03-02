@@ -16,7 +16,7 @@
 			var current = $pageTemplate.val();
 			current = current.substr( current.lastIndexOf( '/' ) + 1 );
 
-			return $.inArray( current, value ) > -1;
+			return $.inArray( current, sureArray( value ) ) > -1;
 		},
 		format: function( value ) {
 			var current = $postFormat.filter( ':checked' ).val();
@@ -24,7 +24,7 @@
 				current = 'standard';
 			}
 
-			return $.inArray( current, value ) > -1;
+			return $.inArray( current, sureArray( value ) ) > -1;
 		}
 	};
 
@@ -62,6 +62,17 @@
 		maybeShowHide( $this.parents( '.themeplate' ), 'hide', conditions );
 		addEventListener( $this.parents( '.themeplate' ), 'hide', conditions );
 	});
+
+	function sureArray( value ) {
+		if ( $.isArray( value ) ) {
+			return value;
+		}
+
+		var array = [];
+		array.push( value );
+
+		return array;
+	}
 
 	function isAvailable( checker ) {
 		if ( checkersElements[checker].length ) {
