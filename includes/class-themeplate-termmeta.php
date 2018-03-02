@@ -66,7 +66,7 @@ class ThemePlate_TermMeta {
 				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['show_on'] );
 
-					if ( ! array_intersect( (array) $tag->term_id, (array) $value[0]['value'] ) ) {
+					if ( is_object( $tag ) && ! array_intersect( (array) $tag->term_id, (array) $value[0]['value'] ) ) {
 						$check = false;
 					}
 				}
@@ -86,7 +86,7 @@ class ThemePlate_TermMeta {
 				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['hide_on'] );
 
-					if ( array_intersect( (array) $tag->term_id, (array) $value[0]['value'] ) ) {
+					if ( is_object( $tag ) && array_intersect( (array) $tag->term_id, (array) $value[0]['value'] ) ) {
 						$check = false;
 					}
 				}
