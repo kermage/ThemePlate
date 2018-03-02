@@ -12,35 +12,6 @@
 	$( '.themeplate .form-table:empty' ).remove();
 
 
-	var post_formats = $( 'input[name=post_format]' ).map( function() {
-		return this.value
-	}).get()
-
-	function HideAll() {
-		$.each( post_formats, function( i, val ) {
-			if ( val == 0 ) {
-				val = 'standard';
-			}
-			$( 'div[id^="themeplate_"][id $="' + val + '_post"]' ).hide();
-		});
-	};
-
-	HideAll();
-
-	$( 'div[id^="themeplate_"][id $="' + $( 'input[name=post_format]:checked' ).val() + '_post"]' ).show();
-
-	$( '#post-formats-select input' ).change( function() {
-		HideAll();
-		if ( $( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]' ).length ) {
-			$( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]' ).show();
-
-			$( 'html,body' ).animate({
-				scrollTop: $( 'div[id^="themeplate_"][id $="' + $( this ).val() + '_post"]').offset().top - 50
-			});
-		}
-	});
-
-
 	$( '.themeplate-color-picker' ).wpColorPicker();
 
 
