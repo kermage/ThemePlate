@@ -131,12 +131,24 @@ class ThemePlate_PostMeta {
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		if ( isset( $meta_box['args']['show_on'] ) ) {
-			$show_on = json_encode( $meta_box['args']['show_on']['value'] );
+			$show_on = $meta_box['args']['show_on']['value'];
+
+			if ( ! is_array( $show_on ) ) {
+				$show_on = array( $show_on );
+			}
+
+			$show_on = json_encode( $show_on );
 			echo '<div class="themeplate-show" data-template="' . esc_attr( $show_on ) . '"></div>';
 		}
 
 		if ( isset( $meta_box['args']['hide_on'] ) ) {
-			$hide_on = json_encode( $meta_box['args']['hide_on']['value'] );
+			$hide_on = $meta_box['args']['hide_on']['value'];
+
+			if ( ! is_array( $hide_on ) ) {
+				$hide_on = array( $hide_on );
+			}
+
+			$hide_on = json_encode( $hide_on );
 			echo '<div class="themeplate-hide" data-template="' . esc_attr( $hide_on ) . '"></div>';
 		}
 
