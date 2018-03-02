@@ -45,66 +45,45 @@ class ThemePlate_UserMeta {
 
 		$check = true;
 
-		if ( is_object( $user ) ) :
-		$first = true;
+		if ( isset( $meta_box['show_on'] ) ) {
+			$value = $meta_box['show_on'];
 
-		foreach ( $meta_box as $key => $value ) {
-			if ( $key == 'show_on' ) {
-				if ( $first ) {
-					$first = false;
-					$check = false;
+			if ( is_callable( $value ) ) {
+				$check = call_user_func( $value );
+			} elseif ( is_array( $value ) ) {
+				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+					$value = array( $value );
 				}
 
-				if ( is_callable( $value ) ) {
-					$check = call_user_func( $value );
-				} elseif ( is_array( $value ) ) {
-					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-						$value = array( $value );
-					}
+				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
+					unset( $meta_box['show_on'] );
 
-					foreach ( (array) $value as $show_on ) {
-						if ( $show_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $show_on['value'] ) ) {
-							$check = true;
-						}
-						if ( $show_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $show_on['value'] ) ) {
-							$check = true;
-						}
-						if ( $show_on['key'] == 'capability' && array_intersect( array_keys( (array) $user->allcaps ), (array) $show_on['value'] ) ) {
-							$check = true;
-						}
-					}
-				}
-			}
-
-			if ( $key == 'hide_on' ) {
-				if ( $first ) {
-					$first = false;
-				}
-
-				if ( is_callable( $value ) ) {
-					$check = ! call_user_func( $value );
-				} elseif ( is_array( $value ) ) {
-					if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
-						$value = array( $value );
-					}
-
-					foreach ( (array) $value as $hide_on ) {
-						if ( $hide_on['key'] == 'id' && array_intersect( (array) $user->ID, (array) $hide_on['value'] ) ) {
-							$check = false;
-						}
-						if ( $hide_on['key'] == 'role' && array_intersect( (array) $user->roles, (array) $hide_on['value'] ) ) {
-							$check = false;
-						}
-						if ( $hide_on['key'] == 'capability' && array_intersect( array_keys( (array) $user->allcaps ), (array) $hide_on['value'] ) ) {
-							$check = false;
-						}
+					if ( ! array_intersect( (array) $user->ID, (array) $value[0]['value'] ) ) {
+						$check = false;
 					}
 				}
 			}
 		}
-		elseif ( isset( $meta_box['show_on'] ) || isset( $meta_box['hide_on'] ) ) :
-			$check = false;
-		endif;
+
+		if ( isset( $meta_box['hide_on'] ) ) {
+			$value = $meta_box['hide_on'];
+
+			if ( is_callable( $value ) ) {
+				$check = call_user_func( $value );
+			} elseif ( is_array( $value ) ) {
+				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+					$value = array( $value );
+				}
+
+				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
+					unset( $meta_box['hide_on'] );
+
+					if ( array_intersect( (array) $user->ID, (array) $value[0]['value'] ) ) {
+						$check = false;
+					}
+				}
+			}
+		}
 
 		if ( ! $check ) {
 			return;
