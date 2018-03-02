@@ -108,6 +108,28 @@ class ThemePlate_TermMeta {
 		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
 		echo '<div class="inside">';
 
+		if ( isset( $meta_box['show_on'] ) ) {
+			$show_on = $meta_box['show_on'];
+
+			if ( array_keys( $show_on ) !== range( 0, count( $show_on ) - 1 ) ) {
+				$show_on = array( $show_on );
+			}
+
+			$show_on = json_encode( $show_on );
+			echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
+		}
+
+		if ( isset( $meta_box['hide_on'] ) ) {
+			$hide_on = $meta_box['hide_on'];
+
+			if ( array_keys( $hide_on ) !== range( 0, count( $hide_on ) - 1 ) ) {
+				$hide_on = array( $hide_on );
+			}
+
+			$hide_on = json_encode( $hide_on );
+			echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
+		}
+
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p class="description">' . $meta_box['description'] . '</p>';
 		}

@@ -4,11 +4,15 @@
 
 
 	var $pageTemplate = $( '#page_template' ),
-		$postFormat = $( 'input[name="post_format"]' );
+		$postFormat = $( 'input[name="post_format"]' ),
+		$parent = $( '#parent' ),
+		$role = $( '#role' );
 
 	var checkersElements = {
 		'template': $pageTemplate,
-		'format': $postFormat
+		'format': $postFormat,
+		'parent': $parent,
+		'role': $role
 	};
 
 	var checkCallbacks = {
@@ -25,6 +29,17 @@
 			}
 
 			return $.inArray( current, sureArray( value ) ) > -1;
+		},
+		parent: function( value ) {
+			var current = $parent.val();
+			current = parseInt( current );
+
+			return $.inArray( current, sureArray( value ) ) > -1;
+		},
+		role: function( value ) {
+			var current = $role.val();
+
+			return $.inArray( current, sureArray( value ) ) > -1;
 		}
 	};
 
@@ -34,6 +49,12 @@
 		},
 		format: function( callback ) {
 			$postFormat.on( 'change', callback );
+		},
+		parent: function( callback ) {
+			$parent.on( 'change', callback );
+		},
+		role: function( callback ) {
+			$role.on( 'change', callback );
 		}
 	}
 
@@ -75,6 +96,10 @@
 	}
 
 	function isAvailable( checker ) {
+		if ( ! checkersElements.hasOwnProperty( checker ) ) {
+			return false;
+		}
+
 		if ( checkersElements[checker].length ) {
 			return true;
 		}
@@ -87,10 +112,10 @@
 
 		for ( var i in conditions ) {
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
-				continue;
+				result = result || false;
+			} else {
+				result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
 			}
-
-			result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
 		}
 
 		return result;
