@@ -5,7 +5,7 @@
 
 	var $pageTemplate = $( '#page_template' ),
 		$postFormat = $( 'input[name="post_format"]' ),
-		$parent = $( '#parent' ),
+		$parent = $( '#parent' ).length ? $( '#parent' ) : $( '#parent_id' ),
 		$role = $( '#role' );
 
 	var checkersElements = {
