@@ -138,7 +138,7 @@ class ThemePlate_PostMeta {
 			}
 
 			$show_on = json_encode( $show_on );
-			echo '<div class="themeplate-show" data-template="' . esc_attr( $show_on ) . '"></div>';
+			echo '<div class="themeplate-show" data-' . $meta_box['args']['show_on']['key'] . '="' . esc_attr( $show_on ) . '"></div>';
 		}
 
 		if ( isset( $meta_box['args']['hide_on'] ) ) {
@@ -149,7 +149,7 @@ class ThemePlate_PostMeta {
 			}
 
 			$hide_on = json_encode( $hide_on );
-			echo '<div class="themeplate-hide" data-template="' . esc_attr( $hide_on ) . '"></div>';
+			echo '<div class="themeplate-hide" data-' . $meta_box['args']['hide_on']['key'] . '="' . esc_attr( $hide_on ) . '"></div>';
 		}
 
 		if ( ! empty( $meta_box['args']['description'] ) ) {
