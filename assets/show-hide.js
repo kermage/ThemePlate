@@ -95,6 +95,10 @@
 
 	function addEventListener( $metabox, type, conditions ) {
 		for ( var i in conditions ) {
+			if ( ! isAvailable( conditions[i]['key'] ) ) {
+				continue;
+			}
+
 			eventListeners[conditions[i]['key']]( function() {
 				maybeShowHide( $metabox, type, conditions );
 			});
