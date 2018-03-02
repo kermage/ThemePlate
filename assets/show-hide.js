@@ -34,6 +34,10 @@
 			var current = $parent.val();
 			current = parseInt( current );
 
+			if ( isNaN( current ) ) {
+				current = -1;
+			}
+
 			return $.inArray( current, sureArray( value ) ) > -1;
 		},
 		role: function( value ) {
