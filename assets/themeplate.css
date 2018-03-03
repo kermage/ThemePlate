@@ -206,6 +206,11 @@
 	display: none;
 }
 
+#poststuff .seamless h2,
+.themeplate.seamless .inside {
+	padding: 0;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate th,
 	[id $="side-sortables"] .themeplate td {
