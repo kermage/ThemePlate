@@ -42,7 +42,6 @@ class ThemePlate_UserMeta {
 	public function create( $user ) {
 
 		$meta_box = $this->meta_box;
-
 		$check = true;
 
 		if ( isset( $meta_box['show_on'] ) ) {

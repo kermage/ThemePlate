@@ -50,7 +50,6 @@ class ThemePlate_TermMeta {
 	public function create( $tag ) {
 
 		$meta_box = $this->meta_box;
-
 		$check = true;
 
 		if ( isset( $meta_box['show_on'] ) ) {

@@ -38,20 +38,7 @@ class ThemePlate_PostMeta {
 	public function add() {
 
 		$meta_box = $this->meta_box;
-
 		$post_id = get_the_ID();
-		$template = basename( get_post_meta( $post_id, '_wp_page_template', true ) );
-		$taxonomies = get_object_taxonomies( get_post_type() );
-		$allterms = array();
-		foreach ( $taxonomies as $taxonomy ) {
-			$terms = get_the_terms( $post_id, $taxonomy );
-			foreach ( (array) $terms as $term ) {
-				if ( isset( $term->term_id ) ) {
-					array_push( $allterms, $term->term_id );
-				}
-			}
-		}
-
 		$check = true;
 
 		if ( isset( $meta_box['show_on'] ) ) {
