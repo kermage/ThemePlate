@@ -123,7 +123,7 @@ class ThemePlate {
 	public function scripts_styles() {
 
 		$screen = get_current_screen();
-		$wanted_base = array( 'post', 'edit-tags', 'term', 'user', 'profile' );
+		$wanted_base = array( 'post', 'edit-tags', 'term', 'user', 'user-edit', 'profile' );
 		$wanted_id = array_map(
 			function( $value ) {
 				return sanitize_title( $this->title ) . '_page_' . $this->key . '-' . $value;
