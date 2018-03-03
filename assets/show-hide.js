@@ -44,6 +44,22 @@
 			var current = $role.val();
 
 			return $.inArray( current, sureArray( value ) ) > -1;
+		},
+		term: function ( taxonomy, value ) {
+			var $checker = $( '#' + taxonomy + 'checklist :checked' );
+			var current = [];
+
+			$checker.each( function() {
+				current.push( parseInt( $( this ).val() ) );
+			});
+
+			for ( var i in current ) {
+				if ( $.inArray( current[i], sureArray( value ) ) > -1 ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 	};
 
@@ -59,6 +75,9 @@
 		},
 		role: function( callback ) {
 			$role.on( 'change', callback );
+		},
+		term: function( taxonomy, callback ) {
+			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
 		}
 	}
 
@@ -113,13 +132,23 @@
 
 	function isMet( conditions ) {
 		var result;
+		var maybeTerms = []
 
 		for ( var i in conditions ) {
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
-				result = result || false;
-			} else {
-				result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+				maybeTerms.push( conditions[i] );
+				continue;
 			}
+
+			result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+		}
+
+		if ( ! maybeTerms.length ) {
+			return result;
+		}
+
+		for ( var i in maybeTerms ) {
+			result = result || checkCallbacks['term']( maybeTerms[i]['key'], maybeTerms[i]['value'] );
 		}
 
 		return result;
@@ -134,13 +163,27 @@
 	}
 
 	function addEventListener( $metabox, type, conditions ) {
+
+		var maybeTerms = []
+
 		for ( var i in conditions ) {
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
+				maybeTerms.push( conditions[i] );
 				continue;
 			}
 
 			eventListeners[conditions[i]['key']]( function() {
 				maybeShowHide( $metabox, type, conditions );
+			});
+		}
+
+		if ( ! maybeTerms.length ) {
+			return;
+		}
+
+		for ( var i in maybeTerms ) {
+			eventListeners['term']( maybeTerms[i]['key'], function() {
+				maybeShowHide( $metabox, type, maybeTerms );
 			});
 		}
 	}
