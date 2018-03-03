@@ -211,6 +211,11 @@
 	padding: 0;
 }
 
+#poststuff .themeplate.seamless h2,
+.edit-tags-php .themeplate.seamless h2 {
+	font-size: 1.3em;
+}
+
 .themeplate.seamless .inside > .description,
 .themeplate.seamless tr,
 .themeplate.seamless .grouped {
