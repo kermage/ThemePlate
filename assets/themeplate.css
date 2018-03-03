@@ -211,6 +211,12 @@
 	padding: 0;
 }
 
+.themeplate.seamless .inside > .description,
+.themeplate.seamless tr,
+.themeplate.seamless .grouped {
+	border: 0;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate th,
 	[id $="side-sortables"] .themeplate td {
