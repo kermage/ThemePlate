@@ -167,8 +167,11 @@
 	margin: 1em 0;
 }
 
-#after_title-sortables,
-.themeplate.postbox {
+#after_title-sortables .postbox,
+.term-php .postbox,
+.user-new-php .postbox,
+.user-edit-php .postbox,
+.profile-php .postbox {
 	margin-top: 20px;
 }
 
