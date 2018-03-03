@@ -58,7 +58,7 @@ class ThemePlate_UserMeta {
 				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['show_on'] );
 
-					if ( is_object( $user ) && ! array_intersect( (array) $user->ID, (array) $value[0]['value'] ) ) {
+					if ( ! is_object( $user ) || ( is_object( $user ) && ! array_intersect( (array) $user->ID, (array) $value[0]['value'] ) ) ) {
 						$check = false;
 					}
 				}
