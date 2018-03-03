@@ -167,11 +167,11 @@
 	margin: 1em 0;
 }
 
-#after_title-sortables .postbox,
-.term-php .postbox,
-.user-new-php .postbox,
-.user-edit-php .postbox,
-.profile-php .postbox {
+#after_title-sortables .themeplate,
+.term-php .themeplate,
+.user-new-php .themeplate,
+.user-edit-php .themeplate,
+.profile-php .themeplate {
 	margin-top: 20px;
 }
 
@@ -206,7 +206,7 @@
 	display: none;
 }
 
-#poststuff .seamless h2,
+#poststuff .themeplate.seamless h2,
 .themeplate.seamless .inside {
 	padding: 0;
 }
