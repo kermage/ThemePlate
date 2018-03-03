@@ -127,8 +127,8 @@
 			$select.select2( {
 				allowClear: true,
 				placeholder: '',
-				dropdownCssClass: 'themeplate',
-				containerCssClass: 'themeplate'
+				dropdownCssClass: 'themeplate-select2',
+				containerCssClass: 'themeplate-select2'
 			});
 
 			if ( $select.attr( 'multiple' ) ) {

@@ -144,18 +144,18 @@
 	margin-left: 0.5em;
 }
 
-.themeplate.select2-selection li,
-.themeplate.select2-dropdown li {
+.themeplate-select2.select2-selection li,
+.themeplate-select2.select2-dropdown li {
 	margin-bottom: 0;
 }
 
-.themeplate.select2-selection--single .select2-selection__clear {
+.themeplate-select2.select2-selection--single .select2-selection__clear {
 	display: inline-block;
 	margin-right: 5px;
 	margin-top: -2px;
 }
 
-.themeplate .select2-results__option[aria-disabled='true'] {
+.themeplate-select2 .select2-results__option[aria-disabled='true'] {
 	display: none;
 }
 
@@ -167,8 +167,11 @@
 	margin: 1em 0;
 }
 
-#after_title-sortables,
-.themeplate.postbox {
+#after_title-sortables .themeplate,
+.term-php .themeplate,
+.user-new-php .themeplate,
+.user-edit-php .themeplate,
+.profile-php .themeplate {
 	margin-top: 20px;
 }
 
@@ -201,6 +204,22 @@
 
 .themeplate.seamless .handlediv {
 	display: none;
+}
+
+#poststuff .themeplate.seamless h2,
+.themeplate.seamless .inside {
+	padding: 0;
+}
+
+#poststuff .themeplate.seamless h2,
+.edit-tags-php .themeplate.seamless h2 {
+	font-size: 1.3em;
+}
+
+.themeplate.seamless .inside > .description,
+.themeplate.seamless tr,
+.themeplate.seamless .grouped {
+	border: 0;
 }
 
 @media screen and ( min-width: 851px ) {
