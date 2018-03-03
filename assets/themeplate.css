@@ -144,18 +144,18 @@
 	margin-left: 0.5em;
 }
 
-.themeplate.select2-selection li,
-.themeplate.select2-dropdown li {
+.themeplate-select2.select2-selection li,
+.themeplate-select2.select2-dropdown li {
 	margin-bottom: 0;
 }
 
-.themeplate.select2-selection--single .select2-selection__clear {
+.themeplate-select2.select2-selection--single .select2-selection__clear {
 	display: inline-block;
 	margin-right: 5px;
 	margin-top: -2px;
 }
 
-.themeplate .select2-results__option[aria-disabled='true'] {
+.themeplate-select2 .select2-results__option[aria-disabled='true'] {
 	display: none;
 }
 
