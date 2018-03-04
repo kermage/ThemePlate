@@ -46,6 +46,7 @@ class ThemePlate_PostMeta {
 
 			if ( is_callable( $value ) ) {
 				$check = call_user_func( $value );
+				unset( $meta_box['show_on'] );
 			} elseif ( is_array( $value ) ) {
 				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
 					$value = array( $value );
@@ -67,6 +68,7 @@ class ThemePlate_PostMeta {
 
 			if ( is_callable( $value ) ) {
 				$check = call_user_func( $value );
+				unset( $meta_box['hide_on'] );
 			} elseif ( is_array( $value ) ) {
 				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
 					$value = array( $value );
