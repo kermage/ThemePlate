@@ -111,12 +111,7 @@
 
 	$( '.themeplate-file.multiple' ).sortable( {
 		items: '.attachment',
-		opacity: 0.75,
-		update: function( event, ui ) {
-			order = $( this ).sortable( 'toArray' ).toString().replace( /file-/g, '' );
-			field = $( this ).attr( 'id' ).replace( '_preview', '' );
-			$( '#' + field ).val( order );
-		}
+		opacity: 0.75
 	});
 
 
