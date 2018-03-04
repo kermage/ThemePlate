@@ -15,37 +15,36 @@
 	$( '.themeplate-color-picker' ).wpColorPicker();
 
 
-	var meta_media_frame, isMultiple;
-	var parent, selection, selected, attachment;
-	var src, centered, filename, fieldname, field, close, preview, order;
+	var meta_media_frame = wp.media.frames.meta_media_frame;
 
 	$( document ).on( 'click', '.themeplate-file .attachment-add', function( e ) {
 		e.preventDefault();
 
-		parent = $( this ).parents( '.themeplate-file' );
+		var $parent = $( this ).parents( '.themeplate-file' );
+		var isMultiple = false;
 
-		isMultiple = false;
-		if ( parent.hasClass( 'multiple' ) ) {
+		if ( $parent.hasClass( 'multiple' ) ) {
 			isMultiple = true;
 		}
 
-		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
+		var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
 
-		meta_media_frame = wp.media.frames.meta_media_frame = wp.media({
+		meta_media_frame = wp.media({
 			title: 'Select Media',
 			multiple: isMultiple
 		});
 
 		meta_media_frame.on( 'select', function() {
-			selection = meta_media_frame.state().get( 'selection' ).toJSON();
+			var selection = meta_media_frame.state().get( 'selection' ).toJSON();
+			var src, centered, filename, field, close, preview;
 
 			if ( isMultiple ) {
-				parent.find( '.attachments-clear' ).removeClass( 'hidden' );
+				$parent.find( '.attachments-clear' ).removeClass( 'hidden' );
 			} else {
-				parent.find( '.attachment-add' ).addClass( 'hidden' );
+				$parent.find( '.attachment-add' ).addClass( 'hidden' );
 			}
 
-			parent.find( '.hidden.placeholder' ).remove();
+			$parent.find( '.hidden.placeholder' ).remove();
 
 			selection.forEach( function( media ) {
 				src = ( media.type == 'image' ? media.url : media.icon );
@@ -55,7 +54,7 @@
 				close = '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 
 				preview = '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
-				parent.find( '.preview-holder' ).append( preview );
+				$parent.find( '.preview-holder' ).append( preview );
 			});
 		});
 
@@ -65,47 +64,46 @@
 	$( document ).on( 'click', '.themeplate-file .attachments-clear', function( e ) {
 		e.preventDefault();
 
-		parent = $( this ).parents( '.themeplate-file' );
+		var $parent = $( this ).parents( '.themeplate-file' );
+		var isMultiple = false;
 
-		isMultiple = false;
-		if ( parent.hasClass( 'multiple' ) ) {
+		if ( $parent.hasClass( 'multiple' ) ) {
 			isMultiple = true;
 		}
 
-		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']';
-		field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
+		var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']';
+		var field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 
-		parent.find( '.preview-holder' ).html( '' )
-		parent.append( field );
+		$parent.find( '.preview-holder' ).html( '' )
+		$parent.append( field );
 		$( this ).addClass( 'hidden' );
 	});
 
 	$( document ).on( 'click', '.themeplate-file .attachment-close', function( e ) {
 		e.preventDefault();
 
-		parent = $( this ).parents( '.themeplate-file' );
+		var $parent = $( this ).parents( '.themeplate-file' );
+		var isMultiple = false;
+		var $attachment = $( this ).parents( '.attachment' );
 
-		isMultiple = false;
-		if ( parent.hasClass( 'multiple' ) ) {
+		if ( $parent.hasClass( 'multiple' ) ) {
 			isMultiple = true;
 		}
 
-		attachment = $( this ).parents( '.attachment' );
-
 		if ( ! isMultiple ) {
-			attachment.siblings( '.placeholder' ).find( '.attachment-add' ).removeClass( 'hidden' );
+			$attachment.siblings( '.placeholder' ).find( '.attachment-add' ).removeClass( 'hidden' );
 		}
 
-		attachment.remove();
+		$attachment.remove();
 
-		if ( ! parent.find( '.preview-holder' ).html().length ) {
-			parent.find( '.attachments-clear' ).addClass( 'hidden' );
+		if ( ! $parent.find( '.preview-holder' ).html().length ) {
+			$parent.find( '.attachments-clear' ).addClass( 'hidden' );
 		}
 
-		if ( ! parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
-			fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']';
-			field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
-			parent.append( field );
+		if ( ! $parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
+			var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']';
+			var field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
+			$parent.append( field );
 		}
 	});
 
