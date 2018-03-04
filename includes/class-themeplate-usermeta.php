@@ -211,9 +211,9 @@ class ThemePlate_UserMeta {
 			$meta = get_user_meta( $user_id, $key, true );
 			if ( $val && ! isset( $meta ) ) {
 				add_user_meta( $user_id, $key, $val, true );
-			} elseif ( isset( $val[0] ) && $val[0] && $val != $meta ) {
+			} elseif ( isset( $val[0] ) && $val != $meta ) {
 				update_user_meta( $user_id, $key, $val, $meta );
-			} elseif ( ( ! isset( $val[0] ) || ! $val[0] ) && isset( $meta ) ) {
+			} elseif ( ! isset( $val[0] ) && isset( $meta ) ) {
 				delete_user_meta( $user_id, $key, $meta );
 			}
 		}

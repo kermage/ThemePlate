@@ -61,6 +61,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'select' :
+				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
@@ -188,6 +189,7 @@ class ThemePlate_Fields {
 			case 'post':
 				$list = 'post';
 			case 'page':
+				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
@@ -220,6 +222,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'user':
+				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
@@ -248,6 +251,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'term':
+				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['multiple'] ) {
 					echo '<option' . ( $field['none'] ? ' value="0">' : ' selected="selected" disabled="disabled" hidden>' ) . ( $field['value'] ? __( '&mdash; None &mdash;' ) : __( '&mdash; Select &mdash;' ) ) . '</option>';
