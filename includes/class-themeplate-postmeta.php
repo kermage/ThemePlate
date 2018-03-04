@@ -67,7 +67,7 @@ class ThemePlate_PostMeta {
 			$value = $meta_box['hide_on'];
 
 			if ( is_callable( $value ) ) {
-				$check = call_user_func( $value );
+				$check = ! call_user_func( $value );
 				unset( $meta_box['hide_on'] );
 			} elseif ( is_array( $value ) ) {
 				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
