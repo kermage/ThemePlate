@@ -155,7 +155,7 @@ class ThemePlate_Fields {
 				echo '</div>';
 				if ( $field['multiple'] ) {
 					echo '<input type="button" class="button attachment-add" value="Add" />';
-					echo '<input type="button" class="button attachments-clear' . ( empty( $field['value'][0] ) ? ' hidden' : '' ) . '" value="Clear" />';
+					echo '<input type="button" class="button attachments-clear' . ( ! $field['value'] ? ' hidden' : '' ) . '" value="Clear" />';
 				}
 				echo '</div>';
 				break;

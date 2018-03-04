@@ -72,7 +72,7 @@
 			isMultiple = true;
 		}
 
-		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
+		fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']';
 		field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 
 		parent.find( '.preview-holder' ).html( '' )
@@ -103,7 +103,7 @@
 		}
 
 		if ( ! parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
-			fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
+			fieldname = parent.data( 'key' ) + '[' + parent.attr( 'id' ) + ']';
 			field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 			parent.append( field );
 		}
