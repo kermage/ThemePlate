@@ -60,6 +60,7 @@ class ThemePlate_TermMeta {
 			} elseif ( is_array( $value ) ) {
 				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
 					$value = array( $value );
+					$meta_box['show_on'] = array( $meta_box['show_on'] );
 				}
 
 				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
@@ -80,6 +81,7 @@ class ThemePlate_TermMeta {
 			} elseif ( is_array( $value ) ) {
 				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
 					$value = array( $value );
+					$meta_box['hide_on'] = array( $meta_box['hide_on'] );
 				}
 
 				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
@@ -108,24 +110,12 @@ class ThemePlate_TermMeta {
 		echo '<div class="inside">';
 
 		if ( isset( $meta_box['show_on'] ) ) {
-			$show_on = $meta_box['show_on'];
-
-			if ( array_keys( $show_on ) !== range( 0, count( $show_on ) - 1 ) ) {
-				$show_on = array( $show_on );
-			}
-
-			$show_on = json_encode( $show_on );
+			$show_on = json_encode( $meta_box['show_on'] );
 			echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
 		}
 
 		if ( isset( $meta_box['hide_on'] ) ) {
-			$hide_on = $meta_box['hide_on'];
-
-			if ( array_keys( $hide_on ) !== range( 0, count( $hide_on ) - 1 ) ) {
-				$hide_on = array( $hide_on );
-			}
-
-			$hide_on = json_encode( $hide_on );
+			$hide_on = json_encode( $meta_box['hide_on'] );
 			echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
 		}
 
