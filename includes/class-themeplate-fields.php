@@ -278,6 +278,28 @@ class ThemePlate_Fields {
 				}
 				echo '</select>';
 				break;
+
+			case 'group':
+				echo '<table class="form-table">';
+				foreach ( $field['fields'] as $id => $sub ) {
+					$sub['id'] = $field['id'] . '_' . $id;
+
+					$default = isset( $sub['std'] ) ? $sub['std'] : '';
+					$stored = get_post_meta( $field['object'], $sub['id'], true );
+					$sub['value'] = $stored ? $stored : $default;
+
+					$desc = ! empty( $sub['desc'] ) ? '<span class="description">' . $sub['desc'] . '</span>' : '';
+					$label = '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . $desc . '</label>';
+
+					echo '<tr>';
+					echo '<th scope="row">' . $label . '</th>';
+					echo '<td>';
+						ThemePlate_Fields::instance()->render( $sub );
+					echo '</td>';
+					echo '</tr>';
+				}
+				echo '</table>';
+				break;
 		}
 
 	}

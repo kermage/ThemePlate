@@ -135,9 +135,10 @@ class ThemePlate_PostMeta {
 			}
 
 			$field['id'] = $meta_box['args']['id'] . '_' . $id;
+			$field['object'] = $post->ID;
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = get_post_meta( $post->ID, $field['id'], true );
+			$stored = get_post_meta( $field['object'], $field['id'], true );
 			$field['value'] = $stored ? $stored : $default;
 
 			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
