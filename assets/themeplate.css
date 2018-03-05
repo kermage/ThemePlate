@@ -204,12 +204,12 @@
 }
 
 @media screen and ( min-width: 851px ) {
-	[id $="side-sortables"] .field-label,
-	[id $="side-sortables"] .field-input {
+	#side-sortables .field-label,
+	#side-sortables .field-input {
 		flex-basis: 100%;
 	}
 
-	[id $="side-sortables"] .field-label {
+	#side-sortables .field-label {
 		margin-bottom: 1em;
 	}
 }

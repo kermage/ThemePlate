@@ -93,11 +93,11 @@ class ThemePlate_Settings {
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
-							<?php self::section( $page . '-side' ); ?>
+							<?php self::section( $page, 'side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php self::section( $page . '-normal' ); ?>
+							<?php self::section( $page, 'normal' ); ?>
 						</div>
 					</div>
 				</div>
@@ -108,15 +108,17 @@ class ThemePlate_Settings {
 	}
 
 
-	public static function section( $page ) {
+	public static function section( $page, $context ) {
 
 		global $wp_settings_sections, $wp_settings_fields;
+
+		$page = $page . '-' . $context;
 
 		if ( ! isset( $wp_settings_sections[$page] ) ) {
 			return;
 		}
 
-		echo '<div id="' . $page . '-sortables" class="meta-box-sortables">';
+		echo '<div id="' . $context . '-sortables" class="meta-box-sortables">';
 
 		foreach ( (array) $wp_settings_sections[$page] as $section ) {
 			printf( '<div id="themeplate_%s-box" class="postbox">', $section['id'] );
