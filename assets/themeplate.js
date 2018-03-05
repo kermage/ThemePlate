@@ -9,8 +9,6 @@
 		.parents( '.themeplate' ).addClass( 'seamless' )
 		.find( '.hndle' ).removeClass();
 
-	$( '.themeplate .form-table:empty' ).remove();
-
 
 	$( '.themeplate-color-picker' ).wpColorPicker();
 
