@@ -103,12 +103,13 @@
 	display: none;
 }
 
-.edit-tags-php .themeplate th,
-.edit-tags-php .themeplate td {
-	width: 100%;
-	display: block;
-	padding: 0;
-	margin: 1em 0;
+.edit-tags-php .field-label,
+.edit-tags-php .field-input {
+	flex-basis: 100%;
+}
+
+.edit-tags-php .field-label {
+	margin-bottom: 1em;
 }
 
 #after_title-sortables .themeplate,
