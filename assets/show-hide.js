@@ -24,6 +24,7 @@
 		},
 		format: function( value ) {
 			var current = $postFormat.filter( ':checked' ).val();
+
 			if ( current == 0 ) {
 				current = 'standard';
 			}
@@ -45,7 +46,7 @@
 
 			return $.inArray( current, sureArray( value ) ) > -1;
 		},
-		term: function ( taxonomy, value ) {
+		term: function( taxonomy, value ) {
 			var $checker = $( '#' + taxonomy + 'checklist :checked' );
 			var current = [];
 
@@ -132,7 +133,7 @@
 
 	function isMet( conditions ) {
 		var result;
-		var maybeTerms = []
+		var maybeTerms = [];
 
 		for ( var i in conditions ) {
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
@@ -163,8 +164,7 @@
 	}
 
 	function addEventListener( $metabox, type, conditions ) {
-
-		var maybeTerms = []
+		var maybeTerms = [];
 
 		for ( var i in conditions ) {
 			if ( ! isAvailable( conditions[i]['key'] ) ) {

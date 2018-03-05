@@ -29,7 +29,7 @@
 
 		var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
 
-		meta_media_frame = wp.media({
+		meta_media_frame = wp.media( {
 			title: 'Select Media',
 			multiple: isMultiple
 		});
@@ -52,8 +52,8 @@
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
 				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
 				close = '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-
 				preview = '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">' + centered + filename +'</div></div>' + close + field + '</div>';
+
 				$parent.find( '.preview-holder' ).append( preview );
 			});
 		});
@@ -65,16 +65,10 @@
 		e.preventDefault();
 
 		var $parent = $( this ).parents( '.themeplate-file' );
-		var isMultiple = false;
-
-		if ( $parent.hasClass( 'multiple' ) ) {
-			isMultiple = true;
-		}
-
 		var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']';
 		var field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 
-		$parent.find( '.preview-holder' ).html( '' )
+		$parent.find( '.preview-holder' ).html( '' );
 		$parent.append( field );
 		$( this ).addClass( 'hidden' );
 	});
