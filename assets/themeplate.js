@@ -5,7 +5,7 @@
 
 	$( 'div[id^="themeplate_"].postbox' ).addClass( 'themeplate' );
 
-	$( '.themeplate .form-table.seamless' ).removeClass( 'seamless' )
+	$( '.themeplate .fields-container.seamless' ).removeClass( 'seamless' )
 		.parents( '.themeplate' ).addClass( 'seamless' )
 		.find( '.hndle' ).removeClass();
 
