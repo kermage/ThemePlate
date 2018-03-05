@@ -137,9 +137,10 @@ class ThemePlate_Settings {
 
 			$style = isset( $section['callback']['style'] ) ? $section['callback']['style'] : '';
 
-			echo '<table class="form-table ' . $style . '">';
-			self::fields( $page, $section['id'] );
-			echo '</table>';
+			echo '<div class="fields-container ' . $style . '">';
+				self::fields( $page, $section['id'] );
+			echo '</div>';
+
 			echo '</div>';
 			echo '</div>';
 		}
@@ -157,67 +158,16 @@ class ThemePlate_Settings {
 			return;
 		}
 
-		$grouped = false;
-		$stacking = false;
-
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
-			if ( isset( $field['args']['group'] ) && $field['args']['group'] == 'start' && ! $grouped ) {
-				echo '</table><table class="form-table grouped"><tr>';
-				$grouped = true;
-			} elseif ( ! $grouped ) {
-				echo '<tr>';
-			}
-
-
 			$desc = ! empty( $field['args']['desc'] ) ? '<span class="description">' . $field['args']['desc'] . '</span>' : '';
 			$label = '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
 
-			if ( $grouped ) {
-				if ( ! $stacking ) {
-					$width = '';
-					if ( isset( $field['args']['width'] ) ) {
-						if ( preg_match( '/\d+(%|px|r?em)/', $field['args']['width'] ) ) {
-							$width = ' style="width:' . $field['args']['width'] . '"';
-						} else {
-							$width = ' class="' . $field['args']['width'] . '"';
-						}
-					}
-					echo '<td' . ( $width ? $width : '' ) . '>';
-				}
-
-				if ( isset( $field['args']['stack'] ) && ! $stacking ) {
-					echo '<div class="stacked">';
-					$stacking = true;
-				}
-
-				echo '<div>' . $label . '</div>';
-				call_user_func( $field['callback'], $field['args'] );
-
-				if ( $stacking ) {
-					echo '</div>';
-
-					if ( isset( $field['args']['stack'] ) ) {
-						echo '<div class="stacked">';
-					} else {
-						echo '</td>';
-						$stacking = false;
-					}
-				} else {
-					echo '</td>';
-				}
-			} else {
-				echo '<th scope="row">' . $label . '</th>';
-				echo '<td>';
+			echo '<div class="field-wrapper">';
+				echo '<div class="field-label">' . $label . '</div>';
+				echo '<div class="field-input">';
 					call_user_func( $field['callback'], $field['args'] );
-				echo '</td>';
-			}
-
-			if ( isset( $field['args']['group'] ) && $field['args']['group'] == 'end' && $grouped ) {
-				echo '</tr></table><table class="form-table">';
-				$grouped = false;
-			} elseif ( ! $grouped ) {
-				echo '</tr>';
-			}
+				echo '</div>';
+			echo '</div>';
 		}
 
 	}

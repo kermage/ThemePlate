@@ -124,10 +124,7 @@ class ThemePlate_PostMeta {
 
 		$style = isset( $meta_box['args']['style'] ) ? $meta_box['args']['style'] : '';
 
-		echo '<table class="form-table ' . $style . '">';
-
-		$grouped = false;
-		$stacking = false;
+		echo '<div class="fields-container ' . $style . '">';
 
 		foreach ( $meta_box['args']['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
@@ -141,65 +138,18 @@ class ThemePlate_PostMeta {
 			$stored = get_post_meta( $field['object'], $field['id'], true );
 			$field['value'] = $stored ? $stored : $default;
 
-			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
-				echo '</table><table class="form-table grouped"><tr>';
-				$grouped = true;
-			} elseif ( ! $grouped ) {
-				echo '<tr>';
-			}
-
 			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';
 			$label = '<label class="label" for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
-			if ( $grouped ) {
-				if ( ! $stacking ) {
-					$width = '';
-					if ( isset( $field['width'] ) ) {
-						if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
-							$width = ' style="width:' . $field['width'] . '"';
-						} else {
-							$width = ' class="' . $field['width'] . '"';
-						}
-					}
-					echo '<td' . ( $width ? $width : '' ) . '>';
-				}
-
-				if ( isset( $field['stack'] ) && ! $stacking ) {
-					echo '<div class="stacked">';
-					$stacking = true;
-				}
-
-				echo '<div>' . $label . '</div>';
+			echo '<div class="field-wrapper">';
+				echo '<div class="field-label">' . $label . '</div>';
+				echo '<div class="field-input">';
 				ThemePlate_Fields::instance()->render( $field );
-
-				if ( $stacking ) {
-					echo '</div>';
-
-					if ( isset( $field['stack'] ) ) {
-						echo '<div class="stacked">';
-					} else {
-						echo '</td>';
-						$stacking = false;
-					}
-				} else {
-					echo '</td>';
-				}
-			} else {
-				echo '<th scope="row">' . $label . '</th>';
-				echo '<td>';
-					ThemePlate_Fields::instance()->render( $field );
-				echo '</td>';
-			}
-
-			if ( isset( $field['group'] ) && $field['group'] == 'end' && $grouped ) {
-				echo '</tr></table><table class="form-table">';
-				$grouped = false;
-			} elseif ( ! $grouped ) {
-				echo '</tr>';
-			}
+				echo '</div>';
+			echo '</div>';
 		}
 
-		echo '</table>';
+		echo '</div>';
 
 	}
 

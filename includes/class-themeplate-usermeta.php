@@ -119,81 +119,32 @@ class ThemePlate_UserMeta {
 
 		$style = isset( $meta_box['style'] ) ? $meta_box['style'] : '';
 
-		echo '<table class="form-table ' . $style . '">';
-
-		$grouped = false;
-		$stacking = false;
+		echo '<div class="fields-container ' . $style . '">';
 
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
 				continue;
 			}
 
-			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+			$field['id'] = $meta_box['id'] . '_' . $id;
+			$field['object'] = is_object( $user ) ? $user->ID : '';
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = is_object( $user ) ? get_user_meta( $user->ID, $field['id'], true ) : '';
+			$stored = $field['object'] ? get_user_meta( $field['object'], $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
-
-			if ( isset( $field['group'] ) && $field['group'] == 'start' && ! $grouped ) {
-				echo '</table><table class="form-table grouped"><tr>';
-				$grouped = true;
-			} elseif ( ! $grouped ) {
-				echo '<tr>';
-			}
 
 			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';
 			$label = '<label class="label" for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
 
-			if ( $grouped ) {
-				if ( ! $stacking ) {
-					$width = '';
-					if ( isset( $field['width'] ) ) {
-						if ( preg_match( '/\d+(%|px|r?em)/', $field['width'] ) ) {
-							$width = ' style="width:' . $field['width'] . '"';
-						} else {
-							$width = ' class="' . $field['width'] . '"';
-						}
-					}
-					echo '<td' . ( $width ? $width : '' ) . '>';
-				}
-
-				if ( isset( $field['stack'] ) && ! $stacking ) {
-					echo '<div class="stacked">';
-					$stacking = true;
-				}
-
-				echo '<div>' . $label . '</div>';
+			echo '<div class="field-wrapper">';
+				echo '<div class="field-label">' . $label . '</div>';
+				echo '<div class="field-input">';
 				ThemePlate_Fields::instance()->render( $field );
-
-				if ( $stacking ) {
-					echo '</div>';
-
-					if ( isset( $field['stack'] ) ) {
-						echo '<div class="stacked">';
-					} else {
-						echo '</td>';
-						$stacking = false;
-					}
-				} else {
-					echo '</td>';
-				}
-			} else {
-				echo '<th scope="row">' . $label . '</th>';
-				echo '<td>';
-					ThemePlate_Fields::instance()->render( $field );
-				echo '</td>';
-			}
-
-			if ( isset( $field['group'] ) && $field['group'] == 'end' && $grouped ) {
-				echo '</tr></table><table class="form-table">';
-				$grouped = false;
-			} elseif ( ! $grouped ) {
-				echo '</tr>';
-			}
+				echo '</div>';
+			echo '</div>';
 		}
 
-		echo '</table>';
+		echo '</div>';
 
 		echo '</div>';
 		echo '</div>';
