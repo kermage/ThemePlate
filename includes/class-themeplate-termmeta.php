@@ -135,10 +135,13 @@ class ThemePlate_TermMeta {
 			}
 
 			$field['id'] = $meta_box['id'] . '_' . $id;
-			$field['object'] = is_object( $tag ) ? $tag->term_id : '';
+			$field['object'] = array(
+				'type' => 'term',
+				'id' => is_object( $tag ) ? $tag->term_id : ''
+			);
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = $field['object'] ? get_term_meta( $field['object'], $field['id'], true ) : '';
+			$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
 
 			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';

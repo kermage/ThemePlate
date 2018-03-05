@@ -132,10 +132,13 @@ class ThemePlate_PostMeta {
 			}
 
 			$field['id'] = $meta_box['args']['id'] . '_' . $id;
-			$field['object'] = $post->ID;
+			$field['object'] = array(
+				'type' => 'post',
+				'id' => $post->ID
+			);
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = get_post_meta( $field['object'], $field['id'], true );
+			$stored = get_post_meta( $field['object']['id'], $field['id'], true );
 			$field['value'] = $stored ? $stored : $default;
 
 			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';

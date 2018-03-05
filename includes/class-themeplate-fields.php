@@ -284,7 +284,19 @@ class ThemePlate_Fields {
 					$sub['id'] = $field['id'] . '_' . $id;
 
 					$default = isset( $sub['std'] ) ? $sub['std'] : '';
-					$stored = get_post_meta( $field['object'], $sub['id'], true );
+
+					if ( $field['object']['type'] == 'post' ) {
+						$stored = get_post_meta( $field['object']['id'], $sub['id'], true );
+					} elseif ( $field['object']['type'] == 'term' ) {
+						$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $sub['id'], true ) : '';
+					} elseif ( $field['object']['type'] == 'user' ) {
+						$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $sub['id'], true ) : '';
+					} elseif ( $field['object']['type'] == 'option' ) {
+						$sub['prefix'] = $field['prefix'];
+						$options = get_option( $field['object']['id'] );
+						$stored = isset( $options[$sub['id']] ) ? $options[$sub['id']] : '';
+					}
+
 					$sub['value'] = $stored ? $stored : $default;
 
 					$desc = ! empty( $sub['desc'] ) ? '<span class="description">' . $sub['desc'] . '</span>' : '';

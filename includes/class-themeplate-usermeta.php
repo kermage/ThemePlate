@@ -127,10 +127,13 @@ class ThemePlate_UserMeta {
 			}
 
 			$field['id'] = $meta_box['id'] . '_' . $id;
-			$field['object'] = is_object( $user ) ? $user->ID : '';
+			$field['object'] = array(
+				'type' => 'user',
+				'id' => is_object( $user ) ? $user->ID : ''
+			);
 
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = $field['object'] ? get_user_meta( $field['object'], $field['id'], true ) : '';
+			$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
 
 			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';
