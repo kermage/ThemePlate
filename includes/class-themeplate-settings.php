@@ -176,6 +176,10 @@ class ThemePlate_Settings {
 	public function create( $field ) {
 
 		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
+		$field['object'] = array(
+			'type' => 'option',
+			'id' => $field['prefix']
+		);
 
 		$default = isset( $field['std'] ) ? $field['std'] : '';
 		$options = get_option( $field['prefix'] );
