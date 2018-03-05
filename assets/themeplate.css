@@ -1,10 +1,29 @@
-.themeplate .label .description {
-	padding-top: 0.5em;
+.themeplate.seamless {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+}
+
+.themeplate.seamless .handlediv {
+	display: none;
+}
+
+#poststuff .themeplate.seamless h2,
+.themeplate.seamless .inside {
+	padding: 0;
+}
+
+#poststuff .themeplate.seamless h2,
+.edit-tags-php .themeplate.seamless h2 {
+	font-size: 1.3em;
+}
+
+.themeplate.seamless .inside > .description,
+.themeplate.seamless .field-wrapper {
+	border-bottom: 0;
 }
 
 .themeplate .description {
-	display: block;
-	color: #666;
 	font-weight: normal;
 	font-style: normal;
 }
@@ -13,6 +32,49 @@
 	margin: 1em 0 0;
 	padding-bottom: 1em;
 	border-bottom: 1px solid #ddd;
+}
+
+.fields-container {
+	margin-top: 1em;
+}
+
+.field-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #ddd;
+}
+
+.field-wrapper:last-of-type {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.field-label {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 15%;
+}
+
+.field-label .label {
+	color: #23282d;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.field-label .description {
+	display: block;
+	padding-top: 0.5em;
+	color: #666;
+}
+
+.field-input {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 84%;
 }
 
 .themeplate fieldset span + span {
@@ -139,68 +201,6 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none!important;
-}
-
-.themeplate.seamless {
-	background: transparent;
-	border: 0;
-	box-shadow: none;
-}
-
-.themeplate.seamless .handlediv {
-	display: none;
-}
-
-#poststuff .themeplate.seamless h2,
-.themeplate.seamless .inside {
-	padding: 0;
-}
-
-#poststuff .themeplate.seamless h2,
-.edit-tags-php .themeplate.seamless h2 {
-	font-size: 1.3em;
-}
-
-.themeplate.seamless .inside > .description,
-.themeplate.seamless .field-wrapper {
-	border-bottom: 0;
-}
-
-.fields-container {
-	margin-top: 1em;
-}
-
-.field-wrapper {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	margin-bottom: 1em;
-	padding-bottom: 1em;
-	border-bottom: 1px solid #ddd;
-}
-
-.field-wrapper:last-of-type {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	border-bottom: 0;
-}
-
-.field-label {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: 15%;
-}
-
-.field-label > .label {
-	color: #23282d;
-	font-size: 14px;
-	font-weight: 600;
-}
-
-.field-input {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: 84%;
 }
 
 @media screen and ( min-width: 851px ) {
