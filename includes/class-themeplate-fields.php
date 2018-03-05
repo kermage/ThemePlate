@@ -280,7 +280,6 @@ class ThemePlate_Fields {
 				break;
 
 			case 'group':
-				echo '<table class="form-table">';
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['id'] = $field['id'] . '_' . $id;
 
@@ -291,14 +290,13 @@ class ThemePlate_Fields {
 					$desc = ! empty( $sub['desc'] ) ? '<span class="description">' . $sub['desc'] . '</span>' : '';
 					$label = '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . $desc . '</label>';
 
-					echo '<tr>';
-					echo '<th scope="row">' . $label . '</th>';
-					echo '<td>';
-						ThemePlate_Fields::instance()->render( $sub );
-					echo '</td>';
-					echo '</tr>';
+					echo '<div class="field-wrapper">';
+						echo '<div class="field-label">' . $label . '</div>';
+						echo '<div class="field-input">';
+							ThemePlate_Fields::instance()->render( $sub );
+						echo '</div>';
+					echo '</div>';
 				}
-				echo '</table>';
 				break;
 		}
 

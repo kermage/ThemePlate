@@ -222,6 +222,43 @@
 	border: 0;
 }
 
+.fields-container {
+	margin-top: 1em;
+}
+
+.field-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #ddd;
+}
+
+.field-wrapper:last-of-type {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.field-label {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 15%;
+}
+
+.field-label > .label {
+	color: #23282d;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.field-input {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: 84%;
+}
+
 @media screen and ( min-width: 851px ) {
 	[id $="side-sortables"] .themeplate th,
 	[id $="side-sortables"] .themeplate td {
