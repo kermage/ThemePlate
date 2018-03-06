@@ -65,12 +65,6 @@
 	font-weight: 600;
 }
 
-.field-label .description {
-	display: block;
-	padding-top: 0.5em;
-	color: #666;
-}
-
 .field-input {
 	flex-grow: 0;
 	flex-shrink: 0;
@@ -174,7 +168,8 @@
 	margin-bottom: 1em;
 }
 
-#after_title-sortables .themeplate,
+#after_title-sortables .postbox,
+#after_title-sortables .sortable-placeholder,
 .term-php .themeplate,
 .user-new-php .themeplate,
 .user-edit-php .themeplate,
