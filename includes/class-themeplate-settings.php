@@ -161,11 +161,11 @@ class ThemePlate_Settings {
 		}
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
-			$desc = ! empty( $field['args']['desc'] ) ? '<span class="description">' . $field['args']['desc'] . '</span>' : '';
-			$label = '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . $desc . '</label>';
-
 			echo '<div class="field-wrapper">';
-				echo '<div class="field-label">' . $label . '</div>';
+				echo '<div class="field-label">';
+					echo '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>';
+					echo ! empty( $field['args']['desc'] ) ? '<p class="description">' . $field['args']['desc'] . '</p>' : '';
+				echo '</div>';
 				echo '<div class="field-input">';
 					call_user_func( $field['callback'], $field['args'] );
 				echo '</div>';

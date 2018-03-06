@@ -144,13 +144,13 @@ class ThemePlate_TermMeta {
 			$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
 
-			$desc = ! empty( $field['desc'] ) ? '<span class="description">' . $field['desc'] . '</span>' : '';
-			$label = '<label class="label" for="' . $field['id'] . '">' . $field['name'] . $desc . '</label>';
-
 			echo '<div class="field-wrapper">';
-				echo '<div class="field-label">' . $label . '</div>';
+				echo '<div class="field-label">';
+					echo '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>';
+					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
+				echo '</div>';
 				echo '<div class="field-input">';
-				ThemePlate_Fields::instance()->render( $field );
+					ThemePlate_Fields::instance()->render( $field );
 				echo '</div>';
 			echo '</div>';
 		}
