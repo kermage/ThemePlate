@@ -74,6 +74,35 @@
 	flex-basis: 84%;
 }
 
+.type-group {
+	padding-top: 0;
+	border: 1px solid #ddd;
+}
+
+.type-group > .field-label,
+.type-group > .field-input {
+	flex-basis: 100%;
+}
+
+.type-group > .field-label {
+	padding: 1em;
+}
+
+.type-group > .field-input {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.type-group > .field-input > .field-wrapper {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
+	margin-top: 0;
+	padding: 1em;
+	border-top: 0;
+}
+
 .themeplate fieldset span + span {
 	margin-left: 1em;
 }
