@@ -18,9 +18,12 @@
 	font-size: 1.3em;
 }
 
-.themeplate.seamless .inside > .description,
-.themeplate.seamless .field-wrapper {
+.themeplate.seamless .inside > .description {
 	border-bottom: 0;
+}
+
+.themeplate.seamless .field-wrapper {
+	border-top: 0;
 }
 
 .themeplate .description {
@@ -42,15 +45,15 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin-bottom: 1em;
-	padding-bottom: 1em;
-	border-bottom: 1px solid #ddd;
+	margin-top: 1em;
+	padding-top: 1em;
+	border-top: 1px solid #ddd;
 }
 
-.field-wrapper:last-of-type {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	border-bottom: 0;
+.field-wrapper:first-of-type {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: 0;
 }
 
 .field-label {
