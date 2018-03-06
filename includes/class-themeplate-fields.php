@@ -299,11 +299,11 @@ class ThemePlate_Fields {
 
 					$sub['value'] = $stored ? $stored : $default;
 
-					$desc = ! empty( $sub['desc'] ) ? '<span class="description">' . $sub['desc'] . '</span>' : '';
-					$label = '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . $desc . '</label>';
-
 					echo '<div class="field-wrapper">';
-						echo '<div class="field-label">' . $label . '</div>';
+						echo '<div class="field-label">';
+							echo '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . '</label>';
+							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
+						echo '</div>';
 						echo '<div class="field-input">';
 							ThemePlate_Fields::instance()->render( $sub );
 						echo '</div>';
