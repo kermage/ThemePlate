@@ -109,12 +109,12 @@ class ThemePlate_PostMeta {
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
 
 		if ( isset( $meta_box['args']['show_on'] ) ) {
-			$show_on = json_encode( $meta_box['args']['show_on'] );
+			$show_on = json_encode( $meta_box['args']['show_on'], JSON_NUMERIC_CHECK );
 			echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
 		}
 
 		if ( isset( $meta_box['args']['hide_on'] ) ) {
-			$hide_on = json_encode( $meta_box['args']['hide_on'] );
+			$hide_on = json_encode( $meta_box['args']['hide_on'], JSON_NUMERIC_CHECK );
 			echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
 		}
 
