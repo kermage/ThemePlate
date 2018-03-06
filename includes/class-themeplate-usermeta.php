@@ -136,7 +136,7 @@ class ThemePlate_UserMeta {
 			$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
 
-			echo '<div class="field-wrapper">';
+			echo '<div class="field-wrapper type-' . $field['type'] . '">';
 				echo '<div class="field-label">';
 					echo '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';

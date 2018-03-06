@@ -161,7 +161,7 @@ class ThemePlate_Settings {
 		}
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
-			echo '<div class="field-wrapper">';
+			echo '<div class="field-wrapper type-' . $field['args']['type'] . '">';
 				echo '<div class="field-label">';
 					echo '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>';
 					echo ! empty( $field['args']['desc'] ) ? '<p class="description">' . $field['args']['desc'] . '</p>' : '';

@@ -299,7 +299,7 @@ class ThemePlate_Fields {
 
 					$sub['value'] = $stored ? $stored : $default;
 
-					echo '<div class="field-wrapper">';
+					echo '<div class="field-wrapper type-' . $sub['type'] . '">';
 						echo '<div class="field-label">';
 							echo '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . '</label>';
 							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
