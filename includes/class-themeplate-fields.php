@@ -56,9 +56,27 @@ class ThemePlate_Fields {
 				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
 				break;
 
+			case 'date':
+				echo '<input type="date" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
+				break;
+
+			case 'time':
+				echo '<input type="time" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
+				break;
+
+			case 'email':
+				echo '<input type="email" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				break;
+
+			case 'url':
+				echo '<input type="url" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				break;
+
+
 			case 'textarea' :
 				echo '<textarea name="' . $field_name . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
 				break;
+
 
 			case 'select' :
 				echo '<input type="hidden" name="' . $field_name . '" />';
@@ -87,6 +105,7 @@ class ThemePlate_Fields {
 				}
 				echo '</select>';
 				break;
+
 
 			case 'radiolist' :
 				$list = true;
@@ -125,9 +144,11 @@ class ThemePlate_Fields {
 				}
 				break;
 
+
 			case 'color':
 				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( isset( $field['std'] ) ? ' data-default-color="' . $field['std'] . '"' : '' ) . ' />';
 				break;
+
 
 			case 'file':
 				echo '<div id="' . $field['id'] . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '">';
@@ -160,13 +181,6 @@ class ThemePlate_Fields {
 				echo '</div>';
 				break;
 
-			case 'date':
-				echo '<input type="date" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
-				break;
-
-			case 'time':
-				echo '<input type="time" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
-				break;
 
 			case 'number':
 				echo '<input type="number" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
@@ -178,6 +192,17 @@ class ThemePlate_Fields {
 				echo ' />';
 				break;
 
+			case 'range':
+				echo '<input type="range" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '"';
+				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+					foreach ( $field['options'] as $option => $value ) {
+						echo $option . '="' . $value . '"';
+					}
+				}
+				echo ' />';
+				break;
+
+
 			case 'editor':
 				$settings = array(
 					'textarea_name' => $field_name,
@@ -185,6 +210,7 @@ class ThemePlate_Fields {
 				);
 				wp_editor( $field['value'], $field['id'], $settings );
 				break;
+
 
 			case 'post':
 				$list = 'post';
@@ -279,23 +305,6 @@ class ThemePlate_Fields {
 				echo '</select>';
 				break;
 
-			case 'email':
-				echo '<input type="email" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
-				break;
-
-			case 'url':
-				echo '<input type="url" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
-				break;
-
-			case 'range':
-				echo '<input type="range" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '"';
-				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
-					foreach ( $field['options'] as $option => $value ) {
-						echo $option . '="' . $value . '"';
-					}
-				}
-				echo ' />';
-				break;
 
 			case 'group':
 				foreach ( $field['fields'] as $id => $sub ) {
