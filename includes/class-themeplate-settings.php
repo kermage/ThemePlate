@@ -55,12 +55,11 @@ class ThemePlate_Settings {
 
 			$field['id'] = $param['id'] . '_' . $id;
 			$field['page'] = isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug;
-			$label = $field['name'] . ( isset( $field['desc'] ) ? '<span>' . $field['desc'] . '</span>' : '' );
 			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 
 			add_settings_field(
 				$field['id'],
-				$label,
+				$field['name'],
 				array( $this, 'create' ),
 				$page,
 				$param['id'],
