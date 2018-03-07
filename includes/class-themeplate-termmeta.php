@@ -143,6 +143,7 @@ class ThemePlate_TermMeta {
 			$default = isset( $field['std'] ) ? $field['std'] : '';
 			$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $field['id'], true ) : '';
 			$field['value'] = $stored ? $stored : $default;
+			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 
 			echo '<div class="field-wrapper type-' . $field['type'] . '">';
 				echo '<div class="field-label">';

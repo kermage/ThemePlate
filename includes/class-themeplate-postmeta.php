@@ -140,6 +140,7 @@ class ThemePlate_PostMeta {
 			$default = isset( $field['std'] ) ? $field['std'] : '';
 			$stored = get_post_meta( $field['object']['id'], $field['id'], true );
 			$field['value'] = $stored ? $stored : $default;
+			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 
 			echo '<div class="field-wrapper type-' . $field['type'] . '">';
 				echo '<div class="field-label">';
