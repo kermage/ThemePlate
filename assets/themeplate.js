@@ -12,6 +12,19 @@
 	$( '.themeplate .form-table:empty' ).remove();
 
 
+	$( '.meta-box-sortables' ).on( 'sortstart', function() {
+		if ( $( '#after_title-sortables' ).is( ':empty' ) ) {
+			$( '#after_title-sortables' ).css( 'min-height', 20 );
+		}
+	});
+
+	$( '.meta-box-sortables' ).on( 'sortstop', function() {
+		if ( $( '#after_title-sortables' ).is( ':empty' ) ) {
+			$( '#after_title-sortables' ).css( 'min-height', '' );
+		}
+	});
+
+
 	$( '.themeplate-color-picker' ).wpColorPicker();
 
 
