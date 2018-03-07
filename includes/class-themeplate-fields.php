@@ -90,6 +90,9 @@ class ThemePlate_Fields {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
 						$value = ( $seq ? (int) $value - 1 : $value );
+						if ( ! in_array( $value, array_keys( $field['options'] ) ) ) {
+							continue;
+						}
 						$ordered[$value] = $field['options'][$value];
 						unset( $field['options'][$value] );
 					}
@@ -231,6 +234,9 @@ class ThemePlate_Fields {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
 						$key = array_search( $value, array_column( $pages, 'ID' ) );
+						if ( $key === false ) {
+							continue;
+						}
 						$ordered[] = $pages[$key];
 						unset( $pages[$key] );
 						$pages = array_values( $pages );
@@ -260,6 +266,9 @@ class ThemePlate_Fields {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
 						$key = array_search( $value, array_column( $users, 'ID' ) );
+						if ( $key === false ) {
+							continue;
+						}
 						$ordered[] = $users[$key];
 						unset( $users[$key] );
 						$users = array_values( $users );
@@ -289,6 +298,9 @@ class ThemePlate_Fields {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
 						$key = array_search( $value, array_column( $terms, 'term_id' ) );
+						if ( $key === false ) {
+							continue;
+						}
 						$ordered[] = $terms[$key];
 						unset( $terms[$key] );
 						$terms = array_values( $terms );

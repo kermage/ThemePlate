@@ -104,12 +104,12 @@ class ThemePlate_UserMeta {
 		echo '<div class="inside">';
 
 		if ( isset( $meta_box['show_on'] ) ) {
-			$show_on = json_encode( $meta_box['show_on'] );
+			$show_on = json_encode( $meta_box['show_on'], JSON_NUMERIC_CHECK );
 			echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
 		}
 
 		if ( isset( $meta_box['hide_on'] ) ) {
-			$hide_on = json_encode( $meta_box['hide_on'] );
+			$hide_on = json_encode( $meta_box['hide_on'], JSON_NUMERIC_CHECK );
 			echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
 		}
 
