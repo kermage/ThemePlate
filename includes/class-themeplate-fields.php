@@ -288,7 +288,13 @@ class ThemePlate_Fields {
 				break;
 
 			case 'range':
-				echo '<input type="range" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				echo '<input type="range" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '"';
+				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+					foreach ( $field['options'] as $option => $value ) {
+						echo $option . '="' . $value . '"';
+					}
+				}
+				echo ' />';
 				break;
 
 			case 'group':
