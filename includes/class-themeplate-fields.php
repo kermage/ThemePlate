@@ -279,6 +279,18 @@ class ThemePlate_Fields {
 				echo '</select>';
 				break;
 
+			case 'email':
+				echo '<input type="email" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				break;
+
+			case 'url':
+				echo '<input type="url" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				break;
+
+			case 'range':
+				echo '<input type="range" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				break;
+
 			case 'group':
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['id'] = $field['id'] . '_' . $id;
