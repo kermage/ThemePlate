@@ -53,23 +53,11 @@ class ThemePlate_Fields {
 		switch ( $field['type'] ) {
 			default:
 			case 'text':
-				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
-				break;
-
 			case 'date':
-				echo '<input type="date" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
-				break;
-
 			case 'time':
-				echo '<input type="time" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '" />';
-				break;
-
 			case 'email':
-				echo '<input type="email" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
-				break;
-
 			case 'url':
-				echo '<input type="url" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				echo '<input type="' . $field['type'] . '" name="' . $field_name . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
 				break;
 
 
@@ -186,17 +174,8 @@ class ThemePlate_Fields {
 
 
 			case 'number':
-				echo '<input type="number" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
-				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
-					foreach ( $field['options'] as $option => $value ) {
-						echo $option . '="' . $value . '"';
-					}
-				}
-				echo ' />';
-				break;
-
 			case 'range':
-				echo '<input type="range" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '"';
+				echo '<input type="' . $field['type'] . '" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					foreach ( $field['options'] as $option => $value ) {
 						echo $option . '="' . $value . '"';
