@@ -124,7 +124,7 @@
 
 			$select.select2( {
 				allowClear: true,
-				placeholder: '',
+				placeholder: '— Select —',
 				dropdownCssClass: 'themeplate-select2',
 				containerCssClass: 'themeplate-select2'
 			});

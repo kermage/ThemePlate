@@ -81,8 +81,8 @@ class ThemePlate_Fields {
 			case 'select' :
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				if ( ! $field['multiple'] && ( $field['none'] || ! $field['value'] ) ) {
-					echo '<option value="0"' . ( $field['none'] && $field['value' ] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
+				if ( ! $field['value'] ) {
+					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {
 					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
@@ -220,8 +220,8 @@ class ThemePlate_Fields {
 			case 'page':
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				if ( ! $field['multiple'] && ( $field['none'] || ! $field['value'] ) ) {
-					echo '<option value="0"' . ( $field['none'] && $field['value' ] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
+				if ( ! $field['value'] ) {
+					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {
 					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
@@ -256,8 +256,8 @@ class ThemePlate_Fields {
 			case 'user':
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				if ( ! $field['multiple'] && ( $field['none'] || ! $field['value'] ) ) {
-					echo '<option value="0"' . ( $field['none'] && $field['value' ] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
+				if ( ! $field['value'] ) {
+					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {
 					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
@@ -288,8 +288,8 @@ class ThemePlate_Fields {
 			case 'term':
 				echo '<input type="hidden" name="' . $field_name . '" />';
 				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
-				if ( ! $field['multiple'] && ( $field['none'] || ! $field['value'] ) ) {
-					echo '<option value="0"' . ( $field['none'] && $field['value' ] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
+				if ( ! $field['value'] ) {
+					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {
 					echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
 				}
