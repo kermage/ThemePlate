@@ -261,7 +261,6 @@ class ThemePlate_Fields {
 					} elseif ( $field['object']['type'] == 'user' ) {
 						$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $sub['id'], true ) : '';
 					} elseif ( $field['object']['type'] == 'option' ) {
-						$sub['prefix'] = $field['prefix'];
 						$options = get_option( $field['object']['id'] );
 						$stored = isset( $options[$sub['id']] ) ? $options[$sub['id']] : '';
 					}

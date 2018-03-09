@@ -177,15 +177,14 @@ class ThemePlate_Settings {
 
 	public function create( $field ) {
 
-		$field['prefix'] = ThemePlate()->key . '-' . $field['page'];
 		$field['object'] = array(
 			'type' => 'option',
-			'id' => $field['prefix']
+			'id' => ThemePlate()->key . '-' . $field['page']
 		);
-		$field['name'] = $field['prefix'] . '[' . $field['id'] . ']';
+		$field['name'] = $field['object']['id'] . '[' . $field['id'] . ']';
 
 		$default = isset( $field['std'] ) ? $field['std'] : '';
-		$options = get_option( $field['prefix'] );
+		$options = get_option( $field['object']['id'] );
 		$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
 		$field['value'] = $stored ? $stored : $default;
 
