@@ -70,7 +70,7 @@ class ThemePlate_UserMeta {
 			$value = $meta_box['hide_on'];
 
 			if ( is_callable( $value ) ) {
-				$check =! call_user_func( $value );
+				$check = ! call_user_func( $value );
 				unset( $meta_box['hide_on'] );
 			} elseif ( is_array( $value ) ) {
 				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
@@ -143,6 +143,7 @@ class ThemePlate_UserMeta {
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
 				echo '</div>';
 				echo '<div class="field-input">';
+					$field['name'] = ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '[' . $field['id'] . ']';
 					ThemePlate_Fields::instance()->render( $field );
 				echo '</div>';
 			echo '</div>';

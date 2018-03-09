@@ -182,6 +182,7 @@ class ThemePlate_Settings {
 			'type' => 'option',
 			'id' => $field['prefix']
 		);
+		$field['name'] = $field['prefix'] . '[' . $field['id'] . ']';
 
 		$default = isset( $field['std'] ) ? $field['std'] : '';
 		$options = get_option( $field['prefix'] );

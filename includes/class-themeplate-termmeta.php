@@ -151,6 +151,7 @@ class ThemePlate_TermMeta {
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
 				echo '</div>';
 				echo '<div class="field-input">';
+					$field['name'] = ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '[' . $field['id'] . ']';
 					ThemePlate_Fields::instance()->render( $field );
 				echo '</div>';
 			echo '</div>';

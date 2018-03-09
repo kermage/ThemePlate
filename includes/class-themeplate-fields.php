@@ -36,9 +36,6 @@ class ThemePlate_Fields {
 			return false;
 		}
 
-		$field_name = isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key;
-		$field_name .= '[' . $field['id'] . ']';
-
 		$field = array_merge( array( 'multiple' => false, 'none' => false ), $field );
 
 		$list = false;
@@ -57,18 +54,18 @@ class ThemePlate_Fields {
 			case 'time':
 			case 'email':
 			case 'url':
-				echo '<input type="' . $field['type'] . '" name="' . $field_name . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+				echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
 				break;
 
 
 			case 'textarea' :
-				echo '<textarea name="' . $field_name . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
+				echo '<textarea name="' . $field['name'] . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
 				break;
 
 
 			case 'select' :
-				echo '<input type="hidden" name="' . $field_name . '" />';
-				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<input type="hidden" name="' . $field['name'] . '" />';
+				echo '<select class="themeplate-select2" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['value'] ) {
 					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {
@@ -106,7 +103,7 @@ class ThemePlate_Fields {
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<' . ( $list ? 'p' : 'span' ) . '>';
-						echo '<label><input type="radio" name="' . $field_name . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
+						echo '<label><input type="radio" name="' . $field['name'] . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
 						echo '</' . ( $list ? 'p' : 'span' ) . '>';
 					}
 					echo '</fieldset>';
@@ -116,13 +113,13 @@ class ThemePlate_Fields {
 			case 'checklist' :
 				$list = true;
 			case 'checkbox' :
-				echo '<input type="hidden" name="' . $field_name . '" />';
+				echo '<input type="hidden" name="' . $field['name'] . '" />';
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					echo '<fieldset>';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<' . ( $list ? 'p' : 'span' ) . '>';
-						echo '<label><input type="checkbox" name="' . $field_name . '[]" value="' . $value . '"';
+						echo '<label><input type="checkbox" name="' . $field['name'] . '[]" value="' . $value . '"';
 						if ( in_array( $value, (array) $field['value'] ) ) {
 							echo ' checked="checked"';
 						}
@@ -131,13 +128,13 @@ class ThemePlate_Fields {
 					}
 					echo '</fieldset>';
 				} else {
-					echo '<input type="checkbox" id="' . $field['id'] . '" name="' . $field_name . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
+					echo '<input type="checkbox" id="' . $field['id'] . '" name="' . $field['name'] . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
 				}
 				break;
 
 
 			case 'color':
-				echo '<input type="text" name="' . $field_name . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( isset( $field['std'] ) ? ' data-default-color="' . $field['std'] . '"' : '' ) . ' />';
+				echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( isset( $field['std'] ) ? ' data-default-color="' . $field['std'] . '"' : '' ) . ' />';
 				break;
 
 
@@ -160,7 +157,7 @@ class ThemePlate_Fields {
 						echo '<div class="filename"><div>' . $name . '</div></div>';
 						echo '</div></div>';
 						echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-						echo '<input type="hidden" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
+						echo '<input type="hidden" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
 						echo '</div>';
 					}
 				}
@@ -175,7 +172,7 @@ class ThemePlate_Fields {
 
 			case 'number':
 			case 'range':
-				echo '<input type="' . $field['type'] . '" name="' . $field_name . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
+				echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					foreach ( $field['options'] as $option => $value ) {
 						echo $option . '="' . $value . '"';
@@ -187,7 +184,7 @@ class ThemePlate_Fields {
 
 			case 'editor':
 				$settings = array(
-					'textarea_name' => $field_name,
+					'textarea_name' => $field['name'],
 					'textarea_rows' => 10
 				);
 				wp_editor( $field['value'], $field['id'], $settings );
@@ -220,8 +217,8 @@ class ThemePlate_Fields {
 						$lbl_prop = 'name';
 						break;
 				}
-				echo '<input type="hidden" name="' . $field_name . '" />';
-				echo '<select class="themeplate-select2" name="' . $field_name . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<input type="hidden" name="' . $field['name'] . '" />';
+				echo '<select class="themeplate-select2" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( ! $field['value'] ) {
 					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {
