@@ -139,7 +139,8 @@ class ThemePlate_Fields {
 
 
 			case 'file':
-				echo '<div id="' . $field['id'] . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '" data-key="' . ( isset( $field['prefix'] ) ? $field['prefix'] : ThemePlate()->key ) . '">';
+				echo '<input type="hidden" name="' . $field['name'] . '" />';
+				echo '<div id="' . $field['id'] . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '">';
 				echo '<div class="preview-holder">';
 				if ( ! $field['multiple'] ) {
 					echo '<div class="attachment placeholder">';

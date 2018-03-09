@@ -38,7 +38,7 @@
 			isMultiple = true;
 		}
 
-		var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']' + ( isMultiple ? '[]' : '' );
+		var fieldname = $parent.siblings( 'input' ).attr( 'name' ) + ( isMultiple ? '[]' : '' );
 
 		meta_media_frame = wp.media( {
 			title: 'Select Media',
@@ -76,11 +76,8 @@
 		e.preventDefault();
 
 		var $parent = $( this ).parents( '.themeplate-file' );
-		var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']';
-		var field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
 
 		$parent.find( '.preview-holder' ).html( '' );
-		$parent.append( field );
 		$( this ).addClass( 'hidden' );
 	});
 
@@ -103,12 +100,6 @@
 
 		if ( ! $parent.find( '.preview-holder' ).html().length ) {
 			$parent.find( '.attachments-clear' ).addClass( 'hidden' );
-		}
-
-		if ( ! $parent.find( '.preview-holder' ).html().length || ! isMultiple ) {
-			var fieldname = $parent.data( 'key' ) + '[' + $parent.attr( 'id' ) + ']';
-			var field = '<input type="hidden" class="hidden placeholder" name="' + fieldname + '" value="">';
-			$parent.append( field );
 		}
 	});
 
