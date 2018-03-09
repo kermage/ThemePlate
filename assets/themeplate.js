@@ -11,13 +11,13 @@
 
 
 	$( '.meta-box-sortables' ).on( 'sortstart', function() {
-		if ( $( '#after_title-sortables' ).is( ':empty' ) ) {
+		if ( $( '#after_title-sortables' ).is( ':empty' ) || $( '#after_title-sortables' ).children( ':visible' ).length == 0 ) {
 			$( '#after_title-sortables' ).css( 'min-height', 20 );
 		}
 	});
 
 	$( '.meta-box-sortables' ).on( 'sortstop', function() {
-		if ( $( '#after_title-sortables' ).is( ':empty' ) ) {
+		if ( $( '#after_title-sortables' ).is( ':empty' ) || $( '#after_title-sortables' ).children( ':visible' ).length == 0 ) {
 			$( '#after_title-sortables' ).css( 'min-height', '' );
 		}
 	});
