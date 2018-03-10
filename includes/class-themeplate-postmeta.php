@@ -138,6 +138,8 @@ class ThemePlate_PostMeta {
 			);
 
 			$key = $field['id'];
+			$title = $field['name'];
+			$name = ThemePlate()->key . '[' . $key . ']';
 			$default = isset( $field['std'] ) ? $field['std'] : '';
 			$unique = isset( $field['repeatable'] ) ? false : true;
 			$stored = get_post_meta( $field['object']['id'], $key, $unique );
@@ -147,20 +149,20 @@ class ThemePlate_PostMeta {
 
 			echo '<div class="field-wrapper type-' . $field['type'] . '">';
 				echo '<div class="field-label">';
-					echo '<label class="label" for="' . $key . '">' . $field['name'] . '</label>';
+					echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
 				echo '</div>';
 				echo '<div class="field-input">';
-					$field['name'] = ThemePlate()->key . '[' . $key . ']' . ( $unique ? '' : '[]'  );
-
 					if ( $unique ) {
 						$field['value'] = $value;
+						$field['name'] =  $name;
 
 						ThemePlate_Fields::instance()->render( $field );
 					} else {
 						foreach ( (array) $value as $i => $val ) {
 							$field['value'] = $val;
-							$field['id'] = $key . '_' . $i;
+							$field['id'] = $key . '_i-' . $i;
+							$field['name'] =  $name . '[i-' . $i . ']';
 
 							echo '<div class="themeplate-clone">';
 								ThemePlate_Fields::instance()->render( $field );
@@ -169,7 +171,8 @@ class ThemePlate_PostMeta {
 						}
 
 						$field['value'] = $default;
-						$field['id'] = $key . '_x';
+						$field['id'] = $key . '_i-x';
+						$field['name'] =  $name . '[i-x]';
 
 						echo '<div class="themeplate-clone hidden">';
 							ThemePlate_Fields::instance()->render( $field );

@@ -9,10 +9,17 @@
 		var index = $( this ).siblings( '.themeplate-clone' ).length - 1;
 		var $field = $( this ).siblings( '.hidden' );
 		var $cloned = $field.clone( true );
+		var attributes = ['id','name'];
 
-		$cloned.find( '[id]' ).each( function() {
-			var id = $( this ).attr( 'id' ).replace( '_x', '_' + index );
-			$( this ).attr( 'id', id );
+		$cloned.find( '[' + attributes.join( '],[' ) + ']' ).each( function() {
+			for ( var i in attributes ) {
+				if ( $( this ).attr( attributes[i] ) == undefined ) {
+					continue;
+				}
+
+				var value = $( this ).attr( attributes[i] ).replace( '-x', '-' + index );
+				$( this ).attr( attributes[i], value );
+			}
 		});
 
 		$cloned.removeClass( 'hidden' ).insertBefore( $field );
