@@ -137,19 +137,35 @@ class ThemePlate_PostMeta {
 				'id' => $post->ID
 			);
 
+			$key = $field['id'];
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = get_post_meta( $field['object']['id'], $field['id'], true );
-			$field['value'] = $stored ? $stored : $default;
+			$unique = isset( $field['repeatable'] ) ? false : true;
+			$stored = get_post_meta( $field['object']['id'], $key, $unique );
+			$value = $stored ? $stored : $default;
+
 			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 
 			echo '<div class="field-wrapper type-' . $field['type'] . '">';
 				echo '<div class="field-label">';
-					echo '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>';
+					echo '<label class="label" for="' . $key . '">' . $field['name'] . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
 				echo '</div>';
 				echo '<div class="field-input">';
-					$field['name'] = ThemePlate()->key . '[' . $field['id'] . ']';
-					ThemePlate_Fields::instance()->render( $field );
+					$field['name'] = ThemePlate()->key . '[' . $key . ']' . ( $unique ? '' : '[]'  );
+
+					if ( $unique || ! $value ) {
+						$field['value'] = $value;
+
+						ThemePlate_Fields::instance()->render( $field );
+					} else {
+						foreach ( $value as $i => $val ) {
+							$field['value'] = $val;
+							$field['id'] = $key . '_' . $i;
+
+							ThemePlate_Fields::instance()->render( $field );
+						}
+					}
+
 				echo '</div>';
 			echo '</div>';
 		}
