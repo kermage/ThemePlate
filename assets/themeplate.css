@@ -195,9 +195,10 @@
 
 .themeplate-clone {
 	position: relative;
+	min-height: 30px;
 	margin-bottom: 1em;
-	padding-left: 18px;
-	padding-right: 38px;
+	padding-left: 23px;
+	padding-right: 43px;
 	padding-top: 2px;
 }
 
