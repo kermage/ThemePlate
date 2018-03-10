@@ -175,7 +175,7 @@ class ThemePlate_PostMeta {
 							ThemePlate_Fields::instance()->render( $field );
 							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 						echo '</div>';
-						echo '<input type="button" class="button" id="themeplate_' . $key . '_cloner" value="Add Field" />';
+						echo '<input type="button" class="button clone-add" value="Add Field" />';
 					}
 				echo '</div>';
 			echo '</div>';
