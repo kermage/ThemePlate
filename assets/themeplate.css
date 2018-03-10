@@ -103,6 +103,11 @@
 	border-top: 0;
 }
 
+.themeplate .wp-color-result,
+.themeplate fieldset span {
+	vertical-align: sub;
+}
+
 .themeplate fieldset span + span {
 	margin-left: 1em;
 }
