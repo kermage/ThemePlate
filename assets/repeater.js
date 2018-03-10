@@ -32,6 +32,10 @@
 		$( this ).sortable( {
 			handle: '.themeplate-handle',
 			items: '> .themeplate-clone',
+			placeholder: 'themaplate-clone clone-placeholder',
+			start: function ( e, ui ) {
+				ui.placeholder.height( ui.item.height() );
+			},
 			stop: function() {
 				var index = 0;
 
