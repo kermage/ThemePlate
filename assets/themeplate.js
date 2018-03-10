@@ -140,11 +140,23 @@
 		e.preventDefault();
 
 		var id = e.target.id.replace( 'themeplate_', '' ).replace( '_cloner', '_' );
-		var index = $( '[id^="' + id + '"]' ).length - 1;
-		var $field = $( '#' + id + 'x' );
-		var $cloned = $field.clone( true ).attr( 'id', id + index );
+		var index = $( this ).siblings( '.themeplate-clone' ).length - 1;
+		var $field = $( this ).siblings( '.hidden' );
+		var $cloned = $field.clone( true );
 
-		$cloned.insertBefore( $field.parents( '.cloneable' ) );
+		$cloned.find( '[id^="' + id + '"]' ).each( function() {
+			$( this ).attr( 'id', id + index );
+		});
+
+		$cloned.removeClass( 'hidden' ).insertBefore( $field );
+	});
+
+	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
+		e.preventDefault();
+
+		var $field = $( this ).parents( '.themeplate-clone' );
+
+		$field.remove();
 	});
 
 }( jQuery ));

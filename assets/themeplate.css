@@ -193,6 +193,13 @@
 	display: none;
 }
 
+.themeplate-clone {
+	position: relative;
+	margin-bottom: 1em;
+	padding-right: 38px;
+	padding-top: 2px;
+}
+
 .edit-tags-php .field-label,
 .edit-tags-php .field-input {
 	flex-basis: 100%;

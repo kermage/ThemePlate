@@ -162,14 +162,18 @@ class ThemePlate_PostMeta {
 							$field['value'] = $val;
 							$field['id'] = $key . '_' . $i;
 
-							ThemePlate_Fields::instance()->render( $field );
+							echo '<div class="themeplate-clone">';
+								ThemePlate_Fields::instance()->render( $field );
+								echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+							echo '</div>';
 						}
 
 						$field['value'] = $default;
 						$field['id'] = $key . '_x';
 
-						echo '<div class="hidden-field cloneable">';
+						echo '<div class="themeplate-clone hidden">';
 							ThemePlate_Fields::instance()->render( $field );
+							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 						echo '</div>';
 						echo '<input type="button" class="button" id="themeplate_' . $key . '_cloner" value="Add Field" />';
 					}
