@@ -152,7 +152,7 @@ class ThemePlate_PostMeta {
 					echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
 				echo '</div>';
-				echo '<div class="field-input">';
+				echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
 					if ( $unique ) {
 						$field['value'] = $value;
 						$field['name'] =  $name;
@@ -165,6 +165,7 @@ class ThemePlate_PostMeta {
 							$field['name'] =  $name . '[i-' . $i . ']';
 
 							echo '<div class="themeplate-clone">';
+								echo '<div class="themeplate-handle"></div>';
 								ThemePlate_Fields::instance()->render( $field );
 								echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 							echo '</div>';
@@ -175,6 +176,7 @@ class ThemePlate_PostMeta {
 						$field['name'] =  $name . '[i-x]';
 
 						echo '<div class="themeplate-clone hidden">';
+							echo '<div class="themeplate-handle"></div>';
 							ThemePlate_Fields::instance()->render( $field );
 							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 						echo '</div>';
