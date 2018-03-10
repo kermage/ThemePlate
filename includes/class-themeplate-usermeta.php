@@ -132,19 +132,51 @@ class ThemePlate_UserMeta {
 				'id' => is_object( $user ) ? $user->ID : ''
 			);
 
+			$key = $field['id'];
+			$title = $field['name'];
+			$name = ThemePlate()->key . '[' . $key . ']';
 			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $field['id'], true ) : '';
-			$field['value'] = $stored ? $stored : $default;
+			$unique = isset( $field['repeatable'] ) ? false : true;
+			$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $field['id'], $unique ) : '';
+			$value = $stored ? $stored : $default;
+
 			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 
 			echo '<div class="field-wrapper type-' . $field['type'] . '">';
 				echo '<div class="field-label">';
-					echo '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>';
+					echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
 				echo '</div>';
-				echo '<div class="field-input">';
-					$field['name'] = ThemePlate()->key . '[' . $field['id'] . ']';
-					ThemePlate_Fields::instance()->render( $field );
+				echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
+					if ( $unique ) {
+						$field['value'] = $value;
+						$field['name'] =  $name;
+
+						ThemePlate_Fields::instance()->render( $field );
+					} else {
+						foreach ( (array) $value as $i => $val ) {
+							$field['value'] = $val;
+							$field['id'] = $key . '_i-' . $i;
+							$field['name'] =  $name . '[i-' . $i . ']';
+
+							echo '<div class="themeplate-clone">';
+								echo '<div class="themeplate-handle"></div>';
+								ThemePlate_Fields::instance()->render( $field );
+								echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+							echo '</div>';
+						}
+
+						$field['value'] = $default;
+						$field['id'] = $key . '_i-x';
+						$field['name'] =  $name . '[i-x]';
+
+						echo '<div class="themeplate-clone hidden">';
+							echo '<div class="themeplate-handle"></div>';
+							ThemePlate_Fields::instance()->render( $field );
+							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+						echo '</div>';
+						echo '<input type="button" class="button clone-add" value="Add Field" />';
+					}
 				echo '</div>';
 			echo '</div>';
 		}
@@ -163,14 +195,32 @@ class ThemePlate_UserMeta {
 			return;
 		}
 
-		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
-			$meta = get_user_meta( $user_id, $key, true );
-			if ( $val && ! isset( $meta ) ) {
-				add_user_meta( $user_id, $key, $val, true );
-			} elseif ( isset( $val[0] ) && $val != $meta ) {
-				update_user_meta( $user_id, $key, $val, $meta );
-			} elseif ( ! isset( $val[0] ) && isset( $meta ) ) {
-				delete_user_meta( $user_id, $key, $meta );
+		foreach ( $this->meta_box['fields'] as $id => $field ) {
+			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
+			$unique = isset( $field['repeatable'] ) ? false : true;
+			$stored = get_user_meta( $user_id, $key, $unique );
+			$updated = $_POST[ThemePlate()->key][$key];
+
+			if ( ! $unique ) {
+				delete_user_meta( $user_id, $key );
+
+				foreach ( (array) $updated as $i => $value ) {
+					if ( empty( $value ) ) {
+						continue;
+					}
+
+					add_user_meta( $user_id, $key, $value );
+				}
+			} else {
+				if ( $stored == $updated ) {
+					continue;
+				}
+
+				if ( $updated ) {
+					update_user_meta( $user_id, $key, $updated, $stored );
+				} else {
+					delete_user_meta( $user_id, $key, $stored );
+				}
 			}
 		}
 
