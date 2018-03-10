@@ -202,15 +202,34 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		foreach ( $_POST[ThemePlate()->key] as $key => $val ) {
-			$meta = get_post_meta( $post_id, $key, true );
-			if ( $val && ! isset( $meta ) ) {
-				add_post_meta( $post_id, $key, $val, true );
-			} elseif ( isset( $val[0] ) && $val != $meta ) {
-				update_post_meta( $post_id, $key, $val, $meta );
-			} elseif ( ! isset( $val[0] ) && isset( $meta ) ) {
-				delete_post_meta( $post_id, $key, $meta );
+		foreach ( $this->meta_box['fields'] as $id => $field ) {
+			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
+			$unique = isset( $field['repeatable'] ) ? false : true;
+			$stored = get_post_meta( $post_id, $key, $unique );
+			$updated = $_POST[ThemePlate()->key][$key];
+
+			if ( ! $unique ) {
+				delete_post_meta( $post_id, $key );
+
+				foreach ( (array) $updated as $i => $value ) {
+					if ( empty( $value ) ) {
+						continue;
+					}
+
+					add_post_meta( $post_id, $key, $value );
+				}
+			} else {
+				if ( $stored == $updated ) {
+					continue;
+				}
+
+				if ( $updated ) {
+					update_post_meta( $post_id, $key, $updated, $stored );
+				} else {
+					delete_post_meta( $post_id, $key, $stored );
+				}
 			}
+
 		}
 
 	}
