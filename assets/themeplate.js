@@ -135,4 +135,16 @@
 		});
 	});
 
+
+	$( document ).on( 'click', 'input[id^="themeplate_"][id $="_cloner"]', function( e ) {
+		e.preventDefault();
+
+		var id = e.target.id.replace( 'themeplate_', '' ).replace( '_cloner', '_' );
+		var index = $( '[id^="' + id + '"]' ).length - 1;
+		var $field = $( '#' + id + 'x' );
+		var $cloned = $field.clone( true ).attr( 'id', id + index );
+
+		$cloned.insertBefore( $field.parents( '.cloneable' ) );
+	});
+
 }( jQuery ));

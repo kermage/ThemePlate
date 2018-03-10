@@ -166,6 +166,14 @@ class ThemePlate_PostMeta {
 						}
 					}
 
+					if ( ! $unique ) {
+						$field['value'] = $default;
+						$field['id'] = $key . '_x';
+						echo '<div class="hidden-field cloneable">';
+							ThemePlate_Fields::instance()->render( $field );
+						echo '</div>';
+						echo '<input type="button" class="button" id="themeplate_' . $key . '_cloner" value="Add Field" />';
+					}
 				echo '</div>';
 			echo '</div>';
 		}
