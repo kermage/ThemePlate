@@ -94,11 +94,11 @@ class ThemePlate {
 
 	public function admin_init() {
 
-		register_setting( $this->key . '-' . $this->slug, $this->key . '-' . $this->slug );
+		register_setting( $this->key . '-' . $this->slug, $this->key . '-' . $this->slug, array( 'ThemePlate_Settings', 'save' ) );
 
 		if ( $this->pages ) {
 			foreach ( $this->pages as $id => $title ) {
-				register_setting( $this->key . '-' . $id, $this->key . '-' . $id );
+				register_setting( $this->key . '-' . $id, $this->key . '-' . $id, array( 'ThemePlate_Settings', 'save' ) );
 			}
 		}
 

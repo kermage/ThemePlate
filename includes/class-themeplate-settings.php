@@ -222,4 +222,35 @@ class ThemePlate_Settings {
 
 	}
 
+
+	public static function save( $options ) {
+
+		$values = array();
+
+		foreach ( $options as $option => $value ) {
+			if ( empty( $value ) ) {
+				continue;
+			}
+
+			if ( ! is_array( $value ) && ! empty( $value ) ) {
+				$values[$option] = $value;
+				continue;
+			}
+
+			$values[$option] = array();
+
+			foreach ( $value as $val ) {
+				if ( empty( $val ) ) {
+					continue;
+				}
+
+				array_push( $values[$option], $val );
+			}
+		}
+
+		$values = array_filter( $values );
+
+		return $values;
+	}
+
 }
