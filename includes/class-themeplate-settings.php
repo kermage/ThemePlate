@@ -39,7 +39,7 @@ class ThemePlate_Settings {
 		$param = $this->param;
 
 		$page = ThemePlate()->key . '-' . ( isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug );
-		$page .= '-' . ( $param['context'] ? $param['context'] : 'normal' );
+		$page .= '-' . ( isset( $param['context'] ) ? $param['context'] : 'normal' );
 
 		add_settings_section(
 			$param['id'],
