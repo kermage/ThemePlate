@@ -6,9 +6,9 @@
 	$( document ).on( 'click', '.clone-add', function( e ) {
 		e.preventDefault();
 
-		var index = $( this ).siblings( '.themeplate-clone' ).length - 1;
 		var $field = $( this ).siblings( '.hidden' );
 		var $cloned = $field.clone( true );
+		var index = getIndex( $field );
 
 		setIndex( $cloned, index );
 		$cloned.removeClass( 'hidden' ).insertBefore( $field );
@@ -23,7 +23,11 @@
 	});
 
 	$( '.field-input.repeatable' ).each( function () {
-		$( this ).sortable( {
+		var $this = $( this );
+		var index = $this.children( '.themeplate-clone' ).length;
+
+		$this.data( 'index', index - 1 );
+		$this.sortable( {
 			handle: '.themeplate-handle',
 			items: '> .themeplate-clone',
 			placeholder: 'themaplate-clone clone-placeholder',
@@ -33,10 +37,19 @@
 		} );
 	} );
 
-	function setIndex( $input, index ) {
+
+	function getIndex( $field ) {
+		var $input = $field.closest( '.field-input' );
+		var index = $input.data( 'index' );
+
+		$input.data( 'index', index + 1 );
+		return index;
+	}
+
+	function setIndex( $field, index ) {
 		var attributes = ['id','name'];
 
-		$input.find( '[' + attributes.join( '],[' ) + ']' ).each( function() {
+		$field.find( '[' + attributes.join( '],[' ) + ']' ).each( function() {
 			for ( var i in attributes ) {
 				if ( $( this ).attr( attributes[i] ) == undefined ) {
 					continue;
