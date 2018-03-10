@@ -134,7 +134,7 @@ class ThemePlate_TermMeta {
 				continue;
 			}
 
-			$field['id'] = $meta_box['id'] . '_' . $id;
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 			$field['object'] = array(
 				'type' => 'term',
 				'id' => is_object( $tag ) ? $tag->term_id : ''

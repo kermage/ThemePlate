@@ -126,7 +126,7 @@ class ThemePlate_UserMeta {
 				continue;
 			}
 
-			$field['id'] = $meta_box['id'] . '_' . $id;
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 			$field['object'] = array(
 				'type' => 'user',
 				'id' => is_object( $user ) ? $user->ID : ''
