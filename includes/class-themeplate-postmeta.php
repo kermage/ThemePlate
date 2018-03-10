@@ -153,22 +153,21 @@ class ThemePlate_PostMeta {
 				echo '<div class="field-input">';
 					$field['name'] = ThemePlate()->key . '[' . $key . ']' . ( $unique ? '' : '[]'  );
 
-					if ( $unique || ! $value ) {
+					if ( $unique ) {
 						$field['value'] = $value;
 
 						ThemePlate_Fields::instance()->render( $field );
 					} else {
-						foreach ( $value as $i => $val ) {
+						foreach ( (array) $value as $i => $val ) {
 							$field['value'] = $val;
 							$field['id'] = $key . '_' . $i;
 
 							ThemePlate_Fields::instance()->render( $field );
 						}
-					}
 
-					if ( ! $unique ) {
 						$field['value'] = $default;
 						$field['id'] = $key . '_x';
+
 						echo '<div class="hidden-field cloneable">';
 							ThemePlate_Fields::instance()->render( $field );
 						echo '</div>';
