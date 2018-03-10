@@ -17,15 +17,9 @@
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
-		var index = 0;
 		var $field = $( this ).parents( '.themeplate-clone' );
-		var $input = $( this ).parents( '.field-input' );
 
 		$field.remove();
-		$input.children( '.themeplate-clone' ).not( '.hidden' ).each( function() {
-			setIndex( $( this ), index );
-			index++;
-		});
 	});
 
 	$( '.field-input.repeatable' ).each( function () {
