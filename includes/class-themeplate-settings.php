@@ -166,7 +166,7 @@ class ThemePlate_Settings {
 					echo '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>';
 					echo ! empty( $field['args']['desc'] ) ? '<p class="description">' . $field['args']['desc'] . '</p>' : '';
 				echo '</div>';
-				echo '<div class="field-input">';
+				echo '<div class="field-input' . ( isset( $field['args']['repeatable'] ) ? ' repeatable' : '' ) . '">';
 					call_user_func( $field['callback'], $field['args'] );
 				echo '</div>';
 			echo '</div>';
@@ -181,14 +181,44 @@ class ThemePlate_Settings {
 			'type' => 'option',
 			'id' => ThemePlate()->key . '-' . $field['page']
 		);
-		$field['name'] = $field['object']['id'] . '[' . $field['id'] . ']';
 
+		$key = $field['object']['id'];
+		$name = $key . '[' . $field['id'] . ']';
 		$default = isset( $field['std'] ) ? $field['std'] : '';
-		$options = get_option( $field['object']['id'] );
+		$options = get_option( $key );
+		$unique = isset( $field['repeatable'] ) ? false : true;
 		$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
-		$field['value'] = $stored ? $stored : $default;
+		$value = $stored ? $stored : $default;
 
-		ThemePlate_Fields::instance()->render( $field );
+		if ( $unique ) {
+			$field['value'] = $value;
+			$field['name'] = $name;
+
+			ThemePlate_Fields::instance()->render( $field );
+		} else {
+			foreach ( (array) $value as $i => $val ) {
+				$field['value'] = $val;
+				$field['id'] = $key . '_i-' . $i;
+				$field['name'] =  $name . '[i-' . $i . ']';
+
+				echo '<div class="themeplate-clone">';
+					echo '<div class="themeplate-handle"></div>';
+					ThemePlate_Fields::instance()->render( $field );
+					echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+				echo '</div>';
+			}
+
+			$field['value'] = $default;
+			$field['id'] = $key . '_i-x';
+			$field['name'] =  $name . '[i-x]';
+
+			echo '<div class="themeplate-clone hidden">';
+				echo '<div class="themeplate-handle"></div>';
+				ThemePlate_Fields::instance()->render( $field );
+				echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+			echo '</div>';
+			echo '<input type="button" class="button clone-add" value="Add Field" />';
+		}
 
 	}
 
