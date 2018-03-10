@@ -35,14 +35,6 @@
 			placeholder: 'themaplate-clone clone-placeholder',
 			start: function ( e, ui ) {
 				ui.placeholder.height( ui.item.height() );
-			},
-			stop: function() {
-				var index = 0;
-
-				$( this ).children( '.themeplate-clone' ).not( '.hidden' ).each( function() {
-					setIndex( $( this ), index );
-					index++;
-				});
 			}
 		} );
 	} );
