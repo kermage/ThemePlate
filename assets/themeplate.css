@@ -99,13 +99,15 @@
 	padding: 1em;
 }
 
-.type-group > .field-input {
+.type-group > .field-input,
+.type-group .themeplate-clone {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
-.type-group > .field-input > .field-wrapper {
+.type-group > .field-input > .field-wrapper,
+.type-group .themeplate-clone > .field-wrapper {
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: auto;
