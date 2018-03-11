@@ -280,7 +280,7 @@ class ThemePlate_Fields {
 							echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
 						echo '</div>';
-						echo '<div class="field-input">';
+						echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
 							if ( $unique ) {
 								$sub['value'] = $value;
 								$sub['name'] = $name;
