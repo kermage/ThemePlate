@@ -94,7 +94,8 @@
 	flex-basis: 100%;
 }
 
-.type-group > .field-label {
+.type-group > .field-label,
+.type-group > .field-input.repeatable {
 	padding: 1em;
 }
 
@@ -210,6 +211,7 @@
 
 .themeplate-clone {
 	position: relative;
+	width: 100%;
 	min-height: 30px;
 	margin-bottom: 1em;
 	padding-left: 23px;
