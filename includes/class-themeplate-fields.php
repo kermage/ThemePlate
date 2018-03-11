@@ -253,28 +253,62 @@ class ThemePlate_Fields {
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['id'] = $field['id'] . '_' . $id;
 
+					$key = $sub['id'];
+					$title = $sub['name'];
+					$name = ThemePlate()->key . '[' . $key . ']';
 					$default = isset( $sub['std'] ) ? $sub['std'] : '';
+					$unique = isset( $sub['repeatable'] ) ? false : true;
 
 					if ( $field['object']['type'] == 'post' ) {
-						$stored = get_post_meta( $field['object']['id'], $sub['id'], true );
+						$stored = get_post_meta( $field['object']['id'], $sub['id'], $unique );
 					} elseif ( $field['object']['type'] == 'term' ) {
-						$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $sub['id'], true ) : '';
+						$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $sub['id'], $unique ) : '';
 					} elseif ( $field['object']['type'] == 'user' ) {
-						$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $sub['id'], true ) : '';
+						$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $sub['id'], $unique ) : '';
 					} elseif ( $field['object']['type'] == 'option' ) {
 						$options = get_option( $field['object']['id'] );
 						$stored = isset( $options[$sub['id']] ) ? $options[$sub['id']] : '';
 					}
 
-					$sub['value'] = $stored ? $stored : $default;
+					$value = $stored ? $stored : $default;
+
+					$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . '">';
 						echo '<div class="field-label">';
-							echo '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . '</label>';
+							echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
 						echo '</div>';
 						echo '<div class="field-input">';
-							ThemePlate_Fields::instance()->render( $sub );
+							if ( $unique ) {
+								$sub['value'] = $value;
+								$sub['name'] = $name;
+
+								ThemePlate_Fields::instance()->render( $sub );
+							} else {
+								foreach ( (array) $value as $i => $val ) {
+									$sub['value'] = $val;
+									$sub['id'] = $key . '_i-' . $i;
+									$sub['name'] =  $name . '[i-' . $i . ']';
+
+									echo '<div class="themeplate-clone">';
+										echo '<div class="themeplate-handle"></div>';
+										ThemePlate_Fields::instance()->render( $sub );
+										echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+									echo '</div>';
+								}
+
+								$sub['value'] = $default;
+								$sub['id'] = $key . '_i-x';
+								$sub['name'] =  $name . '[i-x]';
+
+								echo '<div class="themeplate-clone hidden">';
+									echo '<div class="themeplate-handle"></div>';
+									ThemePlate_Fields::instance()->render( $sub );
+									echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+								echo '</div>';
+								echo '<input type="button" class="button clone-add" value="Add Field" />';
+							}
 						echo '</div>';
 					echo '</div>';
 				}
