@@ -89,6 +89,11 @@
 	border: 1px solid #ddd;
 }
 
+.type-group + .field-wrapper:not( .type-group ) {
+	padding-top: 0;
+	border-top: 0;
+}
+
 .type-group > .field-label,
 .type-group > .field-input {
 	flex-basis: 100%;
