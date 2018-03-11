@@ -252,6 +252,7 @@ class ThemePlate_Fields {
 			case 'group':
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['id'] = $field['id'] . '_' . $id;
+					$sub['object'] = $field['object'];
 
 					$key = $sub['id'];
 					$title = $sub['name'];
@@ -272,7 +273,7 @@ class ThemePlate_Fields {
 
 					$value = $stored ? $stored : $default;
 
-					$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
+					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . '">';
 						echo '<div class="field-label">';

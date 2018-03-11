@@ -89,6 +89,11 @@
 	border: 1px solid #ddd;
 }
 
+.type-group .type-group {
+	width: 100%;
+	margin: 0 0 1em;
+}
+
 .type-group + .field-wrapper:not( .type-group ) {
 	padding-top: 0;
 	border-top: 0;
@@ -107,7 +112,7 @@
 	justify-content: space-between;
 }
 
-.type-group .field-wrapper {
+.type-group .field-wrapper:not( .type-group ) {
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: auto;
