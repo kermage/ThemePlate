@@ -99,7 +99,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'radio' :
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
-					echo '<fieldset>';
+					echo '<fieldset id="' . $field['id'] . '">';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<' . ( $list ? 'p' : 'span' ) . '>';
@@ -115,7 +115,7 @@ class ThemePlate_Fields {
 			case 'checkbox' :
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
-					echo '<fieldset>';
+					echo '<fieldset id="' . $field['id'] . '">';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<' . ( $list ? 'p' : 'span' ) . '>';
