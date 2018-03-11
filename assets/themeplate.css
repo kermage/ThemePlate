@@ -280,15 +280,15 @@
 	margin-bottom: 1em;
 }
 
-.themeplate-clone .attachment-close {
+.repeatable .themeplate-clone .attachment-close {
 	top: 3px;
 }
 
 .themeplate-handle {
 	height: 17px;
-	width: 8px;
+	width: 9px;
 	position: absolute;
-	top: 7px;
+	top: 6px;
 	left: 0;
 	cursor: move;
 	border-left: 3px solid #aaa;
