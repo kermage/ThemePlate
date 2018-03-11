@@ -113,7 +113,7 @@
 }
 
 .type-group > .field-input > .field-wrapper:first-of-type,
-.type-group .themeplate-clone > .field-wrapper:first-of-type {
+.type-group .themeplate-clone > .field-wrapper:nth-child(2) {
 	margin-left: 0;
 }
 
