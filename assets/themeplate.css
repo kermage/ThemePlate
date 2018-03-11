@@ -107,24 +107,13 @@
 	justify-content: space-between;
 }
 
-.type-group > .field-input > .field-wrapper,
-.type-group .themeplate-clone > .field-wrapper {
+.type-group .field-wrapper {
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: auto;
 	margin: 0 1em;
 	padding-top: 0;
 	border-top: 0;
-}
-
-.type-group > .field-input > .field-wrapper:first-of-type,
-.type-group .themeplate-clone > .field-wrapper:nth-child(2) {
-	margin-left: 0;
-}
-
-.type-group > .field-input > .field-wrapper:last-of-type,
-.type-group .themeplate-clone > .field-wrapper:last-of-type {
-	margin-right: 0;
 }
 
 .themeplate .wp-color-result,
