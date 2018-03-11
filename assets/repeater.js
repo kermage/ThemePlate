@@ -17,7 +17,7 @@
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
-		var $field = $( this ).parents( '.themeplate-clone' );
+		var $field = $( this ).closest( '.themeplate-clone' );
 
 		$field.remove();
 	});
