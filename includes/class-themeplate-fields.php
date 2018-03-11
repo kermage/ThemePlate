@@ -274,8 +274,9 @@ class ThemePlate_Fields {
 					$value = $stored ? $stored : $default;
 
 					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
+					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
 
-					echo '<div class="field-wrapper type-' . $sub['type'] . '">';
+					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
 						echo '<div class="field-label">';
 							echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';

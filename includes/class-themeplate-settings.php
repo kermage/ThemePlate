@@ -56,6 +56,7 @@ class ThemePlate_Settings {
 			$field['id'] = $param['id'] . '_' . $id;
 			$field['page'] = isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug;
 			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
+			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
 
 			add_settings_field(
 				$field['id'],
@@ -161,7 +162,7 @@ class ThemePlate_Settings {
 		}
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
-			echo '<div class="field-wrapper type-' . $field['args']['type'] . '">';
+			echo '<div class="field-wrapper type-' . $field['args']['type'] . ' ' . $field['args']['style'] . '">';
 				echo '<div class="field-label">';
 					echo '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>';
 					echo ! empty( $field['args']['desc'] ) ? '<p class="description">' . $field['args']['desc'] . '</p>' : '';

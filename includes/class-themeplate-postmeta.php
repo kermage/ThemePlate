@@ -146,8 +146,9 @@ class ThemePlate_PostMeta {
 			$value = $stored ? $stored : $default;
 
 			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
+			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
 
-			echo '<div class="field-wrapper type-' . $field['type'] . '">';
+			echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
 				echo '<div class="field-label">';
 					echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
