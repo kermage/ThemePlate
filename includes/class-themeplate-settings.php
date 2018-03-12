@@ -238,20 +238,13 @@ class ThemePlate_Settings {
 				continue;
 			}
 
-			$values[$option] = array();
-
-			foreach ( $value as $val ) {
-				if ( empty( $val ) ) {
-					continue;
-				}
-
-				array_push( $values[$option], $val );
-			}
+			$values[$option] = $value;
 		}
 
 		$values = array_filter( $values );
 
 		return $values;
+
 	}
 
 }
