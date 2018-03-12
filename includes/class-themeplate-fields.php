@@ -259,21 +259,7 @@ class ThemePlate_Fields {
 					$name = $field['name'] . '[' . $key . ']';
 					$default = isset( $sub['std'] ) ? $sub['std'] : '';
 					$unique = isset( $sub['repeatable'] ) ? false : true;
-
-					if ( $field['object']['type'] == 'post' ) {
-						$options = get_post_meta( $field['object']['id'], $field['id'], $unique );
-						$stored = isset( $options[$key] ) ? $options[$key] : '';
-					} elseif ( $field['object']['type'] == 'term' ) {
-						$options = $field['object']['id'] ? get_term_meta( $field['object']['id'], $field['id'], $unique ) : '';
-						$stored = isset( $options[$key] ) ? $options[$key] : '';
-					} elseif ( $field['object']['type'] == 'user' ) {
-						$options = $field['object']['id'] ? get_user_meta( $field['object']['id'], $field['id'], $unique ) : '';
-						$stored = isset( $options[$key] ) ? $options[$key] : '';
-					} elseif ( $field['object']['type'] == 'option' ) {
-						$options = get_option( $field['object']['id'] );
-						$stored = isset( $options[$key] ) ? $options[$key] : '';
-					}
-
+					$stored = isset( $field['value'][$id] ) ? $field['value'][$id] : '';
 					$value = $stored ? $stored : $default;
 
 					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
