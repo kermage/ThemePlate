@@ -251,25 +251,27 @@ class ThemePlate_Fields {
 
 			case 'group':
 				foreach ( $field['fields'] as $id => $sub ) {
-					$sub['id'] = $field['id'] . '_' . $id;
+					$sub['id'] = $id;
 					$sub['object'] = $field['object'];
 
 					$key = $sub['id'];
 					$title = $sub['name'];
-					$name = ThemePlate()->key . '[' . $key . ']';
+					$name = $field['name'] . '[' . $key . ']';
 					$default = isset( $sub['std'] ) ? $sub['std'] : '';
 					$unique = isset( $sub['repeatable'] ) ? false : true;
 
 					if ( $field['object']['type'] == 'post' ) {
-						$stored = get_post_meta( $field['object']['id'], $sub['id'], $unique );
+						$options = get_post_meta( $field['object']['id'], $field['id'], $unique );
+						$stored = isset( $options[$key] ) ? $options[$key] : '';
 					} elseif ( $field['object']['type'] == 'term' ) {
-						$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $sub['id'], $unique ) : '';
+						$options = $field['object']['id'] ? get_term_meta( $field['object']['id'], $field['id'], $unique ) : '';
+						$stored = isset( $options[$key] ) ? $options[$key] : '';
 					} elseif ( $field['object']['type'] == 'user' ) {
-						$stored = $field['object']['id'] ? get_user_meta( $field['object']['id'], $sub['id'], $unique ) : '';
+						$options = $field['object']['id'] ? get_user_meta( $field['object']['id'], $field['id'], $unique ) : '';
+						$stored = isset( $options[$key] ) ? $options[$key] : '';
 					} elseif ( $field['object']['type'] == 'option' ) {
-						$name = $field['object']['id'] . '[' . $key . ']';
 						$options = get_option( $field['object']['id'] );
-						$stored = isset( $options[$sub['id']] ) ? $options[$sub['id']] : '';
+						$stored = isset( $options[$key] ) ? $options[$key] : '';
 					}
 
 					$value = $stored ? $stored : $default;
