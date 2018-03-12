@@ -222,6 +222,10 @@ class ThemePlate_PostMeta {
 				delete_post_meta( $post_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {
+					if ( is_array( $updated ) ) {
+						$updated =  array_filter( $updated );
+					}
+
 					if ( empty( $value ) ) {
 						continue;
 					}
@@ -229,6 +233,10 @@ class ThemePlate_PostMeta {
 					add_post_meta( $post_id, $key, $value );
 				}
 			} else {
+				if ( is_array( $updated ) ) {
+					$updated =  array_filter( $updated );
+				}
+
 				if ( $stored == $updated ) {
 					continue;
 				}

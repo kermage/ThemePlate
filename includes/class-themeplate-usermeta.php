@@ -206,6 +206,10 @@ class ThemePlate_UserMeta {
 				delete_user_meta( $user_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {
+					if ( is_array( $updated ) ) {
+						$updated =  array_filter( $updated );
+					}
+
 					if ( empty( $value ) ) {
 						continue;
 					}
@@ -213,6 +217,10 @@ class ThemePlate_UserMeta {
 					add_user_meta( $user_id, $key, $value );
 				}
 			} else {
+				if ( is_array( $updated ) ) {
+					$updated =  array_filter( $updated );
+				}
+
 				if ( $stored == $updated ) {
 					continue;
 				}

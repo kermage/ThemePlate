@@ -229,12 +229,11 @@ class ThemePlate_Settings {
 		$values = array();
 
 		foreach ( $options as $option => $value ) {
-			if ( empty( $value ) ) {
-				continue;
+			if ( is_array( $value ) ) {
+				$value =  array_filter( $value );
 			}
 
-			if ( ! is_array( $value ) && ! empty( $value ) ) {
-				$values[$option] = $value;
+			if ( empty( $value ) ) {
 				continue;
 			}
 
