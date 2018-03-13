@@ -183,12 +183,12 @@ class ThemePlate_Settings {
 			'id' => ThemePlate()->key . '-' . $field['page']
 		);
 
-		$key = $field['object']['id'];
-		$name = $key . '[' . $field['id'] . ']';
+		$key = $field['id'];
+		$name = $field['object']['id'] . '[' . $key . ']';
 		$default = isset( $field['std'] ) ? $field['std'] : '';
-		$options = get_option( $key );
 		$unique = isset( $field['repeatable'] ) ? false : true;
-		$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
+		$options = get_option( $field['object']['id'] );
+		$stored = isset( $options[$key] ) ? $options[$key] : '';
 		$value = $stored ? $stored : $default;
 
 		if ( $unique ) {

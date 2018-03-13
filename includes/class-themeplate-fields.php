@@ -251,12 +251,12 @@ class ThemePlate_Fields {
 
 			case 'group':
 				foreach ( $field['fields'] as $id => $sub ) {
-					$sub['id'] = $id;
+					$sub['id'] = $field['id'] . '_' . $id;
 					$sub['object'] = $field['object'];
 
 					$key = $sub['id'];
 					$title = $sub['name'];
-					$name = $field['name'] . '[' . $key . ']';
+					$name = $field['name'] . '[' . $id . ']';
 					$default = isset( $sub['std'] ) ? $sub['std'] : '';
 					$unique = isset( $sub['repeatable'] ) ? false : true;
 					$stored = isset( $field['value'][$id] ) ? $field['value'][$id] : '';
@@ -267,20 +267,19 @@ class ThemePlate_Fields {
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
 						echo '<div class="field-label">';
-							echo '<label class="label" for="' . $field['id'] . '_' . $sub['id'] . '">' . $title . '</label>';
+							echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
 						echo '</div>';
 						echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
 							if ( $unique ) {
 								$sub['value'] = $value;
-								$sub['id'] = $field['id'] . '_' . $key;
 								$sub['name'] = $name;
 
 								ThemePlate_Fields::instance()->render( $sub );
 							} else {
 								foreach ( (array) $value as $i => $val ) {
 									$sub['value'] = $val;
-									$sub['id'] = $field['id'] . '_' . $key . '_i-' . $i;
+									$sub['id'] = $key . '_i-' . $i;
 									$sub['name'] =  $name . '[i-' . $i . ']';
 
 									echo '<div class="themeplate-clone">';
@@ -291,7 +290,7 @@ class ThemePlate_Fields {
 								}
 
 								$sub['value'] = $default;
-								$sub['id'] = $field['id'] . '_' . $key . '_i-x';
+								$sub['id'] = $key . '_i-x';
 								$sub['name'] =  $name . '[i-x]';
 
 								echo '<div class="themeplate-clone hidden">';
