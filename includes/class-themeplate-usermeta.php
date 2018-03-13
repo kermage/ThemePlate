@@ -157,8 +157,8 @@ class ThemePlate_UserMeta {
 					} else {
 						foreach ( (array) $value as $i => $val ) {
 							$field['value'] = $val;
-							$field['id'] = $key . '_i-' . $i;
-							$field['name'] =  $name . '[i-' . $i . ']';
+							$field['id'] = $key . '_' . $i;
+							$field['name'] =  $name . '[' . $i . ']';
 
 							echo '<div class="themeplate-clone">';
 								echo '<div class="themeplate-handle"></div>';
