@@ -55,7 +55,7 @@
 					continue;
 				}
 
-				var value = $( this ).attr( attributes[i] ).replace( /-(\d|x)/g, '-' + index );
+				var value = $( this ).attr( attributes[i] ).replace( /i-(\d|x)/g, index );
 				$( this ).attr( attributes[i], value );
 			}
 		});
