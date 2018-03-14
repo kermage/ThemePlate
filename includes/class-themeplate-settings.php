@@ -229,22 +229,22 @@ class ThemePlate_Settings {
 		$values = array();
 
 		foreach ( $options as $option => $value ) {
-			if ( is_array( $value ) ) {
-				$value =  array_filter( $value );
-			}
-
-			if ( $option === 'i-x' || empty( $value ) ) {
+			if ( empty( $value ) ) {
 				continue;
 			}
 
 			foreach ( (array) $value as $i => $val ) {
 				if ( is_array( $val ) ) {
-					$val =  array_filter( $val );
+					$val = array_filter( $val );
 				}
 
 				if ( $i === 'i-x' || empty( $val ) ) {
 					unset( $value[$i] );
 				}
+			}
+
+			if ( is_array( $value ) ) {
+				$value = array_merge( $value );
 			}
 
 			$values[$option] = $value;
