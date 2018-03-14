@@ -206,6 +206,11 @@ class ThemePlate_TermMeta {
 
 		foreach ( $this->meta_box['fields'] as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
+
+			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
+				continue;
+			}
+
 			$unique = isset( $field['repeatable'] ) ? false : true;
 			$stored = get_term_meta( $term_id, $key, $unique );
 			$updated = $_POST[ThemePlate()->key][$key];
