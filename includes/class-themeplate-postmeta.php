@@ -96,10 +96,7 @@ class ThemePlate_PostMeta {
 		);
 		$meta_box = wp_parse_args( $meta_box, $defaults );
 
-		$meta_box['id'] = ThemePlate()->key . '_' . $meta_box['id'];
-		$id = 'themeplate_' . $meta_box['id'];
-
-		add_meta_box( $id, $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
+		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
 
 	}
 
@@ -131,7 +128,7 @@ class ThemePlate_PostMeta {
 				continue;
 			}
 
-			$field['id'] = $meta_box['args']['id'] . '_' . $id;
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['args']['id'] . '_' . $id;
 			$field['object'] = array(
 				'type' => 'post',
 				'id' => $post->ID
