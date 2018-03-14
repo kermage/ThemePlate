@@ -279,8 +279,8 @@ class ThemePlate_Fields {
 							} else {
 								foreach ( (array) $value as $i => $val ) {
 									$sub['value'] = $val;
-									$sub['id'] = $key . '_i-' . $i;
-									$sub['name'] =  $name . '[i-' . $i . ']';
+									$sub['id'] = $key . '_' . $i;
+									$sub['name'] =  $name . '[' . $i . ']';
 
 									echo '<div class="themeplate-clone">';
 										echo '<div class="themeplate-handle"></div>';
