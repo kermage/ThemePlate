@@ -47,7 +47,7 @@
 	}
 
 	function setIndex( $field, index ) {
-		var attributes = ['id','name'];
+		var attributes = ['id', 'name', 'for'];
 
 		$field.find( '[' + attributes.join( '],[' ) + ']' ).each( function() {
 			for ( var i in attributes ) {
