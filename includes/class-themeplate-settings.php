@@ -233,7 +233,7 @@ class ThemePlate_Settings {
 				$value =  array_filter( $value );
 			}
 
-			if ( empty( $value ) ) {
+			if ( $option === 'i-x' || empty( $value ) ) {
 				continue;
 			}
 

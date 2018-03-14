@@ -210,7 +210,7 @@ class ThemePlate_UserMeta {
 						$value =  array_filter( $value );
 					}
 
-					if ( empty( $value ) ) {
+					if ( $i === 'i-x' || empty( $value ) ) {
 						continue;
 					}
 
