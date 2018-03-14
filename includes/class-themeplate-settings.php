@@ -237,6 +237,16 @@ class ThemePlate_Settings {
 				continue;
 			}
 
+			foreach ( (array) $value as $i => $val ) {
+				if ( is_array( $val ) ) {
+					$val =  array_filter( $val );
+				}
+
+				if ( $i === 'i-x' || empty( $val ) ) {
+					unset( $value[$i] );
+				}
+			}
+
 			$values[$option] = $value;
 		}
 
