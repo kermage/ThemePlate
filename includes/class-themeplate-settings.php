@@ -122,7 +122,7 @@ class ThemePlate_Settings {
 		echo '<div id="' . $context . '-sortables" class="meta-box-sortables">';
 
 		foreach ( (array) $wp_settings_sections[$page] as $section ) {
-			printf( '<div id="themeplate_%s-box" class="postbox">', $section['id'] );
+			printf( '<div id="themeplate_%s" class="postbox">', $section['id'] );
 			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
 			echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $section['title'] ) . '</span>';
 			echo '<span class="toggle-indicator" aria-hidden="true"></span>';
