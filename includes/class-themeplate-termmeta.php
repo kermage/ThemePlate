@@ -240,7 +240,7 @@ class ThemePlate_TermMeta {
 					$updated =  array_filter( $updated );
 				}
 
-				if ( $stored == $updated ) {
+				if ( ( ! $stored && ! $updated ) || $stored == $updated ) {
 					continue;
 				}
 

@@ -245,7 +245,7 @@ class ThemePlate_PostMeta {
 					$updated =  array_filter( $updated );
 				}
 
-				if ( $stored == $updated ) {
+				if ( ( ! $stored && ! $updated ) || $stored == $updated ) {
 					continue;
 				}
 
