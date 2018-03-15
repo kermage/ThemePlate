@@ -229,11 +229,13 @@ class ThemePlate_Settings {
 		$values = array();
 
 		foreach ( $options as $option => $value ) {
-			if ( empty( $value ) ) {
+			if ( ! is_array( $value ) ) {
+				$values[$option] = $value;
+
 				continue;
 			}
 
-			foreach ( (array) $value as $i => $val ) {
+			foreach ( $value as $i => $val ) {
 				if ( is_array( $val ) ) {
 					$val = array_filter( $val );
 				}
@@ -249,8 +251,6 @@ class ThemePlate_Settings {
 
 			$values[$option] = $value;
 		}
-
-		$values = array_filter( $values );
 
 		return $values;
 
