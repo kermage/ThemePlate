@@ -230,6 +230,12 @@ class ThemePlate_TermMeta {
 					add_term_meta( $term_id, $key, $value );
 				}
 			} else {
+				foreach ( (array) $updated as $i => $value ) {
+					if ( is_array( $value ) ) {
+						$updated[$i] =  array_filter( $value );
+					}
+				}
+
 				if ( is_array( $updated ) ) {
 					$updated =  array_filter( $updated );
 				}
