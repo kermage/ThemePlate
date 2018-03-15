@@ -131,17 +131,26 @@
 		return false;
 	}
 
-	function isMet( conditions ) {
+	function isMet( conditions, relation = 'OR' ) {
 		var result;
 		var maybeTerms = [];
 
 		for ( var i in conditions ) {
+			if ( $.isArray( conditions[i] ) ) {
+				result = result || isMet( conditions[i], 'AND' );
+				continue;
+			}
+
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
 				maybeTerms.push( conditions[i] );
 				continue;
 			}
 
-			result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+			if ( relation == 'OR' ) {
+				result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+			} else {
+				result = result && checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+			}
 		}
 
 		if ( ! maybeTerms.length ) {
