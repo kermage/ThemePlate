@@ -176,6 +176,11 @@
 		var maybeTerms = [];
 
 		for ( var i in conditions ) {
+			if ( $.isArray( conditions[i] ) ) {
+				addEventListener( $metabox, type, conditions[i] );
+				continue;
+			}
+
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
 				maybeTerms.push( conditions[i] );
 				continue;
