@@ -172,12 +172,12 @@
 		}
 	}
 
-	function addEventListener( $metabox, type, conditions ) {
+	function addEventListener( $metabox, type, conditions, origConditions = conditions ) {
 		var maybeTerms = [];
 
 		for ( var i in conditions ) {
 			if ( $.isArray( conditions[i] ) ) {
-				addEventListener( $metabox, type, conditions[i] );
+				addEventListener( $metabox, type, conditions[i], conditions );
 				continue;
 			}
 
@@ -187,7 +187,7 @@
 			}
 
 			eventListeners[conditions[i]['key']]( function() {
-				maybeShowHide( $metabox, type, conditions );
+				maybeShowHide( $metabox, type, origConditions );
 			});
 		}
 
