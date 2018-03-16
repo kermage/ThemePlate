@@ -6,13 +6,15 @@
 	var $pageTemplate = $( '#page_template' ),
 		$postFormat = $( 'input[name="post_format"]' ),
 		$parent = $( '#parent' ).length ? $( '#parent' ) : $( '#parent_id' ),
-		$role = $( '#role' );
+		$role = $( '#role' ),
+		$id = $( '#post_ID' ).length ? $( '#post_ID' ) : $( '#tag_ID' ).length ? $( '#tag_ID' ) : $( '#checkuser_id' );
 
 	var checkersElements = {
 		'template': $pageTemplate,
 		'format': $postFormat,
 		'parent': $parent,
-		'role': $role
+		'role': $role,
+		'id': $id
 	};
 
 	var checkCallbacks = {
@@ -43,6 +45,12 @@
 		},
 		role: function( value ) {
 			var current = $role.val();
+
+			return $.inArray( current, sureArray( value ) ) > -1;
+		},
+		id: function( value ) {
+			var current = $id.val();
+			current = parseInt( current );
 
 			return $.inArray( current, sureArray( value ) ) > -1;
 		},
