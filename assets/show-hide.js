@@ -194,6 +194,10 @@
 				continue;
 			}
 
+			if ( conditions[i]['key'] == 'id' ) {
+				continue;
+			}
+
 			eventListeners[conditions[i]['key']]( function() {
 				maybeShowHide( $metabox, type, origConditions );
 			});
