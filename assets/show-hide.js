@@ -137,7 +137,7 @@
 
 		for ( var i in conditions ) {
 			if ( $.isArray( conditions[i] ) ) {
-				result = result || isMet( conditions[i], 'AND' );
+				result = result == undefined ? isMet( conditions[i], 'AND' ) : result || isMet( conditions[i], 'AND' );
 				continue;
 			}
 
@@ -147,9 +147,9 @@
 			}
 
 			if ( relation == 'OR' ) {
-				result = result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+				result = result == undefined ? checkCallbacks[conditions[i]['key']]( conditions[i]['value'] ) : result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
 			} else {
-				result = result && checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+				result = result == undefined ? checkCallbacks[conditions[i]['key']]( conditions[i]['value'] ) : result && checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
 			}
 		}
 
