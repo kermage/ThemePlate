@@ -150,7 +150,10 @@
 			}
 
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
-				maybeTerms.push( conditions[i] );
+				if ( ! checkersElements.hasOwnProperty( conditions[i]['key'] ) ) {
+					maybeTerms.push( conditions[i] );
+				}
+
 				continue;
 			}
 
@@ -190,7 +193,10 @@
 			}
 
 			if ( ! isAvailable( conditions[i]['key'] ) ) {
-				maybeTerms.push( conditions[i] );
+				if ( ! checkersElements.hasOwnProperty( conditions[i]['key'] ) ) {
+					maybeTerms.push( conditions[i] );
+				}
+
 				continue;
 			}
 
