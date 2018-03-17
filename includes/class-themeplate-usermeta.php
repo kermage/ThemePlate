@@ -212,7 +212,7 @@ class ThemePlate_UserMeta {
 
 				foreach ( (array) $updated as $i => $value ) {
 					if ( is_array( $value ) ) {
-						$value =  array_filter( $value );
+						$value = array_filter( $value );
 					}
 
 					if ( $i === 'i-x' || empty( $value ) ) {
@@ -224,12 +224,12 @@ class ThemePlate_UserMeta {
 			} else {
 				foreach ( (array) $updated as $i => $value ) {
 					if ( is_array( $value ) ) {
-						$updated[$i] =  array_filter( $value );
+						$updated[$i] = array_merge( array_filter( $value ) );
 					}
 				}
 
 				if ( is_array( $updated ) ) {
-					$updated =  array_filter( $updated );
+					$updated = array_filter( $updated );
 				}
 
 				if ( ( ! $stored && ! $updated ) || $stored == $updated ) {
