@@ -159,8 +159,16 @@
 
 			if ( relation == 'OR' ) {
 				result = result == undefined ? checkCallbacks[conditions[i]['key']]( conditions[i]['value'] ) : result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+
+				if ( result ) {
+					return result;
+				}
 			} else {
 				result = result == undefined ? checkCallbacks[conditions[i]['key']]( conditions[i]['value'] ) : result && checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+
+				if ( ! result ) {
+					return result;
+				}
 			}
 		}
 
