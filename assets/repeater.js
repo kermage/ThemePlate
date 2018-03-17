@@ -43,17 +43,17 @@
 		return index;
 	}
 
-	function setIndex( $field, index ) {
-		var attributes = ['id', 'name', 'for'];
+	var indexAttributes = ['id', 'name', 'for'];
 
-		$field.find( '[' + attributes.join( '],[' ) + ']' ).each( function() {
-			for ( var i in attributes ) {
-				if ( $( this ).attr( attributes[i] ) == undefined ) {
+	function setIndex( $field, index ) {
+		$field.find( '[' + indexAttributes.join( '],[' ) + ']' ).each( function() {
+			for ( var i in indexAttributes ) {
+				if ( $( this ).attr( indexAttributes[i] ) == undefined ) {
 					continue;
 				}
 
-				var value = $( this ).attr( attributes[i] ).replace( /i-(\d|x)/, index );
-				$( this ).attr( attributes[i], value );
+				var value = $( this ).attr( indexAttributes[i] ).replace( /i-(\d|x)/, index );
+				$( this ).attr( indexAttributes[i], value );
 			}
 		});
 	}
