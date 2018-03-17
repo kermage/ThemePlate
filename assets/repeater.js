@@ -16,9 +16,7 @@
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
-		var $field = $( this ).closest( '.themeplate-clone' );
-
-		$field.remove();
+		$( this ).closest( '.themeplate-clone' ).remove();
 	});
 
 	$( '.field-input.repeatable' ).each( function () {
