@@ -211,6 +211,12 @@ class ThemePlate_UserMeta {
 				delete_user_meta( $user_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {
+					foreach ( (array) $value as $j => $val ) {
+						if ( is_array( $val ) ) {
+							$value[$j] = array_merge( array_filter( $val ) );
+						}
+					}
+
 					if ( is_array( $value ) ) {
 						$value = array_filter( $value );
 					}
