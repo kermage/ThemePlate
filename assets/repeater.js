@@ -8,9 +8,8 @@
 
 		var $field = $( this ).siblings( '.hidden' );
 		var $cloned = $field.clone( true );
-		var index = getIndex( $field );
 
-		setIndex( $cloned, index );
+		setIndex( $cloned, getIndex( $field ) );
 		$cloned.removeClass( 'hidden' ).insertBefore( $field );
 	});
 
