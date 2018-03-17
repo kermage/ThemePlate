@@ -230,11 +230,17 @@ class ThemePlate_Settings {
 
 		foreach ( $options as $option => $value ) {
 			foreach ( (array) $value as $i => $val ) {
-				if ( is_array( $val ) ) {
-					$val = array_filter( $val );
+				foreach ( (array) $val as $j => $v ) {
+					if ( is_array( $v ) ) {
+						$val[$j] = array_merge( array_filter( $v ) );
+					}
 				}
 
-				if ( ! empty( $val ) || ! is_array( $value ) ) {
+				if ( is_array( $val ) ) {
+					$value[$i] = array_merge( array_filter( $val ) );
+				}
+
+				if ( ! empty( $value[$i] ) || ! is_array( $value ) ) {
 					continue;
 				}
 
