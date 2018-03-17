@@ -56,7 +56,7 @@ class ThemePlate_UserMeta {
 					$meta_box['show_on'] = array( $meta_box['show_on'] );
 				}
 
-				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
+				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['show_on'] );
 
 					if ( ! is_object( $user ) || ( is_object( $user ) && ! array_intersect( (array) $user->ID, (array) $value[0]['value'] ) ) ) {
@@ -78,7 +78,7 @@ class ThemePlate_UserMeta {
 					$meta_box['hide_on'] = array( $meta_box['hide_on'] );
 				}
 
-				if ( ( count( $value ) == 1 ) && $value[0]['key'] == 'id' ) {
+				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['hide_on'] );
 
 					if ( is_object( $user ) && array_intersect( (array) $user->ID, (array) $value[0]['value'] ) ) {
