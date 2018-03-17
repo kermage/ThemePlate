@@ -69,7 +69,7 @@ class ThemePlate_Fields {
 				echo '<select' . ( $field['type'] == 'select2' ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
 				if ( $field['type'] == 'select2' && ! $field['value'] ) {
 					echo '<option></options>';
-				} elseif ( $field['type'] != 'select2' && ( $field['none'] || ! $field['value'] ) ) {
+				} elseif ( $field['type'] != 'select2' && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
 					echo '<option value="0"' . ( $field['none'] && $field['value' ] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
 				if ( $field['type'] == 'select2' && $field['multiple'] && $field['value'] ) {
