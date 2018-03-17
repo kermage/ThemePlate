@@ -36,10 +36,6 @@
 	border: 0;
 }
 
-.themeplate.seamless .themeplate-clone {
-	border-bottom: 0;
-}
-
 .themeplate.seamless .type-group.boxed > .field-label,
 .themeplate.seamless .type-group.boxed > .field-input {
 	padding-left: 0;
