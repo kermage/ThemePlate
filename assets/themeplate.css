@@ -150,7 +150,7 @@
 	border-top: 0;
 }
 
-.type-group .themeplate-clone {
+.type-group > .field-input > .themeplate-clone {
 	border-bottom: 1px solid #ddd;
 }
 
