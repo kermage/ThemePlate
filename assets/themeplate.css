@@ -361,6 +361,10 @@
 	#side-sortables .type-group .field-wrapper:last-of-type {
 		margin-bottom: 0;
 	}
+
+	#side-sortables .type-group:not( .boxed ) .themeplate-clone {
+		padding-bottom: 1em;
+	}
 }
 
 @media screen and ( max-width: 782px ) {
@@ -383,5 +387,9 @@
 
 	.type-group .field-wrapper:last-of-type {
 		margin-bottom: 0;
+	}
+
+	.type-group:not( .boxed ) .themeplate-clone {
+		padding-bottom: 1em;
 	}
 }
