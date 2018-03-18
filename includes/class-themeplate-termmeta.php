@@ -152,6 +152,16 @@ class ThemePlate_TermMeta {
 			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
 
 			echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
+				if ( isset( $field['show_on'] ) ) {
+					$show_on = json_encode( $field['show_on'], JSON_NUMERIC_CHECK );
+					echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
+				}
+
+				if ( isset( $field['hide_on'] ) ) {
+					$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
+					echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
+				}
+
 				echo '<div class="field-label">';
 					echo '<label class="label" for="' . $key . '">' . $title . '</label>';
 					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
