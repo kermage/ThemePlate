@@ -130,15 +130,15 @@
 	}
 
 	function isAvailable( checker ) {
-		if ( ! checkersElements.hasOwnProperty( checker ) ) {
+		if ( checkersElements[checker] === undefined ) {
 			return false;
 		}
 
-		if ( checkersElements[checker].length ) {
-			return true;
+		if ( checkersElements[checker].length === 0	) {
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	function isMet( conditions, relation = 'OR' ) {
