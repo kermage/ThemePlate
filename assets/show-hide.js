@@ -54,7 +54,9 @@
 
 			return $.inArray( current, sureArray( value ) ) > -1;
 		},
-		term: function( taxonomy, value ) {
+		term: function( argument ) {
+			var taxonomy = argument[0];
+			var value = argument[1];
 			var $checker = $( '#' + taxonomy + 'checklist :checked' );
 			var current = [];
 
@@ -85,7 +87,7 @@
 		role: function( callback ) {
 			$role.on( 'change', callback );
 		},
-		term: function( taxonomy, callback ) {
+		term: function( callback, taxonomy ) {
 			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
 		}
 	}
@@ -130,6 +132,10 @@
 	}
 
 	function isAvailable( checker ) {
+		if ( checker == 'term' ) {
+			return true;
+		}
+
 		if ( checkersElements[checker] === undefined ) {
 			return false;
 		}
@@ -142,44 +148,42 @@
 	}
 
 	function isMet( conditions, relation = 'OR' ) {
-		var result;
-		var maybeTerms = [];
+		var condition, key, value, result;
 
 		for ( var i in conditions ) {
-			if ( $.isArray( conditions[i] ) ) {
-				result = result == undefined ? isMet( conditions[i], 'AND' ) : result || isMet( conditions[i], 'AND' );
+			condition = conditions[i];
+
+			if ( $.isArray( condition ) ) {
+				result = result == undefined ? isMet( condition, 'AND' ) : result || isMet( condition, 'AND' );
 				continue;
 			}
 
-			if ( ! isAvailable( conditions[i]['key'] ) ) {
-				if ( ! checkersElements.hasOwnProperty( conditions[i]['key'] ) ) {
-					maybeTerms.push( conditions[i] );
-				}
+			key = condition['key'];
+			value = condition['value'];
 
+			if ( ! checkersElements.hasOwnProperty( key ) ) {
+				key = 'term';
+				value = [ condition['key'], condition['value'] ];
+			}
+
+
+			if ( ! isAvailable( key ) ) {
 				continue;
 			}
 
 			if ( relation == 'OR' ) {
-				result = result == undefined ? checkCallbacks[conditions[i]['key']]( conditions[i]['value'] ) : result || checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+				result = result == undefined ? checkCallbacks[key]( value ) : result || checkCallbacks[key]( value );
 
 				if ( result ) {
 					return result;
 				}
 			} else {
-				result = result == undefined ? checkCallbacks[conditions[i]['key']]( conditions[i]['value'] ) : result && checkCallbacks[conditions[i]['key']]( conditions[i]['value'] );
+				result = result == undefined ? checkCallbacks[key]( value ) : result && checkCallbacks[key]( value );
 
 				if ( ! result ) {
 					return result;
 				}
 			}
-		}
-
-		if ( ! maybeTerms.length ) {
-			return result;
-		}
-
-		for ( var i in maybeTerms ) {
-			result = result || checkCallbacks['term']( maybeTerms[i]['key'], maybeTerms[i]['value'] );
 		}
 
 		return result;
@@ -194,39 +198,35 @@
 	}
 
 	function addEventListener( $metabox, type, conditions, origConditions = conditions ) {
-		var maybeTerms = [];
+		var condition, key, value;
 
 		for ( var i in conditions ) {
-			if ( $.isArray( conditions[i] ) ) {
-				addEventListener( $metabox, type, conditions[i], conditions );
+			condition = conditions[i];
+
+			if ( $.isArray( condition ) ) {
+				addEventListener( $metabox, type, condition, conditions );
 				continue;
 			}
 
-			if ( ! isAvailable( conditions[i]['key'] ) ) {
-				if ( ! checkersElements.hasOwnProperty( conditions[i]['key'] ) ) {
-					maybeTerms.push( conditions[i] );
-				}
+			key = condition['key'];
+			value = condition['value'];
 
+			if ( ! checkersElements.hasOwnProperty( key ) ) {
+				key = 'term';
+				value = condition['key'];
+			}
+
+			if ( ! isAvailable( key ) ) {
 				continue;
 			}
 
-			if ( conditions[i]['key'] == 'id' ) {
+			if ( key == 'id' ) {
 				continue;
 			}
 
-			eventListeners[conditions[i]['key']]( function() {
+			eventListeners[key]( function() {
 				maybeShowHide( $metabox, type, origConditions );
-			});
-		}
-
-		if ( ! maybeTerms.length ) {
-			return;
-		}
-
-		for ( var i in maybeTerms ) {
-			eventListeners['term']( maybeTerms[i]['key'], function() {
-				maybeShowHide( $metabox, type, maybeTerms );
-			});
+			}, value );
 		}
 	}
 
