@@ -71,6 +71,14 @@
 			}
 
 			return false;
+		},
+		field: function( argument ) {
+			var element = argument[0];
+			var value = argument[1];
+			var current = $( element ).val();
+			current = parseInt( current );
+
+			return $.inArray( current, sureArray( value ) ) > -1;
 		}
 	};
 
@@ -89,6 +97,9 @@
 		},
 		term: function( callback, taxonomy ) {
 			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
+		},
+		field: function( callback, element ) {
+			$( element ).on( 'change', callback );
 		}
 	}
 
@@ -136,6 +147,10 @@
 			return true;
 		}
 
+		if ( checker == 'field' ) {
+			return true;
+		}
+
 		if ( checkersElements[checker] === undefined ) {
 			return false;
 		}
@@ -162,10 +177,14 @@
 			value = condition['value'];
 
 			if ( ! checkersElements.hasOwnProperty( key ) ) {
-				key = 'term';
 				value = [ condition['key'], condition['value'] ];
-			}
 
+				if ( key[0] === '#' ) {
+					key = 'field';
+				} else {
+					key = 'term';
+				}
+			}
 
 			if ( ! isAvailable( key ) ) {
 				continue;
@@ -212,8 +231,13 @@
 			value = condition['value'];
 
 			if ( ! checkersElements.hasOwnProperty( key ) ) {
-				key = 'term';
 				value = condition['key'];
+
+				if ( key[0] === '#' ) {
+					key = 'field';
+				} else {
+					key = 'term';
+				}
 			}
 
 			if ( ! isAvailable( key ) ) {
