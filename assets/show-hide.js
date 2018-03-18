@@ -78,6 +78,10 @@
 			var current = $( element ).val();
 			current = parseInt( current );
 
+			if ( value == '-1' && ! current ) {
+				return true;
+			}
+
 			return $.inArray( current, sureArray( value ) ) > -1;
 		}
 	};
