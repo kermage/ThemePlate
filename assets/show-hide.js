@@ -98,9 +98,10 @@
 		}
 
 		var conditions = $this.data( 'show' );
+		var $container = $this.parents( '.field-wrapper' ).length ? $this.parents( '.field-wrapper' ) : $this.parents( '.themeplate' );
 
-		maybeShowHide( $this.parents( '.themeplate' ), 'show', conditions );
-		addEventListener( $this.parents( '.themeplate' ), 'show', conditions );
+		maybeShowHide( $container, 'show', conditions );
+		addEventListener( $container, 'show', conditions );
 	});
 
 	$( '.themeplate-hide' ).each( function() {
@@ -111,9 +112,10 @@
 		}
 
 		var conditions = $this.data( 'hide' );
+		var $container = $this.parents( '.field-wrapper' ).length ? $this.parents( '.field-wrapper' ) : $this.parents( '.themeplate' );
 
-		maybeShowHide( $this.parents( '.themeplate' ), 'hide', conditions );
-		addEventListener( $this.parents( '.themeplate' ), 'hide', conditions );
+		maybeShowHide( $container, 'hide', conditions );
+		addEventListener( $container, 'hide', conditions );
 	});
 
 	function sureArray( value ) {
