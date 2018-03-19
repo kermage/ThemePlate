@@ -180,7 +180,12 @@ class ThemePlate_Fields {
 						echo $option . '="' . $value . '"';
 					}
 				}
-				echo ' />';
+				if ( $field['type'] == 'range' ) {
+					echo ' oninput="this.nextElementSibling.innerHTML=this.value" />';
+					echo '<span>' . $field['value'] . '</span>';
+				} else {
+					echo ' />';
+				}
 				break;
 
 
