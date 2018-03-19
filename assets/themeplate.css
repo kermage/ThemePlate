@@ -184,6 +184,15 @@
 	width: 100%;
 }
 
+.themeplate input[type="range"] {
+	margin-right: 1em;
+	vertical-align: middle;
+}
+
+.themeplate input[type="range"] + span {
+	vertical-align: middle;
+}
+
 .themeplate .iris-picker {
 	position: absolute;
 	z-index: 1001;
