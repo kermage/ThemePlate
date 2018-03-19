@@ -78,6 +78,10 @@
 			var current = $( element ).val();
 			current = parseInt( current );
 
+			if ( ! value && current ) {
+				return true;
+			}
+
 			if ( value == '-1' && ! current ) {
 				return true;
 			}
