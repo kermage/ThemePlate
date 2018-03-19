@@ -185,12 +185,13 @@
 }
 
 .themeplate input[type="range"] {
+	min-width: 80%;
 	margin-right: 1em;
 	vertical-align: middle;
 }
 
 .themeplate input[type="range"] + span {
-	vertical-align: middle;
+	font-weight: 600;
 }
 
 .themeplate .iris-picker {
