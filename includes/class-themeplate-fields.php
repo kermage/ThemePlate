@@ -310,6 +310,11 @@ class ThemePlate_Fields {
 					echo '</div>';
 				}
 				break;
+
+
+			case 'html':
+				echo $field['std'];
+				break;
 		}
 
 	}
