@@ -170,19 +170,18 @@
 	}
 
 	function isMet( conditions, relation = 'OR' ) {
-		var condition, key, value;
 		var result = ( relation != 'OR' );
 
 		for ( var i in conditions ) {
-			condition = conditions[i];
+			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
 				result = result || isMet( condition, 'AND' );
 				continue;
 			}
 
-			key = condition['key'];
-			value = condition['value'];
+			var key = condition['key'];
+			var value = condition['value'];
 
 			if ( ! checkersElements.hasOwnProperty( key ) ) {
 				value = [ condition['key'], condition['value'] ];
