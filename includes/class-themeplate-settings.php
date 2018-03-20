@@ -163,10 +163,13 @@ class ThemePlate_Settings {
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
 			echo '<div class="field-wrapper type-' . $field['args']['type'] . ' ' . $field['args']['style'] . '">';
-				echo '<div class="field-label">';
-					echo '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>';
-					echo ! empty( $field['args']['desc'] ) ? '<p class="description">' . $field['args']['desc'] . '</p>' : '';
-				echo '</div>';
+				if ( ! empty( $field['args']['name'] ) || ! empty( $field['args']['desc'] ) ) {
+					echo '<div class="field-label">';
+						echo ! empty( $field['args']['name'] ) ? '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>' : '';
+						echo ! empty( $field['args']['desc'] ) ? '<p class="description">' . $field['args']['desc'] . '</p>' : '';
+					echo '</div>';
+				}
+
 				echo '<div class="field-input' . ( isset( $field['args']['repeatable'] ) ? ' repeatable' : '' ) . '">';
 					call_user_func( $field['callback'], $field['args'] );
 				echo '</div>';

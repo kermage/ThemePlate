@@ -154,10 +154,13 @@ class ThemePlate_UserMeta {
 					echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
 				}
 
-				echo '<div class="field-label">';
-					echo '<label class="label" for="' . $key . '">' . $title . '</label>';
-					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
-				echo '</div>';
+				if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
+					echo '<div class="field-label">';
+						echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
+						echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
+					echo '</div>';
+				}
+
 				echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
 					if ( $unique ) {
 						$field['value'] = $value;
