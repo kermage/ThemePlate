@@ -114,6 +114,7 @@
 			var $select = $( this );
 
 			$select.select2( {
+				width: '100%',
 				allowClear: true,
 				placeholder: '— Select —',
 				dropdownCssClass: 'themeplate-select2',
