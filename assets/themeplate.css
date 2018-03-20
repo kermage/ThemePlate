@@ -81,6 +81,7 @@
 	flex-grow: 0;
 	flex-shrink: 0;
 	flex-basis: 15%;
+	margin-right: 1em;
 }
 
 .field-label .label {
@@ -90,9 +91,9 @@
 }
 
 .field-input {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: 84%;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
 }
 
 .type-group .field-wrapper:first-of-type,
@@ -356,6 +357,10 @@
 		flex-basis: 100%;
 	}
 
+	#side-sortables .field-label {
+		margin-right: 0;
+	}
+
 	#side-sortables .field-wrapper:not( .boxed ) .field-label {
 		margin-bottom: 1em;
 	}
@@ -381,6 +386,10 @@
 	.field-label,
 	.field-input {
 		flex-basis: 100%;
+	}
+
+	.field-label {
+		margin-right: 0;
 	}
 
 	.field-wrapper:not( .boxed ) .field-label {
