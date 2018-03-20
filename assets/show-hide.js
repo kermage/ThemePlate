@@ -76,7 +76,6 @@
 			var element = argument[0];
 			var value = argument[1];
 			var current = $( element ).val();
-			current = parseInt( current );
 
 			if ( ! value && current ) {
 				return true;
