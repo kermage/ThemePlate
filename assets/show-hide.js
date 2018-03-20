@@ -170,13 +170,14 @@
 	}
 
 	function isMet( conditions, relation = 'OR' ) {
-		var condition, key, value, result;
+		var condition, key, value;
+		var result = ( relation != 'OR' );
 
 		for ( var i in conditions ) {
 			condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
-				result = result == undefined ? isMet( condition, 'AND' ) : result || isMet( condition, 'AND' );
+				result = result || isMet( condition, 'AND' );
 				continue;
 			}
 
@@ -198,13 +199,13 @@
 			}
 
 			if ( relation == 'OR' ) {
-				result = result == undefined ? checkCallbacks[key]( value ) : result || checkCallbacks[key]( value );
+				result = result || checkCallbacks[key]( value );
 
 				if ( result ) {
 					return result;
 				}
 			} else {
-				result = result == undefined ? checkCallbacks[key]( value ) : result && checkCallbacks[key]( value );
+				result = result && checkCallbacks[key]( value );
 
 				if ( ! result ) {
 					return result;
