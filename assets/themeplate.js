@@ -121,18 +121,20 @@
 				containerCssClass: 'themeplate-select2'
 			});
 
-			if ( $select.attr( 'multiple' ) ) {
-				var $ul = $select.next( '.select2-container' ).find( 'ul' );
-
-				$ul.sortable( {
-					stop: function() {
-						$ul.find( '.select2-selection__choice' ).each( function() {
-							var $option = $( $( this ).data( 'data' ).element );
-							$option.detach().appendTo( $select );
-						});
-					}
-				});
+			if ( ! $select.attr( 'multiple' ) ) {
+				return;
 			}
+
+			var $ul = $select.next( '.select2-container' ).find( 'ul' );
+
+			$ul.sortable( {
+				stop: function() {
+					$ul.find( '.select2-selection__choice' ).each( function() {
+						var $option = $( $( this ).data( 'data' ).element );
+						$option.detach().appendTo( $select );
+					});
+				}
+			});
 		});
 	});
 
