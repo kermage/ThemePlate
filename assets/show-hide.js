@@ -72,7 +72,7 @@
 
 			return false;
 		},
-		field: function( argument ) {
+		field: function( argument, operator ) {
 			var element = argument[0];
 			var value = argument[1];
 			var current = $( element ).val();
@@ -81,7 +81,7 @@
 				current = parseInt( current );
 			}
 
-			return $.inArray( current, sureArray( value ) ) > -1;
+			return compareValue( current, value, operator );
 		}
 	};
 
@@ -145,6 +145,31 @@
 		return array;
 	}
 
+	function compareValue( have, want, operator ) {
+		var result;
+
+		switch ( operator ) {
+			default:
+			case '=':
+				result = ( have == want );
+				break;
+			case '>':
+				result = ( have > want );
+				break;
+			case '<':
+				result = ( have < want );
+				break;
+			case '>=':
+				result = ( have >= want );
+				break;
+			case '<=':
+				result = ( have <= want );
+				break;
+		}
+
+		return result;
+	}
+
 	function isAvailable( checker ) {
 		if ( checker == 'term' ) {
 			return true;
@@ -179,6 +204,7 @@
 			var key = condition['key'];
 			var value = condition['value'];
 			var operator = ( condition['operator'] !== undefined ) ? condition['operator'] : '=';
+			var invert = false;
 
 			if ( ! checkersElements.hasOwnProperty( key ) ) {
 				value = [ condition['key'], condition['value'] ];
@@ -194,9 +220,15 @@
 				continue;
 			}
 
-			var returned = checkCallbacks[key]( value );
-
 			if ( operator[0] === '!' ) {
+				invert = true;
+				operator = operator.replace( '!', '' );
+				operator = operator ? operator : '=';
+			}
+
+			var returned = checkCallbacks[key]( value, operator );
+
+			if ( invert ) {
 				returned = ! returned;
 			}
 
