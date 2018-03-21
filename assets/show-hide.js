@@ -165,8 +165,8 @@
 		return true;
 	}
 
-	function isMet( conditions, relation = 'OR' ) {
-		var result = ( relation != 'OR' );
+	function isMet( conditions, logic = 'OR' ) {
+		var result = ( logic != 'OR' );
 
 		for ( var i in conditions ) {
 			var condition = conditions[i];
@@ -200,7 +200,7 @@
 				returned = ! returned;
 			}
 
-			if ( relation == 'OR' ) {
+			if ( logic == 'OR' ) {
 				result = result || returned;
 
 				if ( result ) {
@@ -218,20 +218,20 @@
 		return result;
 	}
 
-	function maybeShowHide( $metabox, type, conditions ) {
+	function maybeShowHide( $container, type, conditions ) {
 		if ( type == 'show' ) {
-			isMet( conditions ) ? $metabox.show() : $metabox.hide();
+			isMet( conditions ) ? $container.show() : $container.hide();
 		} else {
-			isMet( conditions ) ? $metabox.hide() : $metabox.show();
+			isMet( conditions ) ? $container.hide() : $container.show();
 		}
 	}
 
-	function addEventListener( $metabox, type, conditions, origConditions = conditions ) {
+	function addEventListener( $container, type, conditions, origConditions = conditions ) {
 		for ( var i in conditions ) {
 			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
-				addEventListener( $metabox, type, condition, conditions );
+				addEventListener( $container, type, condition, conditions );
 				continue;
 			}
 
@@ -257,7 +257,7 @@
 			}
 
 			eventListeners[key]( function() {
-				maybeShowHide( $metabox, type, origConditions );
+				maybeShowHide( $container, type, origConditions );
 			}, value );
 		}
 	}
