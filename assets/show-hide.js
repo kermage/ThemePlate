@@ -102,7 +102,7 @@
 			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
 		},
 		field: function( callback, element ) {
-			$( element ).on( 'input', callback );
+			$( element ).on( 'change input', callback );
 		}
 	}
 
