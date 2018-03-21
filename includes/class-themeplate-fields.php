@@ -272,10 +272,13 @@ class ThemePlate_Fields {
 					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
-						echo '<div class="field-label">';
-							echo '<label class="label" for="' . $key . '">' . $title . '</label>';
-							echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
-						echo '</div>';
+						if ( ! empty( $sub['name'] ) || ! empty( $sub['desc'] ) ) {
+							echo '<div class="field-label">';
+								echo ! empty( $sub['name'] ) ? '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . '</label>' : '';
+								echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
+							echo '</div>';
+						}
+
 						echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
 							if ( $unique ) {
 								$sub['value'] = $value;
