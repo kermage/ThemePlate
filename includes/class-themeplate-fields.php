@@ -66,7 +66,7 @@ class ThemePlate_Fields {
 			case 'select' :
 			case 'select2' :
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
-				echo '<select' . ( $field['type'] == 'select2' ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select' . ( $field['type'] == 'select2' ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
 				if ( $field['type'] == 'select2' && ! $field['value'] ) {
 					echo '<option></options>';
 				} elseif ( $field['type'] != 'select2' && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
@@ -225,7 +225,7 @@ class ThemePlate_Fields {
 						break;
 				}
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
-				echo '<select class="themeplate-select2" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '" ' . ( $field['multiple'] ? 'multiple="multiple"' : '' ) . '>';
+				echo '<select class="themeplate-select2" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
 				if ( ! $field['value'] ) {
 					echo '<option></options>';
 				} elseif ( $field['none'] && $field['value'] ) {

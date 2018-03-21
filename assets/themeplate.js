@@ -115,7 +115,7 @@
 
 			$select.select2( {
 				width: '100%',
-				allowClear: true,
+				allowClear: $this.data( 'none' ),
 				placeholder: '— Select —',
 				dropdownCssClass: 'themeplate-select2',
 				containerCssClass: 'themeplate-select2'
