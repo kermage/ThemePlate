@@ -227,18 +227,16 @@
 	}
 
 	function addEventListener( $metabox, type, conditions, origConditions = conditions ) {
-		var condition, key, value;
-
 		for ( var i in conditions ) {
-			condition = conditions[i];
+			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
 				addEventListener( $metabox, type, condition, conditions );
 				continue;
 			}
 
-			key = condition['key'];
-			value = condition['value'];
+			var key = condition['key'];
+			var value = condition['value'];
 
 			if ( ! checkersElements.hasOwnProperty( key ) ) {
 				value = condition['key'];
