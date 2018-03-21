@@ -272,6 +272,16 @@ class ThemePlate_Fields {
 					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
+						if ( isset( $sub['show_on'] ) ) {
+							$show_on = json_encode( $sub['show_on'], JSON_NUMERIC_CHECK );
+							echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
+						}
+
+						if ( isset( $sub['hide_on'] ) ) {
+							$hide_on = json_encode( $sub['hide_on'], JSON_NUMERIC_CHECK );
+							echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
+						}
+
 						if ( ! empty( $sub['name'] ) || ! empty( $sub['desc'] ) ) {
 							echo '<div class="field-label">';
 								echo ! empty( $sub['name'] ) ? '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . '</label>' : '';
