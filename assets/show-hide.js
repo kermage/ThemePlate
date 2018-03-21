@@ -77,14 +77,6 @@
 			var value = argument[1];
 			var current = $( element ).val();
 
-			if ( ! value && current ) {
-				return true;
-			}
-
-			if ( value == '-1' && ! current ) {
-				return true;
-			}
-
 			return $.inArray( current, sureArray( value ) ) > -1;
 		}
 	};
