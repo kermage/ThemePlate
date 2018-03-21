@@ -200,7 +200,7 @@
 
 			var returned = checkCallbacks[key]( value );
 
-			if ( operator === '!' ) {
+			if ( operator[0] === '!' ) {
 				returned = ! returned;
 			}
 
