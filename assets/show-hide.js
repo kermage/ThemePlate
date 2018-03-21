@@ -182,6 +182,7 @@
 
 			var key = condition['key'];
 			var value = condition['value'];
+			var operator = ( condition['operator'] !== undefined ) ? condition['operator'] : '=';
 
 			if ( ! checkersElements.hasOwnProperty( key ) ) {
 				value = [ condition['key'], condition['value'] ];
@@ -197,14 +198,20 @@
 				continue;
 			}
 
+			var returned = checkCallbacks[key]( value );
+
+			if ( operator === '!' ) {
+				returned = ! returned;
+			}
+
 			if ( relation == 'OR' ) {
-				result = result || checkCallbacks[key]( value );
+				result = result || returned;
 
 				if ( result ) {
 					return result;
 				}
 			} else {
-				result = result && checkCallbacks[key]( value );
+				result = result && returned;
 
 				if ( ! result ) {
 					return result;
