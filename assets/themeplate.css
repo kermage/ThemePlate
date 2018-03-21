@@ -258,6 +258,10 @@
 	margin-left: 0.5em;
 }
 
+.themeplate .select2-search__field {
+	width: 100% !important;
+}
+
 .themeplate-select2.select2-selection li,
 .themeplate-select2.select2-dropdown li {
 	margin-bottom: 0;

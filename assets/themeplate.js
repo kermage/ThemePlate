@@ -111,9 +111,9 @@
 
 	$( document ).on( 'ready', function() {
 		$( '.themeplate-select2' ).each( function() {
-			var $select = $( this );
+			var $this = $( this );
 
-			$select.select2( {
+			$this.select2( {
 				width: '100%',
 				allowClear: $this.data( 'none' ),
 				placeholder: '— Select —',
@@ -121,17 +121,17 @@
 				containerCssClass: 'themeplate-select2'
 			});
 
-			if ( ! $select.attr( 'multiple' ) ) {
+			if ( ! $this.attr( 'multiple' ) ) {
 				return;
 			}
 
-			var $ul = $select.next( '.select2-container' ).find( 'ul' );
+			var $ul = $this.next( '.select2-container' ).find( 'ul' );
 
 			$ul.sortable( {
 				stop: function() {
 					$ul.find( '.select2-selection__choice' ).each( function() {
 						var $option = $( $( this ).data( 'data' ).element );
-						$option.detach().appendTo( $select );
+						$option.detach().appendTo( $this );
 					});
 				}
 			});
