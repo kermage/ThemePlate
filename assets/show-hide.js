@@ -114,7 +114,7 @@
 		}
 
 		var conditions = $this.data( 'show' );
-		var $container = $this.parents( '.field-wrapper' ).length ? $this.parents( '.field-wrapper' ) : $this.parents( '.themeplate' );
+		var $container = $this.closest( '.field-wrapper' ).length ? $this.closest( '.field-wrapper' ) : $this.closest( '.themeplate' );
 
 		maybeShowHide( $container, 'show', conditions );
 		addEventListener( $container, 'show', conditions );
@@ -128,7 +128,7 @@
 		}
 
 		var conditions = $this.data( 'hide' );
-		var $container = $this.parents( '.field-wrapper' ).length ? $this.parents( '.field-wrapper' ) : $this.parents( '.themeplate' );
+		var $container = $this.closest( '.field-wrapper' ).length ? $this.closest( '.field-wrapper' ) : $this.closest( '.themeplate' );
 
 		maybeShowHide( $container, 'hide', conditions );
 		addEventListener( $container, 'hide', conditions );
