@@ -130,6 +130,16 @@ class ThemePlate_Settings {
 			echo '<h2 class="hndle"><span>' . $section['title'] . '</span></h2>';
 			echo '<div class="inside">';
 
+			if ( isset( $section['callback']['show_on'] ) ) {
+				$show_on = json_encode( $section['callback']['show_on'], JSON_NUMERIC_CHECK );
+				echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
+			}
+
+			if ( isset( $section['callback']['hide_on'] ) ) {
+				$hide_on = json_encode( $section['callback']['hide_on'], JSON_NUMERIC_CHECK );
+				echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
+			}
+
 			if ( ! empty( $section['callback']['description'] ) ) {
 				echo '<p class="description">' . $section['callback']['description'] . '</p>';
 			}
@@ -163,6 +173,16 @@ class ThemePlate_Settings {
 
 		foreach ( (array) $wp_settings_fields[$page][$section] as $field ) {
 			echo '<div class="field-wrapper type-' . $field['args']['type'] . ' ' . $field['args']['style'] . '">';
+				if ( isset( $field['args']['show_on'] ) ) {
+					$show_on = json_encode( $field['args']['show_on'], JSON_NUMERIC_CHECK );
+					echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
+				}
+
+				if ( isset( $field['args']['hide_on'] ) ) {
+					$hide_on = json_encode( $field['args']['hide_on'], JSON_NUMERIC_CHECK );
+					echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
+				}
+
 				if ( ! empty( $field['args']['name'] ) || ! empty( $field['args']['desc'] ) ) {
 					echo '<div class="field-label">';
 						echo ! empty( $field['args']['name'] ) ? '<label class="label" for="' . $field['args']['id'] . '">' . $field['args']['name'] . '</label>' : '';
