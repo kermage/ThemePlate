@@ -75,7 +75,7 @@
 		field: function( argument, operator ) {
 			var element = argument[0];
 			var value = argument[1];
-			var current = $( element ).val();
+			var current = getValue( element );
 
 			if ( $.isNumeric( current ) ) {
 				current = parseInt( current );
@@ -133,6 +133,24 @@
 		maybeShowHide( $container, 'hide', conditions );
 		addEventListener( $container, 'hide', conditions );
 	});
+
+	function getValue( element ) {
+		var $element = $( element );
+		var type = $element.prop( 'tagName' );
+
+		if ( type !== 'FIELDSET' ) {
+			return $element.val();
+		}
+
+		var $items = $element.find( ':checked' );
+		var values = [];
+
+		$items.each( function() {
+			values.push( $( this ).val() );
+		});
+
+		return values;
+	}
 
 	function sureArray( value ) {
 		if ( $.isArray( value ) ) {
