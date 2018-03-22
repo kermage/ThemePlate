@@ -183,6 +183,15 @@
 			case '<=':
 				result = ( have <= want );
 				break;
+			case 'in':
+				result = ( $.inArray( have, want ) > -1 );
+				break;
+			case 'contains':
+				result = ( have.indexOf( want ) > -1 );
+				break;
+			case 'between':
+				result = compareValue( have, want[0], '>=' ) && compareValue( have, want[1], '<=' );
+				break;
 		}
 
 		return result;
