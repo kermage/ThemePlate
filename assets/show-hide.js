@@ -247,9 +247,9 @@
 				continue;
 			}
 
-			if ( compareValue( operator, '!', 'contains' ) ) {
+			if ( compareValue( operator, '!', 'contains' ) || compareValue( operator, 'not', 'contains' ) ) {
 				invert = true;
-				operator = operator.replace( '!', '' );
+				operator = operator.replace( '!', '' ).replace( 'not ', '' );
 				operator = operator ? operator : '=';
 			}
 
