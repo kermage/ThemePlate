@@ -22,7 +22,7 @@
 			var current = $pageTemplate.val();
 			current = current.substr( current.lastIndexOf( '/' ) + 1 );
 
-			return $.inArray( current, sureArray( value ) ) > -1;
+			return compareValue( current, sureArray( value ), 'in' );
 		},
 		format: function( value ) {
 			var current = $postFormat.filter( ':checked' ).val();
@@ -31,7 +31,7 @@
 				current = 'standard';
 			}
 
-			return $.inArray( current, sureArray( value ) ) > -1;
+			return compareValue( current, sureArray( value ), 'in' );
 		},
 		parent: function( value ) {
 			var current = $parent.val();
@@ -41,18 +41,18 @@
 				current = -1;
 			}
 
-			return $.inArray( current, sureArray( value ) ) > -1;
+			return compareValue( current, sureArray( value ), 'in' );
 		},
 		role: function( value ) {
 			var current = $role.val();
 
-			return $.inArray( current, sureArray( value ) ) > -1;
+			return compareValue( current, sureArray( value ), 'in' );
 		},
 		id: function( value ) {
 			var current = $id.val();
 			current = parseInt( current );
 
-			return $.inArray( current, sureArray( value ) ) > -1;
+			return compareValue( current, sureArray( value ), 'in' );
 		},
 		term: function( argument ) {
 			var taxonomy = argument[0];
@@ -65,7 +65,7 @@
 			});
 
 			for ( var i in current ) {
-				if ( $.inArray( current[i], sureArray( value ) ) > -1 ) {
+				if ( compareValue( current[i], sureArray( value ), 'in' ) ) {
 					return true;
 				}
 			}
@@ -247,7 +247,7 @@
 				continue;
 			}
 
-			if ( operator[0] === '!' ) {
+			if ( compareValue( operator, '!', 'contains' ) ) {
 				invert = true;
 				operator = operator.replace( '!', '' );
 				operator = operator ? operator : '=';
