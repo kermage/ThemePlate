@@ -106,32 +106,22 @@
 		}
 	}
 
-	$( '.themeplate-show' ).each( function() {
+	$( '.themeplate-options' ).each( function() {
 		var $this = $( this );
+		var $container = $this.closest( '.field-wrapper' ).length ? $this.closest( '.field-wrapper' ) : $this.closest( '.themeplate' );
+		var conditions;
 
-		if ( ! $this.data( 'show' ) ) {
-			return;
+		if ( $this.data( 'show' ) ) {
+			conditions = $this.data( 'show' );
+			maybeShowHide( $container, 'show', conditions );
+			addEventListener( $container, 'show', conditions );
 		}
 
-		var conditions = $this.data( 'show' );
-		var $container = $this.closest( '.field-wrapper' ).length ? $this.closest( '.field-wrapper' ) : $this.closest( '.themeplate' );
-
-		maybeShowHide( $container, 'show', conditions );
-		addEventListener( $container, 'show', conditions );
-	});
-
-	$( '.themeplate-hide' ).each( function() {
-		var $this = $( this );
-
-		if ( ! $this.data( 'hide' ) ) {
-			return;
+		if ( $this.data( 'hide' ) ) {
+			conditions = $this.data( 'hide' );
+			maybeShowHide( $container, 'hide', conditions );
+			addEventListener( $container, 'hide', conditions );
 		}
-
-		var conditions = $this.data( 'hide' );
-		var $container = $this.closest( '.field-wrapper' ).length ? $this.closest( '.field-wrapper' ) : $this.closest( '.themeplate' );
-
-		maybeShowHide( $container, 'hide', conditions );
-		addEventListener( $container, 'hide', conditions );
 	});
 
 	function getValue( element ) {

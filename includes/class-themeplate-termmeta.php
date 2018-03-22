@@ -111,14 +111,20 @@ class ThemePlate_TermMeta {
 		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
 		echo '<div class="inside">';
 
-		if ( isset( $meta_box['show_on'] ) ) {
-			$show_on = json_encode( $meta_box['show_on'], JSON_NUMERIC_CHECK );
-			echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
-		}
+		if ( isset( $meta_box['show_on'] ) || isset( $meta_box['hide_on'] ) ) {
+			echo '<div class="themeplate-options"';
 
-		if ( isset( $meta_box['hide_on'] ) ) {
-			$hide_on = json_encode( $meta_box['hide_on'], JSON_NUMERIC_CHECK );
-			echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
+			if ( isset( $meta_box['show_on'] ) ) {
+				$show_on = json_encode( $meta_box['show_on'], JSON_NUMERIC_CHECK );
+				echo ' data-show="' . esc_attr( $show_on ) . '"';
+			}
+
+			if ( isset( $meta_box['hide_on'] ) ) {
+				$hide_on = json_encode( $meta_box['hide_on'], JSON_NUMERIC_CHECK );
+				echo ' data-hide="' . esc_attr( $hide_on ) . '"';
+			}
+
+			echo '></div>';
 		}
 
 		if ( ! empty( $meta_box['description'] ) ) {
@@ -152,16 +158,21 @@ class ThemePlate_TermMeta {
 			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
 
 			echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
-				if ( isset( $field['show_on'] ) ) {
-					$show_on = json_encode( $field['show_on'], JSON_NUMERIC_CHECK );
-					echo '<div class="themeplate-show" data-show="' . esc_attr( $show_on ) . '"></div>';
-				}
+				if ( isset( $field['show_on'] ) || isset( $field['hide_on'] ) ) {
+					echo '<div class="themeplate-options"';
 
-				if ( isset( $field['hide_on'] ) ) {
-					$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
-					echo '<div class="themeplate-hide" data-hide="' . esc_attr( $hide_on ) . '"></div>';
-				}
+					if ( isset( $field['show_on'] ) ) {
+						$show_on = json_encode( $field['show_on'], JSON_NUMERIC_CHECK );
+						echo ' data-show="' . esc_attr( $show_on ) . '"';
+					}
 
+					if ( isset( $field['hide_on'] ) ) {
+						$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
+						echo ' data-hide="' . esc_attr( $hide_on ) . '"';
+					}
+
+					echo '></div>';
+				}
 				if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
 					echo '<div class="field-label">';
 						echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
