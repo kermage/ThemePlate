@@ -166,6 +166,8 @@
 	function compareValue( have, want, operator ) {
 		var result;
 
+		operator = operator.trim();
+
 		switch ( operator ) {
 			default:
 			case '=':
@@ -249,7 +251,7 @@
 
 			if ( compareValue( operator, '!', 'contains' ) || compareValue( operator, 'not', 'contains' ) ) {
 				invert = true;
-				operator = operator.replace( '!', '' ).replace( 'not ', '' );
+				operator = operator.replace( '!', '' ).replace( 'not', '' );
 				operator = operator ? operator : '=';
 			}
 
