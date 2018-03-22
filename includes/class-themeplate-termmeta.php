@@ -173,6 +173,7 @@ class ThemePlate_TermMeta {
 
 					echo '></div>';
 				}
+
 				if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
 					echo '<div class="field-label">';
 						echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';

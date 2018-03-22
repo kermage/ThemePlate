@@ -188,7 +188,7 @@ class ThemePlate_Settings {
 					}
 
 					if ( isset( $field['args']['hide_on'] ) ) {
-						$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
+						$hide_on = json_encode( $field['args']['hide_on'], JSON_NUMERIC_CHECK );
 						echo ' data-hide="' . esc_attr( $hide_on ) . '"';
 					}
 
