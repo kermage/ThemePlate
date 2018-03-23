@@ -10,10 +10,12 @@
 
 class ThemePlate_MetaBox {
 
+	private $object_type;
+	private $object_id;
 	private $meta_box;
 
 
-	public function __construct( $params ) {
+	public function __construct( $type, $id, $params ) {
 
 		if ( ! is_array( $params ) || empty( $params ) ) {
 			return false;
@@ -27,7 +29,22 @@ class ThemePlate_MetaBox {
 			return false;
 		}
 
+		$this->object_type = $type;
+		$this->object_id = $id;
 		$this->meta_box = $params;
+
+		$this->setup();
+
+	}
+
+
+	public function setup() {
+
+		if ( $this->object_type != 'post' ) {
+			$this->layout_postbox();
+		}
+
+		$this->layout_inside();
 
 	}
 
@@ -96,8 +113,8 @@ class ThemePlate_MetaBox {
 
 			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 			$field['object'] = array(
-				'type' => 'post',
-				'id' => $post->ID
+				'type' => $this->object_type,
+				'id' => $this->object_id
 			);
 
 			$key = $field['id'];
