@@ -103,7 +103,7 @@ class ThemePlate_PostMeta {
 
 	public function create( $post, $meta_box ) {
 
-		wp_nonce_field( basename( __FILE__ ), 'themeplate_meta_box_nonce' );
+		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['args']['id'] . '_nonce' );
 
 		if ( isset( $meta_box['args']['show_on'] ) || isset( $meta_box['args']['hide_on'] ) ) {
 			echo '<div class="themeplate-options"';
@@ -220,7 +220,7 @@ class ThemePlate_PostMeta {
 			return;
 		}
 
-		if ( ! isset( $_POST['themeplate_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_meta_box_nonce'], basename( __FILE__ ) ) ) {
+		if ( ! isset( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'], basename( __FILE__ ) ) ) {
 			return;
 		}
 
