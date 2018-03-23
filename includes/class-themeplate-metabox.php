@@ -40,11 +40,11 @@ class ThemePlate_MetaBox {
 
 	public function setup() {
 
-		if ( $this->object_type != 'post' ) {
+		if ( $this->object_type == 'post' ) {
+			$this->layout_inside();
+		} else {
 			$this->layout_postbox();
 		}
-
-		$this->layout_inside();
 
 	}
 
