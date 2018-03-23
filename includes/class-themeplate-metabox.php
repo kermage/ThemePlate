@@ -15,7 +15,7 @@ class ThemePlate_MetaBox {
 	private $meta_box;
 
 
-	public function __construct( $type, $id, $params ) {
+	public function __construct( $type, $params ) {
 
 		if ( ! is_array( $params ) || empty( $params ) ) {
 			return false;
@@ -30,21 +30,14 @@ class ThemePlate_MetaBox {
 		}
 
 		$this->object_type = $type;
-		$this->object_id = $id;
 		$this->meta_box = $params;
-
-		$this->setup();
 
 	}
 
 
-	public function setup() {
+	public function object_id( $number ) {
 
-		if ( $this->object_type == 'post' ) {
-			$this->layout_inside();
-		} else {
-			$this->layout_postbox();
-		}
+		$this->object_id = $number;
 
 	}
 
@@ -196,7 +189,7 @@ class ThemePlate_MetaBox {
 	}
 
 
-	public function save() {
+	public function save( $object_id ) {
 
 		foreach ( $this->meta_box['fields'] as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
@@ -206,11 +199,11 @@ class ThemePlate_MetaBox {
 			}
 
 			$unique = isset( $field['repeatable'] ) ? false : true;
-			$stored = get_metadata( $this->object_type, $this->object_id, $key, $unique );
+			$stored = get_metadata( $this->object_type, $object_id, $key, $unique );
 			$updated = $_POST[ThemePlate()->key][$key];
 
 			if ( ! $unique ) {
-				delete_metadata( $this->object_type, $this->object_id, $key );
+				delete_metadata( $this->object_type, $object_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {
 					foreach ( (array) $value as $j => $val ) {
@@ -227,7 +220,7 @@ class ThemePlate_MetaBox {
 						continue;
 					}
 
-					add_metadata( $this->object_type, $this->object_id, $key, $value );
+					add_metadata( $this->object_type, $object_id, $key, $value );
 				}
 			} else {
 				foreach ( (array) $updated as $i => $value ) {
@@ -245,9 +238,9 @@ class ThemePlate_MetaBox {
 				}
 
 				if ( $updated ) {
-					update_metadata( $this->object_type, $this->object_id, $key, $updated, $stored );
+					update_metadata( $this->object_type, $object_id, $key, $updated, $stored );
 				} else {
-					delete_metadata( $this->object_type, $this->object_id, $key, $stored );
+					delete_metadata( $this->object_type, $object_id, $key, $stored );
 				}
 			}
 
