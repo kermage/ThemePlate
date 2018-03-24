@@ -18,15 +18,15 @@ class ThemePlate_MetaBox {
 	public function __construct( $type, $params ) {
 
 		if ( ! is_array( $params ) || empty( $params ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		if ( ! array_key_exists( 'id', $params ) || ! array_key_exists( 'title', $params ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		if ( ! is_array( $params['fields'] ) || empty( $params['fields'] ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		$this->object_type = $type;

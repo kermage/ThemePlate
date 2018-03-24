@@ -16,20 +16,13 @@ class ThemePlate_Settings {
 
 	public function __construct( $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			return false;
-		}
-
-		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
-			return false;
-		}
-
-		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
+		try {
+			$this->tpmb = new ThemePlate_MetaBox( 'options', $config );
+		} catch( Exception $e ) {
 			return false;
 		}
 
 		$this->config = $config;
-		$this->tpmb = new ThemePlate_MetaBox( 'options', $config );
 
 		add_action( 'admin_init', array( $this, 'add' ) );
 

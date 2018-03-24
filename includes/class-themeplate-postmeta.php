@@ -16,20 +16,13 @@ class ThemePlate_PostMeta {
 
 	public function __construct( $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			return false;
-		}
-
-		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
-			return false;
-		}
-
-		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
+		try {
+			$this->tpmb = new ThemePlate_MetaBox( 'post', $config );
+		} catch( Exception $e ) {
 			return false;
 		}
 
 		$this->config = $config;
-		$this->tpmb = new ThemePlate_MetaBox( 'post', $config );
 
 		add_action( 'add_meta_boxes', array( $this, 'add' ) );
 		add_action( 'save_post', array( $this, 'save' ) );

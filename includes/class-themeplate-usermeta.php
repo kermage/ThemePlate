@@ -16,20 +16,13 @@ class ThemePlate_UserMeta {
 
 	public function __construct( $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			return false;
-		}
-
-		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
-			return false;
-		}
-
-		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
+		try {
+			$this->tpmb = new ThemePlate_MetaBox( 'user', $config );
+		} catch( Exception $e ) {
 			return false;
 		}
 
 		$this->config = $config;
-		$this->tpmb = new ThemePlate_MetaBox( 'user', $config );
 
 		add_action( 'show_user_profile', array( $this, 'create' ) );
 		add_action( 'edit_user_profile', array( $this, 'create' ) );
