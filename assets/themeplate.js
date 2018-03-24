@@ -104,8 +104,7 @@
 	});
 
 	$( '.themeplate-file.multiple' ).sortable( {
-		items: '.attachment',
-		opacity: 0.75
+		items: '.attachment'
 	});
 
 
