@@ -68,21 +68,7 @@ class ThemePlate_MetaBox {
 
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['id'] . '_nonce' );
 
-		if ( isset( $meta_box['show_on'] ) || isset( $meta_box['hide_on'] ) ) {
-			echo '<div class="themeplate-options"';
-
-			if ( isset( $meta_box['show_on'] ) ) {
-				$show_on = json_encode( $meta_box['show_on'], JSON_NUMERIC_CHECK );
-				echo ' data-show="' . esc_attr( $show_on ) . '"';
-			}
-
-			if ( isset( $meta_box['hide_on'] ) ) {
-				$hide_on = json_encode( $meta_box['hide_on'], JSON_NUMERIC_CHECK );
-				echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-			}
-
-			echo '></div>';
-		}
+		ThemePlate_Helpers::render_options( $meta_box );
 
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p class="description">' . $meta_box['description'] . '</p>';
@@ -143,21 +129,7 @@ class ThemePlate_MetaBox {
 		$value = $stored ? $stored : $default;
 
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
-			if ( isset( $field['show_on'] ) || isset( $field['hide_on'] ) ) {
-				echo '<div class="themeplate-options"';
-
-				if ( isset( $field['show_on'] ) ) {
-					$show_on = json_encode( $field['show_on'], JSON_NUMERIC_CHECK );
-					echo ' data-show="' . esc_attr( $show_on ) . '"';
-				}
-
-				if ( isset( $field['hide_on'] ) ) {
-					$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
-					echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-				}
-
-				echo '></div>';
-			}
+			ThemePlate_Helpers::render_options( $field );
 
 			if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
 				echo '<div class="field-label">';

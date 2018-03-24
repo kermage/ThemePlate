@@ -272,21 +272,7 @@ class ThemePlate_Fields {
 					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
-						if ( isset( $sub['show_on'] ) || isset( $sub['hide_on'] ) ) {
-							echo '<div class="themeplate-options"';
-
-							if ( isset( $sub['show_on'] ) ) {
-								$show_on = json_encode( $sub['show_on'], JSON_NUMERIC_CHECK );
-								echo ' data-show="' . esc_attr( $show_on ) . '"';
-							}
-
-							if ( isset( $sub['hide_on'] ) ) {
-								$hide_on = json_encode( $sub['hide_on'], JSON_NUMERIC_CHECK );
-								echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-							}
-
-							echo '></div>';
-						}
+						ThemePlate_Helpers::render_options( $sub );
 
 						if ( ! empty( $sub['name'] ) || ! empty( $sub['desc'] ) ) {
 							echo '<div class="field-label">';
