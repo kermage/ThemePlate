@@ -92,12 +92,7 @@ class ThemePlate_MetaBox {
 				continue;
 			}
 
-			$field['object'] = array(
-				'type' => $this->object_type,
-				'id' => $this->object_id
-			);
-
-			if ( $field['object']['type'] == 'options' ) {
+			if ( $this->object_type == 'options' ) {
 				$field['id'] = $meta_box['id'] . '_' . $id;
 			} else {
 				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
@@ -117,12 +112,12 @@ class ThemePlate_MetaBox {
 		$default = isset( $field['std'] ) ? $field['std'] : '';
 		$unique = isset( $field['repeatable'] ) ? false : true;
 
-		if ( $field['object']['type'] == 'options' ) {
-			$options = get_option( $field['object']['id'] );
+		if ( $this->object_type == 'options' ) {
+			$options = get_option( $this->object_id );
 			$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
-			$key = $field['object']['id'];
+			$key = $this->object_id;
 		} else {
-			$stored = get_metadata( $field['object']['type'], $field['object']['id'], $field['id'], $unique );
+			$stored = get_metadata( $this->object_type, $this->object_id, $field['id'], $unique );
 			$key = ThemePlate()->key;
 		}
 
