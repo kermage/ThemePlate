@@ -32,10 +32,6 @@ class ThemePlate_Fields {
 
 	public function render( $field ) {
 
-		if ( ! is_array( $field ) || empty( $field ) ) {
-			return false;
-		}
-
 		$field = array_merge( array( 'multiple' => false, 'none' => false ), $field );
 
 		$list = false;
