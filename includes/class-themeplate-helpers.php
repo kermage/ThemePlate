@@ -14,7 +14,7 @@ class ThemePlate_Helpers {
 
 		$check = true;
 
-		if ( isset( $meta_box['show_on'] ) ) {
+		if ( ! empty( $meta_box['show_on'] ) ) {
 			$value = $meta_box['show_on'];
 
 			if ( is_callable( $value ) ) {
@@ -36,7 +36,7 @@ class ThemePlate_Helpers {
 			}
 		}
 
-		if ( isset( $meta_box['hide_on'] ) ) {
+		if ( ! empty( $meta_box['hide_on'] ) ) {
 			$value = $meta_box['hide_on'];
 
 			if ( is_callable( $value ) ) {
@@ -65,15 +65,15 @@ class ThemePlate_Helpers {
 
 	public static function render_options( $container ) {
 
-		if ( isset( $container['show_on'] ) || isset( $container['hide_on'] ) ) {
+		if ( ! empty( $container['show_on'] ) || ! empty( $container['hide_on'] ) ) {
 			echo '<div class="themeplate-options"';
 
-			if ( isset( $container['show_on'] ) ) {
+			if ( ! empty( $container['show_on'] ) ) {
 				$show_on = json_encode( $container['show_on'], JSON_NUMERIC_CHECK );
 				echo ' data-show="' . esc_attr( $show_on ) . '"';
 			}
 
-			if ( isset( $container['hide_on'] ) ) {
+			if ( ! empty( $container['hide_on'] ) ) {
 				$hide_on = json_encode( $container['hide_on'], JSON_NUMERIC_CHECK );
 				echo ' data-hide="' . esc_attr( $hide_on ) . '"';
 			}

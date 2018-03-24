@@ -45,7 +45,7 @@ class ThemePlate_Fields {
 		$list = false;
 		$seq = false;
 
-		if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+		if ( ! empty( $field['options'] ) ) {
 			if( array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
 				$seq = true;
 			}
@@ -103,7 +103,7 @@ class ThemePlate_Fields {
 			case 'radiolist' :
 				$list = true;
 			case 'radio' :
-				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+				if ( ! empty( $field['options'] ) ) {
 					echo '<fieldset id="' . $field['id'] . '">';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
@@ -119,7 +119,7 @@ class ThemePlate_Fields {
 				$list = true;
 			case 'checkbox' :
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
-				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+				if ( ! empty( $field['options'] ) ) {
 					echo '<fieldset id="' . $field['id'] . '">';
 					foreach ( $field['options'] as $value => $option ) {
 						$value = ( $seq ? $value + 1 : $value );
@@ -179,7 +179,7 @@ class ThemePlate_Fields {
 			case 'number':
 			case 'range':
 				echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
-				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
+				if ( ! empty( $field['options'] ) ) {
 					foreach ( $field['options'] as $option => $value ) {
 						echo $option . '="' . $value . '"';
 					}
