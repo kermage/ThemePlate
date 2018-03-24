@@ -224,6 +224,10 @@
 	width: 100%;
 }
 
+.themeplate-file.multiple .attachment {
+	width: 12.5%;
+}
+
 .themeplate-file .attachment.placeholder {
 	position: absolute;
 	top: 50%;
@@ -384,6 +388,10 @@
 	#side-sortables .type-group:not( .boxed ) .themeplate-clone {
 		padding-bottom: 1em;
 	}
+
+	#side-sortables .themeplate-file.multiple .attachment {
+		width: 50%;
+	}
 }
 
 @media screen and ( max-width: 782px ) {
@@ -414,5 +422,9 @@
 
 	.type-group:not( .boxed ) .themeplate-clone {
 		padding-bottom: 1em;
+	}
+
+	.themeplate-file.multiple .attachment {
+		width: 50%;
 	}
 }
