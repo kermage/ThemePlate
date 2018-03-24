@@ -91,9 +91,7 @@ class ThemePlate_MetaBox {
 			echo '<p class="description">' . $meta_box['description'] . '</p>';
 		}
 
-		$style = isset( $meta_box['style'] ) ? $meta_box['style'] : '';
-
-		echo '<div class="fields-container ' . $style . '">';
+		echo '<div class="fields-container ' . $meta_box['style'] . '">';
 			$this->layout_fields();
 		echo '</div>';
 
