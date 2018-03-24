@@ -257,19 +257,15 @@ class ThemePlate_Fields {
 
 			case 'group':
 				foreach ( $field['fields'] as $id => $sub ) {
-					$sub['id'] = $field['id'] . '_' . $id;
 					$sub['object'] = $field['object'];
+					$sub['id'] = $field['id'] . '_' . $id;
+					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
+					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
 
-					$key = $sub['id'];
-					$title = $sub['name'];
-					$name = $field['name'] . '[' . $id . ']';
 					$default = isset( $sub['std'] ) ? $sub['std'] : '';
 					$unique = isset( $sub['repeatable'] ) ? false : true;
 					$stored = isset( $field['value'][$id] ) ? $field['value'][$id] : '';
 					$value = $stored ? $stored : $default;
-
-					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
-					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
 						ThemePlate_Helpers::render_options( $sub );
@@ -282,16 +278,20 @@ class ThemePlate_Fields {
 						}
 
 						echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
+							$base_name = $field['name'] . '[' . $id . ']';
+
 							if ( $unique ) {
 								$sub['value'] = $value;
-								$sub['name'] = $name;
+								$sub['name'] = $base_name;
 
 								ThemePlate_Fields::instance()->render( $sub );
 							} else {
+								$base_id = $sub['id'];
+
 								foreach ( (array) $value as $i => $val ) {
 									$sub['value'] = $val;
-									$sub['id'] = $key . '_' . $i;
-									$sub['name'] =  $name . '[' . $i . ']';
+									$sub['id'] = $base_id . '_' . $i;
+									$sub['name'] =  $base_name . '[' . $i . ']';
 
 									echo '<div class="themeplate-clone">';
 										echo '<div class="themeplate-handle"></div>';
@@ -301,8 +301,8 @@ class ThemePlate_Fields {
 								}
 
 								$sub['value'] = $default;
-								$sub['id'] = $key . '_i-x';
-								$sub['name'] =  $name . '[i-x]';
+								$sub['id'] = $base_id . '_i-x';
+								$sub['name'] =  $base_name . '[i-x]';
 
 								echo '<div class="themeplate-clone hidden">';
 									echo '<div class="themeplate-handle"></div>';
