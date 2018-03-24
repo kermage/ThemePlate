@@ -10,24 +10,26 @@
 
 class ThemePlate_PostMeta {
 
-	private $meta_box;
+	private $config;
+	private $tpmb;
 
 
-	public function __construct( $meta_box ) {
+	public function __construct( $config ) {
 
-		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
+		if ( ! is_array( $config ) || empty( $config ) ) {
 			return false;
 		}
 
-		if ( ! array_key_exists( 'id', $meta_box ) || ! array_key_exists( 'title', $meta_box ) ) {
+		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
 			return false;
 		}
 
-		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
+		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
 			return false;
 		}
 
-		$this->meta_box = $meta_box;
+		$this->config = $config;
+		$this->tpmb = new ThemePlate_MetaBox( 'post', $config );
 
 		add_action( 'add_meta_boxes', array( $this, 'add' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
@@ -37,8 +39,9 @@ class ThemePlate_PostMeta {
 
 	public function add() {
 
-		$meta_box = $this->meta_box;
+		$meta_box = $this->config;
 		$post_id = get_the_ID();
+		$this->tpmb->object_id( $post_id );
 		$check = true;
 
 		if ( isset( $meta_box['show_on'] ) ) {
@@ -96,133 +99,12 @@ class ThemePlate_PostMeta {
 		);
 		$meta_box = wp_parse_args( $meta_box, $defaults );
 
-		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'create' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box );
-
-	}
-
-
-	public function create( $post, $meta_box ) {
-
-		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['args']['id'] . '_nonce' );
-
-		if ( isset( $meta_box['args']['show_on'] ) || isset( $meta_box['args']['hide_on'] ) ) {
-			echo '<div class="themeplate-options"';
-
-			if ( isset( $meta_box['args']['show_on'] ) ) {
-				$show_on = json_encode( $meta_box['args']['show_on'], JSON_NUMERIC_CHECK );
-				echo ' data-show="' . esc_attr( $show_on ) . '"';
-			}
-
-			if ( isset( $meta_box['args']['hide_on'] ) ) {
-				$hide_on = json_encode( $meta_box['args']['hide_on'], JSON_NUMERIC_CHECK );
-				echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-			}
-
-			echo '></div>';
-		}
-
-		if ( ! empty( $meta_box['args']['description'] ) ) {
-			echo '<p class="description">' . $meta_box['args']['description'] . '</p>';
-		}
-
-		$style = isset( $meta_box['args']['style'] ) ? $meta_box['args']['style'] : '';
-
-		echo '<div class="fields-container ' . $style . '">';
-
-		foreach ( $meta_box['args']['fields'] as $id => $field ) {
-			if ( ! is_array( $field ) || empty( $field ) ) {
-				continue;
-			}
-
-			$field['id'] = ThemePlate()->key . '_' . $meta_box['args']['id'] . '_' . $id;
-			$field['object'] = array(
-				'type' => 'post',
-				'id' => $post->ID
-			);
-
-			$key = $field['id'];
-			$title = $field['name'];
-			$name = ThemePlate()->key . '[' . $key . ']';
-			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$unique = isset( $field['repeatable'] ) ? false : true;
-			$stored = get_post_meta( $field['object']['id'], $key, $unique );
-			$value = $stored ? $stored : $default;
-
-			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
-			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
-
-			echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
-				if ( isset( $field['show_on'] ) || isset( $field['hide_on'] ) ) {
-					echo '<div class="themeplate-options"';
-
-					if ( isset( $field['show_on'] ) ) {
-						$show_on = json_encode( $field['show_on'], JSON_NUMERIC_CHECK );
-						echo ' data-show="' . esc_attr( $show_on ) . '"';
-					}
-
-					if ( isset( $field['hide_on'] ) ) {
-						$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
-						echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-					}
-
-					echo '></div>';
-				}
-
-				if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
-					echo '<div class="field-label">';
-						echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
-						echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
-					echo '</div>';
-				}
-
-				echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
-					if ( $unique ) {
-						$field['value'] = $value;
-						$field['name'] =  $name;
-
-						ThemePlate_Fields::instance()->render( $field );
-					} else {
-						foreach ( (array) $value as $i => $val ) {
-							$field['value'] = $val;
-							$field['id'] = $key . '_' . $i;
-							$field['name'] =  $name . '[' . $i . ']';
-
-							echo '<div class="themeplate-clone">';
-								echo '<div class="themeplate-handle"></div>';
-								ThemePlate_Fields::instance()->render( $field );
-								echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-							echo '</div>';
-						}
-
-						$field['value'] = $default;
-						$field['id'] = $key . '_i-x';
-						$field['name'] =  $name . '[i-x]';
-
-						echo '<div class="themeplate-clone hidden">';
-							echo '<div class="themeplate-handle"></div>';
-							ThemePlate_Fields::instance()->render( $field );
-							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-						echo '</div>';
-						echo '<input type="button" class="button clone-add" value="Add Field" />';
-					}
-				echo '</div>';
-			echo '</div>';
-		}
-
-		echo '</div>';
+		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this->tpmb, 'layout_inside' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
 
 	}
 
 
 	public function save( $post_id ) {
-
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'], basename( __FILE__ ) ) ) {
-			return;
-		}
 
 		if ( 'page' == $_POST['post_type'] ) {
 			if ( ! current_user_can( 'edit_page', $post_id ) ) {
@@ -234,60 +116,7 @@ class ThemePlate_PostMeta {
 			}
 		}
 
-		foreach ( $this->meta_box['fields'] as $id => $field ) {
-			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
-
-			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
-				continue;
-			}
-
-			$unique = isset( $field['repeatable'] ) ? false : true;
-			$stored = get_post_meta( $post_id, $key, $unique );
-			$updated = $_POST[ThemePlate()->key][$key];
-
-			if ( ! $unique ) {
-				delete_post_meta( $post_id, $key );
-
-				foreach ( (array) $updated as $i => $value ) {
-					foreach ( (array) $value as $j => $val ) {
-						if ( is_array( $val ) ) {
-							$value[$j] = array_merge( array_filter( $val ) );
-						}
-					}
-
-					if ( is_array( $value ) ) {
-						$value = array_filter( $value );
-					}
-
-					if ( $i === 'i-x' || empty( $value ) ) {
-						continue;
-					}
-
-					add_post_meta( $post_id, $key, $value );
-				}
-			} else {
-				foreach ( (array) $updated as $i => $value ) {
-					if ( is_array( $value ) ) {
-						$updated[$i] = array_merge( array_filter( $value ) );
-					}
-				}
-
-				if ( is_array( $updated ) ) {
-					$updated = array_filter( $updated );
-				}
-
-				if ( ( ! $stored && ! $updated ) || $stored == $updated ) {
-					continue;
-				}
-
-				if ( $updated ) {
-					update_post_meta( $post_id, $key, $updated, $stored );
-				} else {
-					delete_post_meta( $post_id, $key, $stored );
-				}
-			}
-
-		}
+		$this->tpmb->save( $post_id );
 
 	}
 

@@ -66,6 +66,8 @@ class ThemePlate_MetaBox {
 
 		$meta_box = $this->meta_box;
 
+		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['id'] . '_nonce' );
+
 		if ( isset( $meta_box['show_on'] ) || isset( $meta_box['hide_on'] ) ) {
 			echo '<div class="themeplate-options"';
 
@@ -190,6 +192,14 @@ class ThemePlate_MetaBox {
 
 
 	public function save( $object_id ) {
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'], basename( __FILE__ ) ) ) {
+			return;
+		}
 
 		foreach ( $this->meta_box['fields'] as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
