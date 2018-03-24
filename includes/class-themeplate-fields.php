@@ -256,6 +256,14 @@ class ThemePlate_Fields {
 
 
 			case 'group':
+				if ( ! array_key_exists( 'fields', $field ) ) {
+					return false;
+				}
+
+				if ( ! is_array( $field['fields'] ) || empty( $field['fields'] ) ) {
+					return false;
+				}
+
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['object'] = $field['object'];
 					$sub['id'] = $field['id'] . '_' . $id;
