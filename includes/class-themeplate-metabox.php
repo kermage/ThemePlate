@@ -14,6 +14,22 @@ class ThemePlate_MetaBox {
 	private $object_id;
 	private $meta_box;
 
+	private $meta_defaults = array(
+		'show_on'    => array(),
+		'hide_on'    => array(),
+		'style'      => ''
+	);
+
+	private $field_defaults = array(
+		'type'       => 'text',
+		'options'    => array(),
+		'multiple'   => false,
+		'none'       => false,
+		'std'        => '',
+		'style'      => '',
+		'repeatable' => false
+	);
+
 
 	public function __construct( $type, $params ) {
 
@@ -65,6 +81,7 @@ class ThemePlate_MetaBox {
 	public function layout_inside() {
 
 		$meta_box = $this->meta_box;
+		$meta_box = array_merge( $this->meta_defaults, $meta_box );
 
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['id'] . '_nonce' );
 
@@ -92,14 +109,13 @@ class ThemePlate_MetaBox {
 				continue;
 			}
 
+			$field = array_merge( $this->field_defaults, $field );
+
 			if ( $this->object_type == 'options' ) {
 				$field['id'] = $meta_box['id'] . '_' . $id;
 			} else {
 				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 			}
-
-			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
-			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
 
 			$this->layout_field( $field );
 		}
@@ -109,19 +125,16 @@ class ThemePlate_MetaBox {
 
 	public function layout_field( $field ) {
 
-		$default = isset( $field['std'] ) ? $field['std'] : '';
-		$unique = isset( $field['repeatable'] ) ? false : true;
-
 		if ( $this->object_type == 'options' ) {
 			$options = get_option( $this->object_id );
 			$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
 			$key = $this->object_id;
 		} else {
-			$stored = get_metadata( $this->object_type, $this->object_id, $field['id'], $unique );
+			$stored = get_metadata( $this->object_type, $this->object_id, $field['id'], ! $field['repeatable'] );
 			$key = ThemePlate()->key;
 		}
 
-		$value = $stored ? $stored : $default;
+		$value = $stored ? $stored : $field['std'];
 
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
 			ThemePlate_Helpers::render_options( $field );
@@ -133,10 +146,10 @@ class ThemePlate_MetaBox {
 				echo '</div>';
 			}
 
-			echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
+			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '">';
 				$base_name = $key . '[' . $field['id'] . ']';
 
-				if ( $unique ) {
+				if ( ! $field['repeatable'] ) {
 					$field['value'] = $value;
 					$field['name'] =  $base_name;
 
@@ -156,7 +169,7 @@ class ThemePlate_MetaBox {
 						echo '</div>';
 					}
 
-					$field['value'] = $default;
+					$field['value'] = $field['std'];
 					$field['id'] = $base_id . '_i-x';
 					$field['name'] =  $base_name . '[i-x]';
 
@@ -190,11 +203,10 @@ class ThemePlate_MetaBox {
 				continue;
 			}
 
-			$unique = isset( $field['repeatable'] ) ? false : true;
-			$stored = get_metadata( $this->object_type, $object_id, $key, $unique );
+			$stored = get_metadata( $this->object_type, $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ThemePlate()->key][$key];
 
-			if ( ! $unique ) {
+			if ( ! $field['repeatable'] ) {
 				delete_metadata( $this->object_type, $object_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {

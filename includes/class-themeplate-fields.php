@@ -12,6 +12,16 @@ class ThemePlate_Fields {
 
 	private static $instance;
 
+	private $field_defaults = array(
+		'type'       => 'text',
+		'options'    => array(),
+		'multiple'   => false,
+		'none'       => false,
+		'std'        => '',
+		'style'      => '',
+		'repeatable' => false
+	);
+
 
 	public static function instance() {
 
@@ -31,8 +41,6 @@ class ThemePlate_Fields {
 
 
 	public function render( $field ) {
-
-		$field = array_merge( array( 'multiple' => false, 'none' => false ), $field );
 
 		$list = false;
 		$seq = false;
@@ -265,14 +273,12 @@ class ThemePlate_Fields {
 						continue;
 					}
 
-					$sub['id'] = $field['id'] . '_' . $id;
-					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
-					$sub['style'] = isset( $sub['style'] ) ? $sub['style'] : '';
+					$sub = array_merge( $this->field_defaults, $sub );
 
-					$default = isset( $sub['std'] ) ? $sub['std'] : '';
-					$unique = isset( $sub['repeatable'] ) ? false : true;
+					$sub['id'] = $field['id'] . '_' . $id;
+
 					$stored = isset( $field['value'][$id] ) ? $field['value'][$id] : '';
-					$value = $stored ? $stored : $default;
+					$value = $stored ? $stored : $sub['std'];
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
 						ThemePlate_Helpers::render_options( $sub );
@@ -284,10 +290,10 @@ class ThemePlate_Fields {
 							echo '</div>';
 						}
 
-						echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
+						echo '<div class="field-input' . ( $sub['repeatable'] ? ' repeatable' : '' ) . '">';
 							$base_name = $field['name'] . '[' . $id . ']';
 
-							if ( $unique ) {
+							if ( ! $sub['repeatable'] ) {
 								$sub['value'] = $value;
 								$sub['name'] = $base_name;
 
@@ -307,7 +313,7 @@ class ThemePlate_Fields {
 									echo '</div>';
 								}
 
-								$sub['value'] = $default;
+								$sub['value'] = $sub['std'];
 								$sub['id'] = $base_id . '_i-x';
 								$sub['name'] =  $base_name . '[i-x]';
 
