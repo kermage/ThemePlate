@@ -10,31 +10,33 @@
 
 class ThemePlate_TermMeta {
 
-	private $meta_box;
+	private $config;
+	private $tpmb;
 
 
-	public function __construct( $meta_box ) {
+	public function __construct( $config ) {
 
-		if ( ! is_array( $meta_box ) || empty( $meta_box ) ) {
+		if ( ! is_array( $config ) || empty( $config ) ) {
 			return false;
 		}
 
-		if ( ! array_key_exists( 'id', $meta_box ) || ! array_key_exists( 'title', $meta_box ) ) {
+		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
 			return false;
 		}
 
-		if ( ! is_array( $meta_box['fields'] ) || empty( $meta_box['fields'] ) ) {
+		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
 			return false;
 		}
 
-		$this->meta_box = $meta_box;
+		$this->config = $config;
+		$this->tpmb = new ThemePlate_MetaBox( 'term', $config );
 
-		if ( empty( $meta_box['taxonomy'] ) ) {
+		if ( empty( $config['taxonomy'] ) ) {
 			$taxonomies = get_taxonomies( array( '_builtin' => false ) );
 			$taxonomies['category'] = 'category';
 			$taxonomies['post_tag'] = 'post_tag';
 		} else {
-			$taxonomies = $meta_box['taxonomy'];
+			$taxonomies = $config['taxonomy'];
 		}
 
 		foreach ( (array) $taxonomies as $taxonomy ) {
@@ -49,7 +51,9 @@ class ThemePlate_TermMeta {
 
 	public function create( $tag ) {
 
-		$meta_box = $this->meta_box;
+		$meta_box = $this->config;
+		$term_id = is_object( $tag ) ? $tag->term_id : '';
+		$this->tpmb->object_id( $term_id );
 		$check = true;
 
 		if ( isset( $meta_box['show_on'] ) ) {
@@ -67,7 +71,7 @@ class ThemePlate_TermMeta {
 				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['show_on'] );
 
-					if ( ! is_object( $tag ) || ( is_object( $tag ) && ! array_intersect( (array) $tag->term_id, (array) $value[0]['value'] ) ) ) {
+					if ( ! is_object( $tag ) || ( is_object( $tag ) && ! array_intersect( (array) $term_id, (array) $value[0]['value'] ) ) ) {
 						$check = false;
 					}
 				}
@@ -89,7 +93,7 @@ class ThemePlate_TermMeta {
 				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
 					unset( $meta_box['hide_on'] );
 
-					if ( is_object( $tag ) && array_intersect( (array) $tag->term_id, (array) $value[0]['value'] ) ) {
+					if ( is_object( $tag ) && array_intersect( (array) $term_id, (array) $value[0]['value'] ) ) {
 						$check = false;
 					}
 				}
@@ -103,122 +107,7 @@ class ThemePlate_TermMeta {
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
-		printf( '<div id="themeplate_%s" class="postbox">', ThemePlate()->key . '_' . $meta_box['id'] );
-		echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
-		echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) . '</span>';
-		echo '<span class="toggle-indicator" aria-hidden="true"></span>';
-		echo '</button>';
-		echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
-		echo '<div class="inside">';
-
-		if ( isset( $meta_box['show_on'] ) || isset( $meta_box['hide_on'] ) ) {
-			echo '<div class="themeplate-options"';
-
-			if ( isset( $meta_box['show_on'] ) ) {
-				$show_on = json_encode( $meta_box['show_on'], JSON_NUMERIC_CHECK );
-				echo ' data-show="' . esc_attr( $show_on ) . '"';
-			}
-
-			if ( isset( $meta_box['hide_on'] ) ) {
-				$hide_on = json_encode( $meta_box['hide_on'], JSON_NUMERIC_CHECK );
-				echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-			}
-
-			echo '></div>';
-		}
-
-		if ( ! empty( $meta_box['description'] ) ) {
-			echo '<p class="description">' . $meta_box['description'] . '</p>';
-		}
-
-		$style = isset( $meta_box['style'] ) ? $meta_box['style'] : '';
-
-		echo '<div class="fields-container ' . $style . '">';
-
-		foreach ( $meta_box['fields'] as $id => $field ) {
-			if ( ! is_array( $field ) || empty( $field ) ) {
-				continue;
-			}
-
-			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-			$field['object'] = array(
-				'type' => 'term',
-				'id' => is_object( $tag ) ? $tag->term_id : ''
-			);
-
-			$key = $field['id'];
-			$title = $field['name'];
-			$name = ThemePlate()->key . '[' . $key . ']';
-			$default = isset( $field['std'] ) ? $field['std'] : '';
-			$unique = isset( $field['repeatable'] ) ? false : true;
-			$stored = $field['object']['id'] ? get_term_meta( $field['object']['id'], $field['id'], $unique ) : '';
-			$value = $stored ? $stored : $default;
-
-			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
-			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
-
-			echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
-				if ( isset( $field['show_on'] ) || isset( $field['hide_on'] ) ) {
-					echo '<div class="themeplate-options"';
-
-					if ( isset( $field['show_on'] ) ) {
-						$show_on = json_encode( $field['show_on'], JSON_NUMERIC_CHECK );
-						echo ' data-show="' . esc_attr( $show_on ) . '"';
-					}
-
-					if ( isset( $field['hide_on'] ) ) {
-						$hide_on = json_encode( $field['hide_on'], JSON_NUMERIC_CHECK );
-						echo ' data-hide="' . esc_attr( $hide_on ) . '"';
-					}
-
-					echo '></div>';
-				}
-
-				if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
-					echo '<div class="field-label">';
-						echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
-						echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
-					echo '</div>';
-				}
-
-				echo '<div class="field-input' . ( $unique ? '' : ' repeatable' ) . '">';
-					if ( $unique ) {
-						$field['value'] = $value;
-						$field['name'] =  $name;
-
-						ThemePlate_Fields::instance()->render( $field );
-					} else {
-						foreach ( (array) $value as $i => $val ) {
-							$field['value'] = $val;
-							$field['id'] = $key . '_' . $i;
-							$field['name'] =  $name . '[' . $i . ']';
-
-							echo '<div class="themeplate-clone">';
-								echo '<div class="themeplate-handle"></div>';
-								ThemePlate_Fields::instance()->render( $field );
-								echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-							echo '</div>';
-						}
-
-						$field['value'] = $default;
-						$field['id'] = $key . '_i-x';
-						$field['name'] =  $name . '[i-x]';
-
-						echo '<div class="themeplate-clone hidden">';
-							echo '<div class="themeplate-handle"></div>';
-							ThemePlate_Fields::instance()->render( $field );
-							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-						echo '</div>';
-						echo '<input type="button" class="button clone-add" value="Add Field" />';
-					}
-				echo '</div>';
-			echo '</div>';
-		}
-
-		echo '</div>';
-
-		echo '</div>';
-		echo '</div>';
+		$this->tpmb->layout_postbox();
 
 	}
 
@@ -229,59 +118,7 @@ class ThemePlate_TermMeta {
 			return;
 		}
 
-		foreach ( $this->meta_box['fields'] as $id => $field ) {
-			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
-
-			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
-				continue;
-			}
-
-			$unique = isset( $field['repeatable'] ) ? false : true;
-			$stored = get_term_meta( $term_id, $key, $unique );
-			$updated = $_POST[ThemePlate()->key][$key];
-
-			if ( ! $unique ) {
-				delete_term_meta( $term_id, $key );
-
-				foreach ( (array) $updated as $i => $value ) {
-					foreach ( (array) $value as $j => $val ) {
-						if ( is_array( $val ) ) {
-							$value[$j] = array_merge( array_filter( $val ) );
-						}
-					}
-
-					if ( is_array( $value ) ) {
-						$value = array_filter( $value );
-					}
-
-					if ( $i === 'i-x' || empty( $value ) ) {
-						continue;
-					}
-
-					add_term_meta( $term_id, $key, $value );
-				}
-			} else {
-				foreach ( (array) $updated as $i => $value ) {
-					if ( is_array( $value ) ) {
-						$updated[$i] = array_merge( array_filter( $value ) );
-					}
-				}
-
-				if ( is_array( $updated ) ) {
-					$updated = array_filter( $updated );
-				}
-
-				if ( ( ! $stored && ! $updated ) || $stored == $updated ) {
-					continue;
-				}
-
-				if ( $updated ) {
-					update_term_meta( $term_id, $key, $updated, $stored );
-				} else {
-					delete_term_meta( $term_id, $key, $stored );
-				}
-			}
-		}
+		$this->tpmb->save( $term_id );
 
 	}
 
