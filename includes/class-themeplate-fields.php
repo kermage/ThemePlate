@@ -265,6 +265,10 @@ class ThemePlate_Fields {
 				}
 
 				foreach ( $field['fields'] as $id => $sub ) {
+					if ( ! is_array( $sub ) || empty( $sub ) ) {
+						continue;
+					}
+
 					$sub['object'] = $field['object'];
 					$sub['id'] = $field['id'] . '_' . $id;
 					$sub['type'] = isset( $sub['type'] ) ? $sub['type'] : 'text';
