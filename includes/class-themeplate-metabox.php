@@ -46,7 +46,7 @@ class ThemePlate_MetaBox {
 		}
 
 		$this->object_type = $type;
-		$this->config = $config;
+		$this->config = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $config );
 
 	}
 
@@ -81,7 +81,6 @@ class ThemePlate_MetaBox {
 	public function layout_inside() {
 
 		$meta_box = $this->config;
-		$meta_box = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $meta_box );
 
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['id'] . '_nonce' );
 
