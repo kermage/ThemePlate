@@ -56,6 +56,7 @@ class ThemePlate_Page {
 		} else {
 			if ( $page['parent'] == $page['id'] ) {
 				$this->_menu( $page );
+				$page['menu'] = $page['title'];
 			}
 
 			$this->_submenu( $page );
