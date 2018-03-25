@@ -43,11 +43,7 @@ class ThemePlate_Fields {
 	public function render( $field ) {
 
 		$list = false;
-		$seq = false;
-
-		if( array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
-			$seq = true;
-		}
+		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 
 		switch ( $field['type'] ) {
 			default:

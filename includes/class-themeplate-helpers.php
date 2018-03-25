@@ -21,7 +21,7 @@ class ThemePlate_Helpers {
 				$check = call_user_func( $value );
 				unset( $meta_box['show_on'] );
 			} elseif ( is_array( $value ) ) {
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+				if ( ! self::is_sequential( $value ) ) {
 					$value = array( $value );
 					$meta_box['show_on'] = array( $meta_box['show_on'] );
 				}
@@ -43,7 +43,7 @@ class ThemePlate_Helpers {
 				$check = ! call_user_func( $value );
 				unset( $meta_box['hide_on'] );
 			} elseif ( is_array( $value ) ) {
-				if ( array_keys( $value ) !== range( 0, count( $value ) - 1 ) ) {
+				if ( ! self::is_sequential( $value ) ) {
 					$value = array( $value );
 					$meta_box['hide_on'] = array( $meta_box['hide_on'] );
 				}
@@ -99,6 +99,13 @@ class ThemePlate_Helpers {
 		}
 
 		return $result;
+
+	}
+
+
+	public static function is_sequential( $array ) {
+
+		return ( array_keys( $array ) === range( 0, count( $array ) - 1 ) );
 
 	}
 
