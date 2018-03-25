@@ -12,7 +12,7 @@ class ThemePlate_MetaBox {
 
 	private $object_type;
 	private $object_id;
-	private $meta_box;
+	private $config;
 
 	private $meta_defaults = array(
 		'show_on'    => array(),
@@ -31,22 +31,22 @@ class ThemePlate_MetaBox {
 	);
 
 
-	public function __construct( $type, $params ) {
+	public function __construct( $type, $config ) {
 
-		if ( ! is_array( $params ) || empty( $params ) ) {
+		if ( ! is_array( $config ) || empty( $config ) ) {
 			throw new Exception();
 		}
 
-		if ( ! array_key_exists( 'id', $params ) || ! array_key_exists( 'title', $params ) || ! array_key_exists( 'fields', $params ) ) {
+		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) || ! array_key_exists( 'fields', $config ) ) {
 			throw new Exception();
 		}
 
-		if ( ! is_array( $params['fields'] ) || empty( $params['fields'] ) ) {
+		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
 			throw new Exception();
 		}
 
 		$this->object_type = $type;
-		$this->meta_box = $params;
+		$this->config = $config;
 
 	}
 
@@ -60,7 +60,7 @@ class ThemePlate_MetaBox {
 
 	public function layout_postbox() {
 
-		$meta_box = $this->meta_box;
+		$meta_box = $this->config;
 
 		printf( '<div id="themeplate_%s" class="postbox">', $meta_box['id'] );
 			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
@@ -80,7 +80,7 @@ class ThemePlate_MetaBox {
 
 	public function layout_inside() {
 
-		$meta_box = $this->meta_box;
+		$meta_box = $this->config;
 		$meta_box = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $meta_box );
 
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['id'] . '_nonce' );
@@ -100,7 +100,7 @@ class ThemePlate_MetaBox {
 
 	public function layout_fields() {
 
-		$meta_box = $this->meta_box;
+		$meta_box = $this->config;
 
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
@@ -190,17 +190,17 @@ class ThemePlate_MetaBox {
 			return;
 		}
 
-		if ( ! isset( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->meta_box['id'] . '_nonce'], basename( __FILE__ ) ) ) {
+		if ( ! isset( $_POST['themeplate_' . $this->config['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->config['id'] . '_nonce'], basename( __FILE__ ) ) ) {
 			return;
 		}
 
-		foreach ( $this->meta_box['fields'] as $id => $field ) {
+		foreach ( $this->config['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
 				continue;
 			}
 
 			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
-			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
+			$key = ThemePlate()->key . '_' . $this->config['id'] . '_' . $id;
 
 			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
 				continue;
