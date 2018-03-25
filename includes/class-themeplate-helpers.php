@@ -61,6 +61,11 @@ class ThemePlate_Helpers {
 
 	private static function _option_check( $type, $container ) {
 
+		$additional = array(
+			$type . '_cb' => '',
+			$type . '_id' => ''
+		);
+		$container = array_merge( $additional, $container );
 		$value = $container[$type];
 
 		if ( is_callable( $value ) ) {
