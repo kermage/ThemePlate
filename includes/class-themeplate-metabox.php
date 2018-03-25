@@ -187,15 +187,17 @@ class ThemePlate_MetaBox {
 
 	public function save( $object_id ) {
 
+		$meta_box = $this->config;
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
 
-		if ( ! isset( $_POST['themeplate_' . $this->config['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->config['id'] . '_nonce'], basename( __FILE__ ) ) ) {
+		if ( ! isset( $_POST['themeplate_' . $meta_box['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $meta_box['id'] . '_nonce'], basename( __FILE__ ) ) ) {
 			return;
 		}
 
-		foreach ( $this->config['fields'] as $id => $field ) {
+		foreach ( $meta_box['fields'] as $id => $field ) {
 			if ( ! is_array( $field ) || empty( $field ) ) {
 				continue;
 			}
