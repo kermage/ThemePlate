@@ -37,7 +37,7 @@ class ThemePlate_CPT {
 			return false;
 		}
 
-		$this->param = array_merge( $this->cpt_defaults, $param );
+		$this->param = array_replace_recursive( $this->cpt_defaults, $param );
 		$this->$kind( $this->param );
 
 	}
