@@ -52,38 +52,56 @@ class ThemePlate_Page {
 		$page = $this->config;
 
 		if ( empty( $page['parent'] ) ) {
-			add_menu_page(
-				// Page Title
-				$page['title'],
-				// Menu Title
-				$page['menu'] ? $page['menu'] : $page['title'],
-				// Capability
-				$page['capability'],
-				// Menu Slug
-				$page['id'],
-				// Content Function
-				array( $this, 'page' ),
-				// Icon URL
-				$page['icon'],
-				// Menu Order
-				$page['position']
-			);
+			$this->_menu( $page );
 		} else {
-			add_submenu_page(
-				// Page Slug
-				$page['parent'],
-				// Page Title
-				$page['title'],
-				// Menu Title
-				$page['menu'] ? $page['menu'] : $page['title'],
-				// Capability
-				$page['capability'],
-				// Menu Slug
-				$page['id'],
-				// Content Function
-				array( $this, 'page' )
-			);
+			if ( $page['parent'] == $page['id'] ) {
+				$this->_menu( $page );
+			}
+
+			$this->_submenu( $page );
 		}
+
+	}
+
+
+	private function _menu( $page ) {
+
+		add_menu_page(
+			// Page Title
+			$page['title'],
+			// Menu Title
+			$page['menu'] ? $page['menu'] : $page['title'],
+			// Capability
+			$page['capability'],
+			// Menu Slug
+			$page['id'],
+			// Content Function
+			array( $this, 'page' ),
+			// Icon URL
+			$page['icon'],
+			// Menu Order
+			$page['position']
+		);
+
+	}
+
+
+	private function _submenu( $page ) {
+
+		add_submenu_page(
+			// Parent Slug
+			$page['parent'],
+			// Page Title
+			$page['title'],
+			// Menu Title
+			$page['menu'] ? $page['menu'] : $page['title'],
+			// Capability
+			$page['capability'],
+			// Menu Slug
+			$page['id'],
+			// Content Function
+			array( $this, 'page' )
+		);
 
 	}
 
