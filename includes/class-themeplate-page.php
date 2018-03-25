@@ -14,7 +14,10 @@ class ThemePlate_Page {
 
 	private $page_defaults = array(
 		'capability' => 'edit_theme_options',
-		'parent' => ''
+		'parent' => '',
+		'menu' => '',
+		'icon' => '',
+		'position' => null
 	);
 
 
@@ -53,13 +56,17 @@ class ThemePlate_Page {
 				// Page Title
 				$page['title'],
 				// Menu Title
-				$page['title'],
+				$page['menu'] ? $page['menu'] : $page['title'],
 				// Capability
 				$page['capability'],
 				// Menu Slug
 				$page['id'],
 				// Content Function
-				array( $this, 'page' )
+				array( $this, 'page' ),
+				// Icon URL
+				$page['icon'],
+				// Menu Order
+				$page['position']
 			);
 		} else {
 			add_submenu_page(
@@ -68,7 +75,7 @@ class ThemePlate_Page {
 				// Page Title
 				$page['title'],
 				// Menu Title
-				$page['title'],
+				$page['menu'] ? $page['menu'] : $page['title'],
 				// Capability
 				$page['capability'],
 				// Menu Slug
