@@ -43,9 +43,8 @@ class ThemePlate {
 		$this->pages = isset( $pages ) ? $pages : array();
 		$this->slug = isset( $pages ) ? key( $pages ) : 'options';
 
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		$this->setup();
+
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
@@ -65,56 +64,27 @@ class ThemePlate {
 	}
 
 
-	public function admin_menu() {
+	public function setup() {
 
-		add_menu_page(
-			// Page Title
-			$this->title,
-			// Menu Title
-			$this->title,
-			// Capability
-			'edit_theme_options',
-			// Menu Slug
-			$this->key . '-' . $this->slug,
-			// Content Function
-			array( 'ThemePlate_Settings', 'page' )
-		);
+		$main = new ThemePlate_Page( array(
+			'id' => $this->key . '-' . $this->slug,
+			'title' => array_shift( $this->pages ),
+			'parent' => $this->key . '-' . $this->slug,
+			'menu' => $this->title
+		) );
 
-		if ( $this->pages ) {
-			$title = array_shift( $this->pages );
-			add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $this->slug, array( 'ThemePlate_Settings', 'page' ) );
-
-			foreach ( $this->pages as $id => $title ) {
-				add_submenu_page( $this->key . '-' . $this->slug, $title, $title, 'edit_theme_options', $this->key . '-' . $id, array( 'ThemePlate_Settings', 'page' ) );
-			}
-		}
-
-	}
-
-
-	public function admin_init() {
-
-		register_setting( $this->key . '-' . $this->slug, $this->key . '-' . $this->slug, array( 'ThemePlate_Settings', 'save' ) );
-
-		if ( $this->pages ) {
-			foreach ( $this->pages as $id => $title ) {
-				register_setting( $this->key . '-' . $id, $this->key . '-' . $id, array( 'ThemePlate_Settings', 'save' ) );
-			}
-		}
-
-	}
-
-
-	public function admin_notices() {
-
-		if ( ! isset( $_REQUEST['page'] ) || ! isset( $_REQUEST['settings-updated'] ) ) {
+		if ( ! $this->pages ) {
 			return;
 		}
 
-		$page = str_replace( ThemePlate()->key . '-', '', $_REQUEST['page'] );
+		$subs = array();
 
-		if ( ( $_REQUEST['page'] === $this->key . '-' . $this->slug || array_key_exists( $page, $this->pages ) ) && $_REQUEST['settings-updated'] == true ) {
-			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
+		foreach ( $this->pages as $id => $title ) {
+			$subs[$id] = new ThemePlate_Page( array(
+				'id' => $this->key . '-' . $id,
+				'title' => $title,
+				'parent' => $this->key . '-' . $this->slug
+			) );
 		}
 
 	}
