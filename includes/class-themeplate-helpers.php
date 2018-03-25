@@ -14,45 +14,68 @@ class ThemePlate_Helpers {
 
 		$check = true;
 
-		if ( ! empty( $meta_box['show_on'] ) ) {
-			$value = $meta_box['show_on'];
-
-			if ( is_callable( $value ) ) {
-				$check = call_user_func( $value );
-			} elseif ( is_array( $value ) ) {
-				if ( ! self::is_sequential( $value ) ) {
-					$value = array( $value );
-					$meta_box['show_on'] = array( $meta_box['show_on'] );
-				}
-
-				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
-					if ( ! array_intersect( (array) $object_id, (array) $value[0]['value'] ) ) {
-						$check = false;
-					}
-				}
-			}
+		if ( ! empty( $meta_box['show_on_cb'] ) ) {
+			$check = call_user_func( $meta_box['show_on_cb'] );
 		}
 
-		if ( ! empty( $meta_box['hide_on'] ) ) {
-			$value = $meta_box['hide_on'];
+		if ( ! empty( $meta_box['show_on_id'] ) ) {
+			$check = array_intersect( (array) $object_id, (array) $meta_box['show_on_id'] );
+		}
 
-			if ( is_callable( $value ) ) {
-				$check = ! call_user_func( $value );
-			} elseif ( is_array( $value ) ) {
-				if ( ! self::is_sequential( $value ) ) {
-					$value = array( $value );
-					$meta_box['hide_on'] = array( $meta_box['hide_on'] );
-				}
+		if ( ! empty( $meta_box['hide_on_cb'] ) ) {
+			$check = ! call_user_func( $meta_box['hide_on_cb'] );
+		}
 
-				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
-					if ( array_intersect( (array) $object_id, (array) $value[0]['value'] ) ) {
-						$check = false;
-					}
-				}
-			}
+		if ( ! empty( $meta_box['hide_on_id'] ) ) {
+			$check = ! array_intersect( (array) $object_id, (array) $meta_box['hide_on_id'] );
 		}
 
 		return $check;
+
+	}
+
+
+	public static function normalize_options( $container ) {
+
+		if ( ! empty( $container['show_on'] ) ) {
+			$value = $container['show_on'];
+
+			if ( is_callable( $value ) ) {
+				$container['show_on_cb'] = $value;
+				unset( $container['show_on'] );
+			} elseif ( is_array( $value ) ) {
+				if ( ! self::is_sequential( $value ) ) {
+					$value = array( $value );
+					$container['show_on'] = array( $container['show_on'] );
+				}
+
+				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
+					$container['show_on_id'] = $value[0]['value'];
+					unset( $container['show_on'] );
+				}
+			}
+		}
+
+		if ( ! empty( $container['hide_on'] ) ) {
+			$value = $container['hide_on'];
+
+			if ( is_callable( $value ) ) {
+				$container['hide_on_cb'] = $value;
+				unset( $container['hide_on'] );
+			} elseif ( is_array( $value ) ) {
+				if ( ! self::is_sequential( $value ) ) {
+					$value = array( $value );
+					$container['hide_on'] = array( $container['hide_on'] );
+				}
+
+				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
+					$container['hide_on_id'] = $value[0]['value'];
+					unset( $container['hide_on'] );
+				}
+			}
+		}
+
+		return $container;
 
 	}
 

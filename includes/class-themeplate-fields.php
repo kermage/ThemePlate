@@ -268,6 +268,7 @@ class ThemePlate_Fields {
 					}
 
 					$sub = ThemePlate_Helpers::fool_proof( $this->field_defaults, $sub );
+					$sub = ThemePlate_Helpers::normalize_options( $sub );
 
 					$sub['id'] = $field['id'] . '_' . $id;
 

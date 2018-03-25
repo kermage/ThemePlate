@@ -47,6 +47,7 @@ class ThemePlate_MetaBox {
 
 		$this->object_type = $type;
 		$this->config = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $config );
+		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
 
 	}
 
@@ -107,6 +108,7 @@ class ThemePlate_MetaBox {
 			}
 
 			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
+			$field = ThemePlate_Helpers::normalize_options( $field );
 
 			if ( $this->object_type == 'options' ) {
 				$field['id'] = $meta_box['id'] . '_' . $id;
@@ -199,6 +201,7 @@ class ThemePlate_MetaBox {
 			}
 
 			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
+			$field = ThemePlate_Helpers::normalize_options( $field );
 			$key = ThemePlate()->key . '_' . $this->config['id'] . '_' . $id;
 
 			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
