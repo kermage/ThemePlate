@@ -14,20 +14,12 @@ class ThemePlate_Helpers {
 
 		$check = true;
 
-		if ( ! empty( $meta_box['show_on_cb'] ) ) {
-			$check = call_user_func( $meta_box['show_on_cb'] );
+		if ( isset( $meta_box['show_on_cb'] ) || isset( $meta_box['show_on_id'] ) ) {
+			$check = self::_display_check( $object_id, $meta_box['show_on_cb'], $meta_box['show_on_id'] );
 		}
 
-		if ( ! empty( $meta_box['show_on_id'] ) ) {
-			$check = array_intersect( (array) $object_id, (array) $meta_box['show_on_id'] );
-		}
-
-		if ( ! empty( $meta_box['hide_on_cb'] ) ) {
-			$check = ! call_user_func( $meta_box['hide_on_cb'] );
-		}
-
-		if ( ! empty( $meta_box['hide_on_id'] ) ) {
-			$check = ! array_intersect( (array) $object_id, (array) $meta_box['hide_on_id'] );
+		if ( isset( $meta_box['hide_on_cb'] ) || isset( $meta_box['hide_on_id'] ) ) {
+			$check = ! self::_display_check( $object_id, $meta_box['hide_on_cb'], $meta_box['hide_on_id'] );
 		}
 
 		return $check;
@@ -35,43 +27,54 @@ class ThemePlate_Helpers {
 	}
 
 
+	private static function _display_check( $object_id, $callback, $id ) {
+
+		$result = true;
+
+		if ( $callback ) {
+			$result = call_user_func( $callback );
+		}
+
+		if ( $id ) {
+			$result = array_intersect( (array) $object_id, (array) $id );
+		}
+
+		return $result;
+
+	}
+
+
 	public static function normalize_options( $container ) {
 
 		if ( ! empty( $container['show_on'] ) ) {
-			$value = $container['show_on'];
-
-			if ( is_callable( $value ) ) {
-				$container['show_on_cb'] = $value;
-				unset( $container['show_on'] );
-			} elseif ( is_array( $value ) ) {
-				if ( ! self::is_sequential( $value ) ) {
-					$value = array( $value );
-					$container['show_on'] = array( $container['show_on'] );
-				}
-
-				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
-					$container['show_on_id'] = $value[0]['value'];
-					unset( $container['show_on'] );
-				}
-			}
+			$container = self::_option_check( 'show_on', $container );
 		}
 
 		if ( ! empty( $container['hide_on'] ) ) {
-			$value = $container['hide_on'];
+			$container = self::_option_check( 'hide_on', $container );
+		}
 
-			if ( is_callable( $value ) ) {
-				$container['hide_on_cb'] = $value;
-				unset( $container['hide_on'] );
-			} elseif ( is_array( $value ) ) {
-				if ( ! self::is_sequential( $value ) ) {
-					$value = array( $value );
-					$container['hide_on'] = array( $container['hide_on'] );
-				}
+		return $container;
 
-				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
-					$container['hide_on_id'] = $value[0]['value'];
-					unset( $container['hide_on'] );
-				}
+	}
+
+
+	private static function _option_check( $type, $container ) {
+
+		$value = $container[$type];
+
+		if ( is_callable( $value ) ) {
+			$container[$type . '_cb'] = $value;
+			unset( $container[$type] );
+		} elseif ( is_array( $value ) ) {
+			if ( ! self::is_sequential( $value ) ) {
+				$value = array( $value );
+				$container[$type] = array( $container[$type] );
+			}
+
+			if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
+				$container[$type . '_id'] = $value[0]['value'];
+				unset( $container[$type] );
 			}
 		}
 
