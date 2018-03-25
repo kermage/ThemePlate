@@ -12,6 +12,13 @@ class ThemePlate_CPT {
 
 	private $param;
 
+	private $cpt_defaults = array(
+		'args' => array(
+			'labels' => array(),
+			'public' => true
+		)
+	);
+
 
 	public function __construct( $kind, $param ) {
 
@@ -30,9 +37,8 @@ class ThemePlate_CPT {
 			return false;
 		}
 
-		$this->$kind( $param );
-
-		$this->param = $param;
+		$this->param = array_merge( $this->cpt_defaults, $param );
+		$this->$kind( $this->param );
 
 	}
 
@@ -41,7 +47,7 @@ class ThemePlate_CPT {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
-		$args = isset( $param['args'] ) ? $param['args'] : array();
+		$args = $param['args'];
 
 		$labels = array(
 			'name'                  => $plural,
@@ -68,15 +74,9 @@ class ThemePlate_CPT {
 			'name_admin_bar'        => $plural
 		);
 
-		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+		$args['labels'] = array_merge( $labels, $args['labels'] );
 
-		$defaults = array(
-			'label'       => $plural,
-			'description' => $param['description'],
-			'public'      => true
-		);
-
-		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
+		register_post_type( $param['name'], $args );
 
 		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
 		add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_custom_messages' ), 10, 2 );
@@ -88,7 +88,7 @@ class ThemePlate_CPT {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
-		$args = isset( $param['args'] ) ? $param['args'] : array();
+		$args = $param['args'];
 
 		$labels = array(
 			'name'                       => $plural,
@@ -110,15 +110,9 @@ class ThemePlate_CPT {
 			'not_found'                  => $singular . ' not found'
 		);
 
-		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+		$args['labels'] = array_merge( $labels, $args['labels'] );
 
-		$defaults = array(
-			'label'       => $plural,
-			'description' => $param['description'],
-			'public'      => true
-		);
-
-		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
+		register_taxonomy( $param['name'], $param['type'], $args );
 
 	}
 
