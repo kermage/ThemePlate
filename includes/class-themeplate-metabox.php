@@ -12,7 +12,7 @@ class ThemePlate_MetaBox {
 
 	private $object_type;
 	private $object_id;
-	private $config;
+	public $config;
 
 	private $meta_defaults = array(
 		'show_on'    => array(),

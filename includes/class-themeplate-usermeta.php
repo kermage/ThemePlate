@@ -10,7 +10,6 @@
 
 class ThemePlate_UserMeta {
 
-	private $config;
 	private $tpmb;
 
 
@@ -21,8 +20,6 @@ class ThemePlate_UserMeta {
 		} catch( Exception $e ) {
 			return false;
 		}
-
-		$this->config = $config;
 
 		add_action( 'show_user_profile', array( $this, 'create' ) );
 		add_action( 'edit_user_profile', array( $this, 'create' ) );
@@ -36,7 +33,7 @@ class ThemePlate_UserMeta {
 
 	public function create( $user ) {
 
-		$meta_box = $this->config;
+		$meta_box = $this->tpmb->config;
 		$user_id = is_object( $user ) ? $user->ID : '';
 		$this->tpmb->object_id( $user_id );
 

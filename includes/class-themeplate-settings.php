@@ -10,7 +10,6 @@
 
 class ThemePlate_Settings {
 
-	private $config;
 	private $tpmb;
 
 
@@ -22,8 +21,6 @@ class ThemePlate_Settings {
 			return false;
 		}
 
-		$this->config = $config;
-
 		add_action( 'admin_init', array( $this, 'add' ) );
 
 	}
@@ -31,7 +28,7 @@ class ThemePlate_Settings {
 
 	public function add() {
 
-		$settings = $this->config;
+		$settings = $this->tpmb->config;
 		$page = ThemePlate()->key . '-' . ( isset( $settings['page'] ) ? $settings['page'] : ThemePlate()->slug );
 		$this->tpmb->object_id( $page );
 		$page .= '-' . ( isset( $settings['context'] ) ? $settings['context'] : 'normal' );

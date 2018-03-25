@@ -10,7 +10,6 @@
 
 class ThemePlate_PostMeta {
 
-	private $config;
 	private $tpmb;
 
 
@@ -22,8 +21,6 @@ class ThemePlate_PostMeta {
 			return false;
 		}
 
-		$this->config = $config;
-
 		add_action( 'add_meta_boxes', array( $this, 'add' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
 
@@ -32,7 +29,7 @@ class ThemePlate_PostMeta {
 
 	public function add() {
 
-		$meta_box = $this->config;
+		$meta_box = $this->tpmb->config;
 		$post_id = get_the_ID();
 		$this->tpmb->object_id( $post_id );
 
