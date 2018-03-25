@@ -195,6 +195,11 @@ class ThemePlate_MetaBox {
 		}
 
 		foreach ( $this->meta_box['fields'] as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
+			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
 			$key = ThemePlate()->key . '_' . $this->meta_box['id'] . '_' . $id;
 
 			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
