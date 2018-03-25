@@ -133,7 +133,12 @@ class ThemePlate_Fields {
 
 
 			case 'color':
-				echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( $field['std'] ? ' data-default-color="' . $field['std'] . '"' : '' ) . ' />';
+				echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( $field['std'] ? ' data-default-color="' . $field['std'] . '"' : '' );
+				if ( ! empty( $field['options'] ) ) {
+					$values = json_encode( $field['options'] );
+					echo ' data-palettes="' . esc_attr( $values ) . '"';
+				}
+				echo ' />';
 				break;
 
 
