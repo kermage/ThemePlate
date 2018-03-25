@@ -81,7 +81,7 @@ class ThemePlate_MetaBox {
 	public function layout_inside() {
 
 		$meta_box = $this->meta_box;
-		$meta_box = array_merge( $this->meta_defaults, $meta_box );
+		$meta_box = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $meta_box );
 
 		wp_nonce_field( basename( __FILE__ ), 'themeplate_' . $meta_box['id'] . '_nonce' );
 
@@ -107,7 +107,7 @@ class ThemePlate_MetaBox {
 				continue;
 			}
 
-			$field = array_merge( $this->field_defaults, $field );
+			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
 
 			if ( $this->object_type == 'options' ) {
 				$field['id'] = $meta_box['id'] . '_' . $id;

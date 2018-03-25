@@ -83,4 +83,23 @@ class ThemePlate_Helpers {
 
 	}
 
+
+	public static function fool_proof( $defaults, $options ) {
+
+		$result = array_merge( $defaults, $options );
+
+		foreach ( $defaults as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$result[$key] = (array) $result[$key];
+			}
+
+			if ( is_bool( $value ) ) {
+				$result[$key] = (bool) $result[$key];
+			}
+		}
+
+		return $result;
+
+	}
+
 }

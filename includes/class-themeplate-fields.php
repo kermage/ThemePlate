@@ -273,7 +273,7 @@ class ThemePlate_Fields {
 						continue;
 					}
 
-					$sub = array_merge( $this->field_defaults, $sub );
+					$sub = ThemePlate_Helpers::fool_proof( $this->field_defaults, $sub );
 
 					$sub['id'] = $field['id'] . '_' . $id;
 
