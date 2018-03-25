@@ -13,7 +13,7 @@ class ThemePlate_Page {
 	private $config;
 
 	private $page_defaults = array(
-		'capability' => 'edit_theme_options',
+		'capability' => 'manage_options',
 		'parent' => '',
 		'menu' => '',
 		'icon' => '',
