@@ -13,10 +13,12 @@ class ThemePlate_CPT {
 	private $param;
 
 	private $cpt_defaults = array(
-		'args' => array(
-			'labels' => array(),
-			'public' => true
-		)
+		'args' => array()
+	);
+
+	private $args_defaults = array(
+		'labels' => array(),
+		'public' => true
 	);
 
 
@@ -37,7 +39,7 @@ class ThemePlate_CPT {
 			return false;
 		}
 
-		$this->param = array_replace_recursive( $this->cpt_defaults, $param );
+		$this->param = ThemePlate_Helpers::fool_proof( $this->cpt_defaults, $param );
 		$this->$kind( $this->param );
 
 	}
@@ -47,7 +49,7 @@ class ThemePlate_CPT {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
-		$args = $param['args'];
+		$args = ThemePlate_Helpers::fool_proof( $this->args_defaults, $param['args'] );
 
 		$labels = array(
 			'name'                  => $plural,
@@ -88,7 +90,7 @@ class ThemePlate_CPT {
 
 		$plural = $param['plural'];
 		$singular = $param['singular'];
-		$args = $param['args'];
+		$args = ThemePlate_Helpers::fool_proof( $this->args_defaults, $param['args'] );
 
 		$labels = array(
 			'name'                       => $plural,
