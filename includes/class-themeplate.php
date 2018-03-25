@@ -45,7 +45,6 @@ class ThemePlate {
 
 		$this->setup();
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
@@ -86,33 +85,6 @@ class ThemePlate {
 				'parent' => $this->key . '-' . $this->slug
 			) );
 		}
-
-	}
-
-
-	public function scripts_styles() {
-
-		$screen = get_current_screen();
-		$wanted_base = array( 'post', 'edit-tags', 'term', 'user', 'user-edit', 'profile' );
-		$wanted_id = array_map(
-			function( $value ) {
-				return sanitize_title( $this->title ) . '_page_' . $this->key . '-' . $value;
-			}, array_keys( $this->pages )
-		);
-		array_push( $wanted_id, 'toplevel_page_' . $this->key . '-' . $this->slug );
-
-		if ( ! in_array( $screen->base, $wanted_base ) && ! in_array( $screen->id, $wanted_id ) ) {
-			return;
-		}
-
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker');
-		wp_enqueue_style( 'themeplate-style', TP_URL . 'assets/themeplate.css', array(), TP_VERSION, false );
-		wp_enqueue_script( 'themeplate-script', TP_URL . 'assets/themeplate.js', array(), TP_VERSION, true );
-		wp_enqueue_script( 'themeplate-show-hide', TP_URL . 'assets/show-hide.js', array(), TP_VERSION, true );
-		wp_enqueue_script( 'themeplate-repeater', TP_URL . 'assets/repeater.js', array(), TP_VERSION, true );
-		wp_enqueue_style( 'themeplate-select2-style', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css', array(), '4.0.5', false );
-		wp_enqueue_script( 'themeplate-select2-script', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js', array(), '4.0.5', true );
 
 	}
 
