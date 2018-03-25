@@ -19,7 +19,6 @@ class ThemePlate_Helpers {
 
 			if ( is_callable( $value ) ) {
 				$check = call_user_func( $value );
-				unset( $meta_box['show_on'] );
 			} elseif ( is_array( $value ) ) {
 				if ( ! self::is_sequential( $value ) ) {
 					$value = array( $value );
@@ -27,8 +26,6 @@ class ThemePlate_Helpers {
 				}
 
 				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
-					unset( $meta_box['show_on'] );
-
 					if ( ! array_intersect( (array) $object_id, (array) $value[0]['value'] ) ) {
 						$check = false;
 					}
@@ -41,7 +38,6 @@ class ThemePlate_Helpers {
 
 			if ( is_callable( $value ) ) {
 				$check = ! call_user_func( $value );
-				unset( $meta_box['hide_on'] );
 			} elseif ( is_array( $value ) ) {
 				if ( ! self::is_sequential( $value ) ) {
 					$value = array( $value );
@@ -49,8 +45,6 @@ class ThemePlate_Helpers {
 				}
 
 				if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
-					unset( $meta_box['hide_on'] );
-
 					if ( array_intersect( (array) $object_id, (array) $value[0]['value'] ) ) {
 						$check = false;
 					}
