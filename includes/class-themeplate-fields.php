@@ -45,10 +45,8 @@ class ThemePlate_Fields {
 		$list = false;
 		$seq = false;
 
-		if ( ! empty( $field['options'] ) ) {
-			if( array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
-				$seq = true;
-			}
+		if( array_keys( $field['options'] ) === range( 0, count( $field['options'] ) - 1 ) ) {
+			$seq = true;
 		}
 
 		switch ( $field['type'] ) {
