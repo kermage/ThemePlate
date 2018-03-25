@@ -10,8 +10,8 @@
 
 class ThemePlate_MetaBox {
 
-	private $object_type;
-	private $object_id;
+	public $object_type;
+	public $object_id;
 	public $config;
 
 	private $meta_defaults = array(
@@ -48,13 +48,6 @@ class ThemePlate_MetaBox {
 		$this->object_type = $type;
 		$this->config = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $config );
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
-
-	}
-
-
-	public function object_id( $number ) {
-
-		$this->object_id = $number;
 
 	}
 
