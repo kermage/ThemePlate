@@ -43,7 +43,7 @@ class ThemePlate_TermMeta {
 
 		$meta_box = $this->tpmb->get_config();
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
-		$this->tpmb->object_id = $term_id;
+		$this->tpmb->object_id( $term_id );
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $term_id ) ) {
 			return;

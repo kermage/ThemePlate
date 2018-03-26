@@ -31,7 +31,7 @@ class ThemePlate_PostMeta {
 
 		$meta_box = $this->tpmb->get_config();
 		$post_id = get_the_ID();
-		$this->tpmb->object_id = $post_id;
+		$this->tpmb->object_id( $post_id );
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $post_id ) ) {
 			return;

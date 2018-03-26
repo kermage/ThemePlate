@@ -35,7 +35,7 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->tpmb->get_config();
 		$user_id = is_object( $user ) ? $user->ID : '';
-		$this->tpmb->object_id = $user_id;
+		$this->tpmb->object_id( $user_id );
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $user_id ) ) {
 			return;

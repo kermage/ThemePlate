@@ -11,7 +11,7 @@
 class ThemePlate_MetaBox {
 
 	public $object_type;
-	public $object_id;
+	private $object_id;
 	private $config;
 	public $fields;
 
@@ -172,6 +172,13 @@ class ThemePlate_MetaBox {
 	public function get_config() {
 
 		return $this->config;
+
+	}
+
+
+	public function object_id( $number ) {
+
+		$this->object_id = $number;
 
 	}
 
