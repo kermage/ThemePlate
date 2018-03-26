@@ -42,7 +42,7 @@ class ThemePlate_Page {
 
 	public function init() {
 
-		register_setting( 'themeplate', $this->config['id'], array( $this, 'save' ) );
+		register_setting( $this->config['id'], $this->config['id'], array( $this, 'save' ) );
 
 	}
 
@@ -140,7 +140,7 @@ class ThemePlate_Page {
 								<h2>Publish</h2>
 
 								<div id="major-publishing-actions">
-									<?php settings_fields( 'themeplate' ); ?>
+									<?php settings_fields( $this->config['id'] ); ?>
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
