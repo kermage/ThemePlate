@@ -10,7 +10,7 @@
 
 class ThemePlate_Fields {
 
-	private static $instance;
+	public $collection;
 
 	private $field_defaults = array(
 		'type'       => 'text',
@@ -23,24 +23,119 @@ class ThemePlate_Fields {
 	);
 
 
-	public static function instance() {
+	public function __construct( $collection ) {
 
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
+		if ( ! is_array( $collection ) || empty( $collection ) ) {
+			return false;
 		}
 
-		return self::$instance;
+		$this->collection = $this->filter( $collection );
 
 	}
 
 
-	private function __construct() {
+	private function filter( $fields ) {
 
+		$processed = array();
+
+		foreach ( $fields as $id => $field ) {
+			if ( ! is_array( $field ) || empty( $field ) ) {
+				continue;
+			}
+
+			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
+			$field = ThemePlate_Helpers::normalize_options( $field );
+
+			$processed[$id] = $field;
+		}
+
+
+		return $processed;
 
 	}
 
 
-	public function render( $field ) {
+	public function setup( $metabox_id, $object_type, $object_id ) {
+
+		$fields = $this->collection;
+
+		foreach ( $fields as $id => $field ) {
+			if ( $object_type == 'options' ) {
+				$field['id'] = $metabox_id . '_' . $id;
+			} else {
+				$field['id'] = ThemePlate()->key . '_' . $metabox_id . '_' . $id;
+			}
+
+			$this->layout( $field, $object_type, $object_id );
+		}
+
+	}
+
+
+	private function layout( $field, $object_type, $object_id ) {
+
+		if ( $object_type == 'options' ) {
+			$options = get_option( $object_id );
+			$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
+			$key = $object_id;
+		} else {
+			$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
+			$key = ThemePlate()->key;
+		}
+
+		$value = $stored ? $stored : $field['std'];
+
+		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
+			ThemePlate_Helpers::render_options( $field );
+
+			if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
+				echo '<div class="field-label">';
+					echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
+					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
+				echo '</div>';
+			}
+
+			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '">';
+				$base_name = $key . '[' . $field['id'] . ']';
+
+				if ( ! $field['repeatable'] ) {
+					$field['value'] = $value;
+					$field['name'] =  $base_name;
+
+					$this->render( $field );
+				} else {
+					$base_id = $field['id'];
+
+					foreach ( (array) $value as $i => $val ) {
+						$field['value'] = $val;
+						$field['id'] = $base_id . '_' . $i;
+						$field['name'] =  $base_name . '[' . $i . ']';
+
+						echo '<div class="themeplate-clone">';
+							echo '<div class="themeplate-handle"></div>';
+							$this->render( $field );
+							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+						echo '</div>';
+					}
+
+					$field['value'] = $field['std'];
+					$field['id'] = $base_id . '_i-x';
+					$field['name'] =  $base_name . '[i-x]';
+
+					echo '<div class="themeplate-clone hidden">';
+						echo '<div class="themeplate-handle"></div>';
+						$this->render( $field );
+						echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+					echo '</div>';
+					echo '<input type="button" class="button clone-add" value="Add Field" />';
+				}
+			echo '</div>';
+		echo '</div>';
+
+	}
+
+
+	private function render( $field ) {
 
 		$list = false;
 		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
@@ -297,7 +392,7 @@ class ThemePlate_Fields {
 								$sub['value'] = $value;
 								$sub['name'] = $base_name;
 
-								ThemePlate_Fields::instance()->render( $sub );
+								$this->render( $sub );
 							} else {
 								$base_id = $sub['id'];
 
@@ -308,7 +403,7 @@ class ThemePlate_Fields {
 
 									echo '<div class="themeplate-clone">';
 										echo '<div class="themeplate-handle"></div>';
-										ThemePlate_Fields::instance()->render( $sub );
+										$this->render( $sub );
 										echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 									echo '</div>';
 								}
@@ -319,7 +414,7 @@ class ThemePlate_Fields {
 
 								echo '<div class="themeplate-clone hidden">';
 									echo '<div class="themeplate-handle"></div>';
-									ThemePlate_Fields::instance()->render( $sub );
+									$this->render( $sub );
 									echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 								echo '</div>';
 								echo '<input type="button" class="button clone-add" value="Add Field" />';

@@ -13,21 +13,12 @@ class ThemePlate_MetaBox {
 	public $object_type;
 	public $object_id;
 	public $config;
+	public $fields;
 
 	private $meta_defaults = array(
 		'show_on'    => array(),
 		'hide_on'    => array(),
 		'style'      => ''
-	);
-
-	private $field_defaults = array(
-		'type'       => 'text',
-		'options'    => array(),
-		'multiple'   => false,
-		'none'       => false,
-		'std'        => '',
-		'style'      => '',
-		'repeatable' => false
 	);
 
 
@@ -48,6 +39,7 @@ class ThemePlate_MetaBox {
 		$this->object_type = $type;
 		$this->config = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $config );
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
+		$this->fields = new ThemePlate_Fields( $config['fields'] );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 
@@ -101,94 +93,7 @@ class ThemePlate_MetaBox {
 		}
 
 		echo '<div class="fields-container ' . $meta_box['style'] . '">';
-			$this->layout_fields();
-		echo '</div>';
-
-	}
-
-
-	public function layout_fields() {
-
-		$meta_box = $this->config;
-
-		foreach ( $meta_box['fields'] as $id => $field ) {
-			if ( ! is_array( $field ) || empty( $field ) ) {
-				continue;
-			}
-
-			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
-			$field = ThemePlate_Helpers::normalize_options( $field );
-
-			if ( $this->object_type == 'options' ) {
-				$field['id'] = $meta_box['id'] . '_' . $id;
-			} else {
-				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
-			}
-
-			$this->layout_field( $field );
-		}
-
-	}
-
-
-	public function layout_field( $field ) {
-
-		if ( $this->object_type == 'options' ) {
-			$options = get_option( $this->object_id );
-			$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
-			$key = $this->object_id;
-		} else {
-			$stored = get_metadata( $this->object_type, $this->object_id, $field['id'], ! $field['repeatable'] );
-			$key = ThemePlate()->key;
-		}
-
-		$value = $stored ? $stored : $field['std'];
-
-		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
-			ThemePlate_Helpers::render_options( $field );
-
-			if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
-				echo '<div class="field-label">';
-					echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
-					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
-				echo '</div>';
-			}
-
-			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '">';
-				$base_name = $key . '[' . $field['id'] . ']';
-
-				if ( ! $field['repeatable'] ) {
-					$field['value'] = $value;
-					$field['name'] =  $base_name;
-
-					ThemePlate_Fields::instance()->render( $field );
-				} else {
-					$base_id = $field['id'];
-
-					foreach ( (array) $value as $i => $val ) {
-						$field['value'] = $val;
-						$field['id'] = $base_id . '_' . $i;
-						$field['name'] =  $base_name . '[' . $i . ']';
-
-						echo '<div class="themeplate-clone">';
-							echo '<div class="themeplate-handle"></div>';
-							ThemePlate_Fields::instance()->render( $field );
-							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-						echo '</div>';
-					}
-
-					$field['value'] = $field['std'];
-					$field['id'] = $base_id . '_i-x';
-					$field['name'] =  $base_name . '[i-x]';
-
-					echo '<div class="themeplate-clone hidden">';
-						echo '<div class="themeplate-handle"></div>';
-						ThemePlate_Fields::instance()->render( $field );
-						echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-					echo '</div>';
-					echo '<input type="button" class="button clone-add" value="Add Field" />';
-				}
-			echo '</div>';
+			$this->fields->setup( $meta_box['id'], $this->object_type, $this->object_id );
 		echo '</div>';
 
 	}
@@ -197,6 +102,7 @@ class ThemePlate_MetaBox {
 	public function save( $object_id ) {
 
 		$meta_box = $this->config;
+		$fields = $this->fields->collection;
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
@@ -206,14 +112,8 @@ class ThemePlate_MetaBox {
 			return;
 		}
 
-		foreach ( $meta_box['fields'] as $id => $field ) {
-			if ( ! is_array( $field ) || empty( $field ) ) {
-				continue;
-			}
-
-			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
-			$field = ThemePlate_Helpers::normalize_options( $field );
-			$key = ThemePlate()->key . '_' . $this->config['id'] . '_' . $id;
+		foreach ( $fields as $id => $field ) {
+			$key = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 
 			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
 				continue;
