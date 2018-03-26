@@ -21,13 +21,13 @@ class ThemePlate_PostMeta {
 			return false;
 		}
 
-		add_action( 'add_meta_boxes', array( $this, 'add' ) );
+		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
 
 	}
 
 
-	public function add() {
+	public function create() {
 
 		$meta_box = $this->tpmb->config;
 		$post_id = get_the_ID();

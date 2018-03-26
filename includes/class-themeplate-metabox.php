@@ -15,7 +15,7 @@ class ThemePlate_MetaBox {
 	public $config;
 	public $fields;
 
-	private $meta_defaults = array(
+	private $defaults = array(
 		'show_on'    => array(),
 		'hide_on'    => array(),
 		'style'      => ''
@@ -37,7 +37,7 @@ class ThemePlate_MetaBox {
 		}
 
 		$this->object_type = $type;
-		$this->config = ThemePlate_Helpers::fool_proof( $this->meta_defaults, $config );
+		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
 

@@ -12,7 +12,7 @@ class ThemePlate_Page {
 
 	private $config;
 
-	private $page_defaults = array(
+	private $defaults = array(
 		'capability' => 'manage_options',
 		'parent' => '',
 		'menu' => '',
@@ -31,7 +31,7 @@ class ThemePlate_Page {
 			return false;
 		}
 
-		$this->config = ThemePlate_Helpers::fool_proof( $this->page_defaults, $config );
+		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
 
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_menu', array( $this, 'menu' ) );
@@ -77,7 +77,7 @@ class ThemePlate_Page {
 			// Menu Slug
 			$page['id'],
 			// Content Function
-			array( $this, 'page' ),
+			array( $this, 'create' ),
 			// Icon URL
 			$page['icon'],
 			// Menu Order
@@ -101,7 +101,7 @@ class ThemePlate_Page {
 			// Menu Slug
 			$page['id'],
 			// Content Function
-			array( $this, 'page' )
+			array( $this, 'create' )
 		);
 
 	}
@@ -122,7 +122,7 @@ class ThemePlate_Page {
 	}
 
 
-	public function page() {
+	public function create() {
 
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();

@@ -12,7 +12,7 @@ class ThemePlate_Fields {
 
 	public $collection;
 
-	private $field_defaults = array(
+	private $defaults = array(
 		'type'       => 'text',
 		'options'    => array(),
 		'multiple'   => false,
@@ -43,7 +43,7 @@ class ThemePlate_Fields {
 				continue;
 			}
 
-			$field = ThemePlate_Helpers::fool_proof( $this->field_defaults, $field );
+			$field = ThemePlate_Helpers::fool_proof( $this->defaults, $field );
 			$field = ThemePlate_Helpers::normalize_options( $field );
 
 			$processed[$id] = $field;
@@ -367,7 +367,7 @@ class ThemePlate_Fields {
 						continue;
 					}
 
-					$sub = ThemePlate_Helpers::fool_proof( $this->field_defaults, $sub );
+					$sub = ThemePlate_Helpers::fool_proof( $this->defaults, $sub );
 					$sub = ThemePlate_Helpers::normalize_options( $sub );
 
 					$sub['id'] = $field['id'] . '_' . $id;

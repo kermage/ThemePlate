@@ -21,12 +21,12 @@ class ThemePlate_Settings {
 			return false;
 		}
 
-		add_action( 'admin_init', array( $this, 'add' ) );
+		add_action( 'admin_init', array( $this, 'create' ) );
 
 	}
 
 
-	public function add() {
+	public function create() {
 
 		$settings = $this->tpmb->config;
 		$page = ThemePlate()->key . '-' . ( isset( $settings['page'] ) ? $settings['page'] : ThemePlate()->slug );
