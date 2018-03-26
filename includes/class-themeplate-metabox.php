@@ -102,7 +102,7 @@ class ThemePlate_MetaBox {
 	public function save( $object_id ) {
 
 		$meta_box = $this->config;
-		$fields = $this->fields->collection;
+		$fields = $this->fields->get_collection();
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;

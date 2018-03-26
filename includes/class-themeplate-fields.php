@@ -10,7 +10,7 @@
 
 class ThemePlate_Fields {
 
-	public $collection;
+	private $collection;
 
 	private $defaults = array(
 		'type'       => 'text',
@@ -429,6 +429,13 @@ class ThemePlate_Fields {
 				echo $field['std'];
 				break;
 		}
+
+	}
+
+
+	public function get_collection() {
+
+		return $this->collection;
 
 	}
 
