@@ -55,7 +55,7 @@ class ThemePlate_Fields {
 	}
 
 
-	public function setup( $metabox_id, $object_type, $object_id ) {
+	public function setup( $metabox_id = '', $object_type = 'post', $object_id = 0 ) {
 
 		$fields = $this->collection;
 

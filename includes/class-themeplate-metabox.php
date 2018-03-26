@@ -59,7 +59,7 @@ class ThemePlate_MetaBox {
 	}
 
 
-	public function layout_postbox( $object_id ) {
+	public function layout_postbox( $object_id = 0 ) {
 
 		$meta_box = $this->config;
 
@@ -79,7 +79,7 @@ class ThemePlate_MetaBox {
 	}
 
 
-	public function layout_inside( $object_id ) {
+	public function layout_inside( $object_id = 0 ) {
 
 		$meta_box = $this->config;
 
