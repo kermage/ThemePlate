@@ -10,10 +10,10 @@
 
 class ThemePlate_MetaBox {
 
-	public $object_type;
+	private $object_type;
 	private $object_id;
 	private $config;
-	public $fields;
+	private $fields;
 
 	private $defaults = array(
 		'show_on'    => array(),
