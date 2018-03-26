@@ -12,7 +12,7 @@ class ThemePlate_MetaBox {
 
 	public $object_type;
 	public $object_id;
-	public $config;
+	private $config;
 	public $fields;
 
 	private $defaults = array(
@@ -165,6 +165,13 @@ class ThemePlate_MetaBox {
 			}
 
 		}
+
+	}
+
+
+	public function get_config() {
+
+		return $this->config;
 
 	}
 

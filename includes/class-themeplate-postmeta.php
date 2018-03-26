@@ -29,7 +29,7 @@ class ThemePlate_PostMeta {
 
 	public function create() {
 
-		$meta_box = $this->tpmb->config;
+		$meta_box = $this->tpmb->get_config();
 		$post_id = get_the_ID();
 		$this->tpmb->object_id = $post_id;
 

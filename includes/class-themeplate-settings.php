@@ -28,7 +28,7 @@ class ThemePlate_Settings {
 
 	public function create() {
 
-		$settings = $this->tpmb->config;
+		$settings = $this->tpmb->get_config();
 		$page = ThemePlate()->key . '-' . ( isset( $settings['page'] ) ? $settings['page'] : ThemePlate()->slug );
 		$this->tpmb->object_id = $page;
 		$page .= '-' . ( isset( $settings['context'] ) ? $settings['context'] : 'normal' );

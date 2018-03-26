@@ -41,7 +41,7 @@ class ThemePlate_TermMeta {
 
 	public function create( $tag ) {
 
-		$meta_box = $this->tpmb->config;
+		$meta_box = $this->tpmb->get_config();
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 		$this->tpmb->object_id = $term_id;
 

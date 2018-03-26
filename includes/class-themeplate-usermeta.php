@@ -33,7 +33,7 @@ class ThemePlate_UserMeta {
 
 	public function create( $user ) {
 
-		$meta_box = $this->tpmb->config;
+		$meta_box = $this->tpmb->get_config();
 		$user_id = is_object( $user ) ? $user->ID : '';
 		$this->tpmb->object_id = $user_id;
 
