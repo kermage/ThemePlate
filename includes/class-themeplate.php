@@ -170,10 +170,3 @@ class ThemePlate {
 	}
 
 }
-
-
-function ThemePlate( $key = NULL, $pages = NULL ) {
-
-	return ThemePlate::instance( $key, $pages );
-
-}
