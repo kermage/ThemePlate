@@ -11,7 +11,6 @@
 class ThemePlate_MetaBox {
 
 	private $object_type;
-	private $object_id;
 	private $config;
 	private $fields;
 
@@ -60,7 +59,7 @@ class ThemePlate_MetaBox {
 	}
 
 
-	public function layout_postbox() {
+	public function layout_postbox( $object_id ) {
 
 		$meta_box = $this->config;
 
@@ -73,14 +72,14 @@ class ThemePlate_MetaBox {
 			echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
 
 			echo '<div class="inside">';
-				$this->layout_inside();
+				$this->layout_inside( $object_id );
 			echo '</div>';
 		echo '</div>';
 
 	}
 
 
-	public function layout_inside() {
+	public function layout_inside( $object_id ) {
 
 		$meta_box = $this->config;
 
@@ -93,7 +92,7 @@ class ThemePlate_MetaBox {
 		}
 
 		echo '<div class="fields-container ' . $meta_box['style'] . '">';
-			$this->fields->setup( $meta_box['id'], $this->object_type, $this->object_id );
+			$this->fields->setup( $meta_box['id'], $this->object_type, $object_id );
 		echo '</div>';
 
 	}
@@ -172,13 +171,6 @@ class ThemePlate_MetaBox {
 	public function get_config() {
 
 		return $this->config;
-
-	}
-
-
-	public function object_id( $number ) {
-
-		$this->object_id = $number;
 
 	}
 

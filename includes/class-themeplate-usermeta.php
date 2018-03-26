@@ -35,7 +35,6 @@ class ThemePlate_UserMeta {
 
 		$meta_box = $this->tpmb->get_config();
 		$user_id = is_object( $user ) ? $user->ID : '';
-		$this->tpmb->object_id( $user_id );
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $user_id ) ) {
 			return;
@@ -44,7 +43,7 @@ class ThemePlate_UserMeta {
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
-		$this->tpmb->layout_postbox();
+		$this->tpmb->layout_postbox( $user_id );
 
 	}
 

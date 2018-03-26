@@ -31,7 +31,6 @@ class ThemePlate_PostMeta {
 
 		$meta_box = $this->tpmb->get_config();
 		$post_id = get_the_ID();
-		$this->tpmb->object_id( $post_id );
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $post_id ) ) {
 			return;
@@ -44,7 +43,14 @@ class ThemePlate_PostMeta {
 		);
 		$meta_box = wp_parse_args( $meta_box, $defaults );
 
-		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this->tpmb, 'layout_inside' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
+		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'add' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
+
+	}
+
+
+	public function add() {
+
+		$this->tpmb->layout_inside( get_the_ID() );
 
 	}
 

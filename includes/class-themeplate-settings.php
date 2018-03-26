@@ -11,6 +11,7 @@
 class ThemePlate_Settings {
 
 	private $tpmb;
+	private $key;
 
 
 	public function __construct( $config ) {
@@ -29,11 +30,19 @@ class ThemePlate_Settings {
 	public function create() {
 
 		$settings = $this->tpmb->get_config();
-		$page = ThemePlate()->key . '-' . ( isset( $settings['page'] ) ? $settings['page'] : ThemePlate()->slug );
-		$this->tpmb->object_id( $page );
-		$page .= '-' . ( isset( $settings['context'] ) ? $settings['context'] : 'normal' );
+		$key = ThemePlate()->key . '-' . ( isset( $settings['page'] ) ? $settings['page'] : ThemePlate()->slug );
+		$page = $key . '-' . ( isset( $settings['context'] ) ? $settings['context'] : 'normal' );
 
-		add_action( 'themeplate_settings_' . $page, array( $this->tpmb, 'layout_postbox' ) );
+		$this->key = $key;
+
+		add_action( 'themeplate_settings_' . $page, array( $this, 'add' ) );
+
+	}
+
+
+	public function add() {
+
+		$this->tpmb->layout_postbox( $this->key );
 
 	}
 
