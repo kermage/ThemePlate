@@ -101,14 +101,6 @@ class ThemePlate_MetaBox {
 		$meta_box = $this->config;
 		$fields = $this->fields->get_collection();
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['themeplate_' . $meta_box['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $meta_box['id'] . '_nonce'], basename( __FILE__ ) ) ) {
-			return;
-		}
-
 		foreach ( $fields as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 
@@ -169,6 +161,21 @@ class ThemePlate_MetaBox {
 	public function get_config() {
 
 		return $this->config;
+
+	}
+
+
+	public function can_save() {
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return false;
+		}
+
+		if ( ! isset( $_POST['themeplate_' . $this->config['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->config['id'] . '_nonce'], basename( __FILE__ ) ) ) {
+			return false;
+		}
+
+		return true;
 
 	}
 
