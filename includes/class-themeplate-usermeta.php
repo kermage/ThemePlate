@@ -51,6 +51,10 @@ class ThemePlate_UserMeta {
 
 	public function save( $user_id ) {
 
+		if ( ! $this->tpmb->can_save() ) {
+			return;
+		}
+
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return;
 		}

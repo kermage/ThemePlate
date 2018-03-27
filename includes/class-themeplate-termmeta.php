@@ -60,6 +60,10 @@ class ThemePlate_TermMeta {
 
 	public function save( $term_id ) {
 
+		if ( ! $this->tpmb->can_save() ) {
+			return;
+		}
+
 		if ( ! current_user_can( 'edit_term', $term_id ) ) {
 			return;
 		}
