@@ -23,6 +23,7 @@ class ThemePlate_Settings {
 		}
 
 		add_action( 'admin_init', array( $this, 'create' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 
 	}
 
@@ -43,6 +44,19 @@ class ThemePlate_Settings {
 	public function add() {
 
 		$this->tpmb->layout_postbox( $this->key );
+
+	}
+
+
+	public function scripts_styles() {
+
+		$screen = get_current_screen();
+
+		if ( strpos( $screen->id, $this->key ) === false ) {
+			return;
+		}
+
+		$this->tpmb->enqueue();
 
 	}
 

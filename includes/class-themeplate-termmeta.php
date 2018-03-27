@@ -36,6 +36,8 @@ class ThemePlate_TermMeta {
 			add_action( 'edited_' . $taxonomy, array( $this, 'save' ) );
 		}
 
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+
 	}
 
 
@@ -63,6 +65,19 @@ class ThemePlate_TermMeta {
 		}
 
 		$this->tpmb->save( $term_id );
+
+	}
+
+
+	public function scripts_styles() {
+
+		$screen = get_current_screen();
+
+		if ( ! in_array( $screen->base, array( 'edit-tags', 'term' ) ) ) {
+			return;
+		}
+
+		$this->tpmb->enqueue();
 
 	}
 

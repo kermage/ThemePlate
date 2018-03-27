@@ -23,6 +23,7 @@ class ThemePlate_PostMeta {
 
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 
 	}
 
@@ -68,6 +69,19 @@ class ThemePlate_PostMeta {
 		}
 
 		$this->tpmb->save( $post_id );
+
+	}
+
+
+	public function scripts_styles() {
+
+		$screen = get_current_screen();
+
+		if ( $screen->base != 'post' ) {
+			return;
+		}
+
+		$this->tpmb->enqueue();
 
 	}
 

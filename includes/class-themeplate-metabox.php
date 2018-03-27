@@ -40,12 +40,10 @@ class ThemePlate_MetaBox {
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
-
 	}
 
 
-	public function scripts_styles() {
+	public function enqueue() {
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker');
