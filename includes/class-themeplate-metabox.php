@@ -10,14 +10,13 @@
 
 class ThemePlate_MetaBox {
 
-	private $object_type;
 	private $config;
 	private $fields;
 
 	private $defaults = array(
-		'show_on'    => array(),
-		'hide_on'    => array(),
-		'style'      => ''
+		'show_on' => array(),
+		'hide_on' => array(),
+		'style'   => ''
 	);
 
 
@@ -35,7 +34,7 @@ class ThemePlate_MetaBox {
 			throw new Exception();
 		}
 
-		$this->object_type = $type;
+		$config['object_type'] = $type;
 		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
@@ -90,7 +89,7 @@ class ThemePlate_MetaBox {
 		}
 
 		echo '<div class="fields-container ' . $meta_box['style'] . '">';
-			$this->fields->setup( $meta_box['id'], $this->object_type, $object_id );
+			$this->fields->setup( $meta_box['id'], $meta_box['object_type'], $object_id );
 		echo '</div>';
 
 	}
@@ -108,11 +107,11 @@ class ThemePlate_MetaBox {
 				continue;
 			}
 
-			$stored = get_metadata( $this->object_type, $object_id, $key, ! $field['repeatable'] );
+			$stored = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ThemePlate()->key][$key];
 
 			if ( ! $field['repeatable'] ) {
-				delete_metadata( $this->object_type, $object_id, $key );
+				delete_metadata( $meta_box['object_type'], $object_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {
 					foreach ( (array) $value as $j => $val ) {
@@ -129,7 +128,7 @@ class ThemePlate_MetaBox {
 						continue;
 					}
 
-					add_metadata( $this->object_type, $object_id, $key, $value );
+					add_metadata( $meta_box['object_type'], $object_id, $key, $value );
 				}
 			} else {
 				foreach ( (array) $updated as $i => $value ) {
@@ -147,9 +146,9 @@ class ThemePlate_MetaBox {
 				}
 
 				if ( $updated ) {
-					update_metadata( $this->object_type, $object_id, $key, $updated, $stored );
+					update_metadata( $meta_box['object_type'], $object_id, $key, $updated, $stored );
 				} else {
-					delete_metadata( $this->object_type, $object_id, $key, $stored );
+					delete_metadata( $meta_box['object_type'], $object_id, $key, $stored );
 				}
 			}
 
