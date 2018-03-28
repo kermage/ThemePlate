@@ -16,7 +16,8 @@ class ThemePlate_PostMeta {
 	public function __construct( $config ) {
 
 		try {
-			$this->tpmb = new ThemePlate_MetaBox( 'post', $config );
+			$config['object_type'] = 'post';
+			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
 			return false;
 		}

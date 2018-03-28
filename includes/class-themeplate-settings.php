@@ -17,7 +17,8 @@ class ThemePlate_Settings {
 	public function __construct( $config ) {
 
 		try {
-			$this->tpmb = new ThemePlate_MetaBox( 'options', $config );
+			$config['object_type'] = 'options';
+			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
 			return false;
 		}

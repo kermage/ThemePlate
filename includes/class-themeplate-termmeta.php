@@ -16,7 +16,8 @@ class ThemePlate_TermMeta {
 	public function __construct( $config ) {
 
 		try {
-			$this->tpmb = new ThemePlate_MetaBox( 'term', $config );
+			$config['object_type'] = 'term';
+			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
 			return false;
 		}

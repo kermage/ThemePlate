@@ -20,7 +20,7 @@ class ThemePlate_MetaBox {
 	);
 
 
-	public function __construct( $type, $config ) {
+	public function __construct( $config ) {
 
 		if ( ! is_array( $config ) || empty( $config ) ) {
 			throw new Exception();
@@ -34,7 +34,6 @@ class ThemePlate_MetaBox {
 			throw new Exception();
 		}
 
-		$config['object_type'] = $type;
 		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
