@@ -16,18 +16,19 @@ class ThemePlate_TermMeta {
 	public function __construct( $config ) {
 
 		try {
+			if ( empty( $config['taxonomy'] ) ) {
+				$taxonomies = get_taxonomies( array( '_builtin' => false ) );
+				$taxonomies['category'] = 'category';
+				$taxonomies['post_tag'] = 'post_tag';
+				$config['taxonomy'] = $taxonomies;
+			} else {
+				$taxonomies = $config['taxonomy'];
+			}
+
 			$config['object_type'] = 'term';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
 			return false;
-		}
-
-		if ( empty( $config['taxonomy'] ) ) {
-			$taxonomies = get_taxonomies( array( '_builtin' => false ) );
-			$taxonomies['category'] = 'category';
-			$taxonomies['post_tag'] = 'post_tag';
-		} else {
-			$taxonomies = $config['taxonomy'];
 		}
 
 		foreach ( (array) $taxonomies as $taxonomy ) {
@@ -45,6 +46,11 @@ class ThemePlate_TermMeta {
 	public function create( $tag ) {
 
 		$meta_box = $this->tpmb->get_config();
+
+		if ( ! $this->is_valid_screen() ) {
+			return;
+		}
+
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $term_id ) ) {
@@ -76,13 +82,27 @@ class ThemePlate_TermMeta {
 
 	public function scripts_styles() {
 
-		$screen = get_current_screen();
-
-		if ( ! in_array( $screen->base, array( 'edit-tags', 'term' ) ) ) {
+		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
 		$this->tpmb->enqueue();
+
+	}
+
+
+	private function is_valid_screen() {
+
+		$meta_box = $this->tpmb->get_config();
+		$screen = get_current_screen();
+
+		if ( ! in_array( $screen->taxonomy, $meta_box['taxonomy'] ) ) {
+			return false;
+		}
+		print_r( $screen );
+		print_r( $meta_box );
+
+		return true;
 
 	}
 
