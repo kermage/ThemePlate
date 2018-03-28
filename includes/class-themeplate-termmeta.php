@@ -99,8 +99,6 @@ class ThemePlate_TermMeta {
 		if ( ! in_array( $screen->taxonomy, $meta_box['taxonomy'] ) ) {
 			return false;
 		}
-		print_r( $screen );
-		print_r( $meta_box );
 
 		return true;
 
