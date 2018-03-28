@@ -26,7 +26,7 @@ class ThemePlate_MetaBox {
 			throw new Exception();
 		}
 
-		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) || ! array_key_exists( 'fields', $config ) ) {
+		if ( ! array_key_exists( 'object_type', $config ) || ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) || ! array_key_exists( 'fields', $config ) ) {
 			throw new Exception();
 		}
 
