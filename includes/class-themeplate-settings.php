@@ -17,6 +17,11 @@ class ThemePlate_Settings {
 	public function __construct( $config ) {
 
 		try {
+			$defaults = array(
+				'page'   => ThemePlate()->slug,
+				'context'  => 'normal'
+			);
+			$config = wp_parse_args( $config, $defaults );
 			$config['object_type'] = 'options';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
@@ -32,14 +37,14 @@ class ThemePlate_Settings {
 	public function create() {
 
 		$settings = $this->tpmb->get_config();
-		$key = ThemePlate()->key . '-' . ( isset( $settings['page'] ) ? $settings['page'] : ThemePlate()->slug );
+		$key = ThemePlate()->key . '-' . $settings['page'];
 		$this->key = $key;
 
 		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
-		$page = $key . '-' . ( isset( $settings['context'] ) ? $settings['context'] : 'normal' );
+		$page = $key . '-' . $settings['context'];
 
 		add_action( 'themeplate_settings_' . $page, array( $this, 'add' ) );
 
