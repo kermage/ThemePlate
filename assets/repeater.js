@@ -10,7 +10,7 @@
 		var $cloned = $field.clone( true );
 
 		setIndex( $cloned, getIndex( $field ) );
-		$cloned.removeClass( 'hidden' ).insertBefore( $field );
+		$cloned.removeClass( 'hidden' ).insertBefore( $field ).trigger( 'clone' );
 	});
 
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {

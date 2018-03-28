@@ -23,9 +23,6 @@
 	});
 
 
-	$( '.themeplate-color-picker' ).wpColorPicker();
-
-
 	var meta_media_frame = wp.media.frames.meta_media_frame;
 
 	$( document ).on( 'click', '.themeplate-file .attachment-add', function( e ) {
@@ -108,8 +105,13 @@
 	});
 
 
-	$( document ).on( 'ready', function() {
-		$( '.themeplate-select2' ).each( function() {
+	$( document ).on( 'ready clone', function() {
+
+		$( '.themeplate-color-picker:not( .hidden .themeplate-color-picker ) ' ).each( function() {
+			$( this ).wpColorPicker();
+		});
+
+		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
 			var $this = $( this );
 
 			$this.select2( {
