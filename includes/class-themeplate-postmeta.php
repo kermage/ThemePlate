@@ -16,6 +16,12 @@ class ThemePlate_PostMeta {
 	public function __construct( $config ) {
 
 		try {
+			$defaults = array(
+				'screen'   => '',
+				'context'  => 'advanced',
+				'priority' => 'default'
+			);
+			$config = wp_parse_args( $config, $defaults );
 			$config['object_type'] = 'post';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
@@ -32,14 +38,8 @@ class ThemePlate_PostMeta {
 	public function create() {
 
 		$meta_box = $this->tpmb->get_config();
-		$defaults = array(
-			'screen'   => '',
-			'context'  => 'advanced',
-			'priority' => 'default'
-		);
-		$meta_box = wp_parse_args( $meta_box, $defaults );
 
-		if ( ! $this->is_valid( $meta_box['screen'] ) ) {
+		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
@@ -86,9 +86,7 @@ class ThemePlate_PostMeta {
 
 	public function scripts_styles() {
 
-		$screen = get_current_screen();
-
-		if ( $screen->base != 'post' ) {
+		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
@@ -97,11 +95,12 @@ class ThemePlate_PostMeta {
 	}
 
 
-	private function is_valid( $types ) {
+	private function is_valid_screen() {
 
+		$meta_box = $this->tpmb->get_config();
 		$screen = get_current_screen();
 
-		if ( ! empty( $types ) && ! in_array( $screen->post_type, $types ) ) {
+		if ( ! empty( $meta_box['screen'] ) && ! in_array( $screen->post_type, $meta_box['screen'] ) ) {
 			return false;
 		}
 
