@@ -45,12 +45,11 @@ class ThemePlate_TermMeta {
 
 	public function create( $tag ) {
 
-		$meta_box = $this->tpmb->get_config();
-
 		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
+		$meta_box = $this->tpmb->get_config();
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $term_id ) ) {

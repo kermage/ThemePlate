@@ -36,12 +36,11 @@ class ThemePlate_Settings {
 
 	public function create() {
 
-		$settings = $this->tpmb->get_config();
-
 		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
+		$settings = $this->tpmb->get_config();
 		$page = $settings['page'] . '-' . $settings['context'];
 
 		add_action( 'themeplate_settings_' . $page, array( $this, 'add' ) );

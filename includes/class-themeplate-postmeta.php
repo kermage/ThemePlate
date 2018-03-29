@@ -37,12 +37,11 @@ class ThemePlate_PostMeta {
 
 	public function create() {
 
-		$meta_box = $this->tpmb->get_config();
-
 		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
 
+		$meta_box = $this->tpmb->get_config();
 		$post_id = get_the_ID();
 
 		if ( ! ThemePlate_Helpers::should_display( $meta_box, $post_id ) ) {
@@ -63,11 +62,11 @@ class ThemePlate_PostMeta {
 
 	public function save( $post_id ) {
 
-		$post_type = get_post_type( $post_id );
-
 		if ( ! $this->tpmb->can_save() ) {
 			return;
 		}
+
+		$post_type = get_post_type( $post_id );
 
 		if ( $post_type == 'page' ) {
 			if ( ! current_user_can( 'edit_page', $post_id ) ) {
@@ -97,12 +96,13 @@ class ThemePlate_PostMeta {
 
 	private function is_valid_screen() {
 
-		$meta_box = $this->tpmb->get_config();
 		$screen = get_current_screen();
 
 		if ( $screen->base != 'post' ) {
 			return false;
 		}
+
+		$meta_box = $this->tpmb->get_config();
 
 		if ( ! empty( $meta_box['screen'] ) && ! in_array( $screen->post_type, $meta_box['screen'] ) ) {
 			return false;

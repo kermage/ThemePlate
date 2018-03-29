@@ -73,6 +73,16 @@ class ThemePlate_UserMeta {
 			return;
 		}
 
+		$meta_box = $this->tpmb->get_config();
+
+		if ( $screen->base == 'user-edit' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
+			return;
+		}
+
+		if ( $screen->base == 'profile' && ! ThemePlate_Helpers::should_display( $meta_box, get_current_user_id() ) ) {
+			return;
+		}
+
 		$this->tpmb->enqueue();
 
 	}
