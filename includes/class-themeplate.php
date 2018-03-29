@@ -79,11 +79,7 @@ class ThemePlate {
 		$subs = array();
 
 		foreach ( $this->pages as $id => $title ) {
-			$subs[$id] = new ThemePlate_Page( array(
-				'id' => $this->key . '-' . $id,
-				'title' => $title,
-				'parent' => $this->key . '-' . $this->slug
-			) );
+			$this->menu( $id, $title );
 		}
 
 	}
