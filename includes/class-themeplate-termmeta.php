@@ -53,7 +53,6 @@ class ThemePlate_TermMeta {
 			return;
 		}
 
-		$meta_box = $this->tpmb->get_config();
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 
 		wp_enqueue_script( 'post' );

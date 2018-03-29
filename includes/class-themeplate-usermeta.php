@@ -39,7 +39,6 @@ class ThemePlate_UserMeta {
 			return;
 		}
 
-		$meta_box = $this->tpmb->get_config();
 		$user_id = is_object( $user ) ? $user->ID : '';
 
 		wp_enqueue_script( 'post' );
