@@ -35,12 +35,12 @@ class ThemePlate_UserMeta {
 
 	public function create( $user ) {
 
-		$meta_box = $this->tpmb->get_config();
-		$user_id = is_object( $user ) ? $user->ID : '';
-
-		if ( ! ThemePlate_Helpers::should_display( $meta_box, $user_id ) ) {
+		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
+
+		$meta_box = $this->tpmb->get_config();
+		$user_id = is_object( $user ) ? $user->ID : '';
 
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
@@ -67,23 +67,34 @@ class ThemePlate_UserMeta {
 
 	public function scripts_styles() {
 
+		if ( ! $this->is_valid_screen() ) {
+			return;
+		}
+
+		$this->tpmb->enqueue();
+
+	}
+
+
+	private function is_valid_screen() {
+
 		$screen = get_current_screen();
 
 		if ( ! in_array( $screen->base, array( 'user', 'user-edit', 'profile' ) ) ) {
-			return;
+			return false;
 		}
 
 		$meta_box = $this->tpmb->get_config();
 
 		if ( $screen->base == 'user-edit' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
-			return;
+			return false;
 		}
 
 		if ( $screen->base == 'profile' && ! ThemePlate_Helpers::should_display( $meta_box, get_current_user_id() ) ) {
-			return;
+			return false;
 		}
 
-		$this->tpmb->enqueue();
+		return true;
 
 	}
 

@@ -42,11 +42,6 @@ class ThemePlate_PostMeta {
 		}
 
 		$meta_box = $this->tpmb->get_config();
-		$post_id = get_the_ID();
-
-		if ( ! ThemePlate_Helpers::should_display( $meta_box, $post_id ) ) {
-			return;
-		}
 
 		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'add' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
 
@@ -105,6 +100,10 @@ class ThemePlate_PostMeta {
 		$meta_box = $this->tpmb->get_config();
 
 		if ( ! empty( $meta_box['screen'] ) && ! in_array( $screen->post_type, $meta_box['screen'] ) ) {
+			return false;
+		}
+
+		if ( ! ThemePlate_Helpers::should_display( $meta_box, get_the_ID() ) ) {
 			return false;
 		}
 

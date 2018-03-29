@@ -56,10 +56,6 @@ class ThemePlate_TermMeta {
 		$meta_box = $this->tpmb->get_config();
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 
-		if ( ! ThemePlate_Helpers::should_display( $meta_box, $term_id ) ) {
-			return;
-		}
-
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
@@ -96,10 +92,23 @@ class ThemePlate_TermMeta {
 
 	private function is_valid_screen() {
 
-		$meta_box = $this->tpmb->get_config();
 		$screen = get_current_screen();
 
+		if ( ! in_array( $screen->base, array( 'edit-tags', 'term' ) ) ) {
+			return false;
+		}
+
+		$meta_box = $this->tpmb->get_config();
+
 		if ( ! in_array( $screen->taxonomy, $meta_box['taxonomy'] ) ) {
+			return false;
+		}
+
+		if ( $screen->base == 'edit-tags' && ! ThemePlate_Helpers::should_display( $meta_box, '' ) ) {
+			return false;
+		}
+
+		if ( $screen->base == 'term' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) {
 			return false;
 		}
 
