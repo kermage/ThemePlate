@@ -119,11 +119,13 @@ class ThemePlate {
 
 	public function menu( $id, $title ) {
 
-		if ( ! $this->pages ) {
-			$this->pages = array( $this->key . '-' . $this->slug => $this->title );
-		}
+		$args = array(
+			'id' => $this->key . '-' . $id,
+			'title' => $title,
+			'parent' => $this->key . '-' . $this->slug
+		);
 
-		$this->pages = array_merge( $this->pages, array( $id => $title ) );
+		$this->page( $args );
 
 	}
 
