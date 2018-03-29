@@ -41,9 +41,9 @@ class ThemePlate_Settings {
 		}
 
 		$settings = $this->tpmb->get_config();
-		$page = $settings['page'] . '-' . $settings['context'];
+		$section = $settings['page'] . '-' . $settings['context'];
 
-		add_action( 'themeplate_settings_' . $page, array( $this, 'add' ) );
+		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ) );
 
 	}
 
