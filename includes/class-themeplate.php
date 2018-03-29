@@ -65,7 +65,7 @@ class ThemePlate {
 
 	public function setup() {
 
-		$main = new ThemePlate_Page( array(
+		$main = $this->page( array(
 			'id' => $this->key . '-' . $this->slug,
 			'title' => array_shift( $this->pages ),
 			'parent' => $this->key . '-' . $this->slug,
