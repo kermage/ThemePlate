@@ -169,4 +169,11 @@ class ThemePlate {
 
 	}
 
+
+	public function page( $args ) {
+
+		new ThemePlate_Page( $args );
+
+	}
+
 }
