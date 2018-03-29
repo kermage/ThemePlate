@@ -18,8 +18,8 @@ class ThemePlate_TermMeta {
 		try {
 			if ( empty( $config['taxonomy'] ) ) {
 				$taxonomies = get_taxonomies( array( '_builtin' => false ) );
-				$taxonomies['category'] = 'category';
-				$taxonomies['post_tag'] = 'post_tag';
+				$taxonomies[] = 'category';
+				$taxonomies[] = 'post_tag';
 				$config['taxonomy'] = $taxonomies;
 			} else {
 				$taxonomies = $config['taxonomy'];
