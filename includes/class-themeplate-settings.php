@@ -20,7 +20,7 @@ class ThemePlate_Settings {
 				'page'   => ThemePlate()->slug,
 				'context'  => 'normal'
 			);
-			$config = wp_parse_args( $config, $defaults );
+			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );;
 			$config['page'] = ThemePlate()->key . '-' . $config['page'];
 			$config['object_type'] = 'options';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
