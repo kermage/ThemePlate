@@ -76,7 +76,7 @@ class ThemePlate_CPT {
 			'name_admin_bar'        => $plural
 		);
 
-		$args['labels'] = array_merge( $labels, $args['labels'] );
+		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
 
 		register_post_type( $config['name'], $args );
 
@@ -112,7 +112,7 @@ class ThemePlate_CPT {
 			'not_found'                  => $singular . ' not found'
 		);
 
-		$args['labels'] = array_merge( $labels, $args['labels'] );
+		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
 
 		register_taxonomy( $config['name'], $config['type'], $args );
 
