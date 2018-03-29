@@ -65,12 +65,18 @@ class ThemePlate {
 
 	public function setup() {
 
-		$main = $this->page( array(
+		$args = array(
 			'id' => $this->key . '-' . $this->slug,
-			'title' => array_shift( $this->pages ),
-			'parent' => $this->key . '-' . $this->slug,
-			'menu' => $this->title
-		) );
+			'title' => $this->title
+		);
+
+		if ( $this->pages ) {
+			$args['title'] = array_shift( $this->pages );
+			$args['parent'] = $this->key . '-' . $this->slug;
+			$args['menu'] = $this->title;
+		}
+
+		$main = $this->page( $args );
 
 		if ( ! $this->pages ) {
 			return;
