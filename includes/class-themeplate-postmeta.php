@@ -17,7 +17,7 @@ class ThemePlate_PostMeta {
 
 		try {
 			$defaults = array(
-				'screen'   => '',
+				'screen'   => array(),
 				'context'  => 'advanced',
 				'priority' => 'default'
 			);
