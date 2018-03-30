@@ -10,7 +10,7 @@ class ThemePlate {
 
 	private static $instance;
 
-	public $key, $title, $slug, $pages;
+	public $key, $slug;
 
 
 	public static function instance( $key = NULL, $pages = NULL ) {
@@ -30,20 +30,32 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		if ( is_array( $key ) && ! empty( $key ) ) {
-			$this->title = array_shift( $key );
-			$this->key = array_shift( $key );
-		} else {
-			$this->title = $key;
-			$this->key = $this->title;
+		$config = array();
+
+		if ( ! empty( $key ) ) {
+			if ( is_array( $key ) ) {
+				$config['title'] = array_shift( $key );
+				$config['key'] = array_shift( $key );
+			} else {
+				$config['title'] = $key;
+				$config['key'] = sanitize_title( $key );
+			}
 		}
 
-		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate Options';
-		$this->key = sanitize_title( ! empty( $this->key ) ? $this->key : $this->title );
-		$this->pages = isset( $pages ) ? $pages : array();
-		$this->slug = isset( $pages ) ? key( $pages ) : 'options';
+		if ( ! empty( $pages ) ) {
+			$config['pages'] = $pages;
+			$config['slug'] = key( $pages );
+		}
 
-		$this->setup();
+		$defaults = array(
+			'title' => 'ThemePlate Options',
+			'key' => 'tp',
+			'pages' => array(),
+			'slug' => 'options'
+		);
+		$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
+		$this->setup( $config );
 
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
@@ -63,28 +75,31 @@ class ThemePlate {
 	}
 
 
-	public function setup() {
+	public function setup( $config ) {
+
+		$this->key = $config['key'];
+		$this->slug = $config['slug'];
 
 		$args = array(
-			'id' => $this->key . '-' . $this->slug,
-			'title' => $this->title
+			'id' => $config['key'] . '-' . $config['slug'],
+			'title' => $config['title']
 		);
 
-		if ( $this->pages ) {
-			$args['title'] = array_shift( $this->pages );
-			$args['parent'] = $this->key . '-' . $this->slug;
-			$args['menu'] = $this->title;
+		if ( $config['pages'] ) {
+			$args['title'] = array_shift( $config['pages'] );
+			$args['parent'] = $config['key'] . '-' . $config['slug'];
+			$args['menu'] = $config['title'];
 		}
 
 		$main = $this->page( $args );
 
-		if ( ! $this->pages ) {
+		if ( ! $config['pages'] ) {
 			return;
 		}
 
 		$subs = array();
 
-		foreach ( $this->pages as $id => $title ) {
+		foreach ( $config['pages'] as $id => $title ) {
 			$this->menu( $id, $title );
 		}
 
