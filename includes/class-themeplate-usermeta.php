@@ -41,9 +41,6 @@ class ThemePlate_UserMeta {
 
 		$user_id = is_object( $user ) ? $user->ID : '';
 
-		wp_enqueue_script( 'post' );
-		wp_enqueue_media();
-
 		$this->tpmb->layout_postbox( $user_id );
 
 	}
@@ -69,6 +66,9 @@ class ThemePlate_UserMeta {
 		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
+
+		wp_enqueue_script( 'post' );
+		wp_enqueue_media();
 
 		$this->tpmb->enqueue();
 

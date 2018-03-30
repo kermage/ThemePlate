@@ -55,9 +55,6 @@ class ThemePlate_TermMeta {
 
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 
-		wp_enqueue_script( 'post' );
-		wp_enqueue_media();
-
 		$this->tpmb->layout_postbox( $term_id );
 
 	}
@@ -83,6 +80,9 @@ class ThemePlate_TermMeta {
 		if ( ! $this->is_valid_screen() ) {
 			return;
 		}
+
+		wp_enqueue_script( 'post' );
+		wp_enqueue_media();
 
 		$this->tpmb->enqueue();
 
