@@ -21,7 +21,7 @@ class ThemePlate_PostMeta {
 				'context'  => 'advanced',
 				'priority' => 'default'
 			);
-			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );;
+			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 			$config['object_type'] = 'post';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {

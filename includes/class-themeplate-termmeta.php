@@ -28,7 +28,7 @@ class ThemePlate_TermMeta {
 			$defaults = array(
 				'taxonomy' => array()
 			);
-			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );;
+			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 			$config['object_type'] = 'term';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch( Exception $e ) {
