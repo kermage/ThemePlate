@@ -49,7 +49,6 @@ class ThemePlate_Fields {
 			$processed[$id] = $field;
 		}
 
-
 		return $processed;
 
 	}
@@ -100,7 +99,7 @@ class ThemePlate_Fields {
 
 				if ( ! $field['repeatable'] ) {
 					$field['value'] = $value;
-					$field['name'] =  $base_name;
+					$field['name'] = $base_name;
 
 					$this->render( $field );
 				} else {
@@ -109,7 +108,7 @@ class ThemePlate_Fields {
 					foreach ( (array) $value as $i => $val ) {
 						$field['value'] = $val;
 						$field['id'] = $base_id . '_' . $i;
-						$field['name'] =  $base_name . '[' . $i . ']';
+						$field['name'] = $base_name . '[' . $i . ']';
 
 						echo '<div class="themeplate-clone">';
 							echo '<div class="themeplate-handle"></div>';
@@ -120,7 +119,7 @@ class ThemePlate_Fields {
 
 					$field['value'] = $field['std'];
 					$field['id'] = $base_id . '_i-x';
-					$field['name'] =  $base_name . '[i-x]';
+					$field['name'] = $base_name . '[i-x]';
 
 					echo '<div class="themeplate-clone hidden">';
 						echo '<div class="themeplate-handle"></div>';
@@ -151,19 +150,19 @@ class ThemePlate_Fields {
 				break;
 
 
-			case 'textarea' :
+			case 'textarea':
 				echo '<textarea name="' . $field['name'] . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
 				break;
 
 
-			case 'select' :
-			case 'select2' :
+			case 'select':
+			case 'select2':
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
 				echo '<select' . ( $field['type'] == 'select2' ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
 				if ( $field['type'] == 'select2' && ! $field['value'] ) {
 					echo '<option></options>';
 				} elseif ( $field['type'] != 'select2' && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
-					echo '<option value="0"' . ( $field['none'] && $field['value' ] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
+					echo '<option value="0"' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
 				if ( $field['type'] == 'select2' && $field['multiple'] && $field['value'] ) {
 					$ordered = array();
@@ -189,9 +188,9 @@ class ThemePlate_Fields {
 				break;
 
 
-			case 'radiolist' :
+			case 'radiolist':
 				$list = true;
-			case 'radio' :
+			case 'radio':
 				if ( ! empty( $field['options'] ) ) {
 					echo '<fieldset id="' . $field['id'] . '">';
 					foreach ( $field['options'] as $value => $option ) {
@@ -204,9 +203,9 @@ class ThemePlate_Fields {
 				}
 				break;
 
-			case 'checklist' :
+			case 'checklist':
 				$list = true;
-			case 'checkbox' :
+			case 'checkbox':
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
 				if ( ! empty( $field['options'] ) ) {
 					echo '<fieldset id="' . $field['id'] . '">';
@@ -399,7 +398,7 @@ class ThemePlate_Fields {
 								foreach ( (array) $value as $i => $val ) {
 									$sub['value'] = $val;
 									$sub['id'] = $base_id . '_' . $i;
-									$sub['name'] =  $base_name . '[' . $i . ']';
+									$sub['name'] = $base_name . '[' . $i . ']';
 
 									echo '<div class="themeplate-clone">';
 										echo '<div class="themeplate-handle"></div>';
@@ -410,7 +409,7 @@ class ThemePlate_Fields {
 
 								$sub['value'] = $sub['std'];
 								$sub['id'] = $base_id . '_i-x';
-								$sub['name'] =  $base_name . '[i-x]';
+								$sub['name'] = $base_name . '[i-x]';
 
 								echo '<div class="themeplate-clone hidden">';
 									echo '<div class="themeplate-handle"></div>';
