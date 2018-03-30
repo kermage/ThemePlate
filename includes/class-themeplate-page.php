@@ -143,11 +143,11 @@ class ThemePlate_Page {
 								</div>
 							</div>
 
-							<?php do_action( 'themeplate_settings_' . $this->config['id'] . '-side' ) ?>
+							<?php do_action( 'themeplate_settings_' . $this->config['id'] . '-side' ); ?>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php do_action( 'themeplate_settings_' . $this->config['id'] . '-normal' ) ?>
+							<?php do_action( 'themeplate_settings_' . $this->config['id'] . '-normal' ); ?>
 						</div>
 					</div>
 				</div>
