@@ -29,7 +29,7 @@ define( 'TP_PATH',    plugin_dir_path( __FILE__ ) );
 // Load the ThemePlate plugin
 require_once( TP_PATH . 'includes/class-' . basename( __FILE__ ) );
 
-function ThemePlate( $key = NULL, $pages = NULL ) {
+function ThemePlate( $key = null, $pages = null ) {
 	return ThemePlate::instance( $key, $pages );
 }
 

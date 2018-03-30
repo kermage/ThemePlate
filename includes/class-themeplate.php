@@ -13,7 +13,7 @@ class ThemePlate {
 	public $key, $slug;
 
 
-	public static function instance( $key = NULL, $pages = NULL ) {
+	public static function instance( $key = null, $pages = null ) {
 
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self( $key, $pages );
