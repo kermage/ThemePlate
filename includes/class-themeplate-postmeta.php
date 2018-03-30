@@ -63,14 +63,10 @@ class ThemePlate_PostMeta {
 
 		$post_type = get_post_type( $post_id );
 
-		if ( $post_type == 'page' ) {
-			if ( ! current_user_can( 'edit_page', $post_id ) ) {
-				return;
-			}
-		} else {
-			if ( ! current_user_can( 'edit_post', $post_id ) ) {
-				return;
-			}
+		if ( $post_type == 'page' && ! current_user_can( 'edit_page', $post_id ) ) {
+			return;
+		} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
 		}
 
 		$this->tpmb->save( $post_id );
