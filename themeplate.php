@@ -27,12 +27,12 @@ define( 'TP_URL',     plugin_dir_url( __FILE__ ) );
 define( 'TP_PATH',    plugin_dir_path( __FILE__ ) );
 
 // Load the ThemePlate plugin
-require_once( TP_PATH . 'includes/class-' . basename( __FILE__ ) );
+require_once TP_PATH . 'includes/class-' . basename( __FILE__ );
 
 function ThemePlate( $key = null, $pages = null ) {
 	return ThemePlate::instance( $key, $pages );
 }
 
 // Instantiate the ThemePlate updater
-require_once( TP_PATH . 'includes/class-external-update-manager.php' );
+require_once TP_PATH . 'includes/class-external-update-manager.php';
 new External_Update_Manager( __FILE__, 'https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/data.json' );
