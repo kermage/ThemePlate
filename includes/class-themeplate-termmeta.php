@@ -31,7 +31,7 @@ class ThemePlate_TermMeta {
 			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 			$config['object_type'] = 'term';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
-		} catch( Exception $e ) {
+		} catch ( Exception $e ) {
 			return false;
 		}
 

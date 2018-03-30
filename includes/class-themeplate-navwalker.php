@@ -75,7 +75,7 @@ class ThemePlate_NavWalker extends Walker {
 		}
 
 		$output .= $args->before;
-		$output .= '<a'. $attributes .'>';
+		$output .= '<a' . $attributes . '>';
 		$output .= $args->link_before . $item->title . $args->link_after;
 		$output .= '</a>';
 		$output .= $args->after;

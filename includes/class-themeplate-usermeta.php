@@ -17,8 +17,9 @@ class ThemePlate_UserMeta {
 
 		try {
 			$config['object_type'] = 'user';
+
 			$this->tpmb = new ThemePlate_MetaBox( $config );
-		} catch( Exception $e ) {
+		} catch ( Exception $e ) {
 			return false;
 		}
 

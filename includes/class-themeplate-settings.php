@@ -24,7 +24,7 @@ class ThemePlate_Settings {
 			$config['page'] = ThemePlate()->key . '-' . $config['page'];
 			$config['object_type'] = 'options';
 			$this->tpmb = new ThemePlate_MetaBox( $config );
-		} catch( Exception $e ) {
+		} catch ( Exception $e ) {
 			return false;
 		}
 
