@@ -15,11 +15,11 @@ class ThemePlate_Helpers {
 		$check = true;
 
 		if ( isset( $meta_box['show_on_cb'] ) || isset( $meta_box['show_on_id'] ) ) {
-			$check = self::_display_check( $object_id, $meta_box['show_on_cb'], $meta_box['show_on_id'] );
+			$check = self::display_check( $object_id, $meta_box['show_on_cb'], $meta_box['show_on_id'] );
 		}
 
 		if ( isset( $meta_box['hide_on_cb'] ) || isset( $meta_box['hide_on_id'] ) ) {
-			$check = ! self::_display_check( $object_id, $meta_box['hide_on_cb'], $meta_box['hide_on_id'] );
+			$check = ! self::display_check( $object_id, $meta_box['hide_on_cb'], $meta_box['hide_on_id'] );
 		}
 
 		return $check;
@@ -27,7 +27,7 @@ class ThemePlate_Helpers {
 	}
 
 
-	private static function _display_check( $object_id, $callback, $id ) {
+	private static function display_check( $object_id, $callback, $id ) {
 
 		$result = true;
 
@@ -47,11 +47,11 @@ class ThemePlate_Helpers {
 	public static function normalize_options( $container ) {
 
 		if ( ! empty( $container['show_on'] ) ) {
-			$container = self::_option_check( 'show_on', $container );
+			$container = self::option_check( 'show_on', $container );
 		}
 
 		if ( ! empty( $container['hide_on'] ) ) {
-			$container = self::_option_check( 'hide_on', $container );
+			$container = self::option_check( 'hide_on', $container );
 		}
 
 		return $container;
@@ -59,7 +59,7 @@ class ThemePlate_Helpers {
 	}
 
 
-	private static function _option_check( $type, $container ) {
+	private static function option_check( $type, $container ) {
 
 		$additional = array(
 			$type . '_cb' => '',

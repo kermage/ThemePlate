@@ -52,20 +52,20 @@ class ThemePlate_Page {
 		$page = $this->config;
 
 		if ( empty( $page['parent'] ) ) {
-			$this->_menu( $page );
+			$this->add_menu( $page );
 		} else {
 			if ( $page['parent'] == $page['id'] ) {
-				$this->_menu( $page );
+				$this->add_menu( $page );
 				$page['menu'] = $page['title'];
 			}
 
-			$this->_submenu( $page );
+			$this->add_submenu( $page );
 		}
 
 	}
 
 
-	private function _menu( $page ) {
+	private function add_menu( $page ) {
 
 		add_menu_page(
 			// Page Title
@@ -87,7 +87,7 @@ class ThemePlate_Page {
 	}
 
 
-	private function _submenu( $page ) {
+	private function add_submenu( $page ) {
 
 		add_submenu_page(
 			// Parent Slug
