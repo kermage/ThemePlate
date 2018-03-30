@@ -30,29 +30,13 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		$config = array();
-
-		if ( ! empty( $key ) ) {
-			if ( is_array( $key ) ) {
-				$config['title'] = array_shift( $key );
-				$config['key'] = array_shift( $key );
-			} else {
-				$config['title'] = $key;
-				$config['key'] = sanitize_title( $key );
-			}
-		}
-
-		if ( ! empty( $pages ) ) {
-			$config['pages'] = $pages;
-			$config['slug'] = key( $pages );
-		}
-
 		$defaults = array(
 			'title' => 'ThemePlate Options',
 			'key' => 'tp',
 			'pages' => array(),
 			'slug' => 'options'
 		);
+		$config = $this->prepare( $key, $pages );
 		$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
 		$this->setup( $config );
@@ -71,6 +55,30 @@ class ThemePlate {
 		if ( ! class_exists( $class ) && file_exists( $path ) ) {
 			require_once( $path );
 		}
+
+	}
+
+
+	public function prepare( $key, $pages ) {
+
+		$config = array();
+
+		if ( ! empty( $key ) ) {
+			if ( is_array( $key ) ) {
+				$config['title'] = array_shift( $key );
+				$config['key'] = array_shift( $key );
+			} else {
+				$config['title'] = $key;
+				$config['key'] = sanitize_title( $key );
+			}
+		}
+
+		if ( ! empty( $pages ) ) {
+			$config['pages'] = $pages;
+			$config['slug'] = key( $pages );
+		}
+
+		return $config;
 
 	}
 
