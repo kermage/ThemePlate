@@ -59,7 +59,7 @@ class ThemePlate {
 	}
 
 
-	public function prepare( $key, $pages ) {
+	private function prepare( $key, $pages ) {
 
 		$config = array();
 
@@ -83,7 +83,7 @@ class ThemePlate {
 	}
 
 
-	public function setup( $config ) {
+	private function setup( $config ) {
 
 		$this->key = $config['key'];
 		$this->slug = $config['slug'];
