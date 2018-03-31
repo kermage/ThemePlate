@@ -157,16 +157,16 @@ class ThemePlate_CPT {
 		$scheduled_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $post->post_date ) );
 
 		$messages[ $name ] = array(
-			 0 => '', // Unused. Messages start at index 1.
-			 1 => __( $singular . ' updated.' ) . $view_post_link_html,
-			 2 => __( 'Custom field updated.' ),
-			 3 => __( 'Custom field deleted.' ),
-			 4 => __( $singular . ' updated.' ),
-			 5 => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			 6 => __( $singular . ' published.' ) . $view_post_link_html,
-			 7 => __( $singular . ' saved.' ),
-			 8 => __( $singular . ' submitted.' ) . $preview_post_link_html,
-			 9 => sprintf( __( $singular . ' scheduled for: %s.' ), '<strong>' . $scheduled_date . '</strong>' ) . $scheduled_post_link_html,
+			0  => '', // Unused. Messages start at index 1.
+			1  => __( $singular . ' updated.' ) . $view_post_link_html,
+			2  => __( 'Custom field updated.' ),
+			3  => __( 'Custom field deleted.' ),
+			4  => __( $singular . ' updated.' ),
+			5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => __( $singular . ' published.' ) . $view_post_link_html,
+			7  => __( $singular . ' saved.' ),
+			8  => __( $singular . ' submitted.' ) . $preview_post_link_html,
+			9  => sprintf( __( $singular . ' scheduled for: %s.' ), '<strong>' . $scheduled_date . '</strong>' ) . $scheduled_post_link_html,
 			10 => __( $singular . ' draft updated.' ) . $preview_post_link_html,
 		);
 
