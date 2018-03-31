@@ -65,7 +65,7 @@ class ThemePlate_PostMeta {
 
 		$post_type = get_post_type( $post_id );
 
-		if ( $post_type === 'page' && ! current_user_can( 'edit_page', $post_id ) ) {
+		if ( 'page' === $post_type && ! current_user_can( 'edit_page', $post_id ) ) {
 			return;
 		} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
@@ -91,7 +91,7 @@ class ThemePlate_PostMeta {
 
 		$screen = get_current_screen();
 
-		if ( $screen->base !== 'post' ) {
+		if ( 'post' !== $screen->base ) {
 			return false;
 		}
 

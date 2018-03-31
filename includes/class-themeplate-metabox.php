@@ -123,7 +123,7 @@ class ThemePlate_MetaBox {
 						$value = array_filter( $value );
 					}
 
-					if ( $i === 'i-x' || empty( $value ) ) {
+					if ( 'i-x' === $i || empty( $value ) ) {
 						continue;
 					}
 
