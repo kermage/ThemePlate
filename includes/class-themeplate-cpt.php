@@ -133,22 +133,27 @@ class ThemePlate_CPT {
 			$permalink = '';
 		}
 
-		$preview_post_link_html = $scheduled_post_link_html = $view_post_link_html = '';
-		$preview_url            = get_preview_post_link( $post );
-		$viewable               = is_post_type_viewable( $post_type_object );
+		$preview_post_link_html   = '';
+		$scheduled_post_link_html = '';
+		$view_post_link_html      = '';
+		$preview_url              = get_preview_post_link( $post );
+		$viewable                 = is_post_type_viewable( $post_type_object );
 
 		if ( $viewable ) {
-			$preview_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
+			$preview_post_link_html = sprintf(
+				' <a target="_blank" href="%1$s">%2$s</a>',
 				esc_url( $preview_url ),
 				__( 'Preview ' . $singular )
 			);
 
-			$scheduled_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
+			$scheduled_post_link_html = sprintf(
+				' <a target="_blank" href="%1$s">%2$s</a>',
 				esc_url( $permalink ),
 				__( 'Preview ' . $singular )
 			);
 
-			$view_post_link_html = sprintf( ' <a href="%1$s">%2$s</a>',
+			$view_post_link_html = sprintf(
+				' <a href="%1$s">%2$s</a>',
 				esc_url( $permalink ),
 				__( 'View ' . $singular )
 			);
