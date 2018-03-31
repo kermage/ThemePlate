@@ -41,7 +41,7 @@ class ThemePlate_Settings {
 		}
 
 		$settings = $this->tpmb->get_config();
-		$section = $settings['page'] . '-' . $settings['context'];
+		$section = $settings['page'] . '_' . $settings['context'];
 
 		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ) );
 
