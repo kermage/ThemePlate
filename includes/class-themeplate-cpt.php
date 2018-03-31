@@ -156,7 +156,7 @@ class ThemePlate_CPT {
 
 		$scheduled_date = date_i18n( __( 'M j, Y @ H:i' ), strtotime( $post->post_date ) );
 
-		$messages[$name] = array(
+		$messages[ $name ] = array(
 			 0 => '', // Unused. Messages start at index 1.
 			 1 => __( $singular . ' updated.' ) . $view_post_link_html,
 			 2 => __( 'Custom field updated.' ),
@@ -181,7 +181,7 @@ class ThemePlate_CPT {
 		$singular = $this->config['singular'];
 		$plural   = $this->config['plural'];
 
-		$messages[$name] = array(
+		$messages[ $name ] = array(
 			'updated'   => _n( '%s ' . $singular . ' updated.', '%s ' . $plural . ' updated.', $counts['updated'] ),
 			'locked'    => _n( '%s ' . $singular . ' not updated, somebody is editing it.', '%s ' . $plural . ' not updated, somebody is editing them.', $counts['locked'] ),
 			'deleted'   => _n( '%s ' . $singular . ' permanently deleted.', '%s ' . $plural . ' permanently deleted.', $counts['deleted'] ),

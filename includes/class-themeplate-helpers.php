@@ -66,20 +66,20 @@ class ThemePlate_Helpers {
 			$type . '_id' => '',
 		);
 		$container  = array_merge( $additional, $container );
-		$value      = $container[$type];
+		$value      = $container[ $type ];
 
 		if ( is_callable( $value ) ) {
-			$container[$type . '_cb'] = $value;
-			unset( $container[$type] );
+			$container[ $type . '_cb' ] = $value;
+			unset( $container[ $type ] );
 		} elseif ( is_array( $value ) ) {
 			if ( ! self::is_sequential( $value ) ) {
-				$value            = array( $value );
-				$container[$type] = array( $container[$type] );
+				$value              = array( $value );
+				$container[ $type ] = array( $container[ $type ] );
 			}
 
 			if ( ( count( $value ) === 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] === 'id' ) {
-				$container[$type . '_id'] = $value[0]['value'];
-				unset( $container[$type] );
+				$container[ $type . '_id' ] = $value[0]['value'];
+				unset( $container[ $type ] );
 			}
 		}
 
@@ -115,11 +115,11 @@ class ThemePlate_Helpers {
 
 		foreach ( $defaults as $key => $value ) {
 			if ( is_array( $value ) ) {
-				$result[$key] = (array) $result[$key];
+				$result[ $key ] = (array) $result[ $key ];
 			}
 
 			if ( is_bool( $value ) ) {
-				$result[$key] = (bool) $result[$key];
+				$result[ $key ] = (bool) $result[ $key ];
 			}
 		}
 

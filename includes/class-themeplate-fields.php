@@ -46,7 +46,7 @@ class ThemePlate_Fields {
 			$field = ThemePlate_Helpers::fool_proof( $this->defaults, $field );
 			$field = ThemePlate_Helpers::normalize_options( $field );
 
-			$processed[$id] = $field;
+			$processed[ $id ] = $field;
 		}
 
 		return $processed;
@@ -75,7 +75,7 @@ class ThemePlate_Fields {
 
 		if ( $object_type === 'options' ) {
 			$options = get_option( $object_id );
-			$stored  = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
+			$stored  = isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : '';
 			$key     = $object_id;
 		} else {
 			$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
@@ -171,8 +171,8 @@ class ThemePlate_Fields {
 						if ( ! in_array( $value, array_keys( $field['options'] ), true ) ) {
 							continue;
 						}
-						$ordered[$value] = $field['options'][$value];
-						unset( $field['options'][$value] );
+						$ordered[ $value ] = $field['options'][ $value ];
+						unset( $field['options'][ $value ] );
 					}
 					$field['options'] = $ordered + $field['options'];
 				}
@@ -335,8 +335,8 @@ class ThemePlate_Fields {
 						if ( $key === false ) {
 							continue;
 						}
-						$ordered[] = $items[$key];
-						unset( $items[$key] );
+						$ordered[] = $items[ $key ];
+						unset( $items[ $key ] );
 						$items = array_values( $items );
 					}
 					$items = array_merge( $ordered, $items );
@@ -371,7 +371,7 @@ class ThemePlate_Fields {
 
 					$sub['id'] = $field['id'] . '_' . $id;
 
-					$stored = isset( $field['value'][$id] ) ? $field['value'][$id] : '';
+					$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
 					$value  = $stored ? $stored : $sub['std'];
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';

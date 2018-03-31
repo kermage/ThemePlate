@@ -102,12 +102,12 @@ class ThemePlate_MetaBox {
 		foreach ( $fields as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 
-			if ( ! isset( $_POST[ThemePlate()->key][$key] ) ) {
+			if ( ! isset( $_POST[ ThemePlate()->key ][ $key ] ) ) {
 				continue;
 			}
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
-			$updated = $_POST[ThemePlate()->key][$key];
+			$updated = $_POST[ ThemePlate()->key ][ $key ];
 
 			if ( $field['repeatable'] ) {
 				delete_metadata( $meta_box['object_type'], $object_id, $key );
@@ -115,7 +115,7 @@ class ThemePlate_MetaBox {
 				foreach ( (array) $updated as $i => $value ) {
 					foreach ( (array) $value as $j => $val ) {
 						if ( is_array( $val ) ) {
-							$value[$j] = array_merge( array_filter( $val ) );
+							$value[ $j ] = array_merge( array_filter( $val ) );
 						}
 					}
 
@@ -132,7 +132,7 @@ class ThemePlate_MetaBox {
 			} else {
 				foreach ( (array) $updated as $i => $value ) {
 					if ( is_array( $value ) ) {
-						$updated[$i] = array_merge( array_filter( $value ) );
+						$updated[ $i ] = array_merge( array_filter( $value ) );
 					}
 				}
 
@@ -169,7 +169,7 @@ class ThemePlate_MetaBox {
 			return false;
 		}
 
-		if ( ! isset( $_POST['themeplate_' . $this->config['id'] . '_nonce'] ) || ! wp_verify_nonce( $_POST['themeplate_' . $this->config['id'] . '_nonce'], basename( __FILE__ ) ) ) {
+		if ( ! isset( $_POST[ 'themeplate_' . $this->config['id'] . '_nonce' ] ) || ! wp_verify_nonce( $_POST[ 'themeplate_' . $this->config['id'] . '_nonce' ], basename( __FILE__ ) ) ) {
 			return false;
 		}
 
