@@ -34,7 +34,7 @@ class ThemePlate {
 			'title' => 'ThemePlate Options',
 			'key'   => 'tp',
 			'pages' => array(),
-			'slug'  => 'options'
+			'slug'  => 'options',
 		);
 		$config   = $this->prepare( $key, $pages );
 		$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
@@ -90,7 +90,7 @@ class ThemePlate {
 
 		$args = array(
 			'id'    => $config['key'] . '-' . $config['slug'],
-			'title' => $config['title']
+			'title' => $config['title'],
 		);
 
 		if ( $config['pages'] ) {
@@ -147,7 +147,7 @@ class ThemePlate {
 		$args = array(
 			'id'     => $this->key . '-' . $id,
 			'title'  => $title,
-			'parent' => $this->key . '-' . $this->slug
+			'parent' => $this->key . '-' . $this->slug,
 		);
 
 		$this->page( $args );

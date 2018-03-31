@@ -18,7 +18,7 @@ class ThemePlate_Settings {
 		try {
 			$defaults = array(
 				'page'    => ThemePlate()->slug,
-				'context' => 'normal'
+				'context' => 'normal',
 			);
 			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 

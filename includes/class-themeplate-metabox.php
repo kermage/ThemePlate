@@ -16,7 +16,7 @@ class ThemePlate_MetaBox {
 	private $defaults = array(
 		'show_on' => array(),
 		'hide_on' => array(),
-		'style'   => ''
+		'style'   => '',
 	);
 
 

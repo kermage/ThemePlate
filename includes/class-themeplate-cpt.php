@@ -13,12 +13,12 @@ class ThemePlate_CPT {
 	private $config;
 
 	private $cpt_defaults = array(
-		'args' => array()
+		'args' => array(),
 	);
 
 	private $args_defaults = array(
 		'labels' => array(),
-		'public' => true
+		'public' => true,
 	);
 
 
@@ -73,7 +73,7 @@ class ThemePlate_CPT {
 			'remove_featured_image' => 'Remove ' . $singular . ' Featured Image',
 			'use_featured_image'    => 'Use as ' . $singular . ' Featured Image',
 			'menu_name'             => $plural,
-			'name_admin_bar'        => $plural
+			'name_admin_bar'        => $plural,
 		);
 
 		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
@@ -109,7 +109,7 @@ class ThemePlate_CPT {
 			'separate_items_with_commas' => 'Separate ' . $plural . ' with commas',
 			'add_or_remove_items'        => 'Add or remove ' . $plural,
 			'choose_from_most_used'      => 'Choose from the most used ' . $singular,
-			'not_found'                  => $singular . ' not found'
+			'not_found'                  => $singular . ' not found',
 		);
 
 		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
@@ -167,7 +167,7 @@ class ThemePlate_CPT {
 			 7 => __( $singular . ' saved.' ),
 			 8 => __( $singular . ' submitted.' ) . $preview_post_link_html,
 			 9 => sprintf( __( $singular . ' scheduled for: %s.' ), '<strong>' . $scheduled_date . '</strong>' ) . $scheduled_post_link_html,
-			10 => __( $singular . ' draft updated.' ) . $preview_post_link_html
+			10 => __( $singular . ' draft updated.' ) . $preview_post_link_html,
 		);
 
 		return $messages;
@@ -186,7 +186,7 @@ class ThemePlate_CPT {
 			'locked'    => _n( '%s ' . $singular . ' not updated, somebody is editing it.', '%s ' . $plural . ' not updated, somebody is editing them.', $counts['locked'] ),
 			'deleted'   => _n( '%s ' . $singular . ' permanently deleted.', '%s ' . $plural . ' permanently deleted.', $counts['deleted'] ),
 			'trashed'   => _n( '%s ' . $singular . ' moved to the Trash.', '%s ' . $plural . ' moved to the Trash.', $counts['trashed'] ),
-			'untrashed' => _n( '%s ' . $singular . ' restored from the Trash.', '%s ' . $plural . ' restored from the Trash.', $counts['untrashed'] )
+			'untrashed' => _n( '%s ' . $singular . ' restored from the Trash.', '%s ' . $plural . ' restored from the Trash.', $counts['untrashed'] ),
 		);
 
 		return $messages;

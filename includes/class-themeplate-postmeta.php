@@ -19,7 +19,7 @@ class ThemePlate_PostMeta {
 			$defaults = array(
 				'screen'   => array(),
 				'context'  => 'advanced',
-				'priority' => 'default'
+				'priority' => 'default',
 			);
 			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 

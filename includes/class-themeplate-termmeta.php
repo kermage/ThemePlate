@@ -27,7 +27,7 @@ class ThemePlate_TermMeta {
 			}
 
 			$defaults = array(
-				'taxonomy' => array()
+				'taxonomy' => array(),
 			);
 			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 

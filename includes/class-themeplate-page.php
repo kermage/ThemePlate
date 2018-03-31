@@ -17,7 +17,7 @@ class ThemePlate_Page {
 		'parent'     => '',
 		'menu'       => '',
 		'icon'       => '',
-		'position'   => null
+		'position'   => null,
 	);
 
 

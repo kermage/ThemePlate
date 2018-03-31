@@ -12,14 +12,14 @@ class ThemePlate_NavWalker extends Walker {
 
 	public $db_fields = array(
 		'parent' => 'menu_item_parent',
-		'id'     => 'db_id'
+		'id'     => 'db_id',
 	);
 
 
 	public $class = array(
 		'sub-menu' => 'sub-menu',
 		'has-sub'  => 'has-sub',
-		'active'   => 'active'
+		'active'   => 'active',
 	);
 
 

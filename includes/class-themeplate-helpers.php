@@ -63,7 +63,7 @@ class ThemePlate_Helpers {
 
 		$additional = array(
 			$type . '_cb' => '',
-			$type . '_id' => ''
+			$type . '_id' => '',
 		);
 		$container  = array_merge( $additional, $container );
 		$value      = $container[$type];

@@ -19,7 +19,7 @@ class ThemePlate_Fields {
 		'none'       => false,
 		'std'        => '',
 		'style'      => '',
-		'repeatable' => false
+		'repeatable' => false,
 	);
 
 
@@ -289,7 +289,7 @@ class ThemePlate_Fields {
 			case 'editor':
 				$settings = array(
 					'textarea_name' => $field['name'],
-					'textarea_rows' => 10
+					'textarea_rows' => 10,
 				);
 				wp_editor( $field['value'], $field['id'], $settings );
 				break;
