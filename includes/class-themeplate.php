@@ -99,13 +99,11 @@ class ThemePlate {
 			$args['menu']   = $config['title'];
 		}
 
-		$main = $this->page( $args );
+		$this->page( $args );
 
 		if ( ! $config['pages'] ) {
 			return;
 		}
-
-		$subs = array();
 
 		foreach ( $config['pages'] as $id => $title ) {
 			$this->menu( $id, $title );
