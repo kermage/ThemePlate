@@ -149,11 +149,9 @@ class ThemePlate_Fields {
 				echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
 				break;
 
-
 			case 'textarea':
 				echo '<textarea name="' . $field['name'] . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
 				break;
-
 
 			case 'select':
 			case 'select2':
@@ -186,7 +184,6 @@ class ThemePlate_Fields {
 				}
 				echo '</select>';
 				break;
-
 
 			case 'radiolist':
 				$list = true;
@@ -225,7 +222,6 @@ class ThemePlate_Fields {
 				}
 				break;
 
-
 			case 'color':
 				echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( $field['std'] ? ' data-default-color="' . $field['std'] . '"' : '' );
 				if ( ! empty( $field['options'] ) ) {
@@ -234,7 +230,6 @@ class ThemePlate_Fields {
 				}
 				echo ' />';
 				break;
-
 
 			case 'file':
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
@@ -268,7 +263,6 @@ class ThemePlate_Fields {
 				echo '</div>';
 				break;
 
-
 			case 'number':
 			case 'range':
 				echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
@@ -285,7 +279,6 @@ class ThemePlate_Fields {
 				}
 				break;
 
-
 			case 'editor':
 				$settings = array(
 					'textarea_name' => $field['name'],
@@ -293,7 +286,6 @@ class ThemePlate_Fields {
 				);
 				wp_editor( $field['value'], $field['id'], $settings );
 				break;
-
 
 			case 'post':
 			case 'page':
@@ -350,7 +342,6 @@ class ThemePlate_Fields {
 				}
 				echo '</select>';
 				break;
-
 
 			case 'group':
 				if ( ! array_key_exists( 'fields', $field ) ) {
@@ -422,7 +413,6 @@ class ThemePlate_Fields {
 					echo '</div>';
 				}
 				break;
-
 
 			case 'html':
 				echo $field['std'];
