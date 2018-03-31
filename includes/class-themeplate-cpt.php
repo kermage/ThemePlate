@@ -35,7 +35,7 @@ class ThemePlate_CPT {
 			return false;
 		}
 
-		if ( $kind == 'taxonomy' && ! array_key_exists( 'type', $config ) ) {
+		if ( $kind === 'taxonomy' && ! array_key_exists( 'type', $config ) ) {
 			return false;
 		}
 

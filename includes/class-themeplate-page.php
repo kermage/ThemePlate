@@ -54,7 +54,7 @@ class ThemePlate_Page {
 		if ( empty( $page['parent'] ) ) {
 			$this->add_menu( $page );
 		} else {
-			if ( $page['parent'] == $page['id'] ) {
+			if ( $page['parent'] === $page['id'] ) {
 				$this->add_menu( $page );
 				$page['menu'] = $page['title'];
 			}
@@ -113,7 +113,7 @@ class ThemePlate_Page {
 			return;
 		}
 
-		if ( $_REQUEST['page'] === $this->config['id'] && $_REQUEST['settings-updated'] == true ) {
+		if ( $_REQUEST['page'] === $this->config['id'] && $_REQUEST['settings-updated'] === true ) {
 			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
 		}
 

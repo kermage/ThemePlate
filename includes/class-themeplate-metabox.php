@@ -140,7 +140,7 @@ class ThemePlate_MetaBox {
 					$updated = array_filter( $updated );
 				}
 
-				if ( ( ! $stored && ! $updated ) || $stored == $updated ) {
+				if ( ( ! $stored && ! $updated ) || $stored === $updated ) {
 					continue;
 				}
 

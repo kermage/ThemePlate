@@ -80,17 +80,17 @@ class ThemePlate_UserMeta {
 
 		$screen = get_current_screen();
 
-		if ( ! in_array( $screen->base, array( 'user', 'user-edit', 'profile' ) ) ) {
+		if ( ! in_array( $screen->base, array( 'user', 'user-edit', 'profile' ), true ) ) {
 			return false;
 		}
 
 		$meta_box = $this->tpmb->get_config();
 
-		if ( $screen->base == 'user-edit' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
+		if ( $screen->base === 'user-edit' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
 			return false;
 		}
 
-		if ( $screen->base == 'profile' && ! ThemePlate_Helpers::should_display( $meta_box, get_current_user_id() ) ) {
+		if ( $screen->base === 'profile' && ! ThemePlate_Helpers::should_display( $meta_box, get_current_user_id() ) ) {
 			return false;
 		}
 

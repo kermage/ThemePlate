@@ -63,7 +63,7 @@ class ThemePlate_PostMeta {
 
 		$post_type = get_post_type( $post_id );
 
-		if ( $post_type == 'page' && ! current_user_can( 'edit_page', $post_id ) ) {
+		if ( $post_type === 'page' && ! current_user_can( 'edit_page', $post_id ) ) {
 			return;
 		} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
@@ -89,13 +89,13 @@ class ThemePlate_PostMeta {
 
 		$screen = get_current_screen();
 
-		if ( $screen->base != 'post' ) {
+		if ( $screen->base !== 'post' ) {
 			return false;
 		}
 
 		$meta_box = $this->tpmb->get_config();
 
-		if ( ! in_array( $screen->post_type, $meta_box['screen'] ) ) {
+		if ( ! in_array( $screen->post_type, $meta_box['screen'], true ) ) {
 			return false;
 		}
 

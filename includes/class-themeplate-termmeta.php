@@ -93,21 +93,21 @@ class ThemePlate_TermMeta {
 
 		$screen = get_current_screen();
 
-		if ( ! in_array( $screen->base, array( 'edit-tags', 'term' ) ) ) {
+		if ( ! in_array( $screen->base, array( 'edit-tags', 'term' ), true ) ) {
 			return false;
 		}
 
 		$meta_box = $this->tpmb->get_config();
 
-		if ( ! in_array( $screen->taxonomy, $meta_box['taxonomy'] ) ) {
+		if ( ! in_array( $screen->taxonomy, $meta_box['taxonomy'], true ) ) {
 			return false;
 		}
 
-		if ( $screen->base == 'edit-tags' && ! ThemePlate_Helpers::should_display( $meta_box, '' ) ) {
+		if ( $screen->base === 'edit-tags' && ! ThemePlate_Helpers::should_display( $meta_box, '' ) ) {
 			return false;
 		}
 
-		if ( $screen->base == 'term' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) {
+		if ( $screen->base === 'term' && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) {
 			return false;
 		}
 

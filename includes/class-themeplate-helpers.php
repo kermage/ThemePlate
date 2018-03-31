@@ -77,7 +77,7 @@ class ThemePlate_Helpers {
 				$container[$type] = array( $container[$type] );
 			}
 
-			if ( ( count( $value ) == 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] == 'id' ) {
+			if ( ( count( $value ) === 1 ) && isset( $value[0]['key'] ) && $value[0]['key'] === 'id' ) {
 				$container[$type . '_id'] = $value[0]['value'];
 				unset( $container[$type] );
 			}

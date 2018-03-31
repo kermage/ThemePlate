@@ -59,7 +59,7 @@ class ThemePlate_Fields {
 		$fields = $this->collection;
 
 		foreach ( $fields as $id => $field ) {
-			if ( $object_type == 'options' ) {
+			if ( $object_type === 'options' ) {
 				$field['id'] = $metabox_id . '_' . $id;
 			} else {
 				$field['id'] = ThemePlate()->key . '_' . $metabox_id . '_' . $id;
@@ -73,7 +73,7 @@ class ThemePlate_Fields {
 
 	private function layout( $field, $object_type, $object_id ) {
 
-		if ( $object_type == 'options' ) {
+		if ( $object_type === 'options' ) {
 			$options = get_option( $object_id );
 			$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
 			$key = $object_id;
@@ -158,17 +158,17 @@ class ThemePlate_Fields {
 			case 'select':
 			case 'select2':
 				echo '<input type="hidden" name="' . $field['name'] . '" />';
-				echo '<select' . ( $field['type'] == 'select2' ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
-				if ( $field['type'] == 'select2' && ! $field['value'] ) {
+				echo '<select' . ( $field['type'] === 'select2' ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
+				if ( $field['type'] === 'select2' && ! $field['value'] ) {
 					echo '<option></options>';
-				} elseif ( $field['type'] != 'select2' && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
+				} elseif ( $field['type'] !== 'select2' && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
 					echo '<option value="0"' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
 				}
-				if ( $field['type'] == 'select2' && $field['multiple'] && $field['value'] ) {
+				if ( $field['type'] === 'select2' && $field['multiple'] && $field['value'] ) {
 					$ordered = array();
 					foreach ( (array) $field['value'] as $value ) {
 						$value = ( $seq ? (int) $value - 1 : $value );
-						if ( ! in_array( $value, array_keys( $field['options'] ) ) ) {
+						if ( ! in_array( $value, array_keys( $field['options'] ), true ) ) {
 							continue;
 						}
 						$ordered[$value] = $field['options'][$value];
@@ -179,7 +179,7 @@ class ThemePlate_Fields {
 				foreach ( $field['options'] as $value => $option ) {
 					$value = ( $seq ? $value + 1 : $value );
 					echo '<option value="' . $value . '"';
-					if ( in_array( $value, (array) $field['value'] ) ) {
+					if ( in_array( $value, (array) $field['value'], true ) ) {
 						echo ' selected="selected"';
 					}
 					echo '>' . $option . '</option>';
@@ -213,7 +213,7 @@ class ThemePlate_Fields {
 						$value = ( $seq ? $value + 1 : $value );
 						echo '<' . ( $list ? 'p' : 'span' ) . '>';
 						echo '<label><input type="checkbox" name="' . $field['name'] . '[]" value="' . $value . '"';
-						if ( in_array( $value, (array) $field['value'] ) ) {
+						if ( in_array( $value, (array) $field['value'], true ) ) {
 							echo ' checked="checked"';
 						}
 						echo ' />' . $option . '</label>';
@@ -250,7 +250,7 @@ class ThemePlate_Fields {
 						$name = basename( get_attached_file( $file ) );
 						$info = wp_check_filetype( $name );
 						$type = wp_ext2type( $info['ext'] );
-						$preview = ( $type == 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
+						$preview = ( $type === 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
 						echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 						echo '<div class="centered"><img src="' . $preview . '"/></div>';
 						echo '<div class="filename"><div>' . $name . '</div></div>';
@@ -277,7 +277,7 @@ class ThemePlate_Fields {
 						echo $option . '="' . $value . '"';
 					}
 				}
-				if ( $field['type'] == 'range' ) {
+				if ( $field['type'] === 'range' ) {
 					echo ' oninput="this.nextElementSibling.innerHTML=this.value" />';
 					echo '<span>' . $field['value'] . '</span>';
 				} else {
@@ -343,7 +343,7 @@ class ThemePlate_Fields {
 				}
 				foreach ( $items as $item ) {
 					echo '<option value="' . $item->{$val_prop} . '"';
-					if ( in_array( $item->{$val_prop}, (array) $field['value'] ) ) {
+					if ( in_array( $item->{$val_prop}, (array) $field['value'], true ) ) {
 						echo ' selected="selected"';
 					}
 					echo '>' . $item->{$lbl_prop} . '</option>';
