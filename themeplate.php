@@ -17,7 +17,9 @@
  */
 
 // Accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /* ==================================================
 Global constants
