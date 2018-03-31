@@ -109,7 +109,7 @@ class ThemePlate_MetaBox {
 			$stored = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ThemePlate()->key][$key];
 
-			if ( ! $field['repeatable'] ) {
+			if ( $field['repeatable'] ) {
 				delete_metadata( $meta_box['object_type'], $object_id, $key );
 
 				foreach ( (array) $updated as $i => $value ) {
