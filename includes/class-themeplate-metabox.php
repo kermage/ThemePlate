@@ -150,7 +150,6 @@ class ThemePlate_MetaBox {
 					delete_metadata( $meta_box['object_type'], $object_id, $key, $stored );
 				}
 			}
-
 		}
 
 	}
