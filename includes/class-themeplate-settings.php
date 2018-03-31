@@ -17,12 +17,14 @@ class ThemePlate_Settings {
 
 		try {
 			$defaults = array(
-				'page'   => ThemePlate()->slug,
-				'context'  => 'normal'
+				'page'    => ThemePlate()->slug,
+				'context' => 'normal'
 			);
-			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
-			$config['page'] = ThemePlate()->key . '-' . $config['page'];
+			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
+			$config['page']        = ThemePlate()->key . '-' . $config['page'];
 			$config['object_type'] = 'options';
+
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch ( Exception $e ) {
 			return false;
@@ -41,7 +43,7 @@ class ThemePlate_Settings {
 		}
 
 		$settings = $this->tpmb->get_config();
-		$section = $settings['page'] . '_' . $settings['context'];
+		$section  = $settings['page'] . '_' . $settings['context'];
 
 		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ) );
 
@@ -70,7 +72,7 @@ class ThemePlate_Settings {
 	private function is_valid_screen() {
 
 		$settings = $this->tpmb->get_config();
-		$screen = get_current_screen();
+		$screen   = get_current_screen();
 
 		if ( strpos( $screen->id, $settings['page'] ) === false ) {
 			return false;

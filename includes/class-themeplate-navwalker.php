@@ -12,7 +12,7 @@ class ThemePlate_NavWalker extends Walker {
 
 	public $db_fields = array(
 		'parent' => 'menu_item_parent',
-		'id' => 'db_id'
+		'id'     => 'db_id'
 	);
 
 
@@ -59,10 +59,12 @@ class ThemePlate_NavWalker extends Walker {
 		$output .= '<li' . ( ( $classes ) ? ' class="' . esc_attr( $classes ) . '"' : '' ) . '>';
 
 		$atts = array();
+
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
 		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+
 		$atts = array_merge( $atts, $this->attributes( $item, $args ) );
 		$atts = array_filter( $atts );
 
@@ -70,6 +72,7 @@ class ThemePlate_NavWalker extends Walker {
 		foreach ( $atts as $attr => $value ) {
 			if ( ! empty( $value ) ) {
 				$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+
 				$attributes .= ' ' . $attr . '="' . $value . '"';
 			}
 		}

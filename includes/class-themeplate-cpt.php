@@ -47,9 +47,9 @@ class ThemePlate_CPT {
 
 	public function post_type( $config ) {
 
-		$plural = $config['plural'];
+		$plural   = $config['plural'];
 		$singular = $config['singular'];
-		$args = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
+		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
 
 		$labels = array(
 			'name'                  => $plural,
@@ -88,9 +88,9 @@ class ThemePlate_CPT {
 
 	public function taxonomy( $config ) {
 
-		$plural = $config['plural'];
+		$plural   = $config['plural'];
 		$singular = $config['singular'];
-		$args = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
+		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
 
 		$labels = array(
 			'name'                       => $plural,
@@ -123,10 +123,10 @@ class ThemePlate_CPT {
 
 		global $post_type_object, $post;
 
-		$name = $this->config['name'];
+		$name     = $this->config['name'];
 		$singular = $this->config['singular'];
 
-		$post_ID = isset( $post_ID ) ? (int) $post_ID : 0;
+		$post_ID   = isset( $post_ID ) ? (int) $post_ID : 0;
 		$permalink = get_permalink( $post_ID );
 
 		if ( ! $permalink ) {
@@ -134,8 +134,8 @@ class ThemePlate_CPT {
 		}
 
 		$preview_post_link_html = $scheduled_post_link_html = $view_post_link_html = '';
-		$preview_url = get_preview_post_link( $post );
-		$viewable = is_post_type_viewable( $post_type_object );
+		$preview_url            = get_preview_post_link( $post );
+		$viewable               = is_post_type_viewable( $post_type_object );
 
 		if ( $viewable ) {
 			$preview_post_link_html = sprintf( ' <a target="_blank" href="%1$s">%2$s</a>',
@@ -177,9 +177,9 @@ class ThemePlate_CPT {
 
 	public function bulk_custom_messages( $messages, $counts ) {
 
-		$name = $this->config['name'];
+		$name     = $this->config['name'];
 		$singular = $this->config['singular'];
-		$plural = $this->config['plural'];
+		$plural   = $this->config['plural'];
 
 		$messages[$name] = array(
 			'updated'   => _n( '%s ' . $singular . ' updated.', '%s ' . $plural . ' updated.', $counts['updated'] ),

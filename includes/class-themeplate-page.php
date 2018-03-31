@@ -14,10 +14,10 @@ class ThemePlate_Page {
 
 	private $defaults = array(
 		'capability' => 'manage_options',
-		'parent' => '',
-		'menu' => '',
-		'icon' => '',
-		'position' => null
+		'parent'     => '',
+		'menu'       => '',
+		'icon'       => '',
+		'position'   => null
 	);
 
 

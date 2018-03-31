@@ -17,9 +17,10 @@ class ThemePlate_TermMeta {
 
 		try {
 			if ( empty( $config['taxonomy'] ) ) {
-				$taxonomies = get_taxonomies( array( '_builtin' => false ) );
+				$taxonomies   = get_taxonomies( array( '_builtin' => false ) );
 				$taxonomies[] = 'category';
 				$taxonomies[] = 'post_tag';
+
 				$config['taxonomy'] = $taxonomies;
 			} else {
 				$taxonomies = $config['taxonomy'];
@@ -28,8 +29,10 @@ class ThemePlate_TermMeta {
 			$defaults = array(
 				'taxonomy' => array()
 			);
-			$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
 			$config['object_type'] = 'term';
+
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch ( Exception $e ) {
 			return false;

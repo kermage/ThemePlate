@@ -97,7 +97,7 @@ class ThemePlate_MetaBox {
 	public function save( $object_id ) {
 
 		$meta_box = $this->config;
-		$fields = $this->fields->get_collection();
+		$fields   = $this->fields->get_collection();
 
 		foreach ( $fields as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
@@ -106,7 +106,7 @@ class ThemePlate_MetaBox {
 				continue;
 			}
 
-			$stored = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
+			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ThemePlate()->key][$key];
 
 			if ( $field['repeatable'] ) {

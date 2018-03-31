@@ -75,11 +75,11 @@ class ThemePlate_Fields {
 
 		if ( $object_type === 'options' ) {
 			$options = get_option( $object_id );
-			$stored = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
-			$key = $object_id;
+			$stored  = isset( $options[$field['id']] ) ? $options[$field['id']] : '';
+			$key     = $object_id;
 		} else {
 			$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
-			$key = ThemePlate()->key;
+			$key    = ThemePlate()->key;
 		}
 
 		$value = $stored ? $stored : $field['std'];
@@ -99,7 +99,7 @@ class ThemePlate_Fields {
 
 				if ( ! $field['repeatable'] ) {
 					$field['value'] = $value;
-					$field['name'] = $base_name;
+					$field['name']  = $base_name;
 
 					$this->render( $field );
 				} else {
@@ -107,8 +107,8 @@ class ThemePlate_Fields {
 
 					foreach ( (array) $value as $i => $val ) {
 						$field['value'] = $val;
-						$field['id'] = $base_id . '_' . $i;
-						$field['name'] = $base_name . '[' . $i . ']';
+						$field['id']    = $base_id . '_' . $i;
+						$field['name']  = $base_name . '[' . $i . ']';
 
 						echo '<div class="themeplate-clone">';
 							echo '<div class="themeplate-handle"></div>';
@@ -118,8 +118,8 @@ class ThemePlate_Fields {
 					}
 
 					$field['value'] = $field['std'];
-					$field['id'] = $base_id . '_i-x';
-					$field['name'] = $base_name . '[i-x]';
+					$field['id']    = $base_id . '_i-x';
+					$field['name']  = $base_name . '[i-x]';
 
 					echo '<div class="themeplate-clone hidden">';
 						echo '<div class="themeplate-handle"></div>';
@@ -137,7 +137,7 @@ class ThemePlate_Fields {
 	private function render( $field ) {
 
 		$list = false;
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
+		$seq  = ThemePlate_Helpers::is_sequential( $field['options'] );
 
 		switch ( $field['type'] ) {
 			default:
@@ -247,9 +247,9 @@ class ThemePlate_Fields {
 				}
 				if ( $field['value'] ) {
 					foreach ( (array) $field['value'] as $file ) {
-						$name = basename( get_attached_file( $file ) );
-						$info = wp_check_filetype( $name );
-						$type = wp_ext2type( $info['ext'] );
+						$name    = basename( get_attached_file( $file ) );
+						$info    = wp_check_filetype( $name );
+						$type    = wp_ext2type( $info['ext'] );
 						$preview = ( $type === 'image' ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
 						echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
 						echo '<div class="centered"><img src="' . $preview . '"/></div>';
@@ -301,22 +301,22 @@ class ThemePlate_Fields {
 			case 'term':
 				switch ( $field['type'] ) {
 					case 'post':
-						$items = get_posts( array( 'post_type' => $field['options'], 'numberposts' => -1 ) );
+						$items    = get_posts( array( 'post_type' => $field['options'], 'numberposts' => -1 ) );
 						$val_prop = 'ID';
 						$lbl_prop = 'post_title';
 						break;
 					case 'page':
-						$items = get_pages( array( 'post_type' => $field['options'] ) );
+						$items    = get_pages( array( 'post_type' => $field['options'] ) );
 						$val_prop = 'ID';
 						$lbl_prop = 'post_title';
 						break;
 					case 'user':
-						$items = get_users( array( 'role' => $field['options'] ) );
+						$items    = get_users( array( 'role' => $field['options'] ) );
 						$val_prop = 'ID';
 						$lbl_prop = 'display_name';
 						break;
 					case 'term':
-						$items = get_terms( array( 'taxonomy' => $field['options'] ) );
+						$items    = get_terms( array( 'taxonomy' => $field['options'] ) );
 						$val_prop = 'term_id';
 						$lbl_prop = 'name';
 						break;
@@ -372,7 +372,7 @@ class ThemePlate_Fields {
 					$sub['id'] = $field['id'] . '_' . $id;
 
 					$stored = isset( $field['value'][$id] ) ? $field['value'][$id] : '';
-					$value = $stored ? $stored : $sub['std'];
+					$value  = $stored ? $stored : $sub['std'];
 
 					echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
 						ThemePlate_Helpers::render_options( $sub );
@@ -389,7 +389,7 @@ class ThemePlate_Fields {
 
 							if ( ! $sub['repeatable'] ) {
 								$sub['value'] = $value;
-								$sub['name'] = $base_name;
+								$sub['name']  = $base_name;
 
 								$this->render( $sub );
 							} else {
@@ -397,8 +397,8 @@ class ThemePlate_Fields {
 
 								foreach ( (array) $value as $i => $val ) {
 									$sub['value'] = $val;
-									$sub['id'] = $base_id . '_' . $i;
-									$sub['name'] = $base_name . '[' . $i . ']';
+									$sub['id']    = $base_id . '_' . $i;
+									$sub['name']  = $base_name . '[' . $i . ']';
 
 									echo '<div class="themeplate-clone">';
 										echo '<div class="themeplate-handle"></div>';
@@ -408,8 +408,8 @@ class ThemePlate_Fields {
 								}
 
 								$sub['value'] = $sub['std'];
-								$sub['id'] = $base_id . '_i-x';
-								$sub['name'] = $base_name . '[i-x]';
+								$sub['id']    = $base_id . '_i-x';
+								$sub['name']  = $base_name . '[i-x]';
 
 								echo '<div class="themeplate-clone hidden">';
 									echo '<div class="themeplate-handle"></div>';

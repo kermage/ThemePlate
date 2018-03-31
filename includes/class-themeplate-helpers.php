@@ -65,15 +65,15 @@ class ThemePlate_Helpers {
 			$type . '_cb' => '',
 			$type . '_id' => ''
 		);
-		$container = array_merge( $additional, $container );
-		$value = $container[$type];
+		$container  = array_merge( $additional, $container );
+		$value      = $container[$type];
 
 		if ( is_callable( $value ) ) {
 			$container[$type . '_cb'] = $value;
 			unset( $container[$type] );
 		} elseif ( is_array( $value ) ) {
 			if ( ! self::is_sequential( $value ) ) {
-				$value = array( $value );
+				$value            = array( $value );
 				$container[$type] = array( $container[$type] );
 			}
 

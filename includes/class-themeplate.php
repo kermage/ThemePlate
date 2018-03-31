@@ -32,12 +32,12 @@ class ThemePlate {
 
 		$defaults = array(
 			'title' => 'ThemePlate Options',
-			'key' => 'tp',
+			'key'   => 'tp',
 			'pages' => array(),
-			'slug' => 'options'
+			'slug'  => 'options'
 		);
-		$config = $this->prepare( $key, $pages );
-		$config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$config   = $this->prepare( $key, $pages );
+		$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
 		$this->setup( $config );
 
@@ -66,16 +66,16 @@ class ThemePlate {
 		if ( ! empty( $key ) ) {
 			if ( is_array( $key ) ) {
 				$config['title'] = array_shift( $key );
-				$config['key'] = array_shift( $key );
+				$config['key']   = array_shift( $key );
 			} else {
 				$config['title'] = $key;
-				$config['key'] = sanitize_title( $key );
+				$config['key']   = sanitize_title( $key );
 			}
 		}
 
 		if ( ! empty( $pages ) ) {
 			$config['pages'] = $pages;
-			$config['slug'] = key( $pages );
+			$config['slug']  = key( $pages );
 		}
 
 		return $config;
@@ -85,18 +85,18 @@ class ThemePlate {
 
 	private function setup( $config ) {
 
-		$this->key = $config['key'];
+		$this->key  = $config['key'];
 		$this->slug = $config['slug'];
 
 		$args = array(
-			'id' => $config['key'] . '-' . $config['slug'],
+			'id'    => $config['key'] . '-' . $config['slug'],
 			'title' => $config['title']
 		);
 
 		if ( $config['pages'] ) {
-			$args['title'] = array_shift( $config['pages'] );
+			$args['title']  = array_shift( $config['pages'] );
 			$args['parent'] = $config['key'] . '-' . $config['slug'];
-			$args['menu'] = $config['title'];
+			$args['menu']   = $config['title'];
 		}
 
 		$main = $this->page( $args );
@@ -145,8 +145,8 @@ class ThemePlate {
 	public function menu( $id, $title ) {
 
 		$args = array(
-			'id' => $this->key . '-' . $id,
-			'title' => $title,
+			'id'     => $this->key . '-' . $id,
+			'title'  => $title,
 			'parent' => $this->key . '-' . $this->slug
 		);
 
