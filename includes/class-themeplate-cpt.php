@@ -126,8 +126,7 @@ class ThemePlate_CPT {
 		$name     = $this->config['name'];
 		$singular = $this->config['singular'];
 
-		$post_ID   = isset( $post_ID ) ? (int) $post_ID : 0;
-		$permalink = get_permalink( $post_ID );
+		$permalink = get_permalink();
 
 		if ( ! $permalink ) {
 			$permalink = '';
