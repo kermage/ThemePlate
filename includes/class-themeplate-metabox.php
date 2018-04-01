@@ -108,44 +108,37 @@ class ThemePlate_MetaBox {
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ ThemePlate()->key ][ $key ];
+			$cleaned = array();
+
+			foreach ( $updated as $option => $value ) {
+				if ( is_array( $value ) ) {
+					$value = ThemePlate_Helpers::preprare_save( $value );
+				}
+
+				$cleaned[$option] = $value;
+			}
+
+			if ( is_array( $cleaned ) ) {
+				$cleaned = array_filter( $cleaned );
+			}
 
 			if ( $field['repeatable'] ) {
 				delete_metadata( $meta_box['object_type'], $object_id, $key );
 
-				foreach ( (array) $updated as $i => $value ) {
-					foreach ( (array) $value as $j => $val ) {
-						if ( is_array( $val ) ) {
-							$value[ $j ] = array_merge( array_filter( $val ) );
-						}
-					}
-
-					if ( is_array( $value ) ) {
-						$value = array_filter( $value );
-					}
-
-					if ( 'i-x' === $i || empty( $value ) ) {
+				foreach ( $cleaned as $i => $value ) {
+					if ( 'i-x' === $i ) {
 						continue;
 					}
 
 					add_metadata( $meta_box['object_type'], $object_id, $key, $value );
 				}
 			} else {
-				foreach ( (array) $updated as $i => $value ) {
-					if ( is_array( $value ) ) {
-						$updated[ $i ] = array_merge( array_filter( $value ) );
-					}
-				}
-
-				if ( is_array( $updated ) ) {
-					$updated = array_filter( $updated );
-				}
-
-				if ( ( ! $stored && ! $updated ) || $stored === $updated ) {
+				if ( ( ! $stored && ! $cleaned ) || $stored === $cleaned ) {
 					continue;
 				}
 
-				if ( $updated ) {
-					update_metadata( $meta_box['object_type'], $object_id, $key, $updated, $stored );
+				if ( $cleaned ) {
+					update_metadata( $meta_box['object_type'], $object_id, $key, $cleaned, $stored );
 				} else {
 					delete_metadata( $meta_box['object_type'], $object_id, $key, $stored );
 				}

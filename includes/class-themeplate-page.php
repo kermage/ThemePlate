@@ -164,29 +164,11 @@ class ThemePlate_Page {
 		$values = array();
 
 		foreach ( $options as $option => $value ) {
-			foreach ( (array) $value as $i => $val ) {
-				foreach ( (array) $val as $j => $v ) {
-					if ( is_array( $v ) ) {
-						$val[ $j ] = array_merge( array_filter( $v ) );
-					}
-				}
-
-				if ( is_array( $val ) ) {
-					$value[ $i ] = array_merge( array_filter( $val ) );
-				}
-
-				if ( ! empty( $value[ $i ] ) || ! is_array( $value ) ) {
-					continue;
-				}
-
-				unset( $value[ $i ] );
-			}
-
 			if ( is_array( $value ) ) {
-				$value = array_merge( $value );
+				$value = ThemePlate_Helpers::preprare_save( $value );
 			}
 
-			$values[ $option ] = $value;
+			$values[$option] = $value;
 		}
 
 		return $values;
