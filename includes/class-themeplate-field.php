@@ -229,65 +229,6 @@ class ThemePlate_Field {
 	}
 
 
-	public static function group( $field ) {
-
-		foreach ( $field['fields'] as $id => $sub ) {
-			$sub['id'] = $field['id'] . '_' . $id;
-
-			$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
-			$value  = $stored ? $stored : $sub['std'];
-
-			echo '<div class="field-wrapper type-' . $sub['type'] . ' ' . $sub['style'] . '">';
-				ThemePlate_Helpers::render_options( $sub );
-
-				if ( ! empty( $sub['name'] ) || ! empty( $sub['desc'] ) ) {
-					echo '<div class="field-label">';
-						echo ! empty( $sub['name'] ) ? '<label class="label" for="' . $sub['id'] . '">' . $sub['name'] . '</label>' : '';
-						echo ! empty( $sub['desc'] ) ? '<p class="description">' . $sub['desc'] . '</p>' : '';
-					echo '</div>';
-				}
-
-				echo '<div class="field-input' . ( $sub['repeatable'] ? ' repeatable' : '' ) . '">';
-					$base_name = $field['name'] . '[' . $id . ']';
-
-					if ( ! $sub['repeatable'] ) {
-						$sub['value'] = $value;
-						$sub['name']  = $base_name;
-
-						ThemePlate_Fields::render( $sub );
-					} else {
-						$base_id = $sub['id'];
-
-						foreach ( (array) $value as $i => $val ) {
-							$sub['value'] = $val;
-							$sub['id']    = $base_id . '_' . $i;
-							$sub['name']  = $base_name . '[' . $i . ']';
-
-							echo '<div class="themeplate-clone">';
-								echo '<div class="themeplate-handle"></div>';
-								ThemePlate_Fields::render( $sub );
-								echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-							echo '</div>';
-						}
-
-						$sub['value'] = $sub['std'];
-						$sub['id']    = $base_id . '_i-x';
-						$sub['name']  = $base_name . '[i-x]';
-
-						echo '<div class="themeplate-clone hidden">';
-							echo '<div class="themeplate-handle"></div>';
-							ThemePlate_Fields::render( $sub );
-							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-						echo '</div>';
-						echo '<input type="button" class="button clone-add" value="Add Field" />';
-					}
-				echo '</div>';
-			echo '</div>';
-		}
-
-	}
-
-
 	public static function html( $field ) {
 
 		echo $field['std'];

@@ -81,14 +81,15 @@ class ThemePlate_Fields {
 			}
 
 			$value = $stored ? $stored : $field['std'];
+			$name  = $key . '[' . $field['id'] . ']';
 
-			$this->layout( $field, $key, $value );
+			$this->layout( $field, $value, $name );
 		}
 
 	}
 
 
-	private function layout( $field, $key, $value ) {
+	private function layout( $field, $value, $name ) {
 
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
 			ThemePlate_Helpers::render_options( $field );
@@ -101,11 +102,9 @@ class ThemePlate_Fields {
 			}
 
 			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '">';
-				$base_name = $key . '[' . $field['id'] . ']';
-
 				if ( ! $field['repeatable'] ) {
 					$field['value'] = $value;
-					$field['name']  = $base_name;
+					$field['name']  = $name;
 
 					$this->render( $field );
 				} else {
@@ -114,7 +113,7 @@ class ThemePlate_Fields {
 					foreach ( (array) $value as $i => $val ) {
 						$field['value'] = $val;
 						$field['id']    = $base_id . '_' . $i;
-						$field['name']  = $base_name . '[' . $i . ']';
+						$field['name']  = $name . '[' . $i . ']';
 
 						echo '<div class="themeplate-clone">';
 							echo '<div class="themeplate-handle"></div>';
@@ -125,7 +124,7 @@ class ThemePlate_Fields {
 
 					$field['value'] = $field['std'];
 					$field['id']    = $base_id . '_i-x';
-					$field['name']  = $base_name . '[i-x]';
+					$field['name']  = $name . '[i-x]';
 
 					echo '<div class="themeplate-clone hidden">';
 						echo '<div class="themeplate-handle"></div>';
@@ -140,7 +139,7 @@ class ThemePlate_Fields {
 	}
 
 
-	public static function render( $field ) {
+	private function render( $field ) {
 
 		$list = false;
 		$seq  = ThemePlate_Helpers::is_sequential( $field['options'] );
@@ -201,7 +200,15 @@ class ThemePlate_Fields {
 				break;
 
 			case 'group':
-				ThemePlate_Field::group( $field );
+				foreach ( $field['fields'] as $id => $sub ) {
+					$sub['id'] = $field['id'] . '_' . $id;
+
+					$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
+					$value  = $stored ? $stored : $sub['std'];
+					$name   = $field['name'] . '[' . $id . ']';
+
+					$this->layout( $sub, $value, $name );
+				}
 				break;
 
 			case 'html':
