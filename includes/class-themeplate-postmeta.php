@@ -97,7 +97,7 @@ class ThemePlate_PostMeta {
 
 		$meta_box = $this->tpmb->get_config();
 
-		if ( ! in_array( $screen->post_type, $meta_box['screen'], true ) ) {
+		if ( ! empty( $meta_box['screen'] ) && ! in_array( $screen->post_type, $meta_box['screen'], true ) ) {
 			return false;
 		}
 
