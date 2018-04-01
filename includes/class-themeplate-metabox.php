@@ -108,15 +108,7 @@ class ThemePlate_MetaBox {
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ ThemePlate()->key ][ $key ];
-			$cleaned = array();
-
-			foreach ( $updated as $option => $value ) {
-				if ( is_array( $value ) ) {
-					$value = ThemePlate_Helpers::preprare_save( $value );
-				}
-
-				$cleaned[$option] = $value;
-			}
+			$cleaned = ThemePlate_Helpers::preprare_save( $updated );
 
 			if ( is_array( $cleaned ) ) {
 				$cleaned = array_filter( $cleaned );

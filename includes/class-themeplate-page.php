@@ -161,17 +161,7 @@ class ThemePlate_Page {
 
 	public function save( $options ) {
 
-		$values = array();
-
-		foreach ( $options as $option => $value ) {
-			if ( is_array( $value ) ) {
-				$value = ThemePlate_Helpers::preprare_save( $value );
-			}
-
-			$values[$option] = $value;
-		}
-
-		return $values;
+		return ThemePlate_Helpers::preprare_save( $options );
 
 	}
 

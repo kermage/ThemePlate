@@ -137,9 +137,26 @@ class ThemePlate_Helpers {
 
 	public static function preprare_save( $data ) {
 
+		$filtered = array();
+
 		foreach ( $data as $key => $value ) {
 			if ( is_array( $value ) ) {
-				$data[$key] = self::preprare_save( $data[$key] );
+				$value = self::filter( $value );
+			}
+
+			$filtered[$key] = $value;
+		}
+
+		return $filtered;
+
+	}
+
+
+	private static function filter( $data ) {
+
+		foreach ( $data as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$data[$key] = self::filter( $data[$key] );
 			}
 
 			if ( empty( $value ) ) {
@@ -148,6 +165,7 @@ class ThemePlate_Helpers {
 		}
 
 		return array_merge( array_filter( $data ) );
+
 	}
 
 }
