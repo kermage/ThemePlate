@@ -137,9 +137,13 @@ class ThemePlate_Helpers {
 
 	public static function preprare_save( $data ) {
 
+		if ( ! is_array( $data ) ) {
+			return $data;
+		}
+
 		$filtered = array();
 
-		foreach ( (array) $data as $key => $value ) {
+		foreach ( $data as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$value = self::filter( $value );
 			}
