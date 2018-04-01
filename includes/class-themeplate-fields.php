@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Setup fields
+ * Setup meta fields
  *
  * @package ThemePlate
  * @since 0.1.0
@@ -60,29 +60,27 @@ class ThemePlate_Fields {
 
 		foreach ( $fields as $id => $field ) {
 			if ( 'options' === $object_type ) {
-				$field['id'] = $metabox_id . '_' . $id;
+				$field['id'] = $meta_box['id'] . '_' . $id;
+
+				$options = get_option( $object_id );
+				$stored  = isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : '';
+				$key     = $object_id;
 			} else {
-				$field['id'] = ThemePlate()->key . '_' . $metabox_id . '_' . $id;
+				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+
+				$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
+				$key    = ThemePlate()->key;
 			}
 
-			$this->layout( $field, $object_type, $object_id );
+			$value = $stored ? $stored : $field['std'];
+
+			$this->layout( $field, $key, $value );
 		}
 
 	}
 
 
-	private function layout( $field, $object_type, $object_id ) {
-
-		if ( 'options' === $object_type ) {
-			$options = get_option( $object_id );
-			$stored  = isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : '';
-			$key     = $object_id;
-		} else {
-			$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
-			$key    = ThemePlate()->key;
-		}
-
-		$value = $stored ? $stored : $field['std'];
+	private function layout( $field, $key, $value ) {
 
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
 			ThemePlate_Helpers::render_options( $field );
