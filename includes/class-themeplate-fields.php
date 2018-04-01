@@ -60,13 +60,13 @@ class ThemePlate_Fields {
 
 		foreach ( $fields as $id => $field ) {
 			if ( 'options' === $object_type ) {
-				$field['id'] = $meta_box['id'] . '_' . $id;
+				$field['id'] = $metabox_id . '_' . $id;
 
 				$options = get_option( $object_id );
 				$stored  = isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : '';
 				$key     = $object_id;
 			} else {
-				$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+				$field['id'] = ThemePlate()->key . '_' . $metabox_id . '_' . $id;
 
 				$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
 				$key    = ThemePlate()->key;
