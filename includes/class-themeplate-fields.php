@@ -46,6 +46,14 @@ class ThemePlate_Fields {
 			$field = ThemePlate_Helpers::fool_proof( $this->defaults, $field );
 			$field = ThemePlate_Helpers::normalize_options( $field );
 
+			if ( 'group' == $field['type'] ) {
+				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
+					$field['fields'] = $this->filter( $field['fields'] );
+				} else {
+					continue;
+				}
+			}
+
 			$processed[ $id ] = $field;
 		}
 

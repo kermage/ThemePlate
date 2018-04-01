@@ -231,10 +231,6 @@ class ThemePlate_Field {
 
 	public static function group( $field ) {
 
-		if ( ! array_key_exists( 'fields', $field ) ) {
-			return false;
-		}
-
 		foreach ( $field['fields'] as $id => $sub ) {
 			$sub['id'] = $field['id'] . '_' . $id;
 
