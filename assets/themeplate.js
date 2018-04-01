@@ -1,3 +1,5 @@
+/* global: wp */
+
 (function( $ ) {
 
 	'use strict';
