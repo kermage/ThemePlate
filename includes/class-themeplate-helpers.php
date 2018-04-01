@@ -144,7 +144,7 @@ class ThemePlate_Helpers {
 				$value = self::filter( $value );
 			}
 
-			$filtered[$key] = $value;
+			$filtered[ $key ] = $value;
 		}
 
 		return $filtered;
@@ -156,11 +156,11 @@ class ThemePlate_Helpers {
 
 		foreach ( $data as $key => $value ) {
 			if ( is_array( $value ) ) {
-				$data[$key] = self::filter( $data[$key] );
+				$data[ $key ] = self::filter( $data[ $key ] );
 			}
 
 			if ( empty( $value ) ) {
-				unset( $data[$key] );
+				unset( $data[ $key ] );
 			}
 		}
 
