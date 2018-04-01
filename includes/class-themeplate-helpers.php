@@ -134,4 +134,20 @@ class ThemePlate_Helpers {
 
 	}
 
+
+	public static function preprare_save( $data ) {
+
+		foreach ( $data as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$data[$key] = self::preprare_save( $data[$key] );
+			}
+
+			if ( empty( $value ) ) {
+				unset( $data[$key] );
+			}
+		}
+
+		return array_merge( array_filter( $data ) );
+	}
+
 }
