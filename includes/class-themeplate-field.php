@@ -196,34 +196,13 @@ class ThemePlate_Field {
 				$lbl_prop = 'name';
 				break;
 		}
-		echo '<input type="hidden" name="' . $field['name'] . '" />';
-		echo '<select class="themeplate-select2" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
-		if ( ! $field['value'] ) {
-			echo '<option></options>';
-		} elseif ( $field['none'] && $field['value'] ) {
-			echo '<option value="0">' . __( '&mdash; None &mdash;' ) . '</option>';
-		}
-		if ( $field['multiple'] && $field['value'] ) {
-			$ordered = array();
-			foreach ( (array) $field['value'] as $value ) {
-				$key = array_search( $value, array_column( $items, $val_prop ) );
-				if ( false === $key ) {
-					continue;
-				}
-				$ordered[] = $items[ $key ];
-				unset( $items[ $key ] );
-				$items = array_values( $items );
-			}
-			$items = array_merge( $ordered, $items );
-		}
-		foreach ( $items as $item ) {
-			echo '<option value="' . $item->{$val_prop} . '"';
-			if ( in_array( strval( $item->{$val_prop} ), (array) $field['value'], true ) ) {
-				echo ' selected="selected"';
-			}
-			echo '>' . $item->{$lbl_prop} . '</option>';
-		}
-		echo '</select>';
+		$values = array_column( $items, $val_prop );
+		$labels = array_column( $items, $lbl_prop );
+
+		$field['type']    = 'select2';
+		$field['options'] = array_combine( $values, $labels );
+
+		self::select( $field );
 
 	}
 
