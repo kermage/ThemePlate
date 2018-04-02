@@ -180,12 +180,8 @@ class ThemePlate_Field {
 
 		switch ( $field['type'] ) {
 			case 'post':
-				$items    = get_posts( array( 'post_type' => $field['options'], 'numberposts' => -1 ) );
-				$val_prop = 'ID';
-				$lbl_prop = 'post_title';
-				break;
 			case 'page':
-				$items    = get_pages( array( 'post_type' => $field['options'] ) );
+				$items    = get_posts( array( 'post_type' => $field['options'], 'numberposts' => -1 ) );
 				$val_prop = 'ID';
 				$lbl_prop = 'post_title';
 				break;
