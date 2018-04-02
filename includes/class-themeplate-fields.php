@@ -142,7 +142,6 @@ class ThemePlate_Fields {
 	private function render( $field ) {
 
 		$list = false;
-		$seq  = ThemePlate_Helpers::is_sequential( $field['options'] );
 
 		switch ( $field['type'] ) {
 			default:
@@ -160,19 +159,19 @@ class ThemePlate_Fields {
 
 			case 'select':
 			case 'select2':
-				ThemePlate_Field::select( $field, $seq );
+				ThemePlate_Field::select( $field );
 				break;
 
 			case 'radiolist':
 				$list = true;
 			case 'radio':
-				ThemePlate_Field::radio( $field, $seq, $list );
+				ThemePlate_Field::radio( $field, $list );
 				break;
 
 			case 'checklist':
 				$list = true;
 			case 'checkbox':
-				ThemePlate_Field::checkbox( $field, $seq, $list );
+				ThemePlate_Field::checkbox( $field, $list );
 				break;
 
 			case 'color':

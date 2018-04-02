@@ -24,8 +24,9 @@ class ThemePlate_Field {
 	}
 
 
-	public static function select( $field, $seq ) {
+	public static function select( $field ) {
 
+		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 		echo '<input type="hidden" name="' . $field['name'] . '" />';
 		echo '<select' . ( 'select2' === $field['type'] ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
 		if ( 'select2' === $field['type'] && ! $field['value'] ) {
@@ -58,8 +59,9 @@ class ThemePlate_Field {
 	}
 
 
-	public static function radio( $field, $seq, $list ) {
+	public static function radio( $field, $list ) {
 
+		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 		if ( ! empty( $field['options'] ) ) {
 			echo '<fieldset id="' . $field['id'] . '">';
 			foreach ( $field['options'] as $value => $option ) {
@@ -74,8 +76,9 @@ class ThemePlate_Field {
 	}
 
 
-	public static function checkbox( $field, $seq, $list ) {
+	public static function checkbox( $field, $list ) {
 
+		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 		echo '<input type="hidden" name="' . $field['name'] . '" />';
 		if ( ! empty( $field['options'] ) ) {
 			echo '<fieldset id="' . $field['id'] . '">';
