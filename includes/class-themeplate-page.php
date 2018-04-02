@@ -143,11 +143,15 @@ class ThemePlate_Page {
 								</div>
 							</div>
 
-							<?php do_action( 'themeplate_settings_' . $this->config['id'] . '_side' ); ?>
+							<div id="side-sortables" class="meta-box-sortables">
+								<?php do_action( 'themeplate_settings_' . $this->config['id'] . '_side' ); ?>
+							</div>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
-							<?php do_action( 'themeplate_settings_' . $this->config['id'] . '_normal' ); ?>
+							<div id="normal-sortables" class="meta-box-sortables">
+								<?php do_action( 'themeplate_settings_' . $this->config['id'] . '_normal' ); ?>
+							</div>
 						</div>
 					</div>
 				</div>
