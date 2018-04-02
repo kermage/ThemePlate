@@ -202,3 +202,10 @@ class ThemePlate {
 	}
 
 }
+
+
+function ThemePlate( $key = null, $pages = null ) {
+
+	return ThemePlate::instance( $key, $pages );
+
+}

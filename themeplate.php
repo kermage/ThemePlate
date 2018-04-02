@@ -40,10 +40,6 @@ if ( ! defined( 'TP_PATH' ) ) {
 // Load the ThemePlate plugin
 require_once TP_PATH . 'includes/class-' . basename( __FILE__ );
 
-function ThemePlate( $key = null, $pages = null ) {
-	return ThemePlate::instance( $key, $pages );
-}
-
 // Instantiate the ThemePlate updater
 require_once TP_PATH . 'includes/class-external-update-manager.php';
 new External_Update_Manager( __FILE__, 'https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/data.json' );
