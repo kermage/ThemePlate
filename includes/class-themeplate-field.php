@@ -37,7 +37,7 @@ class ThemePlate_Field {
 			$ordered = array();
 			foreach ( (array) $field['value'] as $value ) {
 				$value = ( $seq ? (int) $value - 1 : $value );
-				if ( ! in_array( $value, array_keys( $field['options'] ), true ) ) {
+				if ( ! in_array( strval( $value ), array_keys( $field['options'] ), true ) ) {
 					continue;
 				}
 				$ordered[ $value ] = $field['options'][ $value ];
@@ -48,7 +48,7 @@ class ThemePlate_Field {
 		foreach ( $field['options'] as $value => $option ) {
 			$value = ( $seq ? $value + 1 : $value );
 			echo '<option value="' . $value . '"';
-			if ( in_array( $value, (array) $field['value'], true ) ) {
+			if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
 				echo ' selected="selected"';
 			}
 			echo '>' . $option . '</option>';
@@ -83,7 +83,7 @@ class ThemePlate_Field {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
 				echo '<label><input type="checkbox" name="' . $field['name'] . '[]" value="' . $value . '"';
-				if ( in_array( $value, (array) $field['value'], true ) ) {
+				if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
 					echo ' checked="checked"';
 				}
 				echo ' />' . $option . '</label>';
@@ -219,7 +219,7 @@ class ThemePlate_Field {
 		}
 		foreach ( $items as $item ) {
 			echo '<option value="' . $item->{$val_prop} . '"';
-			if ( in_array( $item->{$val_prop}, (array) $field['value'], true ) ) {
+			if ( in_array( strval( $item->{$val_prop} ), (array) $field['value'], true ) ) {
 				echo ' selected="selected"';
 			}
 			echo '>' . $item->{$lbl_prop} . '</option>';
