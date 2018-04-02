@@ -106,7 +106,13 @@ class ThemePlate {
 		}
 
 		foreach ( $config['pages'] as $id => $title ) {
-			$this->menu( $id, $title );
+			$args = array(
+				'id'     => $this->key . '-' . $id,
+				'title'  => $title,
+				'parent' => $this->key . '-' . $this->slug,
+			);
+
+			$this->page( $args );
 		}
 
 	}
@@ -141,6 +147,8 @@ class ThemePlate {
 
 
 	public function menu( $id, $title ) {
+
+		_deprecated_function( __METHOD__, '3.0.0', 'ThemePlate()->page( $args ) to add an options page' );
 
 		$args = array(
 			'id'     => $this->key . '-' . $id,
@@ -205,6 +213,10 @@ class ThemePlate {
 
 
 function ThemePlate( $key = null, $pages = null ) {
+
+	if ( ! empty( $pages ) ) {
+		_deprecated_argument( __FUNCTION__, '3.0.0', 'Use ThemePlate()->page( $args ) to create options pages instead.' );
+	}
 
 	return ThemePlate::instance( $key, $pages );
 
