@@ -41,7 +41,6 @@ class ThemePlate {
 
 		$this->setup( $config );
 
-		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
@@ -114,23 +113,6 @@ class ThemePlate {
 
 			$this->page( $args );
 		}
-
-	}
-
-
-	public function clean_walker( $args ) {
-
-		if ( empty( $args['container_class'] ) && empty( $args['container_id'] ) ) {
-			$args['container'] = false;
-		}
-
-		if ( empty( $args['walker'] ) ) {
-			$args['walker'] = new ThemePlate_NavWalker();
-		}
-
-		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
-
-		return $args;
 
 	}
 

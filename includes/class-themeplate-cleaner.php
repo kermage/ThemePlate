@@ -89,6 +89,8 @@ class ThemePlate_Cleaner {
 		// Wrap embedded media for easier responsive styling
 		add_filter( 'embed_oembed_html', array( $this, 'embed_wrap' ) );
 
+		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
+
 	}
 
 
@@ -159,6 +161,23 @@ class ThemePlate_Cleaner {
 	public function embed_wrap( $cache ) {
 
 		return '<div class="embed-responsive">' . $cache . '</div>';
+
+	}
+
+
+	public function clean_walker( $args ) {
+
+		if ( empty( $args['container_class'] ) && empty( $args['container_id'] ) ) {
+			$args['container'] = false;
+		}
+
+		if ( empty( $args['walker'] ) ) {
+			$args['walker'] = new ThemePlate_NavWalker();
+		}
+
+		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+
+		return $args;
 
 	}
 
