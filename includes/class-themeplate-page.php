@@ -51,9 +51,13 @@ class ThemePlate_Page {
 
 		$page = $this->config;
 
+		$page['id'] = ThemePlate()->key . '-' . $page['id'];
+
 		if ( empty( $page['parent'] ) ) {
 			$this->add_menu( $page );
 		} else {
+			$page['parent'] = ThemePlate()->key . '-' . $page['parent'];
+
 			if ( $page['parent'] === $page['id'] ) {
 				$this->add_menu( $page );
 				$page['menu'] = $page['title'];
@@ -125,6 +129,8 @@ class ThemePlate_Page {
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
+		$page = ThemePlate()->key . '-' . $this->config['id'];
+
 		?>
 
 		<div class="wrap">
@@ -138,19 +144,19 @@ class ThemePlate_Page {
 								<h2>Publish</h2>
 
 								<div id="major-publishing-actions">
-									<?php settings_fields( $this->config['id'] ); ?>
+									<?php settings_fields( $page ); ?>
 									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 								</div>
 							</div>
 
 							<div id="side-sortables" class="meta-box-sortables">
-								<?php do_action( 'themeplate_settings_' . $this->config['id'] . '_side' ); ?>
+								<?php do_action( 'themeplate_settings_' . $page . '_side' ); ?>
 							</div>
 						</div>
 
 						<div id="postbox-container-2" class="postbox-container">
 							<div id="normal-sortables" class="meta-box-sortables">
-								<?php do_action( 'themeplate_settings_' . $this->config['id'] . '_normal' ); ?>
+								<?php do_action( 'themeplate_settings_' . $page . '_normal' ); ?>
 							</div>
 						</div>
 					</div>

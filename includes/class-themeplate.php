@@ -88,13 +88,13 @@ class ThemePlate {
 		$this->slug = $config['slug'];
 
 		$args = array(
-			'id'    => $config['key'] . '-' . $config['slug'],
+			'id'    => $config['slug'],
 			'title' => $config['title'],
 		);
 
 		if ( $config['pages'] ) {
 			$args['title']  = array_shift( $config['pages'] );
-			$args['parent'] = $config['key'] . '-' . $config['slug'];
+			$args['parent'] = $config['slug'];
 			$args['menu']   = $config['title'];
 		}
 
@@ -106,9 +106,9 @@ class ThemePlate {
 
 		foreach ( $config['pages'] as $id => $title ) {
 			$args = array(
-				'id'     => $this->key . '-' . $id,
+				'id'     => $id,
 				'title'  => $title,
-				'parent' => $this->key . '-' . $this->slug,
+				'parent' => $this->slug,
 			);
 
 			$this->page( $args );
@@ -133,9 +133,9 @@ class ThemePlate {
 		_deprecated_function( __METHOD__, '3.0.0', 'ThemePlate()->page( $args ) to add an options page' );
 
 		$args = array(
-			'id'     => $this->key . '-' . $id,
+			'id'     => $id,
 			'title'  => $title,
-			'parent' => $this->key . '-' . $this->slug,
+			'parent' => $this->slug,
 		);
 
 		$this->page( $args );
