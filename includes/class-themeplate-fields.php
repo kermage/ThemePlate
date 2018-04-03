@@ -17,7 +17,7 @@ class ThemePlate_Fields {
 		'options'    => array(),
 		'multiple'   => false,
 		'none'       => false,
-		'std'        => '',
+		'default'    => '',
 		'style'      => '',
 		'repeatable' => false,
 	);
@@ -92,7 +92,13 @@ class ThemePlate_Fields {
 				$field['description'] = $field['desc'];
 			}
 
-			$value = $stored ? $stored : $field['std'];
+			if ( ! empty( $field['std'] ) ) {
+				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>default</b> to field config instead of <b>std</b>.' );
+
+				$field['default'] = $field['std'];
+			}
+
+			$value = $stored ? $stored : $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
 
 			$this->layout( $field, $value, $name );
@@ -134,7 +140,7 @@ class ThemePlate_Fields {
 						echo '</div>';
 					}
 
-					$field['value'] = $field['std'];
+					$field['value'] = $field['default'];
 					$field['id']    = $base_id . '_i-x';
 					$field['name']  = $name . '[i-x]';
 
