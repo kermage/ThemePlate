@@ -80,23 +80,7 @@ class ThemePlate_Fields {
 				$key    = ThemePlate()->key;
 			}
 
-			if ( ! empty( $field['name'] ) ) {
-				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>title</b> to field config instead of <b>name</b>.' );
-
-				$field['title'] = $field['name'];
-			}
-
-			if ( ! empty( $field['desc'] ) ) {
-				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>description</b> to field config instead of <b>desc</b>.' );
-
-				$field['description'] = $field['desc'];
-			}
-
-			if ( ! empty( $field['std'] ) ) {
-				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>default</b> to field config instead of <b>std</b>.' );
-
-				$field['default'] = $field['std'];
-			}
+			$this->deprecate_check( $field );
 
 			$value = $stored ? $stored : $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
@@ -220,8 +204,10 @@ class ThemePlate_Fields {
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['id'] = $field['id'] . '_' . $id;
 
+					$this->deprecate_check( $sub );
+
 					$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
-					$value  = $stored ? $stored : $sub['std'];
+					$value  = $stored ? $stored : $sub['default'];
 					$name   = $field['name'] . '[' . $id . ']';
 
 					$this->layout( $sub, $value, $name );
@@ -239,6 +225,31 @@ class ThemePlate_Fields {
 	public function get_collection() {
 
 		return $this->collection;
+
+	}
+
+
+	private function deprecate_check( $field ) {
+
+		if ( ! empty( $field['name'] ) ) {
+			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>title</b> to field config instead of <b>name</b>.' );
+
+			$field['title'] = $field['name'];
+		}
+
+		if ( ! empty( $field['desc'] ) ) {
+			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>description</b> to field config instead of <b>desc</b>.' );
+
+			$field['description'] = $field['desc'];
+		}
+
+		if ( ! empty( $field['std'] ) ) {
+			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>default</b> to field config instead of <b>std</b>.' );
+
+			$field['default'] = $field['std'];
+		}
+
+		return $field;
 
 	}
 
