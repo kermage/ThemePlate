@@ -94,10 +94,22 @@ class ThemePlate_Fields {
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
 			ThemePlate_Helpers::render_options( $field );
 
-			if ( ! empty( $field['name'] ) || ! empty( $field['desc'] ) ) {
+			if ( ! empty( $field['name'] ) ) {
+				_deprecated_function( '$field[\'name\']', '3.0.0', '$field[\'title\']' );
+
+				$field['title'] = $field['name'];
+			}
+
+			if ( ! empty( $field['desc'] ) ) {
+				_deprecated_function( '$field[\'desc\']', '3.0.0', '$field[\'description\']' );
+
+				$field['description'] = $field['desc'];
+			}
+
+			if ( ! empty( $field['title'] ) || ! empty( $field['description'] ) ) {
 				echo '<div class="field-label">';
-					echo ! empty( $field['name'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['name'] . '</label>' : '';
-					echo ! empty( $field['desc'] ) ? '<p class="description">' . $field['desc'] . '</p>' : '';
+					echo ! empty( $field['title'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['title'] . '</label>' : '';
+					echo ! empty( $field['description'] ) ? '<p class="description">' . $field['description'] . '</p>' : '';
 				echo '</div>';
 			}
 
