@@ -80,6 +80,18 @@ class ThemePlate_Fields {
 				$key    = ThemePlate()->key;
 			}
 
+			if ( ! empty( $field['name'] ) ) {
+				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>title</b> to field config instead of <b>name</b>.' );
+
+				$field['title'] = $field['name'];
+			}
+
+			if ( ! empty( $field['desc'] ) ) {
+				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>description</b> to field config instead of <b>desc</b>.' );
+
+				$field['description'] = $field['desc'];
+			}
+
 			$value = $stored ? $stored : $field['std'];
 			$name  = $key . '[' . $field['id'] . ']';
 
@@ -93,18 +105,6 @@ class ThemePlate_Fields {
 
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
 			ThemePlate_Helpers::render_options( $field );
-
-			if ( ! empty( $field['name'] ) ) {
-				_deprecated_function( '$field[\'name\']', '3.0.0', '$field[\'title\']' );
-
-				$field['title'] = $field['name'];
-			}
-
-			if ( ! empty( $field['desc'] ) ) {
-				_deprecated_function( '$field[\'desc\']', '3.0.0', '$field[\'description\']' );
-
-				$field['description'] = $field['desc'];
-			}
 
 			if ( ! empty( $field['title'] ) || ! empty( $field['description'] ) ) {
 				echo '<div class="field-label">';
