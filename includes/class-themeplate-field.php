@@ -103,7 +103,7 @@ class ThemePlate_Field {
 
 	public static function color( $field ) {
 
-		echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( $field['std'] ? ' data-default-color="' . $field['std'] . '"' : '' );
+		echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( $field['default'] ? ' data-default-color="' . $field['default'] . '"' : '' );
 		if ( ! empty( $field['options'] ) ) {
 			$values = json_encode( $field['options'] );
 			echo ' data-palettes="' . esc_attr( $values ) . '"';
@@ -210,7 +210,7 @@ class ThemePlate_Field {
 
 	public static function html( $field ) {
 
-		echo $field['std'];
+		echo $field['default'];
 
 	}
 
