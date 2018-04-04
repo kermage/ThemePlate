@@ -65,6 +65,10 @@
 			});
 
 			for ( var i in current ) {
+				if ( ! current.hasOwnProperty( i ) ) {
+					continue;
+				}
+
 				if ( compareValue( current[i], sureArray( value ), 'in' ) ) {
 					return true;
 				}
@@ -213,6 +217,10 @@
 		var result = ( logic != 'OR' );
 
 		for ( var i in conditions ) {
+			if ( ! conditions.hasOwnProperty( i ) ) {
+				continue;
+			}
+
 			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
@@ -279,6 +287,10 @@
 
 	function addEventListener( $container, type, conditions, origConditions = conditions ) {
 		for ( var i in conditions ) {
+			if ( ! conditions.hasOwnProperty( i ) ) {
+				continue;
+			}
+
 			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {

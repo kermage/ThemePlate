@@ -24,9 +24,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* ==================================================
 Global constants
 ================================================== */
-define( 'TP_VERSION', '2.10.4' );
-define( 'TP_URL',     plugin_dir_url( __FILE__ ) );
-define( 'TP_PATH',    plugin_dir_path( __FILE__ ) );
+
+if ( ! defined( 'TP_VERSION' ) ) {
+	define( 'TP_VERSION', '2.10.4' );
+}
+
+if ( ! defined( 'TP_URL' ) ) {
+	define( 'TP_URL', plugin_dir_url( __FILE__ ) );
+}
+
+if ( ! defined( 'TP_PATH' ) ) {
+	define( 'TP_PATH', plugin_dir_path( __FILE__ ) );
+}
 
 // Load the ThemePlate plugin
 require_once TP_PATH . 'includes/class-' . basename( __FILE__ );

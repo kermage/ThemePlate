@@ -13,7 +13,7 @@ class ThemePlate {
 	public $key, $title, $slug, $pages;
 
 
-	public static function instance( $key = NULL, $pages = NULL ) {
+	public static function instance( $key, $pages ) {
 
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self( $key, $pages );
@@ -47,7 +47,6 @@ class ThemePlate {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
-		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
@@ -143,23 +142,6 @@ class ThemePlate {
 		wp_enqueue_script( 'themeplate-repeater', TP_URL . 'assets/repeater.js', array(), TP_VERSION, true );
 		wp_enqueue_style( 'themeplate-select2-style', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css', array(), '4.0.5', false );
 		wp_enqueue_script( 'themeplate-select2-script', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js', array(), '4.0.5', true );
-
-	}
-
-
-	public function clean_walker( $args ) {
-
-		if ( empty( $args['container_class'] ) && empty( $args['container_id'] ) ) {
-			$args['container'] = false;
-		}
-
-		if ( empty( $args['walker'] ) ) {
-			$args['walker'] = new ThemePlate_NavWalker();
-		}
-
-		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
-
-		return $args;
 
 	}
 

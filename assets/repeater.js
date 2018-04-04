@@ -48,6 +48,10 @@
 	function setIndex( $field, index ) {
 		$field.find( '[' + indexAttributes.join( '],[' ) + ']' ).each( function() {
 			for ( var i in indexAttributes ) {
+				if ( ! indexAttributes.hasOwnProperty( i ) ) {
+					continue;
+				}
+
 				if ( $( this ).attr( indexAttributes[i] ) == undefined ) {
 					continue;
 				}
