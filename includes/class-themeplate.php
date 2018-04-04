@@ -59,7 +59,7 @@ class ThemePlate {
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-' . strtolower( str_replace( '_', '-', $class ) ) . '.php';
 
 		if ( ! class_exists( $class ) && file_exists( $path ) ) {
-			require_once( $path );
+			require_once $path;
 		}
 
 	}
@@ -230,7 +230,7 @@ class ThemePlate {
 }
 
 
-function ThemePlate( $key = NULL, $pages = NULL ) {
+function ThemePlate( $key = null, $pages = null ) {
 
 	return ThemePlate::instance( $key, $pages );
 

@@ -48,8 +48,8 @@ class ThemePlate_Cleaner {
 		remove_action( 'embed_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'admin_print_styles', 'print_emoji_styles' );
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
-		remove_filter( 'the_content_feed', 'wp_staticize_emoji ');
-		remove_filter( 'comment_text_rss', 'wp_staticize_emoji ');
+		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 
 		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
@@ -104,7 +104,7 @@ class ThemePlate_Cleaner {
 		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches );
 		// Only display media if it is meaningful
 		$media = '';
-		if ( $matches[3][0] !== '' && $matches[3][0] !== 'all' ) {
+		if ( '' !== $matches[3][0] && 'all' !== $matches[3][0] ) {
 			$media = ' media="' . $matches[3][0] . '"';
 		}
 		return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
@@ -122,13 +122,13 @@ class ThemePlate_Cleaner {
 
 	public function body_class( $classes ) {
 
-		$match = '(^(postid|attachmentid|page-id|parent-pageid|category|tag|term)-\d+$|(attachment|page-parent|page-child)$)';
+		$match  = '(^(postid|attachmentid|page-id|parent-pageid|category|tag|term)-\d+$|(attachment|page-parent|page-child)$)';
 		$match .= '|(^(page|post|single|category|tag|archive|post-type-archive)$)';
 		$match .= '|(^.*-(template(-default)?(-page-templates)?(-[\w-]+-php)?)$)';
-		$match = '/' . $match . '/';
+		$match  = '/' . $match . '/';
 		foreach ( $classes as $key => $value ) {
 			if ( preg_match( $match, $value ) ) {
-				unset( $classes[$key] );
+				unset( $classes[ $key ] );
 			}
 		}
 		return $classes;
@@ -141,7 +141,7 @@ class ThemePlate_Cleaner {
 		$match = '/(post-\d+$|(type|status|format)-[\w-]+$)/';
 		foreach ( $classes as $key => $value ) {
 			if ( preg_match( $match, $value ) ) {
-				unset( $classes[$key] );
+				unset( $classes[ $key ] );
 			}
 		}
 		return $classes;
