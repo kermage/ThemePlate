@@ -60,7 +60,7 @@ class ThemePlate_Field {
 	}
 
 
-	public static function radio( $field, $list ) {
+	public static function radio( $field, $list = false ) {
 
 		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 		if ( ! empty( $field['options'] ) ) {
@@ -77,7 +77,7 @@ class ThemePlate_Field {
 	}
 
 
-	public static function checkbox( $field, $list ) {
+	public static function checkbox( $field, $list = false ) {
 
 		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 		echo '<input type="hidden" name="' . $field['name'] . '" />';
