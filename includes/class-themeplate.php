@@ -265,6 +265,10 @@ class ThemePlate {
 
 function ThemePlate( $key = null, $pages = null ) {
 
+	if ( ! empty( $key ) && ! is_array( $key ) ) {
+		_deprecated_argument( __FUNCTION__, '3.0.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' ).' );
+	}
+
 	return ThemePlate::instance( $key, $pages );
 
 }
