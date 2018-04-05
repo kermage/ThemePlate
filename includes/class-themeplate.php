@@ -30,23 +30,17 @@ class ThemePlate {
 			spl_autoload_register( array( $this, 'autoload' ) );
 		}
 
-		if ( is_array( $key ) && ! empty( $key ) ) {
-			$this->title = array_shift( $key );
-			$this->key = array_shift( $key );
-		} else {
-			$this->title = $key;
-			$this->key = $this->title;
-		}
+		$defaults = array(
+			'title' => 'ThemePlate Options',
+			'key'   => 'tp',
+			'pages' => array(),
+			'slug'  => 'options',
+		);
+		$config   = $this->prepare( $key, $pages );
+		$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
-		$this->title = ! empty( $this->title ) ? $this->title : 'ThemePlate Options';
-		$this->key = sanitize_title( ! empty( $this->key ) ? $this->key : $this->title );
-		$this->pages = isset( $pages ) ? $pages : array();
-		$this->slug = isset( $pages ) ? key( $pages ) : 'options';
+		$this->setup( $config );
 
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
 
@@ -60,6 +54,47 @@ class ThemePlate {
 		if ( ! class_exists( $class ) && file_exists( $path ) ) {
 			require_once $path;
 		}
+
+	}
+
+
+	private function prepare( $key, $pages ) {
+
+		$config = array();
+
+		if ( ! empty( $key ) ) {
+			if ( is_array( $key ) ) {
+				$config['title'] = array_shift( $key );
+				$config['key']   = array_shift( $key );
+			} else {
+				$config['title'] = $key;
+				$config['key']   = sanitize_title( $key );
+			}
+		}
+
+		if ( ! empty( $pages ) ) {
+			$config['pages'] = $pages;
+			$config['slug']  = key( $pages );
+		}
+
+		return $config;
+
+	}
+
+
+	private function setup( $config ) {
+
+		$this->key  = $config['key'];
+		$this->slug = $config['slug'];
+
+		//
+		$this->title = $config['title'];
+		$this->pages = $config['pages'];
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+		//
 
 	}
 
