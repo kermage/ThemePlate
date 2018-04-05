@@ -244,6 +244,17 @@ class ThemePlate {
 
 	}
 
+
+	public function page( $args ) {
+
+		//
+		$id    = $args['id'];
+		$title = $args['title'];
+		$this->menu( $id, $title );
+		//
+
+	}
+
 }
 
 
