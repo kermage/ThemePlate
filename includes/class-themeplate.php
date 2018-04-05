@@ -69,6 +69,7 @@ class ThemePlate {
 			} else {
 				$config['title'] = $key;
 				$config['key']   = sanitize_title( $key );
+				$this->stall_update();
 			}
 		}
 
@@ -95,6 +96,16 @@ class ThemePlate {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
 		//
+
+	}
+
+
+	private function stall_update() {
+
+		add_filter( 'site_transient_update_plugins', function( $value ) {
+			unset( $value->response[ plugin_basename( TP_FILE ) ] );
+			return $value;
+		} );
 
 	}
 
@@ -202,6 +213,7 @@ class ThemePlate {
 		);
 
 		$this->page( $args );
+		$this->stall_update();
 
 	}
 

@@ -29,6 +29,10 @@ if ( ! defined( 'TP_VERSION' ) ) {
 	define( 'TP_VERSION', '2.10.4' );
 }
 
+if ( ! defined( 'TP_FILE' ) ) {
+	define( 'TP_FILE', __FILE__ );
+}
+
 if ( ! defined( 'TP_URL' ) ) {
 	define( 'TP_URL', plugin_dir_url( __FILE__ ) );
 }
