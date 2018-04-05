@@ -194,11 +194,14 @@ class ThemePlate {
 
 	public function menu( $id, $title ) {
 
-		if ( ! $this->pages ) {
-			$this->pages = array( $this->key . '-' . $this->slug => $this->title );
-		}
+		_deprecated_function( __METHOD__, '3.0.0', 'ThemePlate()->page( $args ) to add an options page' );
 
-		$this->pages = array_merge( $this->pages, array( $id => $title ) );
+		$args = array(
+			'id'    => $id,
+			'title' => $title,
+		);
+
+		$this->page( $args );
 
 	}
 
@@ -248,9 +251,11 @@ class ThemePlate {
 	public function page( $args ) {
 
 		//
-		$id    = $args['id'];
-		$title = $args['title'];
-		$this->menu( $id, $title );
+		if ( ! $this->pages ) {
+			$this->pages = array( $this->key . '-' . $this->slug => $this->title );
+		}
+
+		$this->pages = array_merge( $this->pages, array( $args['id'] => $args['title'] ) );
 		//
 
 	}
