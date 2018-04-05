@@ -57,6 +57,7 @@ class ThemePlate_Settings {
 			$field['page'] = isset( $param['page'] ) ? $param['page'] : ThemePlate()->slug;
 			$field['type'] = isset( $field['type'] ) ? $field['type'] : 'text';
 			$field['style'] = isset( $field['style'] ) ? $field['style'] : '';
+			$field['name'] = isset( $field['name'] ) ? $field['name'] : '';
 
 			add_settings_field(
 				$field['id'],
