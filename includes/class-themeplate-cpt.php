@@ -10,38 +10,46 @@
 
 class ThemePlate_CPT {
 
-	private $param;
+	private $config;
+
+	private $cpt_defaults = array(
+		'args' => array(),
+	);
+
+	private $args_defaults = array(
+		'labels' => array(),
+		'public' => true,
+	);
 
 
-	public function __construct( $kind, $param ) {
+	public function __construct( $kind, $config ) {
 
-		if ( ! is_array( $param ) || empty( $param ) ) {
+		if ( ! is_array( $config ) || empty( $config ) ) {
 			return false;
 		}
 
-		if ( ! array_key_exists( 'name', $param ) ||
-			! array_key_exists( 'plural', $param ) ||
-			! array_key_exists( 'singular', $param )
+		if ( ! array_key_exists( 'name', $config ) ||
+			! array_key_exists( 'plural', $config ) ||
+			! array_key_exists( 'singular', $config )
 		) {
 			return false;
 		}
 
-		if ( $kind == 'taxonomy' && ! array_key_exists( 'type', $param ) ) {
+		if ( 'taxonomy' === $kind && ! array_key_exists( 'type', $config ) ) {
 			return false;
 		}
 
-		$this->$kind( $param );
-
-		$this->param = $param;
+		$this->config = ThemePlate_Helpers::fool_proof( $this->cpt_defaults, $config );
+		$this->$kind( $this->config );
 
 	}
 
 
-	public function post_type( $param ) {
+	public function post_type( $config ) {
 
-		$plural = $param['plural'];
-		$singular = $param['singular'];
-		$args = isset( $param['args'] ) ? $param['args'] : array();
+		$plural   = $config['plural'];
+		$singular = $config['singular'];
+		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
 
 		$labels = array(
 			'name'                  => $plural,
@@ -68,15 +76,9 @@ class ThemePlate_CPT {
 			'name_admin_bar'        => $plural,
 		);
 
-		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
 
-		$defaults = array(
-			'label'       => $plural,
-			'description' => $param['description'],
-			'public'      => true
-		);
-
-		register_post_type( $param['name'], wp_parse_args( $args, $defaults ) );
+		register_post_type( $config['name'], $args );
 
 		add_filter( 'post_updated_messages', array( $this, 'custom_messages' ) );
 		add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_custom_messages' ), 10, 2 );
@@ -84,11 +86,11 @@ class ThemePlate_CPT {
 	}
 
 
-	public function taxonomy( $param ) {
+	public function taxonomy( $config ) {
 
-		$plural = $param['plural'];
-		$singular = $param['singular'];
-		$args = isset( $param['args'] ) ? $param['args'] : array();
+		$plural   = $config['plural'];
+		$singular = $config['singular'];
+		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
 
 		$labels = array(
 			'name'                       => $plural,
@@ -110,15 +112,9 @@ class ThemePlate_CPT {
 			'not_found'                  => $singular . ' not found',
 		);
 
-		$args['labels'] = wp_parse_args( isset( $args['labels'] ) ? $args['labels'] : array(), $labels );
+		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
 
-		$defaults = array(
-			'label'       => $plural,
-			'description' => $param['description'],
-			'public'      => true
-		);
-
-		register_taxonomy( $param['name'], $param['type'], wp_parse_args( $args, $defaults ) );
+		register_taxonomy( $config['name'], $config['type'], $args );
 
 	}
 
@@ -127,8 +123,8 @@ class ThemePlate_CPT {
 
 		global $post_type_object, $post;
 
-		$name = $this->param['name'];
-		$singular = $this->param['singular'];
+		$name     = $this->config['name'];
+		$singular = $this->config['singular'];
 
 		$permalink = get_permalink();
 
@@ -185,9 +181,9 @@ class ThemePlate_CPT {
 
 	public function bulk_custom_messages( $messages, $counts ) {
 
-		$name = $this->param['name'];
-		$singular = $this->param['singular'];
-		$plural = $this->param['plural'];
+		$name     = $this->config['name'];
+		$singular = $this->config['singular'];
+		$plural   = $this->config['plural'];
 
 		$messages[ $name ] = array(
 			'updated'   => _n( '%s ' . $singular . ' updated.', '%s ' . $plural . ' updated.', $counts['updated'] ),
