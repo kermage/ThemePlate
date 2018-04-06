@@ -27,7 +27,7 @@ class ThemePlate_Settings {
 
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch ( Exception $e ) {
-			return false;
+			throw new Exception( $e );
 		}
 
 		add_action( 'current_screen', array( $this, 'create' ) );

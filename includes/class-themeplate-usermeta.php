@@ -20,7 +20,7 @@ class ThemePlate_UserMeta {
 
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch ( Exception $e ) {
-			return false;
+			throw new Exception( $e );
 		}
 
 		add_action( 'show_user_profile', array( $this, 'create' ) );

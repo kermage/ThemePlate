@@ -27,7 +27,7 @@ class ThemePlate_PostMeta {
 
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch ( Exception $e ) {
-			return false;
+			throw new Exception( $e );
 		}
 
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );

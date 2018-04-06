@@ -159,8 +159,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_CPT( 'post_type', $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}
@@ -170,8 +170,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_CPT( 'taxonomy', $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}
@@ -181,8 +181,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_PostMeta( $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}
@@ -192,8 +192,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_Settings( $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}
@@ -203,8 +203,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_TermMeta( $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}
@@ -214,8 +214,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_UserMeta( $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}
@@ -225,8 +225,8 @@ class ThemePlate {
 
 		try {
 			new ThemePlate_Page( $args );
-		} catch ( Execption $e ) {
-			return false;
+		} catch ( Exception $e ) {
+			return $e;
 		}
 
 	}

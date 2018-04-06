@@ -35,7 +35,7 @@ class ThemePlate_TermMeta {
 
 			$this->tpmb = new ThemePlate_MetaBox( $config );
 		} catch ( Exception $e ) {
-			return false;
+			throw new Exception( $e );
 		}
 
 		foreach ( (array) $taxonomies as $taxonomy ) {
