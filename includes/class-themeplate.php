@@ -158,7 +158,7 @@ class ThemePlate {
 	public function post_type( $args ) {
 
 		try {
-			new ThemePlate_CPT( 'post_type', $args );
+			return new ThemePlate_CPT( 'post_type', $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -169,7 +169,7 @@ class ThemePlate {
 	public function taxonomy( $args ) {
 
 		try {
-			new ThemePlate_CPT( 'taxonomy', $args );
+			return new ThemePlate_CPT( 'taxonomy', $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -180,7 +180,7 @@ class ThemePlate {
 	public function post_meta( $args ) {
 
 		try {
-			new ThemePlate_PostMeta( $args );
+			return new ThemePlate_PostMeta( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -191,7 +191,7 @@ class ThemePlate {
 	public function settings( $args ) {
 
 		try {
-			new ThemePlate_Settings( $args );
+			return new ThemePlate_Settings( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -202,7 +202,7 @@ class ThemePlate {
 	public function term_meta( $args ) {
 
 		try {
-			new ThemePlate_TermMeta( $args );
+			return new ThemePlate_TermMeta( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -213,7 +213,7 @@ class ThemePlate {
 	public function user_meta( $args ) {
 
 		try {
-			new ThemePlate_UserMeta( $args );
+			return new ThemePlate_UserMeta( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -224,7 +224,7 @@ class ThemePlate {
 	public function page( $args ) {
 
 		try {
-			new ThemePlate_Page( $args );
+			return new ThemePlate_Page( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
