@@ -69,6 +69,7 @@ class ThemePlate {
 			} else {
 				$config['title'] = $key;
 				$config['key']   = sanitize_title( $key );
+				$this->stall_update();
 			}
 		}
 
@@ -78,6 +79,16 @@ class ThemePlate {
 		}
 
 		return $config;
+
+	}
+
+
+	private function stall_update() {
+
+		add_filter( 'site_transient_update_plugins', function( $value ) {
+			unset( $value->response[ plugin_basename( TP_FILE ) ] );
+			return $value;
+		} );
 
 	}
 
@@ -130,7 +141,7 @@ class ThemePlate {
 
 	public function menu( $id, $title ) {
 
-		_deprecated_function( __METHOD__, '3.0.0', 'ThemePlate()->page( $args ) to add an options page' );
+		_deprecated_function( __METHOD__, '2.11.0', 'ThemePlate()->page( $args ) to add an options page' );
 
 		$args = array(
 			'id'     => $id,
@@ -139,6 +150,7 @@ class ThemePlate {
 		);
 
 		$this->page( $args );
+		$this->stall_update();
 
 	}
 
@@ -198,6 +210,10 @@ function ThemePlate( $key = null, $pages = null ) {
 
 	if ( ! empty( $pages ) ) {
 		_deprecated_argument( __FUNCTION__, '3.0.0', 'Use ThemePlate()->page( $args ) to create options pages instead.' );
+	}
+
+	if ( ! empty( $key ) && ! is_array( $key ) ) {
+		_deprecated_argument( __FUNCTION__, '2.11.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' ).' );
 	}
 
 	return ThemePlate::instance( $key, $pages );
