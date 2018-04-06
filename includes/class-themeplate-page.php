@@ -24,11 +24,11 @@ class ThemePlate_Page {
 	public function __construct( $config ) {
 
 		if ( ! is_array( $config ) || empty( $config ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );

@@ -25,18 +25,18 @@ class ThemePlate_CPT {
 	public function __construct( $kind, $config ) {
 
 		if ( ! is_array( $config ) || empty( $config ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		if ( ! array_key_exists( 'name', $config ) ||
 			! array_key_exists( 'plural', $config ) ||
 			! array_key_exists( 'singular', $config )
 		) {
-			return false;
+			throw new Exception();
 		}
 
 		if ( 'taxonomy' === $kind && ! array_key_exists( 'type', $config ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		$this->config = ThemePlate_Helpers::fool_proof( $this->cpt_defaults, $config );

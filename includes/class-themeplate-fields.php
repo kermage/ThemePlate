@@ -26,7 +26,7 @@ class ThemePlate_Fields {
 	public function __construct( $collection ) {
 
 		if ( ! is_array( $collection ) || empty( $collection ) ) {
-			return false;
+			throw new Exception();
 		}
 
 		$this->collection = $this->filter( $collection );

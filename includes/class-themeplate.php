@@ -157,49 +157,77 @@ class ThemePlate {
 
 	public function post_type( $args ) {
 
-		new ThemePlate_CPT( 'post_type', $args );
+		try {
+			new ThemePlate_CPT( 'post_type', $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
 
 	public function taxonomy( $args ) {
 
-		new ThemePlate_CPT( 'taxonomy', $args );
+		try {
+			new ThemePlate_CPT( 'taxonomy', $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
 
 	public function post_meta( $args ) {
 
-		new ThemePlate_PostMeta( $args );
+		try {
+			new ThemePlate_PostMeta( $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
 
 	public function settings( $args ) {
 
-		new ThemePlate_Settings( $args );
+		try {
+			new ThemePlate_Settings( $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
 
 	public function term_meta( $args ) {
 
-		new ThemePlate_TermMeta( $args );
+		try {
+			new ThemePlate_TermMeta( $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
 
 	public function user_meta( $args ) {
 
-		new ThemePlate_UserMeta( $args );
+		try {
+			new ThemePlate_UserMeta( $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
 
 	public function page( $args ) {
 
-		new ThemePlate_Page( $args );
+		try {
+			new ThemePlate_Page( $args );
+		} catch ( Execption $e ) {
+			return false;
+		}
 
 	}
 
