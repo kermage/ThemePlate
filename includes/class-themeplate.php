@@ -205,7 +205,7 @@ class ThemePlate {
 
 	public function menu( $id, $title ) {
 
-		_deprecated_function( __METHOD__, '3.0.0', 'ThemePlate()->page( $args ) to add an options page' );
+		_deprecated_function( __METHOD__, '2.11.0', 'ThemePlate()->page( $args ) to add an options page' );
 
 		$args = array(
 			'id'    => $id,
@@ -278,7 +278,7 @@ class ThemePlate {
 function ThemePlate( $key = null, $pages = null ) {
 
 	if ( ! empty( $key ) && ! is_array( $key ) ) {
-		_deprecated_argument( __FUNCTION__, '3.0.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' ).' );
+		_deprecated_argument( __FUNCTION__, '2.11.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' ).' );
 	}
 
 	return ThemePlate::instance( $key, $pages );
