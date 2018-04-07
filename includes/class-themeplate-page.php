@@ -141,6 +141,10 @@ class ThemePlate_Page {
 			<form action="options.php" method="post">
 				<div id="poststuff">
 					<div id="post-body" class="metabox-holder columns-2">
+						<div id="post-body-content">
+							<?php do_action( 'themeplate_settings_' . $page . '_content' ); ?>
+						</div>
+
 						<div id="postbox-container-1" class="postbox-container">
 							<div id="submitdiv" class="postbox">
 								<h2>Publish</h2>
