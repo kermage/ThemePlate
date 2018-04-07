@@ -42,7 +42,9 @@ class ThemePlate_Page {
 
 	public function init() {
 
-		register_setting( $this->config['id'], $this->config['id'], array( $this, 'save' ) );
+		$option = ThemePlate()->key . '-' . $this->config['id'];
+
+		register_setting( $option, $option, array( $this, 'save' ) );
 
 	}
 
