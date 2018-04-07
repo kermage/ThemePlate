@@ -49,11 +49,11 @@ class ThemePlate_Field {
 		}
 		foreach ( $field['options'] as $value => $option ) {
 			$value = ( $seq ? $value + 1 : $value );
-			echo '<option value="' . $value . '"';
+			echo '<option value="' . esc_attr( $value ) . '"';
 			if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
 				echo ' selected="selected"';
 			}
-			echo '>' . $option . '</option>';
+			echo '>' . esc_html( $option ) . '</option>';
 		}
 		echo '</select>';
 
@@ -68,7 +68,7 @@ class ThemePlate_Field {
 			foreach ( $field['options'] as $value => $option ) {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="radio" name="' . esc_attr( $field['name'] ) . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
+				echo '<label><input type="radio" name="' . esc_attr( $field['name'] ) . '" value="' . esc_attr( $value ) . '"' . checked( $field['value'], $value, false ) . ' />' . esc_html( $option ) . '</label>';
 				echo '</' . ( $list ? 'p' : 'span' ) . '>';
 			}
 			echo '</fieldset>';
@@ -86,11 +86,11 @@ class ThemePlate_Field {
 			foreach ( $field['options'] as $value => $option ) {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="checkbox" name="' . esc_attr( $field['name'] ) . '[]" value="' . $value . '"';
+				echo '<label><input type="checkbox" name="' . esc_attr( $field['name'] ) . '[]" value="' . esc_attr( $value ) . '"';
 				if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
 					echo ' checked="checked"';
 				}
-				echo ' />' . $option . '</label>';
+				echo ' />' . esc_html( $option ) . '</label>';
 				echo '</' . ( $list ? 'p' : 'span' ) . '>';
 			}
 			echo '</fieldset>';
@@ -130,11 +130,11 @@ class ThemePlate_Field {
 				$type    = wp_ext2type( $info['ext'] );
 				$preview = ( 'image' === $type ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
 				echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
-				echo '<div class="centered"><img src="' . $preview . '"/></div>';
-				echo '<div class="filename"><div>' . $name . '</div></div>';
+				echo '<div class="centered"><img src="' . esc_attr( $preview ) . '"/></div>';
+				echo '<div class="filename"><div>' . esc_html( $name ) . '</div></div>';
 				echo '</div></div>';
 				echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-				echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
+				echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" value="' . esc_attr( $file ) . '" />';
 				echo '</div>';
 			}
 		}
@@ -153,12 +153,12 @@ class ThemePlate_Field {
 		echo '<input type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field['value'] ) . '"';
 		if ( ! empty( $field['options'] ) ) {
 			foreach ( $field['options'] as $option => $value ) {
-				echo $option . '="' . $value . '"';
+				echo $option . '="' . esc_attr( $value ) . '"';
 			}
 		}
 		if ( 'range' === $field['type'] ) {
 			echo ' oninput="this.nextElementSibling.innerHTML=this.value" />';
-			echo '<span>' . $field['value'] . '</span>';
+			echo '<span>' . esc_html( $field['value'] ) . '</span>';
 		} else {
 			echo ' />';
 		}
