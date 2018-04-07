@@ -12,14 +12,14 @@ class ThemePlate_Field {
 
 	public static function input( $field ) {
 
-		echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . esc_attr( $field['value'] ) . '" />';
+		echo '<input type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field['value'] ) . '" />';
 
 	}
 
 
 	public static function textarea( $field ) {
 
-		echo '<textarea name="' . $field['name'] . '" id="' . $field['id'] . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
+		echo '<textarea name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
 
 	}
 
@@ -27,8 +27,8 @@ class ThemePlate_Field {
 	public static function select( $field ) {
 
 		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
-		echo '<input type="hidden" name="' . $field['name'] . '" />';
-		echo '<select' . ( 'select2' === $field['type'] ? ' class="themeplate-select2"' : '' ) . ' name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" id="' . $field['id'] . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
+		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
+		echo '<select' . ( 'select2' === $field['type'] ? ' class="themeplate-select2"' : '' ) . ' name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
 		if ( 'select2' === $field['type'] && ! $field['value'] ) {
 			echo '<option></options>';
 		} elseif ( 'select2' !== $field['type'] && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
@@ -64,11 +64,11 @@ class ThemePlate_Field {
 
 		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
 		if ( ! empty( $field['options'] ) ) {
-			echo '<fieldset id="' . $field['id'] . '">';
+			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';
 			foreach ( $field['options'] as $value => $option ) {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="radio" name="' . $field['name'] . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
+				echo '<label><input type="radio" name="' . esc_attr( $field['name'] ) . '" value="' . $value . '"' . checked( $field['value'], $value, false ) . ' />' . $option . '</label>';
 				echo '</' . ( $list ? 'p' : 'span' ) . '>';
 			}
 			echo '</fieldset>';
@@ -80,13 +80,13 @@ class ThemePlate_Field {
 	public static function checkbox( $field, $list = false ) {
 
 		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
-		echo '<input type="hidden" name="' . $field['name'] . '" />';
+		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
 		if ( ! empty( $field['options'] ) ) {
-			echo '<fieldset id="' . $field['id'] . '">';
+			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';
 			foreach ( $field['options'] as $value => $option ) {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="checkbox" name="' . $field['name'] . '[]" value="' . $value . '"';
+				echo '<label><input type="checkbox" name="' . esc_attr( $field['name'] ) . '[]" value="' . $value . '"';
 				if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
 					echo ' checked="checked"';
 				}
@@ -95,7 +95,7 @@ class ThemePlate_Field {
 			}
 			echo '</fieldset>';
 		} else {
-			echo '<input type="checkbox" id="' . $field['id'] . '" name="' . $field['name'] . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
+			echo '<input type="checkbox" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $field['name'] ) . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
 		}
 
 	}
@@ -103,7 +103,7 @@ class ThemePlate_Field {
 
 	public static function color( $field ) {
 
-		echo '<input type="text" name="' . $field['name'] . '" id="' . $field['id'] . '" class="themeplate-color-picker" value="' . $field['value'] . '"' . ( $field['default'] ? ' data-default-color="' . $field['default'] . '"' : '' );
+		echo '<input type="text" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" class="themeplate-color-picker" value="' . esc_attr( $field['value'] ) . '"' . ( $field['default'] ? ' data-default-color="' . esc_attr( $field['default'] ) . '"' : '' );
 		if ( ! empty( $field['options'] ) ) {
 			$values = json_encode( $field['options'] );
 			echo ' data-palettes="' . esc_attr( $values ) . '"';
@@ -115,8 +115,8 @@ class ThemePlate_Field {
 
 	public static function file( $field ) {
 
-		echo '<input type="hidden" name="' . $field['name'] . '" />';
-		echo '<div id="' . $field['id'] . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '">';
+		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
+		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '">';
 		echo '<div class="preview-holder">';
 		if ( ! $field['multiple'] ) {
 			echo '<div class="attachment placeholder">';
@@ -134,7 +134,7 @@ class ThemePlate_Field {
 				echo '<div class="filename"><div>' . $name . '</div></div>';
 				echo '</div></div>';
 				echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-				echo '<input type="hidden" name="' . $field['name'] . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
+				echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" value="' . $file . '" />';
 				echo '</div>';
 			}
 		}
@@ -150,7 +150,7 @@ class ThemePlate_Field {
 
 	public static function number( $field ) {
 
-		echo '<input type="' . $field['type'] . '" name="' . $field['name'] . '" id="' . $field['id'] . '" value="' . $field['value'] . '"';
+		echo '<input type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field['value'] ) . '"';
 		if ( ! empty( $field['options'] ) ) {
 			foreach ( $field['options'] as $option => $value ) {
 				echo $option . '="' . $value . '"';
@@ -180,6 +180,7 @@ class ThemePlate_Field {
 	public static function object( $field ) {
 
 		switch ( $field['type'] ) {
+			default:
 			case 'post':
 			case 'page':
 				$items    = get_posts( array( 'post_type' => $field['options'], 'numberposts' => -1 ) );
