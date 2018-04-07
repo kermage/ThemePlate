@@ -17,8 +17,9 @@ class ThemePlate_Settings {
 
 		try {
 			$defaults = array(
-				'page'    => ThemePlate()->slug,
-				'context' => 'normal',
+				'page'     => ThemePlate()->slug,
+				'context'  => 'normal',
+				'priority' => 'default',
 			);
 			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
@@ -44,8 +45,9 @@ class ThemePlate_Settings {
 
 		$settings = $this->tpmb->get_config();
 		$section  = $settings['page'] . '_' . $settings['context'];
+		$priority = ThemePlate_Helpers::get_priority( $settings );
 
-		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ) );
+		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ), $priority );
 
 	}
 

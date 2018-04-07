@@ -172,4 +172,24 @@ class ThemePlate_Helpers {
 
 	}
 
+
+	public static function get_priority( $config ) {
+
+		switch ( $config['priority'] ) {
+			default:
+			case 'default':
+				$priority = 10;
+				break;
+			case 'high':
+				$priority = 5;
+				break;
+			case 'low':
+				$priority = 15;
+				break;
+		}
+
+		return $priority;
+
+	}
+
 }

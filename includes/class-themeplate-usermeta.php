@@ -16,6 +16,11 @@ class ThemePlate_UserMeta {
 	public function __construct( $config ) {
 
 		try {
+			$defaults = array(
+				'priority' => 'default',
+			);
+			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
 			$config['object_type'] = 'user';
 
 			$this->tpmb = new ThemePlate_MetaBox( $config );
@@ -23,9 +28,11 @@ class ThemePlate_UserMeta {
 			throw new Exception( $e );
 		}
 
-		add_action( 'show_user_profile', array( $this, 'create' ) );
-		add_action( 'edit_user_profile', array( $this, 'create' ) );
-		add_action( 'user_new_form', array( $this, 'create' ) );
+		$priority = ThemePlate_Helpers::get_priority( $config );
+
+		add_action( 'show_user_profile', array( $this, 'create' ), $priority );
+		add_action( 'edit_user_profile', array( $this, 'create' ), $priority );
+		add_action( 'user_new_form', array( $this, 'create' ), $priority );
 		add_action( 'personal_options_update', array( $this, 'save' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'save' ) );
 		add_action( 'user_register', array( $this, 'save' ) );

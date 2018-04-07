@@ -28,6 +28,7 @@ class ThemePlate_TermMeta {
 
 			$defaults = array(
 				'taxonomy' => array(),
+				'priority' => 'default',
 			);
 			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
@@ -38,9 +39,11 @@ class ThemePlate_TermMeta {
 			throw new Exception( $e );
 		}
 
+		$priority = ThemePlate_Helpers::get_priority( $config );
+
 		foreach ( (array) $taxonomies as $taxonomy ) {
-			add_action( $taxonomy . '_add_form', array( $this, 'create' ) );
-			add_action( $taxonomy . '_edit_form', array( $this, 'create' ) );
+			add_action( $taxonomy . '_add_form', array( $this, 'create' ), $priority );
+			add_action( $taxonomy . '_edit_form', array( $this, 'create' ), $priority );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
 			add_action( 'edited_' . $taxonomy, array( $this, 'save' ) );
 		}
