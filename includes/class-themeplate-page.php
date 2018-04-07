@@ -141,9 +141,11 @@ class ThemePlate_Page {
 			<form action="options.php" method="post">
 				<div id="poststuff">
 					<div id="post-body" class="metabox-holder columns-2">
-						<div id="post-body-content">
-							<?php do_action( $page . '_content' ); ?>
-						</div>
+						<?php if ( has_action( $page . '_content' ) ) : ?>
+							<div id="post-body-content">
+								<?php do_action( $page . '_content' ); ?>
+							</div>
+						<?php endif; ?>
 
 						<div id="postbox-container-1" class="postbox-container">
 							<div id="submitdiv" class="postbox">
