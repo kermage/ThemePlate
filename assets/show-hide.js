@@ -158,7 +158,7 @@
 	}
 
 	function compareValue( have, want, operator ) {
-		var result;
+		var result = false;
 
 		operator = operator.trim();
 
