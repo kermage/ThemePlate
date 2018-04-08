@@ -47,15 +47,11 @@
 	margin-right: 1em;
 }
 
-.themeplate .description {
-	font-weight: normal;
-	font-style: normal;
-}
-
 .themeplate .inside > .description {
 	margin: 1em 0 0;
 	padding-bottom: 1em;
 	border-bottom: 1px solid #ddd;
+	font-style: normal;
 }
 
 .fields-container {
@@ -88,6 +84,10 @@
 	color: #23282d;
 	font-size: 14px;
 	font-weight: 600;
+}
+
+.field-label .description {
+	font-style: normal;
 }
 
 .field-input {
