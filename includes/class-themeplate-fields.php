@@ -135,6 +135,8 @@ class ThemePlate_Fields {
 					echo '</div>';
 					echo '<input type="button" class="button clone-add" value="Add Field" />';
 				}
+
+				echo ! empty( $field['information'] ) ? '<p class="description">' . $field['information'] . '</p>' : '';
 			echo '</div>';
 		echo '</div>';
 
