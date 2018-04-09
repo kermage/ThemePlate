@@ -241,7 +241,7 @@ function ThemePlate( $key = null, $pages = null ) {
 	}
 
 	if ( ! empty( $key ) && ! is_array( $key ) ) {
-		_deprecated_argument( __FUNCTION__, '2.11.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' ).' );
+		_deprecated_argument( __FUNCTION__, '2.11.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' )</b>.' );
 	}
 
 	return ThemePlate::instance( $key, $pages );
