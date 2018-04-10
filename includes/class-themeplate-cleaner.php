@@ -175,7 +175,9 @@ class ThemePlate_Cleaner {
 			$args['walker'] = new ThemePlate_NavWalker();
 		}
 
-		$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+		if ( empty( $args['items_wrap'] ) ) {
+			$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+		}
 
 		return $args;
 
