@@ -13,12 +13,6 @@ class ThemePlate_MetaBox {
 	private $config;
 	private $fields;
 
-	private $defaults = array(
-		'show_on' => array(),
-		'hide_on' => array(),
-		'style'   => '',
-	);
-
 
 	public function __construct( $config ) {
 
@@ -34,7 +28,12 @@ class ThemePlate_MetaBox {
 			throw new Exception();
 		}
 
-		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
+		$defaults     = array(
+			'show_on' => array(),
+			'hide_on' => array(),
+			'style'   => '',
+		);
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
 

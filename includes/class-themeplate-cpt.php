@@ -12,15 +12,6 @@ class ThemePlate_CPT {
 
 	private $config;
 
-	private $cpt_defaults = array(
-		'args' => array(),
-	);
-
-	private $args_defaults = array(
-		'labels' => array(),
-		'public' => true,
-	);
-
 
 	public function __construct( $kind, $config ) {
 
@@ -39,7 +30,10 @@ class ThemePlate_CPT {
 			throw new Exception();
 		}
 
-		$this->config = ThemePlate_Helpers::fool_proof( $this->cpt_defaults, $config );
+		$defaults     = array(
+			'args' => array(),
+		);
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 		$this->$kind( $this->config );
 
 	}
@@ -49,7 +43,11 @@ class ThemePlate_CPT {
 
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
-		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
+		$defaults = array(
+			'labels' => array(),
+			'public' => true,
+		);
+		$args     = ThemePlate_Helpers::fool_proof( $defaults, $config['args'] );
 
 		$labels = array(
 			'name'                  => $plural,
@@ -90,7 +88,12 @@ class ThemePlate_CPT {
 
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
-		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
+		$defaults = array(
+			'labels' => array(),
+			'public' => true,
+		);
+
+		$args = ThemePlate_Helpers::fool_proof( $defaults, $config['args'] );
 
 		$labels = array(
 			'name'                       => $plural,

@@ -12,10 +12,6 @@ class ThemePlate_Columns {
 
 	private $config;
 
-	private $defaults = array(
-		'position' => 0
-	);
-
 
 	public function __construct( $config ) {
 
@@ -27,7 +23,10 @@ class ThemePlate_Columns {
 			throw new Exception();
 		}
 
-		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
+		$defaults     = array(
+			'position' => 0,
+		);
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
 		add_filter( 'manage_' . $config['post_type'] . '_posts_columns', array( $this, 'modify' ), 10 );
 		add_action( 'manage_' . $config['post_type'] . '_posts_custom_column', array( $this, 'populate' ), 10, 2 );

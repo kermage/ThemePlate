@@ -12,14 +12,6 @@ class ThemePlate_Page {
 
 	private $config;
 
-	private $defaults = array(
-		'capability' => 'manage_options',
-		'parent'     => '',
-		'menu'       => '',
-		'icon'       => '',
-		'position'   => null,
-	);
-
 
 	public function __construct( $config ) {
 
@@ -31,7 +23,14 @@ class ThemePlate_Page {
 			throw new Exception();
 		}
 
-		$this->config = ThemePlate_Helpers::fool_proof( $this->defaults, $config );
+		$defaults     = array(
+			'capability' => 'manage_options',
+			'parent'     => '',
+			'menu'       => '',
+			'icon'       => '',
+			'position'   => null,
+		);
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_menu', array( $this, 'menu' ) );

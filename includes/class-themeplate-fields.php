@@ -12,16 +12,6 @@ class ThemePlate_Fields {
 
 	private $collection;
 
-	private $defaults = array(
-		'type'       => 'text',
-		'options'    => array(),
-		'multiple'   => false,
-		'none'       => false,
-		'default'    => '',
-		'style'      => '',
-		'repeatable' => false,
-	);
-
 
 	public function __construct( $collection ) {
 
@@ -43,8 +33,17 @@ class ThemePlate_Fields {
 				continue;
 			}
 
-			$field = ThemePlate_Helpers::fool_proof( $this->defaults, $field );
-			$field = ThemePlate_Helpers::normalize_options( $field );
+			$defaults = array(
+				'type'       => 'text',
+				'options'    => array(),
+				'multiple'   => false,
+				'none'       => false,
+				'default'    => '',
+				'style'      => '',
+				'repeatable' => false,
+			);
+			$field    = ThemePlate_Helpers::fool_proof( $defaults, $field );
+			$field    = ThemePlate_Helpers::normalize_options( $field );
 
 			if ( 'group' === $field['type'] ) {
 				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
