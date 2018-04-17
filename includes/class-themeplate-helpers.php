@@ -121,6 +121,10 @@ class ThemePlate_Helpers {
 			if ( is_bool( $value ) ) {
 				$result[ $key ] = (bool) $result[ $key ];
 			}
+
+			if ( is_int( $value ) ) {
+				$result[$key] = (int) $result[$key];
+			}
 		}
 
 		return $result;
