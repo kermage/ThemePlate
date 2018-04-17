@@ -38,7 +38,7 @@ class ThemePlate_Columns {
 
 		$config = $this->config;
 
-		$columns[$config['id']] = $config['title'];
+		$columns[ $config['id'] ] = $config['title'];
 
 		if ( ( $position = $config['position'] ) > 0 ) {
 			$item    = array_slice( $columns, -1, 1, true );

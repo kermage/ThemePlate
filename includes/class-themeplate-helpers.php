@@ -123,7 +123,7 @@ class ThemePlate_Helpers {
 			}
 
 			if ( is_int( $value ) ) {
-				$result[$key] = (int) $result[$key];
+				$result[ $key ] = (int) $result[ $key ];
 			}
 		}
 
