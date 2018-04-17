@@ -80,8 +80,7 @@ class ThemePlate_Fields {
 				$key    = ThemePlate()->key;
 			}
 
-			$this->deprecate_check( $field );
-
+			$field = $this->deprecate_check( $field );
 			$value = $stored ? $stored : $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
 
