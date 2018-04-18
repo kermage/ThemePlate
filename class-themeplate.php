@@ -187,7 +187,7 @@ class ThemePlate {
 	public function post_meta( $args ) {
 
 		try {
-			return new ThemePlate_PostMeta( $args );
+			return new ThemePlate_Meta_Post( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -209,7 +209,7 @@ class ThemePlate {
 	public function term_meta( $args ) {
 
 		try {
-			return new ThemePlate_TermMeta( $args );
+			return new ThemePlate_Meta_Term( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -220,7 +220,7 @@ class ThemePlate {
 	public function user_meta( $args ) {
 
 		try {
-			return new ThemePlate_UserMeta( $args );
+			return new ThemePlate_Meta_User( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}

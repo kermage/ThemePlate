@@ -8,7 +8,7 @@
  */
 
 
-class ThemePlate_PostMeta {
+class ThemePlate_Meta_Post {
 
 	private $tpmb;
 

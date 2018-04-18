@@ -8,7 +8,7 @@
  */
 
 
-class ThemePlate_TermMeta {
+class ThemePlate_Meta_Term {
 
 	private $tpmb;
 

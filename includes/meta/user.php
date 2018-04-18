@@ -8,7 +8,7 @@
  */
 
 
-class ThemePlate_UserMeta {
+class ThemePlate_Meta_User {
 
 	private $tpmb;
 
