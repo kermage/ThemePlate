@@ -53,10 +53,12 @@ class ThemePlate {
 			return;
 		}
 
-		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-' . strtolower( str_replace( '_', '-', $class ) ) . '.php';
+		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'includes';
+		$base = strtolower( str_replace( 'ThemePlate_', '', $class ) );
+		$file = $path . DIRECTORY_SEPARATOR . $base . '.php';
 
-		if ( ! class_exists( $class ) && file_exists( $path ) ) {
-			require_once $path;
+		if ( ! class_exists( $class ) && file_exists( $file ) ) {
+			require_once $file;
 		}
 
 	}
