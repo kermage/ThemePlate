@@ -41,9 +41,9 @@ if ( ! defined( 'TP_PATH' ) ) {
 	define( 'TP_PATH', plugin_dir_path( __FILE__ ) );
 }
 
-// Load the ThemePlate plugin
-require_once TP_PATH . 'includes/class-' . basename( __FILE__ );
+// Load the main ThemePlate class
+require_once TP_PATH . 'class-' . basename( __FILE__ );
 
 // Instantiate the ThemePlate updater
-require_once TP_PATH . 'includes/class-external-update-manager.php';
+require_once TP_PATH . 'class-external-update-manager.php';
 new External_Update_Manager( __FILE__, 'https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/data.json' );
