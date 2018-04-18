@@ -86,4 +86,11 @@ class ThemePlate_Form {
 
 	}
 
+
+	public function get_fields() {
+
+		return $this->fields->get_collection();
+
+	}
+
 }
