@@ -10,10 +10,9 @@
 
 class ThemePlate_Meta_Term {
 
-	private $form;
-
-
 	public function __construct( $config ) {
+
+		$config['object_type'] = 'term';
 
 		try {
 			parent::__construct( $config );
@@ -36,15 +35,7 @@ class ThemePlate_Meta_Term {
 			'priority' => 'default',
 		);
 
-		$config['object_type'] = 'term';
-
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-		try {
-			$this->form = new ThemePlate_Form( $config );
-		} catch ( Exception $e ) {
-			throw new Exception( $e );
-		}
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $this->config );
 
 		$priority = ThemePlate_Helpers::get_priority( $config );
 

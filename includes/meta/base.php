@@ -11,6 +11,7 @@
 abstract class ThemePlate_Meta_Base {
 
 	protected $config;
+	protected $form;
 
 
 	public function __construct( $config ) {
@@ -22,6 +23,14 @@ abstract class ThemePlate_Meta_Base {
 		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
 			throw new Exception();
 		}
+
+		try {
+			$this->form = new ThemePlate_Form( $config );
+		} catch ( Exception $e ) {
+			throw new Exception( $e );
+		}
+
+		$config['fields'] = $this->form->get_fields();
 
 		$defaults     = array(
 			'show_on' => array(),

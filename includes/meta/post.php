@@ -10,10 +10,9 @@
 
 class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
-	private $form;
-
-
 	public function __construct( $config ) {
+
+		$config['object_type'] = 'post';
 
 		try {
 			parent::__construct( $config );
@@ -27,15 +26,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 			'priority' => 'default',
 		);
 
-		$config['object_type'] = 'post';
-
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-		try {
-			$this->form = new ThemePlate_Form( $config );
-		} catch ( Exception $e ) {
-			throw new Exception( $e );
-		}
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $this->config );
 
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );

@@ -10,10 +10,9 @@
 
 class ThemePlate_Meta_User {
 
-	private $form;
-
-
 	public function __construct( $config ) {
+
+		$config['object_type'] = 'user';
 
 		try {
 			parent::__construct( $config );
@@ -25,15 +24,7 @@ class ThemePlate_Meta_User {
 			'priority' => 'default',
 		);
 
-		$config['object_type'] = 'user';
-
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-		try {
-			$this->form = new ThemePlate_Form( $config );
-		} catch ( Exception $e ) {
-			throw new Exception( $e );
-		}
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $this->config );
 
 		$priority = ThemePlate_Helpers::get_priority( $config );
 
