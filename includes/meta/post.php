@@ -15,6 +15,12 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 	public function __construct( $config ) {
 
+		try {
+			parent::__construct( $config );
+		} catch ( Exception $e ) {
+			throw new Exception( $e );
+		}
+
 		$defaults = array(
 			'screen'   => array(),
 			'context'  => 'advanced',

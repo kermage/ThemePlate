@@ -15,6 +15,12 @@ class ThemePlate_Meta_User {
 
 	public function __construct( $config ) {
 
+		try {
+			parent::__construct( $config );
+		} catch ( Exception $e ) {
+			throw new Exception( $e );
+		}
+
 		$defaults = array(
 			'priority' => 'default',
 		);

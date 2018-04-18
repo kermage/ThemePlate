@@ -15,6 +15,12 @@ class ThemePlate_Meta_Term {
 
 	public function __construct( $config ) {
 
+		try {
+			parent::__construct( $config );
+		} catch ( Exception $e ) {
+			throw new Exception( $e );
+		}
+
 		if ( empty( $config['taxonomy'] ) ) {
 			$taxonomies   = get_taxonomies( array( '_builtin' => false ) );
 			$taxonomies[] = 'category';
