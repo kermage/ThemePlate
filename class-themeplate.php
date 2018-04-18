@@ -54,8 +54,9 @@ class ThemePlate {
 		}
 
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'includes';
-		$base = strtolower( str_replace( 'ThemePlate_', '', $class ) );
-		$file = $path . DIRECTORY_SEPARATOR . $base . '.php';
+		$base = strtolower( str_replace( 'ThemePlate', '', $class ) );
+		$name = strtr( $base, '_', DIRECTORY_SEPARATOR );
+		$file = $path . $name . '.php';
 
 		if ( ! class_exists( $class ) && file_exists( $file ) ) {
 			require_once $file;

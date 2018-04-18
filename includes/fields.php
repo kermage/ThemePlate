@@ -152,52 +152,52 @@ class ThemePlate_Fields {
 			case 'time':
 			case 'email':
 			case 'url':
-				ThemePlate_Field::input( $field );
+				ThemePlate_Field_Input::render( $field );
 				break;
 
 			case 'textarea':
-				ThemePlate_Field::textarea( $field );
+				ThemePlate_Field_Textarea::render( $field );
 				break;
 
 			case 'select':
 			case 'select2':
-				ThemePlate_Field::select( $field );
+				ThemePlate_Field_Select::render( $field );
 				break;
 
 			case 'radiolist':
 				$list = true;
 			case 'radio':
-				ThemePlate_Field::radio( $field, $list );
+				ThemePlate_Field_Radio::render( $field, $list );
 				break;
 
 			case 'checklist':
 				$list = true;
 			case 'checkbox':
-				ThemePlate_Field::checkbox( $field, $list );
+				ThemePlate_Field_Checkbox::render( $field, $list );
 				break;
 
 			case 'color':
-				ThemePlate_Field::color( $field );
+				ThemePlate_Field_Color::render( $field );
 				break;
 
 			case 'file':
-				ThemePlate_Field::file( $field );
+				ThemePlate_Field_File::render( $field );
 				break;
 
 			case 'number':
 			case 'range':
-				ThemePlate_Field::number( $field );
+				ThemePlate_Field_Number::render( $field );
 				break;
 
 			case 'editor':
-				ThemePlate_Field::editor( $field );
+				ThemePlate_Field_Editor::render( $field );
 				break;
 
 			case 'post':
 			case 'page':
 			case 'user':
 			case 'term':
-				ThemePlate_Field::object( $field );
+				ThemePlate_Field_Object::render( $field );
 				break;
 
 			case 'group':
@@ -214,7 +214,7 @@ class ThemePlate_Fields {
 				break;
 
 			case 'html':
-				ThemePlate_Field::html( $field );
+				ThemePlate_Field_Html::render( $field );
 				break;
 		}
 
