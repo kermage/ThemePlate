@@ -10,223 +10,94 @@
 
 class ThemePlate_Field {
 
-	public static function input( $field ) {
+	public static function render( $field ) {
 
-		echo '<input type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field['value'] ) . '" />';
-
-	}
-
-
-	public static function textarea( $field ) {
-
-		echo '<textarea name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" rows="4">' . esc_textarea( $field['value'] ) . '</textarea>';
-
-	}
-
-
-	public static function select( $field ) {
-
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
-		echo '<select' . ( 'select2' === $field['type'] ? ' class="themeplate-select2"' : '' ) . ' name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
-		if ( 'select2' === $field['type'] && ! $field['value'] ) {
-			echo '<option></options>';
-		} elseif ( 'select2' !== $field['type'] && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
-			echo '<option value="0"' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
-		}
-		if ( 'select2' === $field['type'] && $field['multiple'] && $field['value'] ) {
-			$ordered = array();
-			$values  = array_keys( $field['options'] );
-			foreach ( (array) $field['value'] as $value ) {
-				$value = ( $seq ? (int) $value - 1 : $value );
-				if ( ! in_array( strval( $value ), array_map( 'strval', $values ), true ) ) {
-					continue;
-				}
-				$ordered[ $value ] = $field['options'][ $value ];
-				unset( $field['options'][ $value ] );
-			}
-			$field['options'] = $ordered + $field['options'];
-		}
-		foreach ( $field['options'] as $value => $option ) {
-			$value = ( $seq ? $value + 1 : $value );
-			echo '<option value="' . esc_attr( $value ) . '"';
-			if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
-				echo ' selected="selected"';
-			}
-			echo '>' . esc_html( $option ) . '</option>';
-		}
-		echo '</select>';
-
-	}
-
-
-	public static function radio( $field, $list = false ) {
-
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
-		if ( ! empty( $field['options'] ) ) {
-			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';
-			foreach ( $field['options'] as $value => $option ) {
-				$value = ( $seq ? $value + 1 : $value );
-				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="radio" name="' . esc_attr( $field['name'] ) . '" value="' . esc_attr( $value ) . '"' . checked( $field['value'], $value, false ) . ' />' . esc_html( $option ) . '</label>';
-				echo '</' . ( $list ? 'p' : 'span' ) . '>';
-			}
-			echo '</fieldset>';
-		}
-
-	}
-
-
-	public static function checkbox( $field, $list = false ) {
-
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
-		if ( ! empty( $field['options'] ) ) {
-			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';
-			foreach ( $field['options'] as $value => $option ) {
-				$value = ( $seq ? $value + 1 : $value );
-				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="checkbox" name="' . esc_attr( $field['name'] ) . '[]" value="' . esc_attr( $value ) . '"';
-				if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
-					echo ' checked="checked"';
-				}
-				echo ' />' . esc_html( $option ) . '</label>';
-				echo '</' . ( $list ? 'p' : 'span' ) . '>';
-			}
-			echo '</fieldset>';
-		} else {
-			echo '<input type="checkbox" id="' . esc_attr( $field['id'] ) . '" name="' . esc_attr( $field['name'] ) . '" value="1"' . checked( $field['value'], 1, false ) . ' />';
-		}
-
-	}
-
-
-	public static function color( $field ) {
-
-		echo '<input type="text" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" class="themeplate-color-picker" value="' . esc_attr( $field['value'] ) . '"' . ( $field['default'] ? ' data-default-color="' . esc_attr( $field['default'] ) . '"' : '' );
-		if ( ! empty( $field['options'] ) ) {
-			$values = json_encode( $field['options'] );
-			echo ' data-palettes="' . esc_attr( $values ) . '"';
-		}
-		echo ' />';
-
-	}
-
-
-	public static function file( $field ) {
-
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
-		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '">';
-		echo '<div class="preview-holder">';
-		if ( ! $field['multiple'] ) {
-			echo '<div class="attachment placeholder">';
-			echo '<input type="button" class="button attachment-add' . ( $field['value'] ? ' hidden' : '' ) . '" value="Select" />';
-			echo '</div>';
-		}
-		if ( $field['value'] ) {
-			foreach ( (array) $field['value'] as $file ) {
-				$name    = basename( get_attached_file( $file ) );
-				$info    = wp_check_filetype( $name );
-				$type    = wp_ext2type( $info['ext'] );
-				$preview = ( 'image' === $type ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
-				echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
-				echo '<div class="centered"><img src="' . esc_attr( $preview ) . '"/></div>';
-				echo '<div class="filename"><div>' . esc_html( $name ) . '</div></div>';
-				echo '</div></div>';
-				echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-				echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" value="' . esc_attr( $file ) . '" />';
-				echo '</div>';
-			}
-		}
-		echo '</div>';
-		if ( $field['multiple'] ) {
-			echo '<input type="button" class="button attachment-add" value="Add" />';
-			echo '<input type="button" class="button attachments-clear' . ( ! $field['value'] ? ' hidden' : '' ) . '" value="Clear" />';
-		}
-		echo '</div>';
-
-	}
-
-
-	public static function number( $field ) {
-
-		echo '<input type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field['value'] ) . '"';
-		if ( ! empty( $field['options'] ) ) {
-			foreach ( $field['options'] as $option => $value ) {
-				echo $option . '="' . esc_attr( $value ) . '"';
-			}
-		}
-		if ( 'range' === $field['type'] ) {
-			echo ' oninput="this.nextElementSibling.innerHTML=this.value" />';
-			echo '<span>' . esc_html( $field['value'] ) . '</span>';
-		} else {
-			echo ' />';
-		}
-
-	}
-
-
-	public static function editor( $field ) {
-
-		$settings = array(
-			'textarea_name' => $field['name'],
-			'textarea_rows' => 10,
-		);
-		wp_editor( $field['value'], $field['id'], $settings );
-
-	}
-
-
-	public static function object( $field ) {
+		$list = false;
 
 		switch ( $field['type'] ) {
 			default:
+			case 'text':
+			case 'date':
+			case 'time':
+			case 'email':
+			case 'url':
+				ThemePlate_Field_Input::render( $field );
+				break;
+
+			case 'textarea':
+				ThemePlate_Field_Textarea::render( $field );
+				break;
+
+			case 'select':
+			case 'select2':
+				ThemePlate_Field_Select::render( $field );
+				break;
+
+			case 'radiolist':
+				$list = true;
+			case 'radio':
+				ThemePlate_Field_Radio::render( $field, $list );
+				break;
+
+			case 'checklist':
+				$list = true;
+			case 'checkbox':
+				ThemePlate_Field_Checkbox::render( $field, $list );
+				break;
+
+			case 'color':
+				ThemePlate_Field_Color::render( $field );
+				break;
+
+			case 'file':
+				ThemePlate_Field_File::render( $field );
+				break;
+
+			case 'number':
+			case 'range':
+				ThemePlate_Field_Number::render( $field );
+				break;
+
+			case 'editor':
+				ThemePlate_Field_Editor::render( $field );
+				break;
+
 			case 'post':
 			case 'page':
-				$defaults = array( 'post_type' => $field['type'], 'numberposts' => -1 );
-				if ( ThemePlate_Helpers::is_sequential( $field['options'] ) ) {
-					$field['options'] = array( 'post_type' => $field['options'] );
-				}
-				$args     = ThemePlate_Helpers::fool_proof( $defaults, $field['options'] );
-				$items    = get_posts( $args );
-				$val_prop = 'ID';
-				$lbl_prop = 'post_title';
-				break;
 			case 'user':
-				$defaults = array( 'role' => '' );
-				if ( ThemePlate_Helpers::is_sequential( $field['options'] ) ) {
-					$field['options'] = array( 'role' => $field['options'] );
-				}
-				$args     = ThemePlate_Helpers::fool_proof( $defaults, $field['options'] );
-				$items    = get_users( $args );
-				$val_prop = 'ID';
-				$lbl_prop = 'display_name';
-				break;
 			case 'term':
-				$defaults = array( 'taxonomy' => array() );
-				if ( ThemePlate_Helpers::is_sequential( $field['options'] ) ) {
-					$field['options'] = array( 'taxonomy' => $field['options'] );
-				}
-				$args     = ThemePlate_Helpers::fool_proof( $defaults, $field['options'] );
-				$items    = get_terms( $args );
-				$val_prop = 'term_id';
-				$lbl_prop = 'name';
+				ThemePlate_Field_Object::render( $field );
+				break;
+
+			case 'html':
+				ThemePlate_Field_Html::render( $field );
 				break;
 		}
-		$values = array_column( $items, $val_prop );
-		$labels = array_column( $items, $lbl_prop );
-
-		$field['type']    = 'select2';
-		$field['options'] = array_combine( $values, $labels );
-
-		self::select( $field );
 
 	}
 
 
-	public static function html( $field ) {
+	public static function deprecate_check( $field ) {
 
-		echo $field['default'];
+		if ( ! empty( $field['name'] ) ) {
+			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>title</b> to field config instead of <b>name</b>.' );
+
+			$field['title'] = $field['name'];
+		}
+
+		if ( ! empty( $field['desc'] ) ) {
+			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>description</b> to field config instead of <b>desc</b>.' );
+
+			$field['description'] = $field['desc'];
+		}
+
+		if ( ! empty( $field['std'] ) ) {
+			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>default</b> to field config instead of <b>std</b>.' );
+
+			$field['default'] = $field['std'];
+		}
+
+		return $field;
 
 	}
 
