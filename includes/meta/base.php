@@ -85,7 +85,7 @@ abstract class ThemePlate_Meta_Base {
 			return false;
 		}
 
-		if ( ! isset( $_POST[ 'themeplate_' . $this->config['id'] . '_nonce' ] ) || ! wp_verify_nonce( $_POST[ 'themeplate_' . $this->config['id'] . '_nonce' ], basename( __FILE__ ) ) ) {
+		if ( ! isset( $_POST[ 'themeplate_' . $this->config['id'] . '_nonce' ] ) || ! wp_verify_nonce( $_POST[ 'themeplate_' . $this->config['id'] . '_nonce' ], 'save_themeplate_' . $this->config['id'] ) ) {
 			return false;
 		}
 
