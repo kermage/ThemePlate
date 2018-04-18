@@ -10,20 +10,21 @@
 
 class ThemePlate_Meta_User {
 
-	private $tpmb;
+	private $form;
 
 
 	public function __construct( $config ) {
 
+		$defaults = array(
+			'priority' => 'default',
+		);
+
+		$config['object_type'] = 'user';
+
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
 		try {
-			$defaults = array(
-				'priority' => 'default',
-			);
-			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-			$config['object_type'] = 'user';
-
-			$this->tpmb = new ThemePlate_MetaBox( $config );
+			$this->form = new ThemePlate_Form( $config );
 		} catch ( Exception $e ) {
 			throw new Exception( $e );
 		}
@@ -49,14 +50,14 @@ class ThemePlate_Meta_User {
 
 		$user_id = is_object( $user ) ? $user->ID : '';
 
-		$this->tpmb->layout_postbox( $user_id );
+		$this->form->layout_postbox( $user_id );
 
 	}
 
 
 	public function save( $user_id ) {
 
-		if ( ! $this->tpmb->can_save() ) {
+		if ( ! $this->can_save() ) {
 			return;
 		}
 
@@ -64,7 +65,7 @@ class ThemePlate_Meta_User {
 			return;
 		}
 
-		$this->tpmb->save( $user_id );
+		parent::save( $user_id );
 
 	}
 
@@ -78,7 +79,7 @@ class ThemePlate_Meta_User {
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
-		$this->tpmb->enqueue();
+		$this->form->enqueue();
 
 	}
 
@@ -91,7 +92,7 @@ class ThemePlate_Meta_User {
 			return false;
 		}
 
-		$meta_box = $this->tpmb->get_config();
+		$meta_box = $this->config;
 
 		if ( 'user-edit' === $screen->base && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
 			return false;

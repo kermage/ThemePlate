@@ -10,23 +10,26 @@
 
 class ThemePlate_Settings {
 
-	private $tpmb;
+	private $config;
+	private $form;
 
 
 	public function __construct( $config ) {
 
+		$defaults = array(
+			'page'     => ThemePlate()->slug,
+			'context'  => 'normal',
+			'priority' => 'default',
+		);
+		$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
+		$config['page']        = ThemePlate()->key . '-' . $config['page'];
+		$config['object_type'] = 'options';
+
+		$this->config = $config;
+
 		try {
-			$defaults = array(
-				'page'     => ThemePlate()->slug,
-				'context'  => 'normal',
-				'priority' => 'default',
-			);
-			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-			$config['page']        = ThemePlate()->key . '-' . $config['page'];
-			$config['object_type'] = 'options';
-
-			$this->tpmb = new ThemePlate_MetaBox( $config );
+			$this->form = new ThemePlate_Form( $config );
 		} catch ( Exception $e ) {
 			throw new Exception( $e );
 		}
@@ -43,7 +46,7 @@ class ThemePlate_Settings {
 			return;
 		}
 
-		$settings = $this->tpmb->get_config();
+		$settings = $this->config;
 		$section  = $settings['page'] . '_' . $settings['context'];
 		$priority = ThemePlate_Helpers::get_priority( $settings );
 
@@ -54,8 +57,8 @@ class ThemePlate_Settings {
 
 	public function add() {
 
-		$settings = $this->tpmb->get_config();
-		$this->tpmb->layout_postbox( $settings['page'] );
+		$settings = $this->config;
+		$this->form->layout_postbox( $settings['page'] );
 
 	}
 
@@ -66,14 +69,14 @@ class ThemePlate_Settings {
 			return;
 		}
 
-		$this->tpmb->enqueue();
+		$this->form->enqueue();
 
 	}
 
 
 	private function is_valid_screen() {
 
-		$settings = $this->tpmb->get_config();
+		$settings = $this->config;
 		$screen   = get_current_screen();
 
 		if ( strpos( $screen->id, $settings['page'] ) === false ) {

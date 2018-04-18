@@ -8,24 +8,25 @@
  */
 
 
-class ThemePlate_Meta_Post {
+class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
-	private $tpmb;
+	private $form;
 
 
 	public function __construct( $config ) {
 
+		$defaults = array(
+			'screen'   => array(),
+			'context'  => 'advanced',
+			'priority' => 'default',
+		);
+
+		$config['object_type'] = 'post';
+
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
 		try {
-			$defaults = array(
-				'screen'   => array(),
-				'context'  => 'advanced',
-				'priority' => 'default',
-			);
-			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-			$config['object_type'] = 'post';
-
-			$this->tpmb = new ThemePlate_MetaBox( $config );
+			$this->form = new ThemePlate_Form( $config );
 		} catch ( Exception $e ) {
 			throw new Exception( $e );
 		}
@@ -43,7 +44,7 @@ class ThemePlate_Meta_Post {
 			return;
 		}
 
-		$meta_box = $this->tpmb->get_config();
+		$meta_box = $this->config;
 
 		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'add' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
 
@@ -52,14 +53,14 @@ class ThemePlate_Meta_Post {
 
 	public function add() {
 
-		$this->tpmb->layout_inside( get_the_ID() );
+		$this->form->layout_inside( get_the_ID() );
 
 	}
 
 
 	public function save( $post_id ) {
 
-		if ( ! $this->tpmb->can_save() ) {
+		if ( ! $this->can_save() ) {
 			return;
 		}
 
@@ -71,7 +72,7 @@ class ThemePlate_Meta_Post {
 			return;
 		}
 
-		$this->tpmb->save( $post_id );
+		parent::save( $post_id );
 
 	}
 
@@ -82,7 +83,7 @@ class ThemePlate_Meta_Post {
 			return;
 		}
 
-		$this->tpmb->enqueue();
+		$this->form->enqueue();
 
 	}
 
@@ -95,7 +96,7 @@ class ThemePlate_Meta_Post {
 			return false;
 		}
 
-		$meta_box = $this->tpmb->get_config();
+		$meta_box = $this->config;
 
 		if ( ! empty( $meta_box['screen'] ) && ! in_array( $screen->post_type, $meta_box['screen'], true ) ) {
 			return false;

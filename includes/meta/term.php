@@ -10,31 +10,32 @@
 
 class ThemePlate_Meta_Term {
 
-	private $tpmb;
+	private $form;
 
 
 	public function __construct( $config ) {
 
+		if ( empty( $config['taxonomy'] ) ) {
+			$taxonomies   = get_taxonomies( array( '_builtin' => false ) );
+			$taxonomies[] = 'category';
+			$taxonomies[] = 'post_tag';
+
+			$config['taxonomy'] = $taxonomies;
+		} else {
+			$taxonomies = $config['taxonomy'];
+		}
+
+		$defaults = array(
+			'taxonomy' => array(),
+			'priority' => 'default',
+		);
+
+		$config['object_type'] = 'term';
+
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+
 		try {
-			if ( empty( $config['taxonomy'] ) ) {
-				$taxonomies   = get_taxonomies( array( '_builtin' => false ) );
-				$taxonomies[] = 'category';
-				$taxonomies[] = 'post_tag';
-
-				$config['taxonomy'] = $taxonomies;
-			} else {
-				$taxonomies = $config['taxonomy'];
-			}
-
-			$defaults = array(
-				'taxonomy' => array(),
-				'priority' => 'default',
-			);
-			$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
-
-			$config['object_type'] = 'term';
-
-			$this->tpmb = new ThemePlate_MetaBox( $config );
+			$this->form = new ThemePlate_Form( $config );
 		} catch ( Exception $e ) {
 			throw new Exception( $e );
 		}
@@ -61,14 +62,14 @@ class ThemePlate_Meta_Term {
 
 		$term_id = is_object( $tag ) ? $tag->term_id : '';
 
-		$this->tpmb->layout_postbox( $term_id );
+		$this->form->layout_postbox( $term_id );
 
 	}
 
 
 	public function save( $term_id ) {
 
-		if ( ! $this->tpmb->can_save() ) {
+		if ( ! $this->can_save() ) {
 			return;
 		}
 
@@ -76,7 +77,7 @@ class ThemePlate_Meta_Term {
 			return;
 		}
 
-		$this->tpmb->save( $term_id );
+		parent::save( $term_id );
 
 	}
 
@@ -90,7 +91,7 @@ class ThemePlate_Meta_Term {
 		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
-		$this->tpmb->enqueue();
+		$this->form->enqueue();
 
 	}
 
@@ -103,7 +104,7 @@ class ThemePlate_Meta_Term {
 			return false;
 		}
 
-		$meta_box = $this->tpmb->get_config();
+		$meta_box = $this->config;
 
 		if ( ! in_array( $screen->taxonomy, $meta_box['taxonomy'], true ) ) {
 			return false;
