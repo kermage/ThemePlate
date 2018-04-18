@@ -204,8 +204,7 @@ class ThemePlate_Fields {
 				foreach ( $field['fields'] as $id => $sub ) {
 					$sub['id'] = $field['id'] . '_' . $id;
 
-					$this->deprecate_check( $sub );
-
+					$sub    = $this->deprecate_check( $sub );
 					$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
 					$value  = $stored ? $stored : $sub['default'];
 					$name   = $field['name'] . '[' . $id . ']';
