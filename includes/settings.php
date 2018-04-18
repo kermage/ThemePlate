@@ -17,6 +17,8 @@ class ThemePlate_Settings {
 	public function __construct( $config ) {
 
 		$defaults = array(
+			'show_on'  => array(),
+			'hide_on'  => array(),
 			'page'     => ThemePlate()->slug,
 			'context'  => 'normal',
 			'priority' => 'default',

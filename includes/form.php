@@ -28,7 +28,10 @@ class ThemePlate_Form {
 			throw new Exception();
 		}
 
-		$this->config = $config;
+		$defaults     = array(
+			'style' => '',
+		);
+		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
 
 	}
