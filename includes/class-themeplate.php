@@ -49,6 +49,10 @@ class ThemePlate {
 
 	private function autoload( $class ) {
 
+		if ( 0 !== strpos( $class, 'ThemePlate' ) ) {
+			return;
+		}
+
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-' . strtolower( str_replace( '_', '-', $class ) ) . '.php';
 
 		if ( ! class_exists( $class ) && file_exists( $path ) ) {
