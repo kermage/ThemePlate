@@ -99,7 +99,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 			return false;
 		}
 
-		if ( ! ThemePlate_Helpers::should_display( $meta_box, get_the_ID() ) ) {
+		if ( ! ThemePlate_Helper_Meta::should_display( $meta_box, get_the_ID() ) ) {
 			return false;
 		}
 

@@ -91,11 +91,11 @@ class ThemePlate_Meta_User {
 
 		$meta_box = $this->config;
 
-		if ( 'user-edit' === $screen->base && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
+		if ( 'user-edit' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
 			return false;
 		}
 
-		if ( 'profile' === $screen->base && ! ThemePlate_Helpers::should_display( $meta_box, get_current_user_id() ) ) {
+		if ( 'profile' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, get_current_user_id() ) ) {
 			return false;
 		}
 

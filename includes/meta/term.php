@@ -107,11 +107,11 @@ class ThemePlate_Meta_Term {
 			return false;
 		}
 
-		if ( 'edit-tags' === $screen->base && ! ThemePlate_Helpers::should_display( $meta_box, '' ) ) {
+		if ( 'edit-tags' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, '' ) ) {
 			return false;
 		}
 
-		if ( 'term' === $screen->base && ! ThemePlate_Helpers::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) {
+		if ( 'term' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) {
 			return false;
 		}
 
