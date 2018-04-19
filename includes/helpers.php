@@ -196,4 +196,21 @@ class ThemePlate_Helpers {
 
 	}
 
+
+	public static function is_complete( $config, $expected ) {
+
+		if ( ! is_array( $config ) || empty( $config ) ) {
+			return false;
+		}
+
+		foreach ( $expected as $key ) {
+			if ( ! array_key_exists( $key, $config ) ) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
 }

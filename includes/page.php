@@ -15,11 +15,12 @@ class ThemePlate_Page {
 
 	public function __construct( $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			throw new Exception();
-		}
+		$expected = array(
+			'id',
+			'title',
+		);
 
-		if ( ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) ) {
+		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 

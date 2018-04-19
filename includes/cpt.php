@@ -15,14 +15,13 @@ class ThemePlate_CPT {
 
 	public function __construct( $kind, $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			throw new Exception();
-		}
+		$expected = array(
+			'name',
+			'plural',
+			'singular',
+		);
 
-		if ( ! array_key_exists( 'name', $config ) ||
-			! array_key_exists( 'plural', $config ) ||
-			! array_key_exists( 'singular', $config )
-		) {
+		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 

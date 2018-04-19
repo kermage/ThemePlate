@@ -16,15 +16,14 @@ class ThemePlate_Form {
 
 	public function __construct( $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			throw new Exception();
-		}
+		$expected = array(
+			'object_type',
+			'id',
+			'title',
+			'fields',
+		);
 
-		if ( ! array_key_exists( 'object_type', $config ) || ! array_key_exists( 'id', $config ) || ! array_key_exists( 'title', $config ) || ! array_key_exists( 'fields', $config ) ) {
-			throw new Exception();
-		}
-
-		if ( ! is_array( $config['fields'] ) || empty( $config['fields'] ) ) {
+		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
