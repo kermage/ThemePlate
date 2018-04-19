@@ -12,7 +12,7 @@ class ThemePlate_Field_Radio {
 
 	public static function render( $field, $list = false ) {
 
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
+		$seq = ThemePlate_Helper_Main::is_sequential( $field['options'] );
 		if ( ! empty( $field['options'] ) ) {
 			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';
 			foreach ( $field['options'] as $value => $option ) {

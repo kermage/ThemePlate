@@ -72,7 +72,7 @@ class ThemePlate_Helper_Meta {
 			$container[ $type . '_cb' ] = $value;
 			unset( $container[ $type ] );
 		} elseif ( is_array( $value ) ) {
-			if ( ! ThemePlate_Helpers::is_sequential( $value ) ) {
+			if ( ! ThemePlate_Helper_Main::is_sequential( $value ) ) {
 				$value              = array( $value );
 				$container[ $type ] = array( $container[ $type ] );
 			}

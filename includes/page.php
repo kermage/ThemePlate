@@ -20,7 +20,7 @@ class ThemePlate_Page {
 			'title',
 		);
 
-		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
@@ -31,7 +31,7 @@ class ThemePlate_Page {
 			'icon'       => '',
 			'position'   => null,
 		);
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_menu', array( $this, 'menu' ) );
@@ -179,7 +179,7 @@ class ThemePlate_Page {
 
 	public function save( $options ) {
 
-		return ThemePlate_Helpers::preprare_save( $options );
+		return ThemePlate_Helper_Box::preprare_save( $options );
 
 	}
 

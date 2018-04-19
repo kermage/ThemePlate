@@ -22,14 +22,14 @@ class ThemePlate_Columns {
 			'callback',
 		);
 
-		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
 		$defaults     = array(
 			'position' => 0,
 		);
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
 		add_filter( 'manage_' . $config['post_type'] . '_posts_columns', array( $this, 'modify' ), 10 );
 		add_action( 'manage_' . $config['post_type'] . '_posts_custom_column', array( $this, 'populate' ), 10, 2 );

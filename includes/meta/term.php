@@ -35,9 +35,9 @@ class ThemePlate_Meta_Term {
 			'priority' => 'default',
 		);
 
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $this->config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $this->config );
 
-		$priority = ThemePlate_Helpers::get_priority( $config );
+		$priority = ThemePlate_Helper_Box::get_priority( $config );
 
 		foreach ( (array) $taxonomies as $taxonomy ) {
 			add_action( $taxonomy . '_add_form', array( $this, 'create' ), $priority );

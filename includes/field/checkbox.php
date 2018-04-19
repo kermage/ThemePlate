@@ -12,7 +12,7 @@ class ThemePlate_Field_Checkbox {
 
 	public static function render( $field, $list = false ) {
 
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
+		$seq = ThemePlate_Helper_Main::is_sequential( $field['options'] );
 		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
 		if ( ! empty( $field['options'] ) ) {
 			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';

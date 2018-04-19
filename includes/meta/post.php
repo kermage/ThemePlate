@@ -26,7 +26,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 			'priority' => 'default',
 		);
 
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $this->config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $this->config );
 
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );

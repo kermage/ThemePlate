@@ -21,7 +21,7 @@ class ThemePlate_CPT {
 			'singular',
 		);
 
-		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
@@ -32,7 +32,7 @@ class ThemePlate_CPT {
 		$defaults     = array(
 			'args' => array(),
 		);
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 		$this->$kind( $this->config );
 
 	}
@@ -46,7 +46,7 @@ class ThemePlate_CPT {
 			'labels' => array(),
 			'public' => true,
 		);
-		$args     = ThemePlate_Helpers::fool_proof( $defaults, $config['args'] );
+		$args     = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
 
 		$labels = array(
 			'name'                  => $plural,
@@ -73,7 +73,7 @@ class ThemePlate_CPT {
 			'name_admin_bar'        => $plural,
 		);
 
-		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
+		$args['labels'] = ThemePlate_Helper_Main::fool_proof( $labels, $args['labels'] );
 
 		register_post_type( $config['name'], $args );
 
@@ -92,7 +92,7 @@ class ThemePlate_CPT {
 			'public' => true,
 		);
 
-		$args = ThemePlate_Helpers::fool_proof( $defaults, $config['args'] );
+		$args = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
 
 		$labels = array(
 			'name'                       => $plural,
@@ -114,7 +114,7 @@ class ThemePlate_CPT {
 			'not_found'                  => $singular . ' not found',
 		);
 
-		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
+		$args['labels'] = ThemePlate_Helper_Main::fool_proof( $labels, $args['labels'] );
 
 		register_taxonomy( $config['name'], $config['type'], $args );
 

@@ -16,7 +16,7 @@ class ThemePlate_Field_Editor {
 			'textarea_name' => $field['name'],
 			'textarea_rows' => 10,
 		);
-		$settings = ThemePlate_Helpers::fool_proof( $defaults, $field['options'] );
+		$settings = ThemePlate_Helper_Main::fool_proof( $defaults, $field['options'] );
 		wp_editor( $field['value'], $field['id'], $settings );
 
 	}

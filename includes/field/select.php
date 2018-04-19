@@ -12,7 +12,7 @@ class ThemePlate_Field_Select {
 
 	public static function render( $field ) {
 
-		$seq = ThemePlate_Helpers::is_sequential( $field['options'] );
+		$seq = ThemePlate_Helper_Main::is_sequential( $field['options'] );
 		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
 		echo '<select' . ( 'select2' === $field['type'] ? ' class="themeplate-select2"' : '' ) . ' name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . '>';
 		if ( 'select2' === $field['type'] && ! $field['value'] ) {

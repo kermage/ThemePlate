@@ -21,7 +21,7 @@ abstract class ThemePlate_Meta_Base {
 			'title',
 		);
 
-		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
@@ -37,8 +37,8 @@ abstract class ThemePlate_Meta_Base {
 			'show_on' => array(),
 			'hide_on' => array(),
 		);
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
-		$this->config = ThemePlate_Helpers::normalize_options( $this->config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
+		$this->config = ThemePlate_Helper_Meta::normalize_options( $this->config );
 
 	}
 
@@ -56,7 +56,7 @@ abstract class ThemePlate_Meta_Base {
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ ThemePlate()->key ][ $key ];
-			$cleaned = ThemePlate_Helpers::preprare_save( $updated );
+			$cleaned = ThemePlate_Helper_Box::preprare_save( $updated );
 
 			if ( is_array( $cleaned ) ) {
 				$cleaned = array_filter( $cleaned );

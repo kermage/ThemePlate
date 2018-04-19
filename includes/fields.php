@@ -42,8 +42,8 @@ class ThemePlate_Fields {
 				'style'      => '',
 				'repeatable' => false,
 			);
-			$field    = ThemePlate_Helpers::fool_proof( $defaults, $field );
-			$field    = ThemePlate_Helpers::normalize_options( $field );
+			$field    = ThemePlate_Helper_Main::fool_proof( $defaults, $field );
+			$field    = ThemePlate_Helper_Meta::normalize_options( $field );
 
 			if ( 'group' === $field['type'] ) {
 				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
@@ -92,7 +92,7 @@ class ThemePlate_Fields {
 	private function layout( $field, $value, $name ) {
 
 		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
-			ThemePlate_Helpers::render_options( $field );
+			ThemePlate_Helper_Meta::render_options( $field );
 
 			if ( ! empty( $field['title'] ) || ! empty( $field['description'] ) ) {
 				echo '<div class="field-label">';

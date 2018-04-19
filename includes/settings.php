@@ -23,7 +23,7 @@ class ThemePlate_Settings {
 			'context'  => 'normal',
 			'priority' => 'default',
 		);
-		$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$config   = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
 		$config['page']        = ThemePlate()->key . '-' . $config['page'];
 		$config['object_type'] = 'options';
@@ -50,7 +50,7 @@ class ThemePlate_Settings {
 
 		$settings = $this->config;
 		$section  = $settings['page'] . '_' . $settings['context'];
-		$priority = ThemePlate_Helpers::get_priority( $settings );
+		$priority = ThemePlate_Helper_Box::get_priority( $settings );
 
 		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ), $priority );
 

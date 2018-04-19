@@ -23,14 +23,14 @@ class ThemePlate_Form {
 			'fields',
 		);
 
-		if ( ! ThemePlate_Helpers::is_complete( $config, $expected ) ) {
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
 		$defaults     = array(
 			'style' => '',
 		);
-		$this->config = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
 
 	}
@@ -76,7 +76,7 @@ class ThemePlate_Form {
 
 		wp_nonce_field( 'save_themeplate_' . $meta_box['id'], 'themeplate_' . $meta_box['id'] . '_nonce' );
 
-		ThemePlate_Helpers::render_options( $meta_box );
+		ThemePlate_Helper_Meta::render_options( $meta_box );
 
 		if ( ! empty( $meta_box['description'] ) ) {
 			echo '<p class="description">' . $meta_box['description'] . '</p>';

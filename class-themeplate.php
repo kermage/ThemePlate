@@ -37,7 +37,7 @@ class ThemePlate {
 			'slug'  => 'options',
 		);
 		$config   = $this->prepare( $key, $pages );
-		$config   = ThemePlate_Helpers::fool_proof( $defaults, $config );
+		$config   = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
 		$this->setup( $config );
 
