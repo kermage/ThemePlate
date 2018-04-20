@@ -56,7 +56,7 @@ abstract class ThemePlate_Meta_Base {
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
 			$updated = $_POST[ ThemePlate()->key ][ $key ];
-			$cleaned = ThemePlate_Helper_Box::preprare_save( $updated );
+			$cleaned = ThemePlate_Helper_Box::prepare_save( $updated );
 
 			if ( is_array( $cleaned ) ) {
 				$cleaned = array_filter( $cleaned );

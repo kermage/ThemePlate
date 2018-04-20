@@ -179,7 +179,7 @@ class ThemePlate_Page {
 
 	public function save( $options ) {
 
-		return ThemePlate_Helper_Box::preprare_save( $options );
+		return ThemePlate_Helper_Box::prepare_save( $options );
 
 	}
 

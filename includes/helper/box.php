@@ -10,7 +10,7 @@
 
 class ThemePlate_Helper_Box {
 
-	public static function preprare_save( $data ) {
+	public static function prepare_save( $data ) {
 
 		if ( ! is_array( $data ) ) {
 			return $data;
