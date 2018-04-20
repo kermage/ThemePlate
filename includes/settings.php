@@ -16,6 +16,15 @@ class ThemePlate_Settings {
 
 	public function __construct( $config ) {
 
+		$expected = array(
+			'id',
+			'title',
+		);
+
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
+			throw new Exception();
+		}
+
 		$defaults = array(
 			'show_on'  => array(),
 			'hide_on'  => array(),
