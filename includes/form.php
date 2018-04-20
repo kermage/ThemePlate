@@ -31,6 +31,7 @@ class ThemePlate_Form {
 			'style' => '',
 		);
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
+		$this->config = ThemePlate_Helper_Meta::normalize_options( $this->config );
 		$this->fields = new ThemePlate_Fields( $config['fields'] );
 
 	}

@@ -39,7 +39,6 @@ abstract class ThemePlate_Meta_Base {
 			'hide_on' => array(),
 		);
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
-		$this->config = ThemePlate_Helper_Meta::normalize_options( $this->config );
 
 	}
 
