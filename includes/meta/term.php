@@ -8,7 +8,7 @@
  */
 
 
-class ThemePlate_Meta_Term {
+class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 
 	public function __construct( $config ) {
 

@@ -8,7 +8,7 @@
  */
 
 
-class ThemePlate_Meta_User {
+class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 
 	public function __construct( $config ) {
 
