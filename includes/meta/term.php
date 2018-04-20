@@ -35,7 +35,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $this->config );
 
-		$priority = ThemePlate_Helper_Box::get_priority( $config );
+		$priority = ThemePlate_Helper_Box::get_priority( $this->config );
 
 		foreach ( $this->config['taxonomy'] as $taxonomy ) {
 			add_action( $taxonomy . '_add_form', array( $this, 'create' ), $priority );

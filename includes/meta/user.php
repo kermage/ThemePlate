@@ -26,7 +26,7 @@ class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $this->config );
 
-		$priority = ThemePlate_Helper_Box::get_priority( $config );
+		$priority = ThemePlate_Helper_Box::get_priority( $this->config );
 
 		add_action( 'show_user_profile', array( $this, 'create' ), $priority );
 		add_action( 'edit_user_profile', array( $this, 'create' ), $priority );
