@@ -25,9 +25,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 			$taxonomies[] = 'category';
 			$taxonomies[] = 'post_tag';
 
-			$config['taxonomy'] = $taxonomies;
-		} else {
-			$taxonomies = $config['taxonomy'];
+			$this->config['taxonomy'] = $taxonomies;
 		}
 
 		$defaults = array(
@@ -39,7 +37,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 
 		$priority = ThemePlate_Helper_Box::get_priority( $config );
 
-		foreach ( (array) $taxonomies as $taxonomy ) {
+		foreach ( $this->config['taxonomy'] as $taxonomy ) {
 			add_action( $taxonomy . '_add_form', array( $this, 'create' ), $priority );
 			add_action( $taxonomy . '_edit_form', array( $this, 'create' ), $priority );
 			add_action( 'created_' . $taxonomy, array( $this, 'save' ) );
