@@ -21,11 +21,11 @@ class ThemePlate_CPT {
 			'singular',
 		);
 
-		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
-			throw new Exception();
+		if ( 'taxonomy' === $kind ) {
+			$expected[] = 'type';
 		}
 
-		if ( 'taxonomy' === $kind && ! array_key_exists( 'type', $config ) ) {
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
 			throw new Exception();
 		}
 
