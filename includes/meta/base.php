@@ -17,6 +17,7 @@ abstract class ThemePlate_Meta_Base {
 	public function __construct( $config ) {
 
 		$expected = array(
+			'object_type',
 			'id',
 			'title',
 		);
