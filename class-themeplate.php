@@ -26,9 +26,7 @@ class ThemePlate {
 
 	private function __construct( $key, $pages ) {
 
-		if ( function_exists( 'spl_autoload_register' ) ) {
-			spl_autoload_register( array( $this, 'autoload' ) );
-		}
+		spl_autoload_register( array( $this, 'autoload' ) );
 
 		$defaults = array(
 			'title' => 'ThemePlate Options',
