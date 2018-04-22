@@ -119,7 +119,9 @@ class ThemePlate_Page {
 			return;
 		}
 
-		if ( $_REQUEST['page'] === $this->config['id'] && 'true' === $_REQUEST['settings-updated'] ) {
+		$page = ThemePlate()->key . '-' . $this->config['id'];
+
+		if ( $_REQUEST['page'] === $page && 'true' === $_REQUEST['settings-updated'] ) {
 			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
 		}
 
