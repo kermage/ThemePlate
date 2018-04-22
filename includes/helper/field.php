@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Setup a field type
+ * Helper functions
  *
  * @package ThemePlate
  * @since 0.1.0
  */
 
 
-class ThemePlate_Field {
+class ThemePlate_Helper_Field {
 
 	public static function render( $field ) {
 

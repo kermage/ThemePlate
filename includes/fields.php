@@ -79,7 +79,7 @@ class ThemePlate_Fields {
 				$key    = ThemePlate()->key;
 			}
 
-			$field = ThemePlate_Field::deprecate_check( $field );
+			$field = ThemePlate_Helper_Field::deprecate_check( $field );
 			$value = $stored ? $stored : $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
 
@@ -144,13 +144,13 @@ class ThemePlate_Fields {
 	private function render( $field ) {
 
 		if ( 'group' !== $field['type'] ) {
-			return ThemePlate_Field::render( $field );
+			return ThemePlate_Helper_Field::render( $field );
 		}
 
 		foreach ( $field['fields'] as $id => $sub ) {
 			$sub['id'] = $field['id'] . '_' . $id;
 
-			$sub    = ThemePlate_Field::deprecate_check( $sub );
+			$sub    = ThemePlate_Helper_Field::deprecate_check( $sub );
 			$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
 			$value  = $stored ? $stored : $sub['default'];
 			$name   = $field['name'] . '[' . $id . ']';
