@@ -14,12 +14,10 @@ class ThemePlate_Helper_Meta {
 
 		$check = true;
 
-		if ( isset( $meta_box['show_on_cb'] ) || isset( $meta_box['show_on_id'] ) ) {
-			$check = self::display_check( $object_id, $meta_box['show_on_cb'], $meta_box['show_on_id'] );
-		}
-
-		if ( isset( $meta_box['hide_on_cb'] ) || isset( $meta_box['hide_on_id'] ) ) {
-			$check = ! self::display_check( $object_id, $meta_box['hide_on_cb'], $meta_box['hide_on_id'] );
+		foreach ( array( 'show', 'hide' ) as $key ) {
+			if ( isset( $meta_box[ $key . '_on_cb' ] ) || isset( $meta_box[ $key . '_on_id' ] ) ) {
+				$check = self::display_check( $object_id, $meta_box[ $key . '_on_cb' ], $meta_box[ $key . '_on_id' ] );
+			}
 		}
 
 		return $check;
@@ -46,12 +44,10 @@ class ThemePlate_Helper_Meta {
 
 	public static function normalize_options( $container ) {
 
-		if ( ! empty( $container['show_on'] ) ) {
-			$container = self::option_check( 'show_on', $container );
-		}
-
-		if ( ! empty( $container['hide_on'] ) ) {
-			$container = self::option_check( 'hide_on', $container );
+		foreach ( array( 'show', 'hide' ) as $key ) {
+			if ( ! empty( $container[ $key . '_on'] ) ) {
+				$container = self::option_check( $key . '_on', $container );
+			}
 		}
 
 		return $container;
@@ -93,14 +89,11 @@ class ThemePlate_Helper_Meta {
 		if ( ! empty( $container['show_on'] ) || ! empty( $container['hide_on'] ) ) {
 			echo '<div class="themeplate-options"';
 
-			if ( ! empty( $container['show_on'] ) ) {
-				$show_on = json_encode( $container['show_on'], JSON_NUMERIC_CHECK );
-				echo ' data-show="' . esc_attr( $show_on ) . '"';
-			}
-
-			if ( ! empty( $container['hide_on'] ) ) {
-				$hide_on = json_encode( $container['hide_on'], JSON_NUMERIC_CHECK );
-				echo ' data-hide="' . esc_attr( $hide_on ) . '"';
+			foreach ( array( 'show', 'hide' ) as $key ) {
+				if ( ! empty( $container[ $key . '_on' ] ) ) {
+					$value = json_encode( $container[ $key . '_on' ], JSON_NUMERIC_CHECK );
+					echo ' data-' . $key . '="' . esc_attr( $value ) . '"';
+				}
 			}
 
 			echo '></div>';
