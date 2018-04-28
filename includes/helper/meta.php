@@ -17,6 +17,10 @@ class ThemePlate_Helper_Meta {
 		foreach ( array( 'show', 'hide' ) as $key ) {
 			if ( isset( $meta_box[ $key . '_on_cb' ] ) || isset( $meta_box[ $key . '_on_id' ] ) ) {
 				$check = self::display_check( $object_id, $meta_box[ $key . '_on_cb' ], $meta_box[ $key . '_on_id' ] );
+
+				if ( 'hide' === $key ) {
+					$check = ! $check;
+				}
 			}
 		}
 
