@@ -186,8 +186,8 @@ class ThemePlate {
 		wp_enqueue_script( 'themeplate-script', TP_URL . 'assets/themeplate.js', array(), TP_VERSION, true );
 		wp_enqueue_script( 'themeplate-show-hide', TP_URL . 'assets/show-hide.js', array(), TP_VERSION, true );
 		wp_enqueue_script( 'themeplate-repeater', TP_URL . 'assets/repeater.js', array(), TP_VERSION, true );
-		wp_enqueue_style( 'themeplate-select2-style', 'assets/select2.min.css', array(), '4.0.5' );
-		wp_enqueue_script( 'themeplate-select2-script', 'assets/select2.full.min.js', array(), '4.0.5', true );
+		wp_enqueue_style( 'themeplate-select2-style', TP_URL . 'assets/select2.min.css', array(), '4.0.5' );
+		wp_enqueue_script( 'themeplate-select2-script', TP_URL . 'assets/select2.full.min.js', array(), '4.0.5', true );
 
 	}
 
