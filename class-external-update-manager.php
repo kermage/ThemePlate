@@ -9,7 +9,7 @@
  * @package External Update Manager
  * @link    https://github.com/kermage/External-Update-Manager
  * @author  Gene Alyson Fortunado Torcende
- * @version 1.4.0
+ * @version 1.5.0
  * @license GPL-3.0
  */
 
@@ -93,6 +93,7 @@ if ( ! class_exists( 'External_Update_Manager' ) ) {
 
 			if ( version_compare( $this->item_version, $remote_data->new_version, '<' ) ) {
 				$transient->response[ $this->item_key ] = $this->format_response( $remote_data );
+
 				$this->has_update = true;
 			}
 
@@ -125,7 +126,7 @@ if ( ! class_exists( 'External_Update_Manager' ) ) {
 				return $meta;
 			}
 
-			$url  = 'plugin-install.php?tab=plugin-information&plugin=' . urlencode( $this->item_slug ) . '&TB_iframe=true';
+			$url  = 'plugin-install.php?tab=plugin-information&plugin=' . rawurlencode( $this->item_slug ) . '&TB_iframe=true';
 			$link = sprintf(
 				'<a href="%s" class="thickbox open-plugin-details-modal" aria-label="%s" data-title="%s">View details</a>',
 				esc_url( network_admin_url( $url ) ),
@@ -169,6 +170,8 @@ if ( ! class_exists( 'External_Update_Manager' ) ) {
 			if ( 200 === $code ) {
 				return json_decode( $body );
 			}
+
+			return false;
 		}
 
 		private function format_response( $unformatted ) {
@@ -187,6 +190,10 @@ if ( ! class_exists( 'External_Update_Manager' ) ) {
 				$formatted->homepage      = $unformatted->url;
 				$formatted->author        = sprintf( '<a href="%s">%s</a>', $unformatted->author_url, $unformatted->author_name );
 				$formatted->sections      = (array) $unformatted->sections;
+
+				if ( ! empty( $unformatted->banners ) ) {
+					$formatted->banners = (array) $unformatted->banners;
+				}
 			}
 
 			return $formatted;
