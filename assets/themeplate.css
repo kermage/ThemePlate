@@ -329,8 +329,8 @@
 	margin-bottom: 1em;
 }
 
-#after_title-sortables .postbox,
-#after_title-sortables .sortable-placeholder,
+.post-php #after_title-sortables .postbox,
+.post-php #after_title-sortables .sortable-placeholder,
 .term-php .themeplate,
 .user-new-php .themeplate,
 .user-edit-php .themeplate,

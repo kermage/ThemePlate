@@ -143,8 +143,12 @@ class ThemePlate_Page {
 			<form action="options.php" method="post">
 				<div id="poststuff">
 					<div id="post-body" class="metabox-holder columns-2">
-						<?php if ( has_action( $page . '_content' ) ) : ?>
+						<?php if ( has_action( $page . '_content' ) || has_action( 'themeplate_settings_' . $page . '_after_title' ) ) : ?>
 							<div id="post-body-content">
+								<div id="after_title-sortables" class="meta-box-sortables">
+									<?php do_action( 'themeplate_settings_' . $page . '_after_title' ); ?>
+								</div>
+
 								<?php do_action( $page . '_content' ); ?>
 							</div>
 						<?php endif; ?>
@@ -167,6 +171,10 @@ class ThemePlate_Page {
 						<div id="postbox-container-2" class="postbox-container">
 							<div id="normal-sortables" class="meta-box-sortables">
 								<?php do_action( 'themeplate_settings_' . $page . '_normal' ); ?>
+							</div>
+
+							<div id="advanced-sortables" class="meta-box-sortables">
+								<?php do_action( 'themeplate_settings_' . $page . '_advanced' ); ?>
 							</div>
 						</div>
 					</div>
