@@ -11,7 +11,7 @@
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  mailto:genealyson.torcende@gmail.com
  * Description: A toolkit to handle everything related in developing a full-featured WordPress theme.
- * Version:     2.11.1
+ * Version:     2.13.0
  * License:     GNU General Public License v3.0
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -26,7 +26,7 @@ Global constants
 ================================================== */
 
 if ( ! defined( 'TP_VERSION' ) ) {
-	define( 'TP_VERSION', '2.11.1' );
+	define( 'TP_VERSION', '2.13.0' );
 }
 
 if ( ! defined( 'TP_FILE' ) ) {

@@ -112,7 +112,7 @@
 
 	$( '.themeplate-options' ).each( function() {
 		var $this = $( this );
-		var $container = $this.closest( '.field-wrapper' ).length ? $this.closest( '.field-wrapper' ) : $this.closest( '.themeplate' );
+		var $container = getContainer( $this );
 		var conditions;
 
 		if ( $this.data( 'show' ) ) {
@@ -127,6 +127,24 @@
 			addEventListener( $container, 'hide', conditions );
 		}
 	});
+
+	function getContainer( element ) {
+		var selector;
+
+		if ( element.closest( '.field-wrapper' ).length ) {
+			selector = element.closest( '.field-wrapper' )
+		} else {
+			var selectorArray = [];
+			var selectorID = element.closest( '.themeplate' ).attr( 'id' );
+
+			selectorArray.push( document.getElementById( selectorID ) );
+			selectorArray.push( document.getElementById( selectorID + '-hide' ).parentNode );
+
+			selector = $( selectorArray );
+		}
+
+		return selector;
+	}
 
 	function getValue( element ) {
 		var $element = $( element );

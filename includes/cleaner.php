@@ -116,8 +116,7 @@ class ThemePlate_Cleaner {
 
 	public function script_tag( $input ) {
 
-		$input = str_replace( "type='text/javascript' ", '', $input );
-		return str_replace( "'", '"', $input );
+		return str_replace( "type='text/javascript' ", '', $input );
 
 	}
 
