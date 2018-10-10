@@ -13,5 +13,9 @@
   "banners": {
     "low": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/banner-772x250.png",
     "high": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/banner-1544x500.png"
+  },
+  "icons": {
+    "1x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-128x128.png",
+    "2x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-256x256.png"
   }
 }
