@@ -49,7 +49,7 @@ class ThemePlate_Helper_Meta {
 	public static function normalize_options( $container ) {
 
 		foreach ( array( 'show', 'hide' ) as $key ) {
-			if ( ! empty( $container[ $key . '_on'] ) ) {
+			if ( ! empty( $container[ $key . '_on' ] ) ) {
 				$container = self::option_check( $key . '_on', $container );
 			}
 		}
@@ -77,7 +77,7 @@ class ThemePlate_Helper_Meta {
 				$container[ $type ] = array( $container[ $type ] );
 			}
 
-			if ( ( count( $value ) === 1 ) && isset( $value[0]['key'] ) && 'id' === $value[0]['key'] ) {
+			if ( ( 1 === count( $value ) ) && isset( $value[0]['key'] ) && 'id' === $value[0]['key'] ) {
 				$container[ $type . '_id' ] = $value[0]['value'];
 				unset( $container[ $type ] );
 			}
