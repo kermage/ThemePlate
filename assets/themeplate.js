@@ -25,7 +25,7 @@
 	});
 
 
-	var meta_media_frame = wp.media.frames.meta_media_frame;
+	var meta_media_frame;
 
 	$( document ).on( 'click', '.themeplate-file .attachment-add', function( e ) {
 		e.preventDefault();
