@@ -1,4 +1,4 @@
-/* global: wp */
+/* global wp */
 
 (function( $ ) {
 

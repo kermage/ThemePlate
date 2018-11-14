@@ -108,7 +108,7 @@
 		field: function( callback, element ) {
 			$( element ).on( 'change input', callback );
 		}
-	}
+	};
 
 	$( '.themeplate-options' ).each( function() {
 		var $this = $( this );
@@ -132,7 +132,7 @@
 		var selector;
 
 		if ( element.closest( '.field-wrapper' ).length ) {
-			selector = element.closest( '.field-wrapper' )
+			selector = element.closest( '.field-wrapper' );
 		} else {
 			var selectorArray = [];
 			var selectorID = element.closest( '.themeplate' ).attr( 'id' );
