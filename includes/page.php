@@ -130,7 +130,6 @@ class ThemePlate_Page {
 
 	public function create() {
 
-		wp_enqueue_script( 'post' );
 		wp_enqueue_media();
 
 		$page = ThemePlate()->key . '-' . $this->config['id'];

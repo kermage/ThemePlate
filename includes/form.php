@@ -56,7 +56,7 @@ class ThemePlate_Form {
 
 		$meta_box = $this->config;
 
-		printf( '<div id="themeplate_%s" class="postbox">', $meta_box['id'] );
+		printf( '<div id="themeplate_%s" class="tpo postbox">', $meta_box['id'] );
 			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
 				echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) . '</span>';
 				echo '<span class="toggle-indicator" aria-hidden="true"></span>';
