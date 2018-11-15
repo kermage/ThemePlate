@@ -352,6 +352,10 @@
 	line-height: 1.4;
 }
 
+.themeplate.tpo .hndle {
+	cursor: pointer;
+}
+
 .themeplate .toggle-indicator::before {
 	content: "\f142";
 	display: inline-block;
