@@ -20,7 +20,8 @@
 
 #poststuff .themeplate.seamless h2,
 .themeplate.seamless .inside {
-	padding: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #poststuff .themeplate.seamless h2,
@@ -342,6 +343,7 @@
 }
 
 .themeplate .inside {
+	box-sizing: border-box;
 	margin: 6px 0 0;
 }
 
