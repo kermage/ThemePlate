@@ -83,8 +83,6 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 			return;
 		}
 
-		wp_enqueue_media();
-
 		$this->form->enqueue();
 
 	}
