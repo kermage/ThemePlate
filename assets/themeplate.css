@@ -20,7 +20,8 @@
 
 #poststuff .themeplate.seamless h2,
 .themeplate.seamless .inside {
-	padding: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #poststuff .themeplate.seamless h2,
@@ -212,7 +213,7 @@
 	min-height: 144px;
 	float: left;
 	border: 1px solid #ddd;
-	box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+	box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07 );
 }
 
 .themeplate-file.multiple .preview-holder {
@@ -263,6 +264,7 @@
 }
 
 .themeplate .select2-search__field {
+	/* stylelint-disable-next-line declaration-no-important */
 	width: 100% !important;
 }
 
@@ -329,8 +331,10 @@
 	margin-bottom: 1em;
 }
 
-#after_title-sortables .postbox,
-#after_title-sortables .sortable-placeholder,
+.post-php #after_title-sortables .postbox,
+.post-php #after_title-sortables .sortable-placeholder,
+.post-new-php #after_title-sortables .postbox,
+.post-new-php #after_title-sortables .sortable-placeholder,
 .term-php .themeplate,
 .user-new-php .themeplate,
 .user-edit-php .themeplate,
@@ -339,6 +343,7 @@
 }
 
 .themeplate .inside {
+	box-sizing: border-box;
 	margin: 6px 0 0;
 }
 
@@ -349,14 +354,20 @@
 	line-height: 1.4;
 }
 
+.themeplate.tpo .hndle {
+	cursor: pointer;
+}
+
 .themeplate .toggle-indicator::before {
 	content: "\f142";
 	display: inline-block;
+	/* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
 	font: 400 20px/1 dashicons;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-decoration: none!important;
+	/* stylelint-disable-next-line declaration-no-important */
+	text-decoration: none !important;
 }
 
 @media screen and ( min-width: 851px ) {

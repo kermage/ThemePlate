@@ -33,7 +33,12 @@ class ThemePlate_NavWalker extends Walker {
 
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 
-		$output .= '<ul class="' . $this->class['sub-menu'] . '">';
+		$classes = array( $this->class['sub-menu'] );
+
+		$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+		$output .= '<ul' . $class_names . '>';
 
 	}
 
@@ -49,17 +54,26 @@ class ThemePlate_NavWalker extends Walker {
 
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes = preg_replace( '/current[-_](menu|page)[-_](item|parent|ancestor)|(menu|page)[-_\w+]+/', '', $classes );
+
 		if ( $args->walker->has_children ) {
 			$classes[] = $this->class['has-sub'];
 		}
+
 		if ( $item->current ) {
 			$classes[] = $this->class['active'];
 		}
-		$classes = join( ' ', array_filter( $classes ) );
-		$output .= '<li' . ( ( $classes ) ? ' class="' . esc_attr( $classes ) . '"' : '' ) . '>';
+
+		$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
+
+		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+		$id = apply_filters( 'nav_menu_item_id', '', $item, $args, $depth );
+		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+
+		$output .= '<li' . $id . $class_names .'>';
 
 		$atts = array();
-
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
 		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
@@ -67,6 +81,7 @@ class ThemePlate_NavWalker extends Walker {
 
 		$atts = array_merge( $atts, $this->attributes( $item, $args ) );
 		$atts = array_filter( $atts );
+		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
 
 		$attributes = '';
 		foreach ( $atts as $attr => $value ) {
@@ -77,11 +92,16 @@ class ThemePlate_NavWalker extends Walker {
 			}
 		}
 
-		$output .= $args->before;
-		$output .= '<a' . $attributes . '>';
-		$output .= $args->link_before . $item->title . $args->link_after;
-		$output .= '</a>';
-		$output .= $args->after;
+		$title = apply_filters( 'the_title', $item->title, $item->ID );
+		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
+
+		$item_output  = $args->before;
+		$item_output .= '<a' . $attributes . '>';
+		$item_output .= $args->link_before . $title . $args->link_after;
+		$item_output .= '</a>';
+		$item_output .= $args->after;
+
+		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 
 	}
 

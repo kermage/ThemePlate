@@ -92,10 +92,7 @@ class ThemePlate_UserMeta {
 			return;
 		}
 
-		wp_enqueue_script( 'post' );
-		wp_enqueue_media();
-
-		printf( '<div id="themeplate_%s" class="postbox">', ThemePlate()->key . '_' . $meta_box['id'] );
+		printf( '<div id="themeplate_%s" class="tpo postbox">', ThemePlate()->key . '_' . $meta_box['id'] );
 		echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
 		echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) . '</span>';
 		echo '<span class="toggle-indicator" aria-hidden="true"></span>';

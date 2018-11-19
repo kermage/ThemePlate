@@ -1,4 +1,4 @@
-/* global: wp */
+/* global wp */
 
 (function( $ ) {
 
@@ -25,7 +25,25 @@
 	});
 
 
-	var meta_media_frame = wp.media.frames.meta_media_frame;
+	$( document ).on( 'click', '.tpo.postbox .hndle, .tpo.postbox .handlediv', function() {
+		var $el = $( this ),
+			p = $el.parent( '.postbox' ),
+			ariaExpandedValue;
+
+		p.toggleClass( 'closed' );
+
+		ariaExpandedValue = ! p.hasClass( 'closed' );
+
+		if ( $el.hasClass( 'handlediv' ) ) {
+			$el.attr( 'aria-expanded', ariaExpandedValue );
+		} else {
+			$el.closest( '.postbox' ).find( 'button.handlediv' )
+				.attr( 'aria-expanded', ariaExpandedValue );
+		}
+	});
+
+
+	var meta_media_frame;
 
 	$( document ).on( 'click', '.themeplate-file .attachment-add', function( e ) {
 		e.preventDefault();
