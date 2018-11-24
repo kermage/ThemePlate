@@ -22,7 +22,7 @@ class ThemePlate_Field_Number {
 			echo ' oninput="this.nextElementSibling.innerHTML=this.value" />';
 			echo '<span>' . esc_html( $field['value'] ) . '</span>';
 		} else {
-			echo ' />';
+			echo ( $field['required'] ? ' required="required"' : '' ) . ' />';
 		}
 
 	}

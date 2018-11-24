@@ -18,7 +18,7 @@ class ThemePlate_Field_Radio {
 			foreach ( $field['options'] as $value => $option ) {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
-				echo '<label><input type="radio" name="' . esc_attr( $field['name'] ) . '" value="' . esc_attr( $value ) . '"' . checked( $field['value'], $value, false ) . ' />' . esc_html( $option ) . '</label>';
+				echo '<label><input type="radio" name="' . esc_attr( $field['name'] ) . '" value="' . esc_attr( $value ) . '"' . checked( $field['value'], $value, false ) . ( $field['required'] ? ' required="required"' : '' ) . ' />' . esc_html( $option ) . '</label>';
 				echo '</' . ( $list ? 'p' : 'span' ) . '>';
 			}
 			echo '</fieldset>';

@@ -23,7 +23,7 @@ class ThemePlate_Field_Checkbox {
 				if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
 					echo ' checked="checked"';
 				}
-				echo ' />' . esc_html( $option ) . '</label>';
+				echo ( $field['required'] ? ' required="required"' : '' ) . ' />' . esc_html( $option ) . '</label>';
 				echo '</' . ( $list ? 'p' : 'span' ) . '>';
 			}
 			echo '</fieldset>';
