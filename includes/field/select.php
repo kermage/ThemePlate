@@ -18,7 +18,7 @@ class ThemePlate_Field_Select {
 		if ( 'select2' === $field['type'] && ! $field['value'] ) {
 			echo '<option></options>';
 		} elseif ( 'select2' !== $field['type'] && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
-			echo '<option value="0"' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
+			echo '<option value=""' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . __( '&mdash; None &mdash;' ) : ' selected>' . __( '&mdash; Select &mdash;' ) ) . '</option>';
 		}
 		if ( 'select2' === $field['type'] && $field['multiple'] && $field['value'] ) {
 			$ordered = array();
