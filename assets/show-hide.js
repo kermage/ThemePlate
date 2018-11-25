@@ -27,7 +27,7 @@
 		format: function( value ) {
 			var current = $postFormat.filter( ':checked' ).val();
 
-			if ( current == 0 ) {
+			if ( current === 0 ) {
 				current = 'standard';
 			}
 
