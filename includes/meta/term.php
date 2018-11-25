@@ -44,7 +44,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 			add_action( 'edited_' . $taxonomy, array( $this, 'save' ) );
 		}
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
 
 	}
 

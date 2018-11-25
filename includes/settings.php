@@ -46,7 +46,7 @@ class ThemePlate_Settings {
 		}
 
 		add_action( 'current_screen', array( $this, 'create' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
 
 	}
 

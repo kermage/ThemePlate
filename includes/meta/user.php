@@ -34,7 +34,7 @@ class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 		add_action( 'personal_options_update', array( $this, 'save' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'save' ) );
 		add_action( 'user_register', array( $this, 'save' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
 
 	}
 
