@@ -43,8 +43,9 @@ class ThemePlate_CPT {
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
 		$defaults = array(
-			'labels' => array(),
-			'public' => true,
+			'labels'       => array(),
+			'public'       => true,
+			'show_in_rest' => true,
 		);
 		$args     = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
 
@@ -97,8 +98,9 @@ class ThemePlate_CPT {
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
 		$defaults = array(
-			'labels' => array(),
-			'public' => true,
+			'labels'       => array(),
+			'public'       => true,
+			'show_in_rest' => true,
 		);
 
 		$args = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
