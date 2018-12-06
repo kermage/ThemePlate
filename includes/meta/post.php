@@ -44,7 +44,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 		$meta_box = $this->config;
 
 		if ( 'after_title' === $meta_box['context'] && use_block_editor_for_post( get_the_ID() ) ) {
-			$meta_box['context']  = 'advanced';
+			$meta_box['context'] = 'normal';
 		}
 
 		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'add' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
