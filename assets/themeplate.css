@@ -78,6 +78,7 @@
 	flex-grow: 0;
 	flex-shrink: 0;
 	flex-basis: 15%;
+	min-width: 185px;
 	margin-right: 1em;
 }
 
