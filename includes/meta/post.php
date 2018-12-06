@@ -43,7 +43,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 		$meta_box = $this->config;
 
-		if ( 'after_title' === $meta_box['context'] && use_block_editor_for_post( get_the_ID() ) ) {
+		if ( 'after_title' === $meta_box['context'] && function_exists( 'use_block_editor_for_post' ) && use_block_editor_for_post( get_the_ID() ) ) {
 			$meta_box['context'] = 'normal';
 		}
 
