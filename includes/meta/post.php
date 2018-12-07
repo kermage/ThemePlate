@@ -31,8 +31,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
-
-		$this->columns();
+		add_action( 'load-edit.php', array( $this, 'columns' ) );
 
 	}
 
@@ -113,7 +112,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 	}
 
-	private function columns() {
+	public function columns() {
 
 		$meta_box = $this->config;
 		$fields   = $this->form->get_fields();
@@ -128,6 +127,12 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 				'title'    => $meta_box['title'] . ': ' . $field['name'],
 				'callback' => array( ThemePlate_Helper_Meta::class, 'display_column' ),
 			);
+
+			if ( empty( $meta_box['screen'] ) ) {
+				$screen = get_current_screen();
+
+				$meta_box['screen'][] = $screen->post_type;
+			}
 
 			foreach ( $meta_box['screen'] as $post_type ) {
 				$args['post_type'] = $post_type;
