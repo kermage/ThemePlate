@@ -32,6 +32,8 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 		add_action( 'save_post', array( $this, 'save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
 
+		$this->columns();
+
 	}
 
 
@@ -108,6 +110,31 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 		}
 
 		return true;
+
+	}
+
+	private function columns() {
+
+		$meta_box = $this->config;
+		$fields   = $this->form->get_fields();
+
+		foreach ( $fields as $id => $field ) {
+			if ( ! $field['column'] ) {
+				continue;
+			}
+
+			$args  = array(
+				'id'       => ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id,
+				'title'    => $meta_box['title'] . ': ' . $field['name'],
+				'callback' => array( ThemePlate_Helper_Meta::class, 'display_column' ),
+			);
+
+			foreach ( $meta_box['screen'] as $post_type ) {
+				$args['post_type'] = $post_type;
+
+				new ThemePlate_Columns( $args );
+			}
+		}
 
 	}
 

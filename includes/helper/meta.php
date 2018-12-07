@@ -105,4 +105,15 @@ class ThemePlate_Helper_Meta {
 
 	}
 
+
+	public static function display_column( $id, $key ) {
+
+		$value = get_post_meta( $id, $key );
+
+		if ( $value ) {
+			print_r( $value );
+		}
+
+	}
+
 }

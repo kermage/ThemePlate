@@ -63,7 +63,7 @@ class ThemePlate_Columns {
 			return;
 		}
 
-		return call_user_func( $config['callback'], $post_id );
+		return call_user_func( $config['callback'], $post_id, $column_name );
 
 	}
 
