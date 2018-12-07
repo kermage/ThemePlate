@@ -42,6 +42,7 @@ class ThemePlate_Fields {
 				'style'      => '',
 				'repeatable' => false,
 				'required'   => false,
+				'column'     => false,
 			);
 			$field    = ThemePlate_Helper_Main::fool_proof( $defaults, $field );
 			$field    = ThemePlate_Helper_Meta::normalize_options( $field );
