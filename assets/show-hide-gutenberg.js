@@ -4,6 +4,7 @@
 
 
 	var changesHolder = {};
+	var initialized = false;
 
 
 	function listenDataChanges() {
@@ -13,6 +14,11 @@
 
 		wp.data.subscribe( function() {
 			var currentChanges = wp.data.select( 'core/editor' ).getPostEdits();
+
+			if ( ! initialized ) {
+				changesHolder = wp.data.select( 'core/editor' ).getCurrentPost();
+				initialized = true;
+			}
 
 			if ( changesHolder !== currentChanges ) {
 				changesHolder = currentChanges;
@@ -167,6 +173,6 @@
 	}
 
 
-	listenDataChanges();
+	$( window ).on( 'load', listenDataChanges );
 
 }( jQuery ));
