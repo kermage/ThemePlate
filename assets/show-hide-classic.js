@@ -8,7 +8,7 @@
 	$.extend( TP.checkersElements, {
 		'template': $( '#page_template' ),
 		'format': $( 'input[name="post_format"]' ),
-		'parent': $( '#parent' ).length ? $( '#parent' ) : $( '#parent_id' ),
+		'parent': $( '#parent_id' ),
 	});
 
 	$.extend( TP.checkCallbacks, {

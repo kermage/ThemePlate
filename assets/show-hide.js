@@ -5,14 +5,21 @@ window.ThemePlate = window.ThemePlate || {};
 	'use strict';
 
 
-	var editorSpecific = [ 'template', 'format', 'parent' ];
+	var editorSpecific = [ 'template', 'format' ];
 
 	TP.checkersElements = {
+		'parent': $( '#parent' ),
 		'role': $( '#role' ),
 		'id': $( '#post_ID' ).length ? $( '#post_ID' ) : $( '#tag_ID' ).length ? $( '#tag_ID' ) : $( '#checkuser_id' ),
 	};
 
 	TP.checkCallbacks = {
+		parent: function( value ) {
+			var current = TP.checkersElements['parent'].val();
+			current = parseInt( current );
+
+			return TP.compareValue( current, TP.sureArray( value ), 'in' );
+		},
 		role: function( value ) {
 			var current = TP.checkersElements['role'].val();
 
@@ -38,6 +45,9 @@ window.ThemePlate = window.ThemePlate || {};
 	};
 
 	TP.eventListeners = {
+		parent: function( callback ) {
+			TP.checkersElements['parent'].on( 'change', callback );
+		},
 		role: function( callback ) {
 			TP.checkersElements['role'].on( 'change', callback );
 		},
