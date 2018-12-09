@@ -122,8 +122,10 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 				continue;
 			}
 
+			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+
 			$args  = array(
-				'id'            => ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id,
+				'id'            => $field['id'],
 				'title'         => $meta_box['title'] . ': ' . $field['name'],
 				'callback'      => array( ThemePlate_Helper_Meta::class, 'display_column' ),
 				'callback_args' => $field,
