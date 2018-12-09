@@ -83,7 +83,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 			return;
 		}
 
-		$this->form->enqueue();
+		$this->form->enqueue( 'term' );
 
 	}
 

@@ -85,7 +85,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 			return;
 		}
 
-		$this->form->enqueue();
+		$this->form->enqueue( 'post' );
 
 	}
 

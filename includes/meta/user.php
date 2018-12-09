@@ -73,7 +73,7 @@ class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 			return;
 		}
 
-		$this->form->enqueue();
+		$this->form->enqueue( 'user' );
 
 	}
 

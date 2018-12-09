@@ -80,7 +80,7 @@ class ThemePlate_Settings {
 			return;
 		}
 
-		$this->form->enqueue();
+		$this->form->enqueue( 'settings' );
 
 	}
 
