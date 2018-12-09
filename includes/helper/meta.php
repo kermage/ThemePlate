@@ -110,9 +110,22 @@ class ThemePlate_Helper_Meta {
 
 		$value = get_post_meta( $id, $args['id'], ! $args['repeatable'] );
 
-		if ( $value ) {
-			print_r( $value );
+		if ( ! $value ) {
+			return;
 		}
+
+		if ( 1 === count( $value ) ) {
+			echo $value[0];
+			return;
+		}
+
+		echo '<ul>';
+
+		foreach ( $value as $val ) {
+			echo '<li>' . $val . '</li>';
+		}
+
+		echo '</ul>';
 
 	}
 
