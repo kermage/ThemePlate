@@ -1,4 +1,4 @@
-// window.ThemePlate = window.ThemePlate || {};
+/* global wp */
 
 (function( $, TP ) {
 

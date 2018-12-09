@@ -34,7 +34,7 @@ window.ThemePlate = window.ThemePlate || {};
 		field: function( argument, operator ) {
 			var element = argument[0];
 			var value = argument[1];
-			var current = getValue( element );
+			var current = TP.getValue( element );
 
 			if ( $.isNumeric( current ) ) {
 				current = parseInt( current );

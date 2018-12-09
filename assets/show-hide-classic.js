@@ -1,5 +1,3 @@
-// window.ThemePlate = window.ThemePlate || {};
-
 (function( $, TP ) {
 
 	'use strict';
@@ -67,9 +65,6 @@
 		},
 		format: function( callback ) {
 			TP.checkersElements['format'].on( 'change', callback );
-		},
-		parent: function( callback ) {
-			TP.checkersElements['parent'].on( 'change', callback );
 		},
 		term: function( callback, taxonomy ) {
 			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
