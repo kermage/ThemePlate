@@ -12,7 +12,10 @@
 	$.extend( TP.checkCallbacks, {
 		template: function( value ) {
 			var current = TP.checkersElements['template'].val();
-			current = current.substr( current.lastIndexOf( '/' ) + 1 );
+
+			if ( TP.compareValue( current, '/', 'contains' ) ) {
+				current = current.substr( current.lastIndexOf( '/' ) + 1 );
+			}
 
 			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},

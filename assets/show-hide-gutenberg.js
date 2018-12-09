@@ -11,7 +11,10 @@
 	$.extend( TP.checkCallbacks, {
 		'template': function( value ) {
 			var current = wp.data.select( 'core/editor' ).getEditedPostAttribute( 'template' );
-			current = current.substr( current.lastIndexOf( '/' ) + 1 );
+
+			if ( TP.compareValue( current, '/', 'contains' ) ) {
+				current = current.substr( current.lastIndexOf( '/' ) + 1 );
+			}
 
 			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},
