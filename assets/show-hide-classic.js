@@ -37,6 +37,28 @@
 
 			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},
+		term: function( argument ) {
+			var taxonomy = argument[0];
+			var value = argument[1];
+			var $checker = $( '#' + taxonomy + 'checklist :checked' );
+			var current = [];
+
+			$checker.each( function() {
+				current.push( parseInt( $( this ).val() ) );
+			});
+
+			for ( var i in current ) {
+				if ( ! current.hasOwnProperty( i ) ) {
+					continue;
+				}
+
+				if ( TP.compareValue( current[i], TP.sureArray( value ), 'in' ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		},
 	});
 
 	$.extend( TP.eventListeners, {
@@ -48,6 +70,9 @@
 		},
 		parent: function( callback ) {
 			TP.checkersElements['parent'].on( 'change', callback );
+		},
+		term: function( callback, taxonomy ) {
+			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
 		},
 	});
 

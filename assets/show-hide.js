@@ -223,7 +223,7 @@ window.ThemePlate = window.ThemePlate || {};
 			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
-				addEventListener( $container, type, condition, conditions );
+				TP.addEventListener( $container, type, condition, conditions );
 				continue;
 			}
 
