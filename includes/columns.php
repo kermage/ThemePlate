@@ -27,7 +27,8 @@ class ThemePlate_Columns {
 		}
 
 		$defaults     = array(
-			'position' => 0,
+			'position'      => 0,
+			'callback_args' => array(),
 		);
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
@@ -63,7 +64,7 @@ class ThemePlate_Columns {
 			return;
 		}
 
-		return call_user_func( $config['callback'], $post_id, $column_name );
+		return call_user_func( $config['callback'], $post_id, $config['callback_args'] );
 
 	}
 
