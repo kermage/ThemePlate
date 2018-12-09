@@ -91,6 +91,10 @@ window.ThemePlate = window.ThemePlate || {};
 	TP.compareValue = function( have, want, operator ) {
 		var result = false;
 
+		if ( have === undefined || want === undefined ) {
+			return result;
+		}
+
 		operator = operator.trim();
 
 		switch ( operator ) {
