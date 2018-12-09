@@ -76,25 +76,4 @@
 		},
 	});
 
-
-	$( document ).ready( function() {
-		$( '.themeplate-options' ).each( function() {
-			var $this = $( this );
-			var $container = TP.getContainer( $this );
-			var conditions;
-
-			if ( $this.data( 'show' ) ) {
-				conditions = $this.data( 'show' );
-				TP.maybeShowHide( $container, 'show', conditions );
-				TP.addEventListener( $container, 'show', conditions );
-			}
-
-			if ( $this.data( 'hide' ) ) {
-				conditions = $this.data( 'hide' );
-				TP.maybeShowHide( $container, 'hide', conditions );
-				TP.addEventListener( $container, 'hide', conditions );
-			}
-		});
-	});
-
 }( jQuery, window.ThemePlate ));
