@@ -21,9 +21,10 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 		}
 
 		$defaults = array(
-			'screen'   => array(),
-			'context'  => 'advanced',
-			'priority' => 'default',
+			'screen'        => array(),
+			'context'       => 'advanced',
+			'priority'      => 'default',
+			'callback_args' => array(),
 		);
 
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $this->config );
@@ -48,7 +49,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 			$meta_box['context'] = 'normal';
 		}
 
-		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'add' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'] );
+		add_meta_box( 'themeplate_' . $meta_box['id'], $meta_box['title'], array( $this, 'add' ), $meta_box['screen'], $meta_box['context'], $meta_box['priority'], $meta_box['callback_args'] );
 
 	}
 
