@@ -81,6 +81,7 @@ class ThemePlate {
 		if ( ! empty( $pages ) ) {
 			$config['pages'] = $pages;
 			$config['slug']  = key( $pages );
+			$this->stall_update();
 		}
 
 		return $config;
