@@ -236,6 +236,17 @@ class ThemePlate {
 
 	}
 
+
+	public function column( $args ) {
+
+		try {
+			return new ThemePlate_Columns( $args );
+		} catch ( Exception $e ) {
+			return $e;
+		}
+
+	}
+
 }
 
 
