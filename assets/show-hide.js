@@ -1,156 +1,75 @@
-(function( $ ) {
+window.ThemePlate = window.ThemePlate || {};
+
+(function( $, TP ) {
 
 	'use strict';
 
 
-	var $pageTemplate = $( '#page_template' ),
-		$postFormat = $( 'input[name="post_format"]' ),
-		$parent = $( '#parent' ).length ? $( '#parent' ) : $( '#parent_id' ),
-		$role = $( '#role' ),
-		$id = $( '#post_ID' ).length ? $( '#post_ID' ) : $( '#tag_ID' ).length ? $( '#tag_ID' ) : $( '#checkuser_id' );
+	var editorSpecific = [ 'template', 'format' ];
 
-	var checkersElements = {
-		'template': $pageTemplate,
-		'format': $postFormat,
-		'parent': $parent,
-		'role': $role,
-		'id': $id
+	TP.checkersElements = {
+		'parent': $( '#parent' ),
+		'role': $( '#role' ),
+		'id': $( '#post_ID' ).length ? $( '#post_ID' ) : $( '#tag_ID' ).length ? $( '#tag_ID' ) : $( '#checkuser_id' ),
 	};
 
-	var checkCallbacks = {
-		template: function( value ) {
-			var current = $pageTemplate.val();
-			current = current.substr( current.lastIndexOf( '/' ) + 1 );
-
-			return compareValue( current, sureArray( value ), 'in' );
-		},
-		format: function( value ) {
-			var current = $postFormat.filter( ':checked' ).val();
-
-			if ( current == 0 ) {
-				current = 'standard';
-			}
-
-			return compareValue( current, sureArray( value ), 'in' );
-		},
+	TP.checkCallbacks = {
 		parent: function( value ) {
-			var current = $parent.val();
+			var current = TP.checkersElements['parent'].val();
 			current = parseInt( current );
 
-			if ( isNaN( current ) ) {
-				current = -1;
-			}
-
-			return compareValue( current, sureArray( value ), 'in' );
+			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},
 		role: function( value ) {
-			var current = $role.val();
+			var current = TP.checkersElements['role'].val();
 
-			return compareValue( current, sureArray( value ), 'in' );
+			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},
 		id: function( value ) {
-			var current = $id.val();
+			var current = TP.checkersElements['id'].val();
 			current = parseInt( current );
 
-			return compareValue( current, sureArray( value ), 'in' );
-		},
-		term: function( argument ) {
-			var taxonomy = argument[0];
-			var value = argument[1];
-			var $checker = $( '#' + taxonomy + 'checklist :checked' );
-			var current = [];
-
-			$checker.each( function() {
-				current.push( parseInt( $( this ).val() ) );
-			});
-
-			for ( var i in current ) {
-				if ( ! current.hasOwnProperty( i ) ) {
-					continue;
-				}
-
-				if ( compareValue( current[i], sureArray( value ), 'in' ) ) {
-					return true;
-				}
-			}
-
-			return false;
+			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},
 		field: function( argument, operator ) {
 			var element = argument[0];
 			var value = argument[1];
-			var current = getValue( element );
+			var current = TP.getValue( element );
 
 			if ( $.isNumeric( current ) ) {
 				current = parseInt( current );
 			}
 
-			return compareValue( current, value, operator );
+			return TP.compareValue( current, value, operator );
 		}
 	};
 
-	var eventListeners = {
-		template: function( callback ) {
-			$pageTemplate.on( 'change', callback );
-		},
-		format: function( callback ) {
-			$postFormat.on( 'change', callback );
-		},
+	TP.eventListeners = {
 		parent: function( callback ) {
-			$parent.on( 'change', callback );
+			TP.checkersElements['parent'].on( 'change', callback );
 		},
 		role: function( callback ) {
-			$role.on( 'change', callback );
-		},
-		term: function( callback, taxonomy ) {
-			$( '#' + taxonomy + 'checklist' ).on( 'change', callback );
+			TP.checkersElements['role'].on( 'change', callback );
 		},
 		field: function( callback, element ) {
 			$( element ).on( 'change input', callback );
 		}
 	};
 
-	$( '.themeplate-options' ).each( function() {
-		var $this = $( this );
-		var $container = getContainer( $this );
-		var conditions;
 
-		if ( $this.data( 'show' ) ) {
-			conditions = $this.data( 'show' );
-			maybeShowHide( $container, 'show', conditions );
-			addEventListener( $container, 'show', conditions );
-		}
-
-		if ( $this.data( 'hide' ) ) {
-			conditions = $this.data( 'hide' );
-			maybeShowHide( $container, 'hide', conditions );
-			addEventListener( $container, 'hide', conditions );
-		}
-	});
-
-	function getContainer( element ) {
+	TP.getContainer = function( element ) {
 		var selector;
 
 		if ( element.closest( '.field-wrapper' ).length ) {
 			selector = element.closest( '.field-wrapper' );
 		} else {
-			var selectorArray = [];
-			var selectorID = element.closest( '.themeplate' ).attr( 'id' );
-			var toggler =  document.getElementById( selectorID + '-hide' );
-
-			if ( toggler !== null ) {
-				selectorArray.push( toggler.parentNode );
-			}
-
-			selectorArray.push( document.getElementById( selectorID ) );
-
-			selector = $( selectorArray );
+			selector = element.closest( '.themeplate' );
 		}
 
 		return selector;
-	}
+	};
 
-	function getValue( element ) {
+	TP.getValue = function( element ) {
 		var $element = $( element );
 		var type = $element.prop( 'tagName' );
 
@@ -166,9 +85,9 @@
 		});
 
 		return values;
-	}
+	};
 
-	function sureArray( value ) {
+	TP.sureArray = function( value ) {
 		if ( $.isArray( value ) ) {
 			return value;
 		}
@@ -177,10 +96,14 @@
 		array.push( value );
 
 		return array;
-	}
+	};
 
-	function compareValue( have, want, operator ) {
+	TP.compareValue = function( have, want, operator ) {
 		var result = false;
+
+		if ( have === undefined || want === undefined ) {
+			return result;
+		}
 
 		operator = operator.trim();
 
@@ -208,14 +131,14 @@
 				result = ( have.indexOf( want ) > -1 );
 				break;
 			case 'between':
-				result = compareValue( have, want[0], '>=' ) && compareValue( have, want[1], '<=' );
+				result = TP.compareValue( have, want[0], '>=' ) && TP.compareValue( have, want[1], '<=' );
 				break;
 		}
 
 		return result;
-	}
+	};
 
-	function isAvailable( checker ) {
+	TP.isAvailable = function( checker ) {
 		if ( checker == 'term' ) {
 			return true;
 		}
@@ -224,18 +147,18 @@
 			return true;
 		}
 
-		if ( checkersElements[checker] === undefined ) {
+		if ( TP.checkersElements[checker] === undefined ) {
 			return false;
 		}
 
-		if ( checkersElements[checker].length === 0	) {
+		if ( TP.checkersElements[checker].length === 0	) {
 			return false;
 		}
 
 		return true;
-	}
+	};
 
-	function isMet( conditions, logic = 'OR' ) {
+	TP.isMet = function( conditions, logic = 'OR' ) {
 		var result = ( logic != 'OR' );
 
 		for ( var i in conditions ) {
@@ -246,7 +169,7 @@
 			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
-				result = result || isMet( condition, 'AND' );
+				result = result || TP.isMet( condition, 'AND' );
 				continue;
 			}
 
@@ -255,7 +178,7 @@
 			var operator = ( condition['operator'] !== undefined ) ? condition['operator'] : '=';
 			var invert = false;
 
-			if ( ! checkersElements.hasOwnProperty( key ) ) {
+			if ( ! TP.checkersElements.hasOwnProperty( key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
 				value = [ condition['key'], condition['value'] ];
 
 				if ( key[0] === '#' ) {
@@ -265,17 +188,17 @@
 				}
 			}
 
-			if ( ! isAvailable( key ) ) {
+			if ( ! TP.isAvailable( key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
 				continue;
 			}
 
-			if ( compareValue( operator, '!', 'contains' ) || compareValue( operator, 'not', 'contains' ) ) {
+			if ( TP.compareValue( operator, '!', 'contains' ) || TP.compareValue( operator, 'not', 'contains' ) ) {
 				invert = true;
 				operator = operator.replace( '!', '' ).replace( 'not', '' );
 				operator = operator ? operator : '=';
 			}
 
-			var returned = checkCallbacks[key]( value, operator );
+			var returned = TP.checkCallbacks[key]( value, operator );
 
 			if ( invert ) {
 				returned = ! returned;
@@ -297,17 +220,17 @@
 		}
 
 		return result;
-	}
+	};
 
-	function maybeShowHide( $container, type, conditions ) {
+	TP.maybeShowHide = function( $container, type, conditions ) {
 		if ( type == 'show' ) {
-			isMet( conditions ) ? $container.show() : $container.hide();
+			TP.isMet( conditions ) ? $container.show() : $container.hide();
 		} else {
-			isMet( conditions ) ? $container.hide() : $container.show();
+			TP.isMet( conditions ) ? $container.hide() : $container.show();
 		}
-	}
+	};
 
-	function addEventListener( $container, type, conditions, origConditions = conditions ) {
+	TP.addEventListener = function( $container, type, conditions, origConditions = conditions ) {
 		for ( var i in conditions ) {
 			if ( ! conditions.hasOwnProperty( i ) ) {
 				continue;
@@ -316,14 +239,14 @@
 			var condition = conditions[i];
 
 			if ( $.isArray( condition ) ) {
-				addEventListener( $container, type, condition, conditions );
+				TP.addEventListener( $container, type, condition, conditions );
 				continue;
 			}
 
 			var key = condition['key'];
 			var value = condition['value'];
 
-			if ( ! checkersElements.hasOwnProperty( key ) ) {
+			if ( ! TP.checkersElements.hasOwnProperty( key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
 				value = condition['key'];
 
 				if ( key[0] === '#' ) {
@@ -333,7 +256,7 @@
 				}
 			}
 
-			if ( ! isAvailable( key ) ) {
+			if ( ! TP.isAvailable( key ) ) {
 				continue;
 			}
 
@@ -341,10 +264,31 @@
 				continue;
 			}
 
-			eventListeners[key]( function() {
-				maybeShowHide( $container, type, origConditions );
+			TP.eventListeners[key]( function() {
+				TP.maybeShowHide( $container, type, origConditions );
 			}, value );
 		}
-	}
+	};
 
-}( jQuery ));
+
+	$( document ).ready( function() {
+		$( '.themeplate-options' ).each( function() {
+			var $this = $( this );
+			var $container = TP.getContainer( $this );
+			var conditions;
+
+			if ( $this.data( 'show' ) ) {
+				conditions = $this.data( 'show' );
+				TP.maybeShowHide( $container, 'show', conditions );
+				TP.addEventListener( $container, 'show', conditions );
+			}
+
+			if ( $this.data( 'hide' ) ) {
+				conditions = $this.data( 'hide' );
+				TP.maybeShowHide( $container, 'hide', conditions );
+				TP.addEventListener( $container, 'hide', conditions );
+			}
+		});
+	});
+
+}( jQuery, window.ThemePlate ));

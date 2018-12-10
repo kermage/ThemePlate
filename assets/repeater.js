@@ -52,7 +52,7 @@
 					continue;
 				}
 
-				if ( $( this ).attr( indexAttributes[i] ) == undefined ) {
+				if ( $( this ).attr( indexAttributes[i] ) === undefined ) {
 					continue;
 				}
 

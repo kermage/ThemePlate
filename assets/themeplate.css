@@ -9,6 +9,7 @@
 }
 
 .themeplate.seamless {
+	margin: 1em;
 	background: transparent;
 	border: 0;
 	box-shadow: none;
@@ -22,6 +23,7 @@
 .themeplate.seamless .inside {
 	padding-left: 0;
 	padding-right: 0;
+	border-bottom: 0;
 }
 
 #poststuff .themeplate.seamless h2,
@@ -78,6 +80,7 @@
 	flex-grow: 0;
 	flex-shrink: 0;
 	flex-basis: 15%;
+	min-width: 185px;
 	margin-right: 1em;
 }
 

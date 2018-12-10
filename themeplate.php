@@ -11,7 +11,7 @@
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  mailto:genealyson.torcende@gmail.com
  * Description: A toolkit to handle everything related in developing a full-featured WordPress theme.
- * Version:     2.14.0
+ * Version:     3.0.0-beta
  * License:     GNU General Public License v3.0
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -26,7 +26,7 @@ Global constants
 ================================================== */
 
 if ( ! defined( 'TP_VERSION' ) ) {
-	define( 'TP_VERSION', '2.14.0' );
+	define( 'TP_VERSION', '3.0.0-beta' );
 }
 
 if ( ! defined( 'TP_FILE' ) ) {
@@ -41,8 +41,8 @@ if ( ! defined( 'TP_PATH' ) ) {
 	define( 'TP_PATH', plugin_dir_path( __FILE__ ) );
 }
 
-// Load the ThemePlate plugin
-require_once TP_PATH . 'includes/class-' . basename( __FILE__ );
+// Load the main ThemePlate class
+require_once TP_PATH . 'class-' . basename( __FILE__ );
 
 // Instantiate the ThemePlate updater
 require_once TP_PATH . 'class-external-update-manager.php';

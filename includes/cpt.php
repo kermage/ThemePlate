@@ -12,34 +12,27 @@ class ThemePlate_CPT {
 
 	private $config;
 
-	private $cpt_defaults = array(
-		'args' => array(),
-	);
-
-	private $args_defaults = array(
-		'labels' => array(),
-		'public' => true,
-	);
-
 
 	public function __construct( $kind, $config ) {
 
-		if ( ! is_array( $config ) || empty( $config ) ) {
-			return false;
+		$expected = array(
+			'name',
+			'plural',
+			'singular',
+		);
+
+		if ( 'taxonomy' === $kind ) {
+			$expected[] = 'type';
 		}
 
-		if ( ! array_key_exists( 'name', $config ) ||
-			! array_key_exists( 'plural', $config ) ||
-			! array_key_exists( 'singular', $config )
-		) {
-			return false;
+		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
+			throw new Exception();
 		}
 
-		if ( 'taxonomy' === $kind && ! array_key_exists( 'type', $config ) ) {
-			return false;
-		}
-
-		$this->config = ThemePlate_Helpers::fool_proof( $this->cpt_defaults, $config );
+		$defaults     = array(
+			'args' => array(),
+		);
+		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 		$this->$kind( $this->config );
 
 	}
@@ -49,34 +42,48 @@ class ThemePlate_CPT {
 
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
-		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
+		$defaults = array(
+			'labels'       => array(),
+			'public'       => true,
+			'show_in_rest' => true,
+		);
+		$args     = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
 
 		$labels = array(
-			'name'                  => $plural,
-			'singular_name'         => $singular,
-			'add_new'               => 'Add New ' . $singular,
-			'add_new_item'          => 'Add New ' . $singular,
-			'edit_item'             => 'Edit ' . $singular,
-			'new_item'              => 'New ' . $singular,
-			'view_item'             => 'View ' . $singular,
-			'update_item'           => 'Update ' . $singular,
-			'search_items'          => 'Search ' . $singular,
-			'not_found'             => $singular . ' not found',
-			'not_found_in_trash'    => $singular . ' not found in Trash',
-			'parent_item_colon'     => 'Parent ' . $singular . ':',
-			'all_items'             => 'All ' . $plural,
-			'archives'              => $singular . ' Archives',
-			'insert_into_item'      => 'Insert into ' . $singular,
-			'uploaded_to_this_item' => 'Uploaded to this ' . $singular,
-			'featured_image'        => $singular . ' Featured Image',
-			'set_featured_image'    => 'Set ' . $singular . ' Featured Image',
-			'remove_featured_image' => 'Remove ' . $singular . ' Featured Image',
-			'use_featured_image'    => 'Use as ' . $singular . ' Featured Image',
-			'menu_name'             => $plural,
-			'name_admin_bar'        => $plural,
+			'name'                     => $plural,
+			'singular_name'            => $singular,
+			'add_new'                  => 'Add New ' . $singular,
+			'add_new_item'             => 'Add New ' . $singular,
+			'edit_item'                => 'Edit ' . $singular,
+			'new_item'                 => 'New ' . $singular,
+			'view_item'                => 'View ' . $singular,
+			'view_items'               => 'View ' . $plural,
+			'search_items'             => 'Search ' . $plural,
+			'not_found'                => 'No ' . strtolower( $plural ) . ' found.',
+			'not_found_in_trash'       => 'No ' . strtolower( $plural ) . ' found in Trash.',
+			'parent_item_colon'        => 'Parent ' . $singular . ':',
+			'all_items'                => 'All ' . $plural,
+			'archives'                 => $singular . ' Archives',
+			'attributes'               => $singular . ' Attributes',
+			'insert_into_item'         => 'Insert into ' . strtolower( $singular ),
+			'uploaded_to_this_item'    => 'Uploaded to this ' . strtolower( $singular ),
+			'featured_image'           => $singular . ' Featured Image',
+			'set_featured_image'       => 'Set ' . strtolower( $singular ) . ' featured image',
+			'remove_featured_image'    => 'Remove ' . strtolower( $singular ) . ' featured image',
+			'use_featured_image'       => 'Use as ' . strtolower( $singular ) . ' featured image',
+			'filter_items_list'        => 'Filter ' . strtolower( $plural ) . ' list',
+			'items_list_navigation'    => $plural . ' list navigation',
+			'items_list'               => $plural . ' list',
+			'item_published'           => $singular . ' published.',
+			'item_published_privately' => $singular . ' published privately.',
+			'item_reverted_to_draft'   => $singular . ' reverted to draft.',
+			'item_scheduled'           => $singular . ' scheduled.',
+			'item_updated'             => $singular . ' updated.',
+			'menu_name'                => $plural,
+			'name_admin_bar'           => $singular,
 		);
 
-		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
+		$args['labels'] = ThemePlate_Helper_Main::fool_proof( $labels, $args['labels'] );
 
 		register_post_type( $config['name'], $args );
 
@@ -90,29 +97,41 @@ class ThemePlate_CPT {
 
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
-		$args     = ThemePlate_Helpers::fool_proof( $this->args_defaults, $config['args'] );
+		$defaults = array(
+			'labels'       => array(),
+			'public'       => true,
+			'show_in_rest' => true,
+		);
+
+		$args = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
 
 		$labels = array(
 			'name'                       => $plural,
 			'singular_name'              => $singular,
-			'menu_name'                  => $plural,
+			'search_items'               => 'Search ' . $plural,
+			'popular_items'              => 'Popular ' . $plural,
 			'all_items'                  => 'All ' . $plural,
+			'parent_item'                => 'Parent ' . $singular,
+			'parent_item_colon'          => 'Parent ' . $singular . ':',
 			'edit_item'                  => 'Edit ' . $singular,
 			'view_item'                  => 'View ' . $singular,
 			'update_item'                => 'Update ' . $singular,
 			'add_new_item'               => 'Add New ' . $singular,
 			'new_item_name'              => 'New ' . $singular . ' Name',
-			'parent_item'                => 'Parent ' . $singular,
-			'parent_item_colon'          => 'Parent ' . $singular . ':',
-			'search_items'               => 'Search ' . $singular,
-			'popular_items'              => 'Popular ' . $singular,
-			'separate_items_with_commas' => 'Separate ' . $plural . ' with commas',
-			'add_or_remove_items'        => 'Add or remove ' . $plural,
-			'choose_from_most_used'      => 'Choose from the most used ' . $singular,
-			'not_found'                  => $singular . ' not found',
+			'separate_items_with_commas' => 'Separate ' . strtolower( $plural ) . ' with commas',
+			'add_or_remove_items'        => 'Add or remove ' . strtolower( $plural ),
+			'choose_from_most_used'      => 'Choose from the most used ' . strtolower( $singular ),
+			'not_found'                  => 'No ' . strtolower( $plural ) . ' found.',
+			'not_terms'                  => 'No ' . strtolower( $plural ),
+			'items_list_navigation'      => $plural . ' list navigation',
+			'items_list'                 => $plural . ' list',
+			'most_used'                  => 'Most Used ' . $plural,
+			'back_to_items'              => '&larr; Back to ' . $plural,
+			'menu_name'                  => $plural,
+			'name_admin_bar'             => $singular,
 		);
 
-		$args['labels'] = ThemePlate_Helpers::fool_proof( $labels, $args['labels'] );
+		$args['labels'] = ThemePlate_Helper_Main::fool_proof( $labels, $args['labels'] );
 
 		register_taxonomy( $config['name'], $config['type'], $args );
 
@@ -182,8 +201,8 @@ class ThemePlate_CPT {
 	public function bulk_custom_messages( $messages, $counts ) {
 
 		$name     = $this->config['name'];
-		$singular = $this->config['singular'];
-		$plural   = $this->config['plural'];
+		$singular = strtolower( $this->config['singular'] );
+		$plural   = strtolower( $this->config['plural'] );
 
 		$messages[ $name ] = array(
 			'updated'   => _n( '%s ' . $singular . ' updated.', '%s ' . $plural . ' updated.', $counts['updated'] ),
