@@ -10,7 +10,7 @@ class ThemePlate {
 
 	private static $instance;
 
-	public $key, $slug;
+	public $key, $slug, $stalled;
 
 
 	public static function instance( $key, $pages ) {
@@ -75,6 +75,7 @@ class ThemePlate {
 			} else if ( ThemePlate_Helper_Main::is_sequential( $key ) ) {
 				$config['title'] = array_shift( $key );
 				$config['key']   = array_shift( $key );
+				$this->stalled = true;
 			} else {
 				$config = $key;
 			}
@@ -92,6 +93,8 @@ class ThemePlate {
 
 
 	private function stall_update() {
+
+		$this->stalled = true;
 
 		add_filter( 'site_transient_update_plugins', function( $value ) {
 			unset( $value->response[ plugin_basename( TP_FILE ) ] );

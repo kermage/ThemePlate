@@ -80,19 +80,25 @@ class ThemePlate_Helper_Field {
 	public static function deprecate_check( $field ) {
 
 		if ( ! empty( $field['name'] ) ) {
-			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>title</b> to field config instead of <b>name</b>.' );
+			if ( ! ThemePlate()->stalled ) {
+				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>title</b> to field config instead of <b>name</b>.' );
+			}
 
 			$field['title'] = $field['name'];
 		}
 
 		if ( ! empty( $field['desc'] ) ) {
-			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>description</b> to field config instead of <b>desc</b>.' );
+			if ( ! ThemePlate()->stalled ) {
+				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>description</b> to field config instead of <b>desc</b>.' );
+			}
 
 			$field['description'] = $field['desc'];
 		}
 
 		if ( ! empty( $field['std'] ) ) {
-			_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>default</b> to field config instead of <b>std</b>.' );
+			if ( ! ThemePlate()->stalled ) {
+				_deprecated_argument( sprintf( 'Field <b>%1$s</b>', $field['id'] ), '3.0.0', 'Use key <b>default</b> to field config instead of <b>std</b>.' );
+			}
 
 			$field['default'] = $field['std'];
 		}
