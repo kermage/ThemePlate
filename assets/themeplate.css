@@ -407,6 +407,11 @@
 	#side-sortables .themeplate-file.multiple .attachment {
 		width: 50%;
 	}
+
+	#side-sortables .themeplate-clone {
+		padding-left: 12px;
+		padding-right: 32px;
+	}
 }
 
 @media screen and ( max-width: 782px ) {
