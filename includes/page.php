@@ -152,7 +152,7 @@ class ThemePlate_Page {
 
 						<div id="postbox-container-1" class="postbox-container">
 							<div id="submitdiv" class="postbox">
-								<h2>Publish</h2>
+								<h2><?php echo get_admin_page_title(); ?></h2>
 
 								<div id="major-publishing-actions">
 									<?php settings_fields( $page ); ?>
