@@ -380,6 +380,7 @@
 	}
 
 	#side-sortables .field-label {
+		min-width: 0;
 		margin-right: 0;
 	}
 
@@ -415,6 +416,7 @@
 	}
 
 	.field-label {
+		min-width: 0;
 		margin-right: 0;
 	}
 
