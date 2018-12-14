@@ -40,7 +40,7 @@ class ThemePlate {
 		$this->setup( $config );
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
-		add_action( 'after_setup_theme', array( 'ThemePlate_Cleaner', 'instance' ) );
+		add_action( 'init', array( 'ThemePlate_Cleaner', 'instance' ) );
 
 	}
 
