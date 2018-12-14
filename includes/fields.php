@@ -46,6 +46,7 @@ class ThemePlate_Fields {
 			);
 			$field    = ThemePlate_Helper_Main::fool_proof( $defaults, $field );
 			$field    = ThemePlate_Helper_Meta::normalize_options( $field );
+			$field    = ThemePlate_Helper_Field::deprecate_check( $field );
 
 			if ( 'group' === $field['type'] ) {
 				if ( array_key_exists( 'fields', $field ) && ! empty( $field['fields'] ) ) {
@@ -81,7 +82,6 @@ class ThemePlate_Fields {
 				$key    = ThemePlate()->key;
 			}
 
-			$field = ThemePlate_Helper_Field::deprecate_check( $field );
 			$value = $stored ? $stored : $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
 
@@ -152,7 +152,6 @@ class ThemePlate_Fields {
 		foreach ( $field['fields'] as $id => $sub ) {
 			$sub['id'] = $field['id'] . '_' . $id;
 
-			$sub    = ThemePlate_Helper_Field::deprecate_check( $sub );
 			$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
 			$value  = $stored ? $stored : $sub['default'];
 			$name   = $field['name'] . '[' . $id . ']';
