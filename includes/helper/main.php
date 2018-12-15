@@ -47,13 +47,23 @@ class ThemePlate_Helper_Main {
 			return false;
 		}
 
+		$result = true;
+
 		foreach ( $expected as $key ) {
-			if ( ! array_key_exists( $key, $config ) ) {
+			if ( is_array( $key ) ) {
+				$result = false;
+
+				foreach ( $key as $k ) {
+					if ( array_key_exists( $k, $config ) ) {
+						$result = true;
+					}
+				}
+			} elseif ( ! array_key_exists( $key, $config ) ) {
 				return false;
 			}
 		}
 
-		return true;
+		return $result;
 
 	}
 
