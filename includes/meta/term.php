@@ -45,7 +45,8 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 		}
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
-		add_action( 'load-edit-tags.php', array( $this, 'columns' ) );
+
+		$this->columns();
 
 	}
 

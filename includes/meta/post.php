@@ -32,7 +32,8 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
-		add_action( 'load-edit.php', array( $this, 'columns' ) );
+
+		$this->columns();
 
 	}
 
