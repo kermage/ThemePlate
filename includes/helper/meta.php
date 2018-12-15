@@ -106,9 +106,9 @@ class ThemePlate_Helper_Meta {
 	}
 
 
-	public static function display_column( $id, $args ) {
+	public static function display_column( $object_id, $args ) {
 
-		$value = get_post_meta( $id, $args['id'], ! $args['repeatable'] );
+		$value = get_metadata( $args['object_type'], $object_id, $args['id'], ! $args['repeatable'] );
 
 		if ( ! $value ) {
 			return;

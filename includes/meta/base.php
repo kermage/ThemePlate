@@ -114,7 +114,8 @@ abstract class ThemePlate_Meta_Base {
 				continue;
 			}
 
-			$field['id'] = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+			$field['id']          = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
+			$field['object_type'] = $meta_box['object_type'];
 
 			$args  = array(
 				'id'            => $field['id'],
