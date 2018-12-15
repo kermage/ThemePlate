@@ -36,8 +36,34 @@ class ThemePlate_Columns {
 		);
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
-		add_filter( 'manage_' . $config['post_type'] . '_posts_columns', array( $this, 'modify' ), 10 );
-		add_action( 'manage_' . $config['post_type'] . '_posts_custom_column', array( $this, 'populate' ), 10, 2 );
+		$context = $this->context();
+
+		add_filter( 'manage_' . $context['modify'] . '_columns', array( $this, 'modify' ), 10 );
+		add_action( 'manage_' . $context['populate'] . '_custom_column', array( $this, 'populate' ), 10, 2 );
+
+	}
+
+
+	private function context() {
+
+		$config  = $this->config;
+		$context = array();
+
+		if ( ! empty( $config['post_type'] ) ) {
+			$context['type']   = 'post_type';
+			$context['modify'] = $context['populate'] = $config['post_type'] . '_posts';
+		} elseif ( ! empty( $config['taxonomy'] ) ) {
+			$context['type']     = 'taxonomy';
+			$context['modify']   = 'edit-' . $config['taxonomy'];
+			$context['populate'] = $config['taxonomy'];
+		} elseif ( ! empty( $config['users'] ) ) {
+			$context['type']   = 'users';
+			$context['modify'] = $context['populate'] = 'users';
+		}
+
+		$this->config['context'] = $context;
+
+		return $context;
 
 	}
 
