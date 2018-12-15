@@ -39,7 +39,7 @@ class ThemePlate_Columns {
 		$context = $this->context();
 
 		add_filter( 'manage_' . $context['modify'] . '_columns', array( $this, 'modify' ), 10 );
-		add_action( 'manage_' . $context['populate'] . '_custom_column', array( $this, 'populate' ), 10, 2 );
+		add_action( 'manage_' . $context['populate'] . '_custom_column', array( $this, 'populate' ), 10, 3 );
 
 	}
 
@@ -86,15 +86,22 @@ class ThemePlate_Columns {
 	}
 
 
-	public function populate( $column_name, $post_id ) {
+	public function populate( $content_name, $name_id, $object_id = null ) {
 
 		$config = $this->config;
+
+		if ( 'post_type' === $config['context']['type'] ) {
+			$column_name = $content_name;
+			$object_id   = $name_id;
+		} else {
+			$column_name = $name_id;
+		}
 
 		if ( $column_name !== $config['id'] ) {
 			return;
 		}
 
-		return call_user_func( $config['callback'], $post_id, $config['callback_args'] );
+		return call_user_func( $config['callback'], $object_id, $config['callback_args'] );
 
 	}
 
