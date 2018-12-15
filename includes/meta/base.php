@@ -123,17 +123,7 @@ abstract class ThemePlate_Meta_Base {
 				'callback_args' => $field,
 			);
 
-			if ( empty( $meta_box['screen'] ) ) {
-				$screen = get_current_screen();
-
-				$meta_box['screen'][] = $screen->post_type;
-			}
-
-			foreach ( $meta_box['screen'] as $post_type ) {
-				$args['post_type'] = $post_type;
-
-				new ThemePlate_Columns( $args );
-			}
+			$this->column_data( $args );
 		}
 
 	}

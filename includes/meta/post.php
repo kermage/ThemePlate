@@ -113,4 +113,23 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 	}
 
+
+	public function column_data( $args ) {
+
+		$meta_box = $this->config;
+
+		if ( empty( $meta_box['screen'] ) ) {
+			$screen = get_current_screen();
+
+			$meta_box['screen'][] = $screen->post_type;
+		}
+
+		foreach ( $meta_box['screen'] as $post_type ) {
+			$args['post_type'] = $post_type;
+
+			new ThemePlate_Columns( $args );
+		}
+
+	}
+
 }
