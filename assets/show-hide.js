@@ -10,7 +10,7 @@ window.ThemePlate = window.ThemePlate || {};
 	TP.checkersElements = {
 		'parent': $( '#parent' ),
 		'role': $( '#role' ),
-		'id': $( '#post_ID' ).length ? $( '#post_ID' ) : $( '#tag_ID' ).length ? $( '#tag_ID' ) : $( '#checkuser_id' ),
+		'id': $( '#post_ID' ).length ? $( '#post_ID' ) : $( '#tag_ID' ).length ? $( '#tag_ID' ) : $( '#user_id' ),
 	};
 
 	TP.checkCallbacks = {
