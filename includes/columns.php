@@ -16,10 +16,14 @@ class ThemePlate_Columns {
 	public function __construct( $config ) {
 
 		$expected = array(
-			'post_type',
 			'id',
 			'title',
 			'callback',
+			array(
+				'post_type',
+				'taxonomy',
+				'users',
+			),
 		);
 
 		if ( ! ThemePlate_Helper_Main::is_complete( $config, $expected ) ) {
