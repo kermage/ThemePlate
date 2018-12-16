@@ -76,7 +76,7 @@ class ThemePlate_Columns {
 					$context['list'][ $index ]['populate'] = $taxonomy;
 				}
 			}
-		} elseif ( ! empty( $config['users'] ) ) {
+		} elseif ( isset( $config['users'] ) ) {
 			$context['type']              = 'users';
 			$context['list'][0]['modify'] = $context['list'][0]['populate'] = 'users';
 		}
