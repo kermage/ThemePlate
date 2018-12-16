@@ -6,6 +6,7 @@
 
 
 	var changesHolder = {};
+	var initialized = false;
 
 
 	$.extend( TP.checkCallbacks, {
@@ -34,6 +35,11 @@
 	function listenDataChanges() {
 		if ( ! wp.data ) {
 			return;
+		}
+
+		if ( ! initialized ) {
+			applyCurrentChanges();
+			initialized = true;
 		}
 
 		wp.data.subscribe( function() {
