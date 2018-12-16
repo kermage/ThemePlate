@@ -55,7 +55,7 @@ class ThemePlate_Columns {
 			$context['type'] = 'post_type';
 
 			if ( ! empty( $config['post_type'] ) ) {
-				$context['list'][]['modify'] = $context['list'][]['populate'] = $config['post_type'] . '_posts';
+				$context['list'][0]['modify'] = $context['list'][0]['populate'] = $config['post_type'] . '_posts';
 			} else {
 				$context['list'][0]['modify'] = $context['list'][0]['populate'] = 'posts';
 				$context['list'][1]['modify'] = $context['list'][1]['populate'] = 'pages';
@@ -77,8 +77,8 @@ class ThemePlate_Columns {
 				}
 			}
 		} elseif ( ! empty( $config['users'] ) ) {
-			$context['type']             = 'users';
-			$context['list'][]['modify'] = $context['list'][]['populate'] = 'users';
+			$context['type']              = 'users';
+			$context['list'][0]['modify'] = $context['list'][0]['populate'] = 'users';
 		}
 
 		$this->config['context'] = $context;
