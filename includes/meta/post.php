@@ -29,6 +29,8 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $this->config );
 
+		$this->config['screen'] = array_filter( $this->config['screen'] );
+
 		add_action( 'add_meta_boxes', array( $this, 'create' ) );
 		add_action( 'save_post', array( $this, 'save' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
@@ -118,6 +120,10 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 	protected function column_data( $args ) {
 
 		$meta_box = $this->config;
+
+		if ( empty( $meta_box['screen'] ) ) {
+			$meta_box['screen'][] = '';
+		}
 
 		foreach ( $meta_box['screen'] as $post_type ) {
 			$args['post_type'] = $post_type;
