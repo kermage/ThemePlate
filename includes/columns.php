@@ -49,9 +49,9 @@ class ThemePlate_Columns {
 		$config  = $this->config;
 		$context = array();
 
-		if ( ! empty( $config['post_type'] ) ) {
+		if ( isset( $config['post_type'] ) ) {
 			$context['type']   = 'post_type';
-			$context['modify'] = $context['populate'] = $config['post_type'] . '_posts';
+			$context['modify'] = $context['populate'] = ltrim( $config['post_type'] . '_posts', '_' );
 		} elseif ( ! empty( $config['taxonomy'] ) ) {
 			$context['type']     = 'taxonomy';
 			$context['modify']   = 'edit-' . $config['taxonomy'];
