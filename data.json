@@ -1,12 +1,12 @@
 {
-  "new_version"  : "2.14.0",
+  "new_version"  : "3.0.0",
   "url"          : "https://github.com/kermage/ThemePlate",
-  "package"      : "https://github.com/kermage/ThemePlate/archive/v2.14.0.zip",
-  "last_updated" : "2018-11-20",
+  "package"      : "https://github.com/kermage/ThemePlate/releases/download/v3.0.0/themeplate.zip",
+  "last_updated" : "2018-12-16",
   "author_name"  : "Gene Alyson Fortunado Torcende",
   "author_url"   : "mailto:genealyson.torcende@gmail.com",
   "requires"     : "4.6.0",
-  "tested"       : "5.0.0",
+  "tested"       : "5.0.1",
   "sections"     : {
     "description" : "A toolkit to handle everything related in developing a full-featured WordPress theme"
   },
@@ -17,5 +17,6 @@
   "icons": {
     "1x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-128x128.png",
     "2x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-256x256.png"
-  }
+  },
+  "upgrade_notice" : "Here's why you should upgrade...FULLY COMPATIBLE WITH GUTENBERG!"
 }
