@@ -60,10 +60,18 @@ class ThemePlate_Columns {
 				$context['list'][0]['modify'] = $context['list'][0]['populate'] = 'posts';
 				$context['list'][1]['modify'] = $context['list'][1]['populate'] = 'pages';
 			}
-		} elseif ( ! empty( $config['taxonomy'] ) ) {
-			$context['type']               = 'taxonomy';
-			$context['list'][]['modify']   = 'edit-' . $config['taxonomy'];
-			$context['list'][]['populate'] = $config['taxonomy'];
+		} elseif ( isset( $config['taxonomy'] ) ) {
+			$context['type'] = 'taxonomy';
+
+			if ( ! empty( $config['taxonomy'] ) ) {
+				$context['list'][0]['modify']   = 'edit-' . $config['taxonomy'];
+				$context['list'][0]['populate'] = $config['taxonomy'];
+			} else {
+				$context['list'][0]['modify']   = 'edit-category';
+				$context['list'][0]['populate'] = 'category';
+				$context['list'][1]['modify']   = 'edit-post_tag';
+				$context['list'][1]['populate'] = 'post_tag';
+			}
 		} elseif ( ! empty( $config['users'] ) ) {
 			$context['type']             = 'users';
 			$context['list'][]['modify'] = $context['list'][]['populate'] = 'users';
