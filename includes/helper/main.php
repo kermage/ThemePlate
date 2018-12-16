@@ -17,7 +17,6 @@ class ThemePlate_Helper_Main {
 		foreach ( $defaults as $key => $value ) {
 			if ( is_array( $value ) ) {
 				$result[ $key ] = (array) $result[ $key ];
-				$result[ $key ] = array_filter( $result[ $key ] );
 			}
 
 			if ( is_bool( $value ) ) {
