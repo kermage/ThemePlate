@@ -115,7 +115,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 	}
 
 
-	public function column_data( $args ) {
+	protected function column_data( $args ) {
 
 		$meta_box = $this->config;
 

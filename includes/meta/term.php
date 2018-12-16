@@ -117,7 +117,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 	}
 
 
-	public function column_data( $args ) {
+	protected function column_data( $args ) {
 
 		foreach ( $this->config['taxonomy'] as $taxonomy ) {
 			$args['taxonomy'] = $taxonomy;

@@ -103,7 +103,7 @@ class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 	}
 
 
-	public function column_data( $args ) {
+	protected function column_data( $args ) {
 
 		$args['users'] = true;
 

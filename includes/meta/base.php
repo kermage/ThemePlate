@@ -129,4 +129,7 @@ abstract class ThemePlate_Meta_Base {
 
 	}
 
+
+	abstract protected function column_data( $args );
+
 }
