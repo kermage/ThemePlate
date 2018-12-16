@@ -119,7 +119,7 @@ abstract class ThemePlate_Meta_Base {
 
 			$args  = array(
 				'id'            => $field['id'],
-				'title'         => $meta_box['title'] . ': ' . $field['title'],
+				'title'         => $field['title'],
 				'callback'      => array( 'ThemePlate_Helper_Meta', 'display_column' ),
 				'callback_args' => $field,
 			);
