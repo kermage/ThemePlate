@@ -38,8 +38,10 @@ class ThemePlate_Columns {
 
 		$context = $this->context();
 
-		add_filter( 'manage_' . $context['modify'] . '_columns', array( $this, 'modify' ), 10 );
-		add_action( 'manage_' . $context['populate'] . '_custom_column', array( $this, 'populate' ), 10, 3 );
+		foreach ( $context['list'] as $item ) {
+			add_filter( 'manage_' . $item['modify'] . '_columns', array( $this, 'modify' ), 10 );
+			add_action( 'manage_' . $item['populate'] . '_custom_column', array( $this, 'populate' ), 10, 3 );
+		}
 
 	}
 
@@ -50,15 +52,21 @@ class ThemePlate_Columns {
 		$context = array();
 
 		if ( isset( $config['post_type'] ) ) {
-			$context['type']   = 'post_type';
-			$context['modify'] = $context['populate'] = ltrim( $config['post_type'] . '_posts', '_' );
+			$context['type'] = 'post_type';
+
+			if ( ! empty( $config['post_type'] ) ) {
+				$context['list'][]['modify'] = $context['list'][]['populate'] = $config['post_type'] . '_posts';
+			} else {
+				$context['list'][0]['modify'] = $context['list'][0]['populate'] = 'posts';
+				$context['list'][1]['modify'] = $context['list'][1]['populate'] = 'pages';
+			}
 		} elseif ( ! empty( $config['taxonomy'] ) ) {
-			$context['type']     = 'taxonomy';
-			$context['modify']   = 'edit-' . $config['taxonomy'];
-			$context['populate'] = $config['taxonomy'];
+			$context['type']               = 'taxonomy';
+			$context['list'][]['modify']   = 'edit-' . $config['taxonomy'];
+			$context['list'][]['populate'] = $config['taxonomy'];
 		} elseif ( ! empty( $config['users'] ) ) {
-			$context['type']   = 'users';
-			$context['modify'] = $context['populate'] = 'users';
+			$context['type']             = 'users';
+			$context['list'][]['modify'] = $context['list'][]['populate'] = 'users';
 		}
 
 		$this->config['context'] = $context;
