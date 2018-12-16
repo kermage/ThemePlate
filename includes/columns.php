@@ -67,10 +67,14 @@ class ThemePlate_Columns {
 				$context['list'][0]['modify']   = 'edit-' . $config['taxonomy'];
 				$context['list'][0]['populate'] = $config['taxonomy'];
 			} else {
-				$context['list'][0]['modify']   = 'edit-category';
-				$context['list'][0]['populate'] = 'category';
-				$context['list'][1]['modify']   = 'edit-post_tag';
-				$context['list'][1]['populate'] = 'post_tag';
+				$taxonomies   = get_taxonomies( array( '_builtin' => false ) );
+				$taxonomies[] = 'category';
+				$taxonomies[] = 'post_tag';
+
+				foreach ( $taxonomies as $index => $taxonomy ) {
+					$context['list'][ $index ]['modify']   = 'edit-' . $taxonomy;
+					$context['list'][ $index ]['populate'] = $taxonomy;
+				}
 			}
 		} elseif ( ! empty( $config['users'] ) ) {
 			$context['type']             = 'users';
