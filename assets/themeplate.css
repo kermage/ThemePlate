@@ -290,8 +290,8 @@
 	position: relative;
 	width: 100%;
 	min-height: 30px;
-	padding-left: 23px;
-	padding-right: 43px;
+	padding-left: 19px;
+	padding-right: 34px;
 }
 
 .themeplate-clone,
@@ -302,6 +302,7 @@
 
 .repeatable .themeplate-clone .attachment-close {
 	top: 3px;
+	right: 0;
 }
 
 .themeplate-handle {
