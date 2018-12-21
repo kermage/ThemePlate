@@ -115,14 +115,16 @@ class ThemePlate_Helper_Meta {
 		}
 
 		if ( 1 === count( $value ) ) {
-			echo $value[0];
+			print_r( $value[0] );
 			return;
 		}
 
 		echo '<ul>';
 
 		foreach ( $value as $val ) {
-			echo '<li>' . $val . '</li>';
+			echo '<li>';
+			print_r( $val );
+			echo '</li>';
 		}
 
 		echo '</ul>';
