@@ -115,7 +115,12 @@ class ThemePlate_Helper_Meta {
 		}
 
 		if ( 1 === count( $value ) ) {
-			print_r( $value[0] );
+			if ( $args['repeatable'] ) {
+				print_r( $value[0] );
+			} else {
+				echo $value;
+			}
+
 			return;
 		}
 
