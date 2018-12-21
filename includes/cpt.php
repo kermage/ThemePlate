@@ -33,13 +33,15 @@ class ThemePlate_CPT {
 			'args' => array(),
 		);
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
-		$this->$kind( $this->config );
+
+		add_action( 'init', array( $this, $kind ) );
 
 	}
 
 
-	public function post_type( $config ) {
+	public function post_type() {
 
+		$config   = $this->config;
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
 		$defaults = array(
@@ -93,8 +95,9 @@ class ThemePlate_CPT {
 	}
 
 
-	public function taxonomy( $config ) {
+	public function taxonomy() {
 
+		$config   = $this->config;
 		$plural   = $config['plural'];
 		$singular = $config['singular'];
 		$defaults = array(
