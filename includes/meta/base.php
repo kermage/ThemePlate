@@ -107,9 +107,8 @@ abstract class ThemePlate_Meta_Base {
 	public function columns() {
 
 		$meta_box = $this->config;
-		$fields   = $this->form->get_fields();
 
-		foreach ( $fields as $id => $field ) {
+		foreach ( $this->form->get_fields() as $id => $field ) {
 			if ( ! $field['column'] ) {
 				continue;
 			}

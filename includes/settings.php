@@ -68,8 +68,7 @@ class ThemePlate_Settings {
 
 	public function add() {
 
-		$settings = $this->config;
-		$this->form->layout_postbox( $settings['page'] );
+		$this->form->layout_postbox( $this->config['page'] );
 
 	}
 
@@ -87,10 +86,9 @@ class ThemePlate_Settings {
 
 	private function is_valid_screen() {
 
-		$settings = $this->config;
-		$screen   = get_current_screen();
+		$screen = get_current_screen();
 
-		if ( false === strpos( $screen->id, $settings['page'] ) ) {
+		if ( false === strpos( $screen->id, $this->config['page'] ) ) {
 			return false;
 		}
 

@@ -66,9 +66,7 @@ class ThemePlate_Fields {
 
 	public function setup( $metabox_id = '', $object_type = 'post', $object_id = 0 ) {
 
-		$fields = $this->collection;
-
-		foreach ( $fields as $id => $field ) {
+		foreach ( $this->collection as $id => $field ) {
 			if ( 'options' === $object_type ) {
 				$field['id'] = $metabox_id . '_' . $id;
 
