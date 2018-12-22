@@ -410,8 +410,21 @@
 	}
 
 	#side-sortables .themeplate-clone {
-		padding-left: 12px;
-		padding-right: 32px;
+		padding-left: 18px;
+		padding-right: 30px;
+	}
+
+	#side-sortables .themeplate-clone .attachment-close {
+		top: 5px;
+		width: 19px;
+		height: 19px;
+		background-size: 107px 12px;
+		background-position-x: -75px;
+	}
+
+	#side-sortables .themeplate-clone .attachment-close:focus,
+	#side-sortables .themeplate-clone .attachment-close:hover {
+		background-position-x: -28px;
 	}
 }
 
