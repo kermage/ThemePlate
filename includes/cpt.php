@@ -34,7 +34,11 @@ class ThemePlate_CPT {
 		);
 		$this->config = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
-		add_action( 'init', array( $this, $kind ) );
+		if ( did_action( 'init' ) ) {
+			$this->$kind();
+		} else {
+			add_action( 'init', array( $this, $kind ) );
+		}
 
 	}
 
