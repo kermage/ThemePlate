@@ -12,7 +12,13 @@ class ThemePlate_Field_Textarea {
 
 	public static function render( $field ) {
 
-		echo '<textarea name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" rows="4"' . ( $field['required'] ? ' required="required"' : '' ) . '>' . esc_textarea( $field['value'] ) . '</textarea>';
+		$defaults = array( 'rows' => 4 );
+		$attrs    = ThemePlate_Helper_Main::fool_proof( $defaults, $field['options'] );
+		echo '<textarea name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" ';
+		foreach ( $attrs as $attr => $value ) {
+			echo $attr . '="' . esc_attr( $value ) . '"';
+		}
+		echo ( $field['required'] ? ' required="required"' : '' ) . '>' . esc_textarea( $field['value'] ) . '</textarea>';
 
 	}
 
