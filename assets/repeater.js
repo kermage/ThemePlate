@@ -11,11 +11,13 @@
 
 		setIndex( $cloned, getIndex( $field ) );
 		$cloned.removeClass( 'hidden' ).insertBefore( $field ).trigger( 'clone' );
+		setRequired( $( this ).parent( '.repeatable' ) );
 	});
 
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
+		setRequired( $( this ).parents( '.repeatable' ) );
 		$( this ).closest( '.themeplate-clone' ).remove();
 	});
 
@@ -30,8 +32,13 @@
 			placeholder: 'themaplate-clone clone-placeholder',
 			start: function ( e, ui ) {
 				ui.placeholder.height( ui.item.height() );
+			},
+			update: function() {
+				setRequired( $this );
 			}
 		} );
+
+		setRequired( $this );
 	} );
 
 
@@ -60,6 +67,12 @@
 				$( this ).attr( indexAttributes[i], value );
 			}
 		});
+	}
+
+
+	function setRequired( $field ) {
+		$field.find( '.themeplate-clone .attachment-close' ).show();
+		$field.find( '.themeplate-clone .attachment-close' ).slice( 0, $field.data( 'min' ) ).hide();
 	}
 
 }( jQuery ));

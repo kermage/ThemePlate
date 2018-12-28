@@ -25,11 +25,6 @@
 	});
 
 
-	$( '.themeplate .field-input.repeatable' ).each( function() {
-		$( this ).find( '.themeplate-clone .attachment-close' ).slice( 0, $( this ).data( 'min' ) ).hide();
-	});
-
-
 	$( document ).on( 'click', '.tpo.postbox .hndle, .tpo.postbox .handlediv', function() {
 		var $el = $( this ),
 			p = $el.parent( '.postbox' ),
