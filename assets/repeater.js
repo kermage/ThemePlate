@@ -73,6 +73,12 @@
 	function setRequired( $field ) {
 		$field.find( '.themeplate-clone' ).removeClass( 'required' )
 			.slice( 0, $field.data( 'min' ) ).addClass( 'required' );
+
+		if ( $field.data( 'max' ) && $field.find( '.themeplate-clone' ).length - 1 === $field.data( 'max' ) ) {
+			$field.find( '.clone-add' ).hide();
+		} else {
+			$field.find( '.clone-add' ).show();
+		}
 	}
 
 }( jQuery ));

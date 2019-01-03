@@ -44,6 +44,7 @@ class ThemePlate_Fields {
 				'required'   => false,
 				'column'     => false,
 				'minimum'    => 1,
+				'maximum'    => 0,
 			);
 			$field    = ThemePlate_Helper_Main::fool_proof( $defaults, $field );
 			$field    = ThemePlate_Helper_Meta::normalize_options( $field );
@@ -102,7 +103,7 @@ class ThemePlate_Fields {
 				echo '</div>';
 			}
 
-			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '" data-min="' . $field['minimum'] . '">';
+			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '" data-min="' . $field['minimum'] . '" data-max="' . $field['maximum'] . '">';
 				if ( ! $field['repeatable'] ) {
 					$field['value'] = $value;
 					$field['name']  = $name;
