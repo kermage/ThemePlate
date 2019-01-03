@@ -294,6 +294,15 @@
 	padding-right: 34px;
 }
 
+.themeplate-clone.required {
+	/* stylelint-disable-next-line declaration-no-important */
+	padding-right: 0 !important;
+}
+
+.themeplate-clone.required .attachment-close {
+	display: none;
+}
+
 .themeplate-clone,
 .themeplate-clone > .field-wrapper {
 	margin-top: 0;

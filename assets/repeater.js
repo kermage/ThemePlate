@@ -71,8 +71,8 @@
 
 
 	function setRequired( $field ) {
-		$field.find( '.themeplate-clone .attachment-close' ).show();
-		$field.find( '.themeplate-clone .attachment-close' ).slice( 0, $field.data( 'min' ) ).hide();
+		$field.find( '.themeplate-clone' ).removeClass( 'required' )
+			.slice( 0, $field.data( 'min' ) ).addClass( 'required' );
 	}
 
 }( jQuery ));
