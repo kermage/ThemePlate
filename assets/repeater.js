@@ -17,7 +17,7 @@
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
-		setRequired( $( this ).parents( '.repeatable' ) );
+		setRequired( $( this ).parents( '.repeatable' ), true );
 		$( this ).closest( '.themeplate-clone' ).remove();
 	});
 
@@ -70,11 +70,11 @@
 	}
 
 
-	function setRequired( $field ) {
+	function setRequired( $field, $delayed = false ) {
 		$field.find( '.themeplate-clone' ).removeClass( 'required' )
 			.slice( 0, $field.data( 'min' ) ).addClass( 'required' );
 
-		if ( $field.data( 'max' ) && $field.find( '.themeplate-clone' ).length - 1 === $field.data( 'max' ) ) {
+		if ( $field.data( 'max' ) && $field.find( '.themeplate-clone' ).length - 1 === $field.data( 'max' ) + $delayed ) {
 			$field.find( '.clone-add' ).hide();
 		} else {
 			$field.find( '.clone-add' ).show();
