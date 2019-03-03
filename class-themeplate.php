@@ -72,7 +72,7 @@ class ThemePlate {
 				$config['title'] = $key;
 				$config['key']   = sanitize_title( $key );
 				$this->stall_update();
-			} else if ( ThemePlate_Helper_Main::is_sequential( $key ) ) {
+			} elseif ( ThemePlate_Helper_Main::is_sequential( $key ) ) {
 				$config['title'] = array_shift( $key );
 				$config['key']   = array_shift( $key );
 				$this->stalled   = true;
