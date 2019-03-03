@@ -98,6 +98,7 @@
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: auto;
+	max-width: 100%;
 }
 
 .type-group .field-wrapper:first-of-type,
