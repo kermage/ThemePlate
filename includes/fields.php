@@ -43,7 +43,7 @@ class ThemePlate_Fields {
 				'repeatable' => false,
 				'required'   => false,
 				'column'     => false,
-				'minimum'    => 1,
+				'minimum'    => 0,
 				'maximum'    => 0,
 			);
 			$field    = ThemePlate_Helper_Main::fool_proof( $defaults, $field );
@@ -58,8 +58,8 @@ class ThemePlate_Fields {
 				}
 			}
 
-			if ( $field['minimum'] < 1 ) {
-				$field['minimum'] = 1;
+			if ( $field['minimum'] < 0 ) {
+				$field['minimum'] = 0;
 			}
 
 			if ( $field['maximum'] < 0 ) {
@@ -68,6 +68,10 @@ class ThemePlate_Fields {
 
 			if ( $field['maximum'] && $field['maximum'] < $field['minimum'] ) {
 				$field['maximum'] = $field['minimum'];
+			}
+
+			if ( $field['required'] && ! $field['minimum'] ) {
+				$field['minimum'] = 1;
 			}
 
 			$processed[ $id ] = $field;
