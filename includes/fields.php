@@ -58,6 +58,14 @@ class ThemePlate_Fields {
 				}
 			}
 
+			if ( $field['minimum'] < 1 ) {
+				$field['minimum'] = 1;
+			}
+
+			if ( $field['maximum'] < 0 ) {
+				$field['maximum'] = 0;
+			}
+
 			if ( $field['maximum'] && $field['maximum'] < $field['minimum'] ) {
 				$field['maximum'] = $field['minimum'];
 			}
