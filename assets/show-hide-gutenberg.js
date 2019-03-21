@@ -29,6 +29,23 @@
 
 			return TP.compareValue( current, TP.sureArray( value ), 'in' );
 		},
+		term: function( argument ) {
+			var taxonomy = argument[0];
+			var value = argument[1];
+			var current = wp.data.select( 'core/editor' ).getEditedPostAttribute( taxonomy );
+
+			for ( var i in current ) {
+				if ( ! current.hasOwnProperty( i ) ) {
+					continue;
+				}
+
+				if ( TP.compareValue( current[i], TP.sureArray( value ), 'in' ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		},
 	});
 
 
