@@ -138,12 +138,12 @@ window.ThemePlate = window.ThemePlate || {};
 		return result;
 	};
 
-	TP.isAvailable = function( checker ) {
-		if ( checker == 'term' ) {
+	TP.isAvailable = function( checker, $strict = false ) {
+		if ( ! $strict && checker == 'term' ) {
 			return true;
 		}
 
-		if ( checker == 'field' ) {
+		if ( ! $strict && checker == 'field' ) {
 			return true;
 		}
 
@@ -256,7 +256,7 @@ window.ThemePlate = window.ThemePlate || {};
 				}
 			}
 
-			if ( ! TP.isAvailable( key ) ) {
+			if ( ! TP.isAvailable( key, true ) ) {
 				continue;
 			}
 
