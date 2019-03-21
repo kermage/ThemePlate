@@ -5,7 +5,7 @@ window.ThemePlate = window.ThemePlate || {};
 	'use strict';
 
 
-	var editorSpecific = [ 'template', 'format' ];
+	var editorSpecific = [ 'template', 'format', 'parent' ];
 
 	TP.checkersElements = {
 		'parent': $( '#parent' ),
