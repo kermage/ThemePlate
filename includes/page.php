@@ -60,8 +60,14 @@ class ThemePlate_Page {
 		} else {
 			global $_parent_pages;
 
-			if ( array_key_exists( ThemePlate()->key . '-' . $page['parent'], $_parent_pages ) ) {
-				$page['parent'] = ThemePlate()->key . '-' . $page['parent'];
+			$parent_slug = ThemePlate()->key . '-' . $page['parent'];
+
+			if ( array_key_exists( $parent_slug, $_parent_pages ) ) {
+				$page['parent'] = $parent_slug;
+			} else if ( $parent_slug === $page['id'] ) {
+				$page['parent'] = $parent_slug;
+				$this->add_menu( $page );
+				$page['menu'] = $page['title'];
 			}
 
 			$this->add_submenu( $page );
