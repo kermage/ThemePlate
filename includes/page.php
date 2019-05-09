@@ -58,11 +58,10 @@ class ThemePlate_Page {
 		if ( empty( $page['parent'] ) ) {
 			$this->add_menu( $page );
 		} else {
-			$page['parent'] = ThemePlate()->key . '-' . $page['parent'];
+			global $_parent_pages;
 
-			if ( $page['parent'] === $page['id'] ) {
-				$this->add_menu( $page );
-				$page['menu'] = $page['title'];
+			if ( array_key_exists( ThemePlate()->key . '-' . $page['parent'], $_parent_pages ) ) {
+				$page['parent'] = ThemePlate()->key . '-' . $page['parent'];
 			}
 
 			$this->add_submenu( $page );
