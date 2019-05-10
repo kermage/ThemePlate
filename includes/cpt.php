@@ -129,7 +129,7 @@ class ThemePlate_CPT {
 			'add_or_remove_items'        => 'Add or remove ' . strtolower( $plural ),
 			'choose_from_most_used'      => 'Choose from the most used ' . strtolower( $singular ),
 			'not_found'                  => 'No ' . strtolower( $plural ) . ' found.',
-			'not_terms'                  => 'No ' . strtolower( $plural ),
+			'no_terms'                   => 'No ' . strtolower( $plural ),
 			'items_list_navigation'      => $plural . ' list navigation',
 			'items_list'                 => $plural . ' list',
 			'most_used'                  => 'Most Used ' . $plural,
