@@ -54,9 +54,6 @@ class ThemePlate_Cleaner {
 		remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 		remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
 
-		// Remove the WordPress version from RSS feeds
-		add_filter( 'the_generator', '__return_false' );
-
 		// Remove the link to comments feed
 		add_filter( 'feed_links_show_comments_feed', '__return_false' );
 
