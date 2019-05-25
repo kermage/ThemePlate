@@ -161,7 +161,12 @@ class ThemePlate_Page {
 
 								<div id="major-publishing-actions">
 									<?php settings_fields( $page ); ?>
-									<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
+
+									<?php if ( current_user_can( 'manage_options' ) ) : ?>
+										<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
+									<?php else : ?>
+										<p>Need administrator access to save changes.</p>
+									<?php endif; ?>
 								</div>
 							</div>
 
