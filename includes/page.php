@@ -165,7 +165,7 @@ class ThemePlate_Page {
 									<?php if ( current_user_can( 'manage_options' ) ) : ?>
 										<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 									<?php else : ?>
-										<p>Need administrator access to save changes.</p>
+										<p><strong>Need a higher level access to save changes.</strong></p>
 									<?php endif; ?>
 								</div>
 							</div>
