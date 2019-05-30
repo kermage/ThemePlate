@@ -162,7 +162,7 @@ class ThemePlate_Page {
 								<div id="major-publishing-actions">
 									<?php settings_fields( $page ); ?>
 
-									<?php if ( current_user_can( 'manage_options' ) ) : ?>
+									<?php if ( current_user_can( apply_filters( 'option_page_capability_' . $page, 'manage_options' ) ) ) : ?>
 										<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 									<?php else : ?>
 										<p><strong>Need a higher level access to save changes.</strong></p>
