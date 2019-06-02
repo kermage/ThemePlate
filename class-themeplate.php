@@ -109,18 +109,20 @@ class ThemePlate {
 		$this->key  = $config['key'];
 		$this->slug = $config['slug'];
 
-		$args = array(
-			'id'    => $config['slug'],
-			'title' => $config['title'],
-		);
+		if ( apply_filters( 'themeplate_options_page', true ) ) {
+			$args = array(
+				'id'    => $config['slug'],
+				'title' => $config['title'],
+			);
 
-		if ( $config['pages'] ) {
-			$args['title']  = array_shift( $config['pages'] );
-			$args['parent'] = $config['slug'];
-			$args['menu']   = $config['title'];
+			if ( $config['pages'] ) {
+				$args['title']  = array_shift( $config['pages'] );
+				$args['parent'] = $config['slug'];
+				$args['menu']   = $config['title'];
+			}
+
+			$this->page( $args );
 		}
-
-		$this->page( $args );
 
 		if ( ! $config['pages'] ) {
 			return;
