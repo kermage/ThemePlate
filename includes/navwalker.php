@@ -111,4 +111,50 @@ class ThemePlate_NavWalker extends Walker {
 		$output .= '</li>';
 
 	}
+
+
+	public static function fallback( $args ) {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		$output = '';
+
+		if ( $args['container'] ) {
+			$output .= '<' . $args['container'];
+
+			if ( $args['container_id'] ) {
+				$output .= ' id="' . $args['container_id'] . '"';
+			}
+
+			if ( $args['container_class'] ) {
+				$output .= ' class="' . $args['container_class'] . '"';
+			}
+
+			$output .= '>';
+		}
+
+		$output .= '<ul';
+
+		if ( $args['menu_id'] ) {
+			$output .= ' id="' . $args['menu_id'] . '"';
+		}
+
+		if ( $args['menu_class'] ) {
+			$output .= ' class="' . $args['menu_class'] . '"';
+		}
+
+		$output .= '>';
+		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">Add a menu</a></li>';
+		$output .= '</ul>';
+
+		if ( $args['container'] ) {
+			$output .= '</' . $args['container'] . '>';
+		}
+
+		return $output;
+
+	}
+
 }
