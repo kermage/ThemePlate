@@ -173,6 +173,10 @@ class ThemePlate_Cleaner {
 			$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
 		}
 
+		if ( 'wp_page_menu' === $args['fallback_cb'] ) {
+			$args['fallback_cb'] = 'ThemePlate_NavWalker::fallback';
+		}
+
 		return $args;
 
 	}
