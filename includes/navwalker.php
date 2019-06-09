@@ -153,7 +153,11 @@ class ThemePlate_NavWalker extends Walker {
 			$output .= '</' . $args['container'] . '>';
 		}
 
-		return $output;
+		if ( $args['echo'] ) {
+			echo $output;
+		} else {
+			return $output;
+		}
 
 	}
 
