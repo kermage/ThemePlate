@@ -115,7 +115,7 @@ class ThemePlate_NavWalker extends Walker {
 
 	public static function fallback( $args ) {
 
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			return false;
 		}
 
