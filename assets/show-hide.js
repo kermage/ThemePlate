@@ -63,7 +63,17 @@ window.ThemePlate = window.ThemePlate || {};
 		if ( element.closest( '.field-wrapper' ).length ) {
 			selector = element.closest( '.field-wrapper' );
 		} else {
-			selector = element.closest( '.themeplate' );
+			var selectorArray = [];
+			var selectorID = element.closest( '.themeplate' ).attr( 'id' );
+			var toggler =  document.getElementById( selectorID + '-hide' );
+
+			if ( toggler !== null ) {
+				selectorArray.push( toggler.parentNode );
+			}
+
+			selectorArray.push( document.getElementById( selectorID ) );
+
+			selector = $( selectorArray );
 		}
 
 		return selector;
