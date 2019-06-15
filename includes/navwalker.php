@@ -71,7 +71,7 @@ class ThemePlate_NavWalker extends Walker {
 		$id = apply_filters( 'nav_menu_item_id', '', $item, $args, $depth );
 		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$output .= '<li' . $id . $class_names .'>';
+		$output .= '<li' . $id . $class_names . '>';
 
 		$atts = array();
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
