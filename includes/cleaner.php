@@ -167,14 +167,14 @@ class ThemePlate_Cleaner {
 
 		if ( empty( $args['walker'] ) ) {
 			$args['walker'] = new ThemePlate_NavWalker();
+
+			if ( 'wp_page_menu' === $args['fallback_cb'] ) {
+				$args['fallback_cb'] = 'ThemePlate_NavWalker::fallback';
+			}
 		}
 
 		if ( empty( $args['items_wrap'] ) ) {
 			$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
-		}
-
-		if ( 'wp_page_menu' === $args['fallback_cb'] ) {
-			$args['fallback_cb'] = 'ThemePlate_NavWalker::fallback';
 		}
 
 		return $args;
