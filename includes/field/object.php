@@ -46,6 +46,11 @@ class ThemePlate_Field_Object {
 				$lbl_prop = 'name';
 				break;
 		}
+
+		$items = array_map( function( $post ) {
+			return (array) $post;
+		}, $items );
+
 		$values = array_column( $items, $val_prop );
 		$labels = array_column( $items, $lbl_prop );
 
