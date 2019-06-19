@@ -52,6 +52,9 @@ class ThemePlate_CPT {
 			'labels'       => array(),
 			'public'       => true,
 			'show_in_rest' => true,
+			'rewrite'      => array(
+				'with_front' => false,
+			),
 		);
 		$args     = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
 
