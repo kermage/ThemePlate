@@ -110,6 +110,7 @@ class ThemePlate_CPT {
 			'labels'       => array(),
 			'public'       => true,
 			'show_in_rest' => true,
+			'rewrite'      => array(),
 		);
 
 		$args = ThemePlate_Helper_Main::fool_proof( $defaults, $config['args'] );
@@ -140,7 +141,8 @@ class ThemePlate_CPT {
 			'name_admin_bar'             => $singular,
 		);
 
-		$args['labels'] = ThemePlate_Helper_Main::fool_proof( $labels, $args['labels'] );
+		$args['labels']  = ThemePlate_Helper_Main::fool_proof( $labels, $args['labels'] );
+		$args['rewrite'] = ThemePlate_Helper_Main::fool_proof( array( 'with_front' => false ), $args['rewrite'] );
 
 		register_taxonomy( $config['name'], $config['type'], $args );
 
