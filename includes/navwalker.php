@@ -146,7 +146,9 @@ class ThemePlate_NavWalker extends Walker {
 		}
 
 		$output .= '>';
-		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">Add a menu</a></li>';
+		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">Click here</a></li>';
+		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">to add</a></li>';
+		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">a menu</a></li>';
 		$output .= '</ul>';
 
 		if ( $args['container'] ) {
