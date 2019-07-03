@@ -64,7 +64,7 @@ class ThemePlate_Page {
 
 			if ( array_key_exists( $parent_slug, $_parent_pages ) ) {
 				$page['parent'] = $parent_slug;
-			} else if ( $parent_slug === $page['id'] ) {
+			} elseif ( $parent_slug === $page['id'] ) {
 				$page['parent'] = $parent_slug;
 				$this->add_menu( $page );
 				$page['menu'] = $page['title'];
