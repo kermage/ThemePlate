@@ -37,7 +37,7 @@ class ThemePlate_Form {
 	}
 
 
-	public function enqueue( $object_type = 'post' ) {
+	public function enqueue( $object_type ) {
 
 		wp_enqueue_media();
 		wp_enqueue_style( 'wp-color-picker' );
@@ -63,7 +63,7 @@ class ThemePlate_Form {
 	}
 
 
-	public function layout_postbox( $object_id = 0 ) {
+	public function layout_postbox( $object_id ) {
 
 		$meta_box = $this->config;
 
@@ -83,7 +83,7 @@ class ThemePlate_Form {
 	}
 
 
-	public function layout_inside( $object_id = 0 ) {
+	public function layout_inside( $object_id ) {
 
 		$meta_box = $this->config;
 
