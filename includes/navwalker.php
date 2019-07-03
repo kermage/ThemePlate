@@ -35,7 +35,7 @@ class ThemePlate_NavWalker extends Walker {
 
 		$classes = array( $this->class['sub-menu'] );
 
-		$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+		$class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 		$output .= '<ul' . $class_names . '>';
@@ -65,7 +65,7 @@ class ThemePlate_NavWalker extends Walker {
 
 		$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
-		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+		$class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
 		$id = apply_filters( 'nav_menu_item_id', '', $item, $args, $depth );
