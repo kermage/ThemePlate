@@ -98,7 +98,7 @@ class ThemePlate_Fields {
 				$key    = ThemePlate()->key;
 			}
 
-			$value = $stored ? $stored : $field['default'];
+			$value = $stored ?: $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
 
 			$this->layout( $field, $value, $name );
@@ -169,7 +169,7 @@ class ThemePlate_Fields {
 			$sub['id'] = $field['id'] . '_' . $id;
 
 			$stored = isset( $field['value'][ $id ] ) ? $field['value'][ $id ] : '';
-			$value  = $stored ? $stored : $sub['default'];
+			$value  = $stored ?: $sub['default'];
 			$name   = $field['name'] . '[' . $id . ']';
 
 			$this->layout( $sub, $value, $name );

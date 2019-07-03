@@ -82,7 +82,7 @@ class ThemePlate_Page {
 			// Page Title
 			$page['title'],
 			// Menu Title
-			$page['menu'] ? $page['menu'] : $page['title'],
+			$page['menu'] ?: $page['title'],
 			// Capability
 			$page['capability'],
 			// Menu Slug
@@ -106,7 +106,7 @@ class ThemePlate_Page {
 			// Page Title
 			$page['title'],
 			// Menu Title
-			$page['menu'] ? $page['menu'] : $page['title'],
+			$page['menu'] ?: $page['title'],
 			// Capability
 			$page['capability'],
 			// Menu Slug
