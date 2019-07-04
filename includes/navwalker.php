@@ -54,6 +54,7 @@ class ThemePlate_NavWalker extends Walker {
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes = preg_replace( '/current[-_](menu|page)[-_](item|parent|ancestor)|(menu|page)[-_\w+]+/', '', $classes );
 
+		/** @var stdClass $args */
 		if ( $args->walker->has_children ) {
 			$classes[] = $this->class['has-sub'];
 		}
@@ -73,11 +74,12 @@ class ThemePlate_NavWalker extends Walker {
 		$output .= '<li' . $id_name . $class_names . '>';
 
 		$atts = array();
+		// phpcs:disable WordPress.WhiteSpace.OperatorSpacing.SpacingBefore
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
 		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
-
+		// phpcs:enable
 		$atts = array_merge( $atts, $this->attributes( $item, $args ) );
 		$atts = array_filter( $atts );
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
@@ -155,7 +157,7 @@ class ThemePlate_NavWalker extends Walker {
 		}
 
 		if ( $args['echo'] ) {
-			echo $output;
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		} else {
 			return $output;
 		}

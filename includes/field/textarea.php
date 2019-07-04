@@ -16,7 +16,7 @@ class ThemePlate_Field_Textarea {
 		$attrs    = ThemePlate_Helper_Main::fool_proof( $defaults, $field['options'] );
 		echo '<textarea name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" ';
 		foreach ( $attrs as $attr => $value ) {
-			echo $attr . '="' . esc_attr( $value ) . '"';
+			echo esc_attr( $attr ) . '="' . esc_attr( $value ) . '"';
 		}
 		echo ( $field['required'] ? ' required="required"' : '' ) . '>' . esc_textarea( $field['value'] ) . '</textarea>';
 

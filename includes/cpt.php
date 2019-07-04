@@ -196,7 +196,7 @@ class ThemePlate_CPT {
 			2  => __( 'Custom field updated.' ),
 			3  => __( 'Custom field deleted.' ),
 			4  => __( $singular . ' updated.' ),
-			5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,  // phpcs:ignore WordPress.Security.NonceVerification
 			6  => __( $singular . ' published.' ) . $view_post_link_html,
 			7  => __( $singular . ' saved.' ),
 			8  => __( $singular . ' submitted.' ) . $preview_post_link_html,

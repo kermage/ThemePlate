@@ -109,17 +109,18 @@ class ThemePlate_Fields {
 
 	private function layout( $field, $value, $name ) {
 
-		echo '<div class="field-wrapper type-' . $field['type'] . ' ' . $field['style'] . '">';
+		/* phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact */
+		echo '<div class="field-wrapper type-' . esc_attr( $field['type'] ) . ' ' . esc_attr( $field['style'] ) . '">';
 			ThemePlate_Helper_Meta::render_options( $field );
 
 			if ( ! empty( $field['title'] ) || ! empty( $field['description'] ) ) {
 				echo '<div class="field-label">';
-					echo ! empty( $field['title'] ) ? '<label class="label" for="' . $field['id'] . '">' . $field['title'] . '</label>' : '';
-					echo ! empty( $field['description'] ) ? '<p class="description">' . $field['description'] . '</p>' : '';
+					echo ! empty( $field['title'] ) ? '<label class="label" for="' . esc_attr( $field['id'] ) . '">' . esc_html( $field['title'] ) . '</label>' : '';
+					echo ! empty( $field['description'] ) ? '<p class="description">' . $field['description'] . '</p>' : ''; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 				echo '</div>';
 			}
 
-			echo '<div class="field-input' . ( $field['repeatable'] ? ' repeatable' : '' ) . '" data-min="' . $field['minimum'] . '" data-max="' . $field['maximum'] . '">';
+			echo '<div class="field-input' . ( esc_attr( $field['repeatable'] ) ? ' repeatable' : '' ) . '" data-min="' . esc_attr( $field['minimum'] ) . '" data-max="' . esc_attr( $field['maximum'] ) . '">';
 				if ( ! $field['repeatable'] ) {
 					$field['value'] = $value;
 					$field['name']  = $name;
@@ -152,9 +153,10 @@ class ThemePlate_Fields {
 					echo '<input type="button" class="button clone-add" value="Add Field" />';
 				}
 
-				echo ! empty( $field['information'] ) ? '<p class="description">' . $field['information'] . '</p>' : '';
+				echo ! empty( $field['information'] ) ? '<p class="description">' . $field['information'] . '</p>' : ''; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			echo '</div>';
 		echo '</div>';
+		/* phpcs:enable */
 
 	}
 

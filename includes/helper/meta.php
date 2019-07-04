@@ -96,7 +96,7 @@ class ThemePlate_Helper_Meta {
 			foreach ( array( 'show', 'hide' ) as $key ) {
 				if ( ! empty( $container[ $key . '_on' ] ) ) {
 					$value = json_encode( $container[ $key . '_on' ], JSON_NUMERIC_CHECK );
-					echo ' data-' . $key . '="' . esc_attr( $value ) . '"';
+					echo ' data-' . $key . '="' . esc_attr( $value ) . '"'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
 
@@ -118,7 +118,7 @@ class ThemePlate_Helper_Meta {
 			if ( $args['repeatable'] ) {
 				print_r( $value[0] );
 			} else {
-				echo $value;
+				echo $value; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			return;

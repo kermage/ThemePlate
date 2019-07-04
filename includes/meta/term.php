@@ -108,7 +108,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 			return false;
 		}
 
-		if ( 'term' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) {
+		if ( 'term' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, $_REQUEST['tag_ID'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return false;
 		}
 

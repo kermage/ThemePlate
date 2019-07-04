@@ -67,13 +67,13 @@ class ThemePlate_Form {
 
 		$meta_box = $this->config;
 
-		printf( '<div id="themeplate_%s" class="tpo postbox">', $meta_box['id'] );
+		printf( '<div id="themeplate_%s" class="tpo postbox">', esc_attr( $meta_box['id'] ) );
 			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
-				echo '<span class="screen-reader-text">' . sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) . '</span>';
+				echo '<span class="screen-reader-text">' . esc_html( sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) ) . '</span>';
 				echo '<span class="toggle-indicator" aria-hidden="true"></span>';
 			echo '</button>';
 
-			echo '<h2 class="hndle"><span>' . $meta_box['title'] . '</span></h2>';
+			echo '<h2 class="hndle"><span>' . esc_html( $meta_box['title'] ) . '</span></h2>';
 
 			echo '<div class="inside">';
 				$this->layout_inside( $object_id );
@@ -92,10 +92,10 @@ class ThemePlate_Form {
 		ThemePlate_Helper_Meta::render_options( $meta_box );
 
 		if ( ! empty( $meta_box['description'] ) ) {
-			echo '<p class="description">' . $meta_box['description'] . '</p>';
+			echo '<p class="description">' . $meta_box['description'] . '</p>'; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 		}
 
-		echo '<div class="fields-container ' . $meta_box['style'] . '">';
+		echo '<div class="fields-container ' . esc_attr( $meta_box['style'] ) . '">';
 			$this->fields->setup( $meta_box['id'], $meta_box['object_type'], $object_id );
 		echo '</div>';
 

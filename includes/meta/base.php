@@ -51,12 +51,12 @@ abstract class ThemePlate_Meta_Base {
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			$key = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 
-			if ( ! isset( $_POST[ ThemePlate()->key ][ $key ] ) ) {
+			if ( ! isset( $_POST[ ThemePlate()->key ][ $key ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 				continue;
 			}
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
-			$updated = $_POST[ ThemePlate()->key ][ $key ];
+			$updated = $_POST[ ThemePlate()->key ][ $key ]; // phpcs:ignore WordPress.Security.NonceVerification
 			$cleaned = ThemePlate_Helper_Box::prepare_save( $updated );
 
 			if ( is_array( $cleaned ) ) {

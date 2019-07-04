@@ -98,13 +98,13 @@ class ThemePlate_Cleaner {
 
 	public function style_tag( $input ) {
 
-		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches );
+		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)' type='text/css' media='(.*)' />!", $input, $matches ); // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 		// Only display media if it is meaningful
 		$media = '';
 		if ( '' !== $matches[3][0] && 'all' !== $matches[3][0] ) {
 			$media = ' media="' . $matches[3][0] . '"';
 		}
-		return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n";
+		return '<link rel="stylesheet" href="' . $matches[2][0] . '"' . $media . '>' . "\n"; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 
 	}
 

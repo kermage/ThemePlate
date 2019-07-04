@@ -15,7 +15,7 @@ class ThemePlate_Field_Number {
 		echo '<input type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" value="' . esc_attr( $field['value'] ) . '"';
 		if ( ! empty( $field['options'] ) ) {
 			foreach ( $field['options'] as $option => $value ) {
-				echo $option . '="' . esc_attr( $value ) . '"';
+				echo esc_attr( $option ) . '="' . esc_attr( $value ) . '"';
 			}
 		}
 		if ( 'range' === $field['type'] ) {

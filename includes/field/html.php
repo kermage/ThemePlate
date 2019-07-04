@@ -12,7 +12,7 @@ class ThemePlate_Field_Html {
 
 	public static function render( $field ) {
 
-		echo $field['default'];
+		echo $field['default']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	}
 

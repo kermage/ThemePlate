@@ -120,14 +120,14 @@ class ThemePlate_Page {
 
 	public function notices() {
 
-		if ( ! isset( $_REQUEST['page'], $_REQUEST['settings-updated'] ) ) {
+		if ( ! isset( $_REQUEST['page'], $_REQUEST['settings-updated'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return;
 		}
 
 		$page = ThemePlate()->key . '-' . $this->config['id'];
 
-		if ( $_REQUEST['page'] === $page && 'true' === $_REQUEST['settings-updated'] ) {
-			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>';
+		if ( $_REQUEST['page'] === $page && 'true' === $_REQUEST['settings-updated'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+			echo '<div id="themeplate-message" class="updated"><p><strong>Settings updated.</strong></p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 	}
@@ -140,7 +140,7 @@ class ThemePlate_Page {
 		?>
 
 		<div class="wrap">
-			<h1><?php echo get_admin_page_title(); ?></h1>
+			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
 			<form action="options.php" method="post">
 				<div id="poststuff">
@@ -157,7 +157,7 @@ class ThemePlate_Page {
 
 						<div id="postbox-container-1" class="postbox-container">
 							<div id="submitdiv" class="postbox">
-								<h2><?php echo get_admin_page_title(); ?></h2>
+								<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
 								<div id="major-publishing-actions">
 									<?php settings_fields( $page ); ?>

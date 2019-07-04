@@ -90,7 +90,7 @@ class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 
 		$meta_box = $this->config;
 
-		if ( 'user-edit' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, $_REQUEST['user_id'] ) ) {
+		if ( 'user-edit' === $screen->base && ! ThemePlate_Helper_Meta::should_display( $meta_box, $_REQUEST['user_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return false;
 		}
 
