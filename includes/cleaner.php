@@ -32,12 +32,12 @@ class ThemePlate_Cleaner {
 		// Display the link to the Windows Live Writer manifest file.
 		remove_action( 'wp_head', 'wlwmanifest_link' );
 		// Display relational links for the posts adjacent to the current post for single post pages.
-		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 );
+		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 		// Output rel=canonical for singular queries.
 		remove_action( 'wp_head', 'rel_canonical' );
 		remove_action( 'embed_head', 'rel_canonical' );
 		// Inject rel=shortlink into head if a shortlink is defined for the current page.
-		remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
+		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 		// Display the XHTML generator that is generated on the wp_head hook
 		remove_action( 'wp_head', 'wp_generator' );
 		// Emoji support detection script and styles
@@ -52,7 +52,7 @@ class ThemePlate_Cleaner {
 
 		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 		remove_action( 'wp_head', 'wp_oembed_add_host_js' );
-		remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
+		remove_action( 'wp_head', 'rest_output_link_wp_head' );
 
 		// Remove the link to comments feed
 		add_filter( 'feed_links_show_comments_feed', '__return_false' );
