@@ -74,7 +74,9 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 		if ( 'page' === $post_type && ! current_user_can( 'edit_page', $post_id ) ) {
 			return;
-		} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}
 

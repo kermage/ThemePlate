@@ -125,11 +125,12 @@ class ThemePlate_Columns {
 
 		if ( 'post_type' === $config['context']['type'] ) {
 			return call_user_func( $config['callback'], $object_id, $config['callback_args'] );
-		} else {
-			ob_start();
-			call_user_func( $config['callback'], $object_id, $config['callback_args'] );
-			return ob_get_clean();
 		}
+
+		ob_start();
+		call_user_func( $config['callback'], $object_id, $config['callback_args'] );
+
+		return ob_get_clean();
 
 	}
 
