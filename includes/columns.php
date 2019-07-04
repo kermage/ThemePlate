@@ -100,7 +100,7 @@ class ThemePlate_Columns {
 			$item    = array_slice( $columns, -1, 1, true );
 			$start   = array_slice( $columns, 0, $position, true );
 			$end     = array_slice( $columns, $position, count( $columns ) - 1, true );
-			$columns = $start + $item + $end;
+			$columns = array_merge( $start, $item, $end );
 		}
 
 		return $columns;
