@@ -120,7 +120,7 @@ class ThemePlate_Page {
 
 	public function notices() {
 
-		if ( ! isset( $_REQUEST['page'] ) || ! isset( $_REQUEST['settings-updated'] ) ) {
+		if ( ! isset( $_REQUEST['page'], $_REQUEST['settings-updated'] ) ) {
 			return;
 		}
 
