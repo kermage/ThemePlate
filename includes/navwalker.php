@@ -68,10 +68,10 @@ class ThemePlate_NavWalker extends Walker {
 		$class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-		$id = apply_filters( 'nav_menu_item_id', '', $item, $args, $depth );
-		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+		$id_name = apply_filters( 'nav_menu_item_id', '', $item, $args, $depth );
+		$id_name = $id_name ? ' id="' . esc_attr( $id_name ) . '"' : '';
 
-		$output .= '<li' . $id . $class_names . '>';
+		$output .= '<li' . $id_name . $class_names . '>';
 
 		$atts = array();
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
