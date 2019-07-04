@@ -94,7 +94,9 @@ class ThemePlate_Columns {
 
 		$columns[ $config['id'] ] = $config['title'];
 
-		if ( ( $position = $config['position'] ) > 0 ) {
+		$position = $config['position'];
+
+		if ( $position > 0 ) {
 			$item    = array_slice( $columns, -1, 1, true );
 			$start   = array_slice( $columns, 0, $position, true );
 			$end     = array_slice( $columns, $position, count( $columns ) - 1, true );

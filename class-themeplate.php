@@ -109,7 +109,9 @@ class ThemePlate {
 		$this->key  = $config['key'];
 		$this->slug = $config['slug'];
 
-		if ( $is_capable = apply_filters( 'themeplate_options_page', true ) ) {
+		$is_capable = apply_filters( 'themeplate_options_page', true );
+
+		if ( $is_capable ) {
 			$args = array(
 				'id'    => $config['slug'],
 				'title' => $config['title'],
