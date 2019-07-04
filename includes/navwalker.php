@@ -25,8 +25,7 @@ class ThemePlate_NavWalker extends Walker {
 
 	public function attributes( $item, $args ) {
 
-		$atts = array();
-		return $atts;
+		return array();
 
 	}
 
