@@ -96,10 +96,15 @@ class ThemePlate {
 
 		$this->stalled = true;
 
-		add_filter( 'site_transient_update_plugins', function( $value ) {
-			unset( $value->response[ plugin_basename( TP_FILE ) ] );
-			return $value;
-		} );
+		add_filter( 'site_transient_update_plugins', array( $this, 'unset_transient' ) );
+
+	}
+
+
+	public function unset_transient( $value ) {
+
+		unset( $value->response[ plugin_basename( TP_FILE ) ] );
+		return $value;
 
 	}
 
