@@ -100,7 +100,7 @@ class ThemePlate_Meta_Post extends ThemePlate_Meta_Base {
 
 		$screen = get_current_screen();
 
-		if ( 'post' !== $screen->base ) {
+		if ( null === $screen || 'post' !== $screen->base ) {
 			return false;
 		}
 

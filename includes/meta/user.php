@@ -84,7 +84,7 @@ class ThemePlate_Meta_User extends ThemePlate_Meta_Base {
 
 		$screen = get_current_screen();
 
-		if ( ! in_array( $screen->base, array( 'user', 'user-edit', 'profile' ), true ) ) {
+		if ( null === $screen || ! in_array( $screen->base, array( 'user', 'user-edit', 'profile' ), true ) ) {
 			return false;
 		}
 

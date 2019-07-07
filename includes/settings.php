@@ -88,7 +88,7 @@ class ThemePlate_Settings {
 
 		$screen = get_current_screen();
 
-		return ! ( false === strpos( $screen->id, $this->config['page'] ) );
+		return ! ( null === $screen || false === strpos( $screen->id, $this->config['page'] ) );
 
 	}
 

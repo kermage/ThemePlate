@@ -94,7 +94,7 @@ class ThemePlate_Meta_Term extends ThemePlate_Meta_Base {
 
 		$screen = get_current_screen();
 
-		if ( ! in_array( $screen->base, array( 'edit-tags', 'term' ), true ) ) {
+		if ( null === $screen || ! in_array( $screen->base, array( 'edit-tags', 'term' ), true ) ) {
 			return false;
 		}
 
