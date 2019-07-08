@@ -34,7 +34,7 @@ class ThemePlate_Helper_Meta {
 		$result = true;
 
 		if ( $callback ) {
-			$result = call_user_func( $callback );
+			$result = $callback();
 		}
 
 		if ( $id ) {

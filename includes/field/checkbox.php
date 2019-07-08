@@ -20,7 +20,7 @@ class ThemePlate_Field_Checkbox {
 				$value = ( $seq ? $value + 1 : $value );
 				echo '<' . ( $list ? 'p' : 'span' ) . '>';
 				echo '<label><input type="checkbox" name="' . esc_attr( $field['name'] ) . '[]" value="' . esc_attr( $value ) . '"';
-				if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
+				if ( in_array( (string) $value, (array) $field['value'], true ) ) {
 					echo ' checked="checked"';
 				}
 				echo ( $field['required'] ? ' required="required"' : '' ) . ' />' . esc_html( $option ) . '</label>';

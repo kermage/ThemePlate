@@ -51,7 +51,7 @@ class ThemePlate {
 			return;
 		}
 
-		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'includes';
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'includes';
 		$base = strtolower( str_replace( 'ThemePlate', '', $class ) );
 		$name = strtr( $base, '_', DIRECTORY_SEPARATOR );
 		$file = $path . $name . '.php';

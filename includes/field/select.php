@@ -25,7 +25,7 @@ class ThemePlate_Field_Select {
 			$values  = array_keys( $field['options'] );
 			foreach ( (array) $field['value'] as $value ) {
 				$value = ( $seq ? (int) $value - 1 : $value );
-				if ( ! in_array( strval( $value ), array_map( 'strval', $values ), true ) ) {
+				if ( ! in_array( (string) $value, array_map( 'strval', $values ), true ) ) {
 					continue;
 				}
 				$ordered[ $value ] = $field['options'][ $value ];
@@ -36,7 +36,7 @@ class ThemePlate_Field_Select {
 		foreach ( $field['options'] as $value => $option ) {
 			$value = ( $seq ? $value + 1 : $value );
 			echo '<option value="' . esc_attr( $value ) . '"';
-			if ( in_array( strval( $value ), (array) $field['value'], true ) ) {
+			if ( in_array( (string) $value, (array) $field['value'], true ) ) {
 				echo ' selected="selected"';
 			}
 			echo '>' . esc_html( $option ) . '</option>';
