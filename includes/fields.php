@@ -164,7 +164,8 @@ class ThemePlate_Fields {
 	private function render( $field ) {
 
 		if ( 'group' !== $field['type'] ) {
-			return ThemePlate_Helper_Field::render( $field );
+			ThemePlate_Helper_Field::render( $field );
+			return;
 		}
 
 		foreach ( $field['fields'] as $id => $sub ) {
