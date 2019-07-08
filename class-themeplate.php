@@ -53,7 +53,7 @@ class ThemePlate {
 
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'includes';
 		$base = strtolower( str_replace( 'ThemePlate', '', $class ) );
-		$name = strtr( $base, '_', DIRECTORY_SEPARATOR );
+		$name = str_replace( '_', DIRECTORY_SEPARATOR, $base );
 		$file = $path . $name . '.php';
 
 		if ( ! class_exists( $class ) && file_exists( $file ) ) {

@@ -95,7 +95,7 @@ class ThemePlate_Helper_Meta {
 
 			foreach ( array( 'show', 'hide' ) as $key ) {
 				if ( ! empty( $container[ $key . '_on' ] ) ) {
-					$value = json_encode( $container[ $key . '_on' ], JSON_NUMERIC_CHECK );
+					$value = wp_json_encode( $container[ $key . '_on' ], JSON_NUMERIC_CHECK );
 					echo ' data-' . $key . '="' . esc_attr( $value ) . '"'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 			}
