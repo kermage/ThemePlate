@@ -41,6 +41,7 @@ class ThemePlate {
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'init', array( 'ThemePlate_Cleaner', 'instance' ) );
+		add_action( 'plugins_loaded', array( $this, 'force_load_first' ) );
 
 	}
 
@@ -159,6 +160,21 @@ class ThemePlate {
 		do_meta_boxes( get_current_screen(), 'after_title', $post );
 
 		unset( $wp_meta_boxes['post']['after_title'] );
+
+	}
+
+
+	public function force_load_first() {
+
+		$plugins = get_option( 'active_plugins' );
+		$plugin  = basename( __DIR__ ) . '/' . basename( TP_FILE );
+		$index   = array_search( $plugin, $plugins );
+
+		if ( $index > 0 ) {
+			array_splice( $plugins, $index, 1 );
+			array_unshift( $plugins, $plugin );
+			update_option( 'active_plugins', $plugins );
+		}
 
 	}
 
