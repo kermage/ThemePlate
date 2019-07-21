@@ -16,7 +16,10 @@ class ThemePlate_Field_Object {
 			default:
 			case 'post':
 			case 'page':
-				$defaults = array( 'post_type' => $field['type'], 'numberposts' => -1 );
+				$defaults = array(
+					'post_type'   => $field['type'],
+					'numberposts' => -1,
+				);
 				if ( ThemePlate_Helper_Main::is_sequential( $field['options'] ) ) {
 					$field['options'] = array( 'post_type' => $field['options'] );
 				}

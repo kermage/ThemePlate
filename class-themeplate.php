@@ -10,7 +10,9 @@ class ThemePlate {
 
 	private static $instance;
 
-	public $key, $slug, $stalled;
+	public $key;
+	public $slug;
+	public $stalled;
 
 
 	public static function instance( $key, $pages ) {
