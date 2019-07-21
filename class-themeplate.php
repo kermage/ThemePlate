@@ -167,8 +167,13 @@ class ThemePlate {
 	public function force_load_first() {
 
 		$plugins = get_option( 'active_plugins' );
-		$plugin  = basename( __DIR__ ) . '/' . basename( TP_FILE );
-		$index   = array_search( $plugin, $plugins );
+
+		if ( empty( $plugins ) ) {
+			return;
+		}
+
+		$plugin = basename( __DIR__ ) . '/' . basename( TP_FILE );
+		$index  = array_search( $plugin, $plugins, true );
 
 		if ( $index > 0 ) {
 			array_splice( $plugins, $index, 1 );
