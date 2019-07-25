@@ -116,7 +116,7 @@ abstract class ThemePlate_Meta_Base {
 			$field['id']          = ThemePlate()->key . '_' . $meta_box['id'] . '_' . $id;
 			$field['object_type'] = $meta_box['object_type'];
 
-			$args  = array(
+			$args = array(
 				'id'            => $field['id'],
 				'title'         => $field['title'],
 				'callback'      => array( 'ThemePlate_Helper_Meta', 'display_column' ),
