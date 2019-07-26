@@ -49,7 +49,7 @@
 			});
 
 			for ( var i in current ) {
-				if ( ! current.hasOwnProperty( i ) ) {
+				if ( ! Object.prototype.hasOwnProperty.call( current, i ) ) {
 					continue;
 				}
 

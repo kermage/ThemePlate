@@ -35,7 +35,7 @@
 			var current = wp.data.select( 'core/editor' ).getEditedPostAttribute( taxonomy );
 
 			for ( var i in current ) {
-				if ( ! current.hasOwnProperty( i ) ) {
+				if ( ! Object.prototype.hasOwnProperty.call( current, i ) ) {
 					continue;
 				}
 

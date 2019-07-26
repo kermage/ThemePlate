@@ -172,7 +172,7 @@ window.ThemePlate = window.ThemePlate || {};
 		var result = ( logic != 'OR' );
 
 		for ( var i in conditions ) {
-			if ( ! conditions.hasOwnProperty( i ) ) {
+			if ( ! Object.prototype.hasOwnProperty.call( conditions, i ) ) {
 				continue;
 			}
 
@@ -188,7 +188,7 @@ window.ThemePlate = window.ThemePlate || {};
 			var operator = ( condition['operator'] !== undefined ) ? condition['operator'] : '=';
 			var invert = false;
 
-			if ( ! TP.checkersElements.hasOwnProperty( key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
+			if ( ! Object.prototype.hasOwnProperty.call( TP.checkersElements, key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
 				value = [ condition['key'], condition['value'] ];
 
 				if ( key[0] === '#' ) {
@@ -242,7 +242,7 @@ window.ThemePlate = window.ThemePlate || {};
 
 	TP.addEventListener = function( $container, type, conditions, origConditions = conditions ) {
 		for ( var i in conditions ) {
-			if ( ! conditions.hasOwnProperty( i ) ) {
+			if ( ! Object.prototype.hasOwnProperty.call( conditions, i ) ) {
 				continue;
 			}
 
@@ -256,7 +256,7 @@ window.ThemePlate = window.ThemePlate || {};
 			var key = condition['key'];
 			var value = condition['value'];
 
-			if ( ! TP.checkersElements.hasOwnProperty( key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
+			if ( ! Object.prototype.hasOwnProperty.call( TP.checkersElements, key ) && ! TP.compareValue( key, editorSpecific, 'in' ) ) {
 				value = condition['key'];
 
 				if ( key[0] === '#' ) {

@@ -55,7 +55,7 @@
 	function setIndex( $field, index ) {
 		$field.find( '[' + indexAttributes.join( '],[' ) + ']' ).each( function() {
 			for ( var i in indexAttributes ) {
-				if ( ! indexAttributes.hasOwnProperty( i ) ) {
+				if ( ! Object.prototype.hasOwnProperty.call( indexAttributes, i ) ) {
 					continue;
 				}
 
