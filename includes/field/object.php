@@ -50,9 +50,9 @@ class ThemePlate_Field_Object {
 				break;
 		}
 
-		$items = array_map( function( $post ) {
+		$items = array_map( static function( $post ) {
 			return (array) $post;
-		}, $items );
+		}, (array) $items );
 
 		$field['type']    = 'select2';
 		$field['options'] = array_column( $items, $val_prop, $lbl_prop );
