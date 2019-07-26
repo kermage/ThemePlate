@@ -118,10 +118,6 @@ window.ThemePlate = window.ThemePlate || {};
 		operator = operator.trim();
 
 		switch ( operator ) {
-			default:
-			case '=':
-				result = ( have == want );
-				break;
 			case '>':
 				result = ( have > want );
 				break;
@@ -142,6 +138,10 @@ window.ThemePlate = window.ThemePlate || {};
 				break;
 			case 'between':
 				result = TP.compareValue( have, want[0], '>=' ) && TP.compareValue( have, want[1], '<=' );
+				break;
+			case '=':
+			default:
+				result = ( have == want );
 				break;
 		}
 
