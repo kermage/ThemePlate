@@ -55,7 +55,7 @@ class ThemePlate_Field_Object {
 		}, (array) $items );
 
 		$field['type']    = 'select2';
-		$field['options'] = array_column( $items, $val_prop, $lbl_prop );
+		$field['options'] = array_column( $items, $lbl_prop, $val_prop );
 
 		ThemePlate_Field_Select::render( $field );
 
