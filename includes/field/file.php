@@ -12,8 +12,9 @@ class ThemePlate_Field_File {
 
 	public static function render( $field ) {
 
+		$options = wp_json_encode( $field['options'] );
 		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
-		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '">';
+		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-file' . ( $field['multiple'] ? ' multiple' : ' single' ) . '" data-options="' . esc_attr( $options ) . '">';
 		echo '<div class="preview-holder">';
 		if ( ! $field['multiple'] ) {
 			echo '<div class="attachment placeholder">';

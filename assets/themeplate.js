@@ -57,10 +57,10 @@
 
 		var fieldname = $parent.siblings( 'input' ).attr( 'name' ) + ( isMultiple ? '[]' : '' );
 
-		meta_media_frame = wp.media( {
+		meta_media_frame = wp.media( $.extend( {
 			title: 'Select Media',
 			multiple: isMultiple
-		});
+		}, $parent.data( 'options' ) ) );
 
 		meta_media_frame.on( 'select', function() {
 			var selection = meta_media_frame.state().get( 'selection' ).toJSON();
