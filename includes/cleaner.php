@@ -121,9 +121,9 @@ class ThemePlate_Cleaner {
 		$match  = '(^(postid|attachmentid|page-id|parent-pageid|category|tag|term)-\d+$|(attachment|page-parent|page-child)$)';
 		$match .= '|(^(page|post|single|category|tag|archive|post-type-archive)$)';
 		$match .= '|(^.*-(template(-default)?(-page-templates)?(-[\w-]+-php)?)$)';
-		$match  = '/' . $match . '/';
+
 		foreach ( $classes as $key => $value ) {
-			if ( preg_match( $match, $value ) ) {
+			if ( preg_match( '/' . $match . '/', $value ) ) {
 				unset( $classes[ $key ] );
 			}
 		}
@@ -135,6 +135,7 @@ class ThemePlate_Cleaner {
 	public function post_class( $classes ) {
 
 		$match = '/(post-\d+$|(type|status|format)-[\w-]+$)/';
+
 		foreach ( $classes as $key => $value ) {
 			if ( preg_match( $match, $value ) ) {
 				unset( $classes[ $key ] );
