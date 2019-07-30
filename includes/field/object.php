@@ -50,12 +50,16 @@ class ThemePlate_Field_Object {
 				break;
 		}
 
-		$items = array_map( static function( $post ) {
-			return (array) $post;
-		}, (array) $items );
+		$options = array();
+
+		if ( is_array( $items ) ) {
+			foreach ( $items as $item ) {
+				$options[ $item->$val_prop ] = $item->$lbl_prop;
+			}
+		}
 
 		$field['type']    = 'select2';
-		$field['options'] = array_column( $items, $lbl_prop, $val_prop );
+		$field['options'] = $options;
 
 		ThemePlate_Field_Select::render( $field );
 
