@@ -45,6 +45,7 @@ class ThemePlate_Form {
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_style( 'themeplate-style', TP_URL . 'assets/themeplate.css', array(), TP_VERSION );
 		wp_enqueue_script( 'themeplate-script', TP_URL . 'assets/themeplate.js', array(), TP_VERSION, true );
+		wp_enqueue_script( 'themeplate-wysiwyg', TP_URL . 'assets/wysiwyg.js', array(), TP_VERSION, true );
 		wp_enqueue_script( 'themeplate-show-hide', TP_URL . 'assets/show-hide.js', array(), TP_VERSION, true );
 		wp_enqueue_script( 'themeplate-repeater', TP_URL . 'assets/repeater.js', array(), TP_VERSION, true );
 		wp_enqueue_style( 'themeplate-select2-style', TP_URL . 'assets/select2.min.css', array(), '4.0.5' );

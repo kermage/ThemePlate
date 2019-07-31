@@ -13,6 +13,7 @@ class ThemePlate_Field_Editor {
 	public static function render( $field ) {
 
 		$defaults = array(
+			'editor_class'  => 'themeplate-wysiwyg',
 			'textarea_name' => $field['name'],
 			'textarea_rows' => 10,
 		);
