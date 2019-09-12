@@ -52,7 +52,14 @@ window.ThemePlate = window.ThemePlate || {};
 			TP.checkersElements['role'].on( 'change', callback );
 		},
 		field: function( callback, element ) {
-			$( element ).on( 'change input', callback );
+			var $element = $( element );
+			var type = $element.prop( 'tagName' );
+
+			if ( type !== 'FIELDSET' ) {
+				$element.on( 'change input', callback );
+			} else {
+				$element.find( 'input' ).on( 'change input', callback );
+			}
 		}
 	};
 
