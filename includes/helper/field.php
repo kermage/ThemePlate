@@ -28,6 +28,10 @@ class ThemePlate_Helper_Field {
 				ThemePlate_Field_Textarea::render( $field );
 				break;
 
+			case 'multidate':
+				ThemePlate_Field_Multidate::render( $field );
+				break;
+
 			case 'select':
 			case 'select2':
 				ThemePlate_Field_Select::render( $field );

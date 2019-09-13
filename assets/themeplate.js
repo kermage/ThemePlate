@@ -131,6 +131,13 @@
 			$( this ).wpColorPicker();
 		});
 
+		$( '.themeplate-date-picker:not( .hidden .themeplate-date-picker ) ' ).each( function() {
+			$( this ).datepicker({
+				container: $( this ).parents( '.field-input' ),
+				multidate: true,
+			});
+		});
+
 		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
 			var $this = $( this );
 
