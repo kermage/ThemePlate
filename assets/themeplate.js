@@ -134,6 +134,7 @@
 		$( '.themeplate-date-picker:not( .hidden .themeplate-date-picker ) ' ).each( function() {
 			$( this ).datepicker({
 				container: $( this ).parents( '.field-input' ),
+				format: 'yyyy-mm-dd',
 				multidate: true,
 			});
 		});
