@@ -155,13 +155,13 @@ window.ThemePlate = window.ThemePlate || {};
 		return result;
 	};
 
-	TP.isAvailable = function( checker, $strict = false ) {
-		if ( ! $strict && checker == 'term' ) {
-			return true;
+	TP.isAvailable = function( checker, element = null ) {
+		if ( checker === 'term' ) {
+			return element !== null ? $( '#' + element + 'checklist' ).length !== 0 : true;
 		}
 
-		if ( ! $strict && checker == 'field' ) {
-			return true;
+		if ( checker === 'field' ) {
+			return element !== null ? $( element ).length !== 0 : true;
 		}
 
 		if ( TP.checkersElements[checker] === undefined ) {
@@ -273,7 +273,7 @@ window.ThemePlate = window.ThemePlate || {};
 				}
 			}
 
-			if ( ! TP.isAvailable( key, true ) ) {
+			if ( ! TP.isAvailable( key, condition['key'] ) ) {
 				continue;
 			}
 
