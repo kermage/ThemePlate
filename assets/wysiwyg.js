@@ -6,6 +6,11 @@
 
 	$( document ).on( 'clone', '.themeplate-clone', function() {
 		var $field = $( this ).find( '.themeplate-wysiwyg' );
+
+		if ( $field.length === 0 ) {
+			return;
+		}
+
 		var fieldID = $field.attr( 'id' );
 
 		if ( tinyMCEPreInit.mceInit[ fieldID ] ) {
