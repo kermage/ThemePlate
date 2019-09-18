@@ -17,7 +17,6 @@ class ThemePlate_Helper_Field {
 		switch ( $field['type'] ) {
 			default:
 			case 'text':
-			case 'date':
 			case 'time':
 			case 'email':
 			case 'url':
@@ -28,8 +27,8 @@ class ThemePlate_Helper_Field {
 				ThemePlate_Field_Textarea::render( $field );
 				break;
 
-			case 'multidate':
-				ThemePlate_Field_Multidate::render( $field );
+			case 'date':
+				ThemePlate_Field_Date::render( $field );
 				break;
 
 			case 'select':
