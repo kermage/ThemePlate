@@ -135,7 +135,7 @@
 			$( this ).datepicker({
 				container: $( this ).parents( '.field-input' ),
 				format: 'yyyy-mm-dd',
-				multidate: true,
+				multidate: $( this ).hasClass( 'multiple' ),
 			});
 		});
 
