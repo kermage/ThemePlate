@@ -205,16 +205,6 @@
 	z-index: 1001;
 }
 
-.type-date .field-input {
-	position: relative;
-}
-
-.themeplate .datepicker {
-	position: absolute;
-	background-color: #fff;
-	border: 1px solid rgba( 0, 0, 0, 0.15 );;
-}
-
 .themeplate-file::after {
 	content: '';
 	display: table;

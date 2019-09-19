@@ -12,7 +12,9 @@ class ThemePlate_Field_Date {
 
 	public static function render( $field ) {
 
-		echo '<input type="text" name="' . esc_attr( $field['name'] ) . '" id="' . esc_attr( $field['id'] ) . '" class="themeplate-date-picker' . ( $field['multiple'] ? ' multiple' : ' single' ) . '" value="' . esc_attr( $field['value'] ) . '" />';
+		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-date-picker' . ( $field['multiple'] ? ' multiple' : ' single' ) . '">';
+		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" value="' . esc_attr( $field['value'] ) . '" />';
+		echo '</div>';
 
 	}
 
