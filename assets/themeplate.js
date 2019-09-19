@@ -125,8 +125,18 @@
 	});
 
 
-	$( document ).on( 'ready clone', function() {
+	function preloadDates( loaded ) {
+		var dates = [];
 
+		loaded.split( ',' ).forEach( function( value ) {
+			dates.push( new Date( value ) );
+		});
+
+		return dates;
+	}
+
+
+	$( document ).on( 'ready clone', function() {
 		$( '.themeplate-color-picker:not( .hidden .themeplate-color-picker ) ' ).each( function() {
 			$( this ).wpColorPicker();
 		});
@@ -147,6 +157,12 @@
 					$element.next().html( $( list ) );
 				}
 			});
+
+			var loaded = $( this ).find( 'input' ).val();
+
+			if ( loaded ) {
+				$( this ).datepicker( 'setDate', preloadDates( loaded ) );
+			}
 		});
 
 		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
