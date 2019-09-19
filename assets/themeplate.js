@@ -136,6 +136,16 @@
 				container: $( this ).parents( '.field-input' ),
 				format: 'yyyy-mm-dd',
 				multidate: $( this ).hasClass( 'multiple' ),
+			}).on( 'changeDate', function( e ) {
+				var $element = $( e.target );
+				var selected = $element.datepicker( 'getFormattedDate' );
+
+				$element.find( 'input' ).val( selected );
+
+				if ( $element.hasClass( 'multiple' ) && selected ) {
+					var list = '<li>' + selected.split(',').join('</li><li>') + '</li>';
+					$element.next().html( $( list ) );
+				}
 			});
 		});
 

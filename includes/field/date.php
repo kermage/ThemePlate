@@ -16,6 +16,10 @@ class ThemePlate_Field_Date {
 		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" value="' . esc_attr( $field['value'] ) . '" />';
 		echo '</div>';
 
+		if ( $field['multiple'] ) {
+			echo '<ul class="ul-disc"></ul>';
+		}
+
 	}
 
 }

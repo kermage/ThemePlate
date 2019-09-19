@@ -205,6 +205,23 @@
 	z-index: 1001;
 }
 
+.type-date .field-input {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.themeplate-date-picker + ul {
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
+	max-width: 100%;
+	margin: 0;
+	padding-left: 2em;
+	columns: 4;
+	column-fill: auto;
+}
+
 .themeplate-file::after {
 	content: '';
 	display: table;
