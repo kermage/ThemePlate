@@ -143,7 +143,7 @@
 
 		$( '.themeplate-date-picker:not( .hidden .themeplate-date-picker ) ' ).each( function() {
 			$( this ).datepicker({
-				container: $( this ).parents( '.field-input' ),
+				container: $( this ).parents( '.wrapper' ),
 				format: 'yyyy-mm-dd',
 				multidate: $( this ).hasClass( 'multiple' ),
 			}).on( 'changeDate', function( e ) {
