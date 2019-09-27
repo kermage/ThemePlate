@@ -12,6 +12,7 @@ class ThemePlate_Settings {
 
 	private $config;
 	private $form;
+	private $page;
 
 
 	public function __construct( $config ) {
@@ -34,7 +35,6 @@ class ThemePlate_Settings {
 		);
 		$config   = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
 
-		$config['page']        = ThemePlate()->key . '-' . $config['page'];
 		$config['object_type'] = 'options';
 
 		$this->config = $config;
@@ -58,7 +58,7 @@ class ThemePlate_Settings {
 		}
 
 		$settings = $this->config;
-		$section  = $settings['page'] . '_' . $settings['context'];
+		$section  = $this->page . '_' . $settings['context'];
 		$priority = ThemePlate_Helper_Box::get_priority( $settings );
 
 		add_action( 'themeplate_settings_' . $section, array( $this, 'add' ), $priority );
@@ -68,7 +68,7 @@ class ThemePlate_Settings {
 
 	public function add() {
 
-		$this->form->layout_postbox( $this->config['page'] );
+		$this->form->layout_postbox( $this->page );
 
 	}
 
@@ -87,8 +87,23 @@ class ThemePlate_Settings {
 	private function is_valid_screen() {
 
 		$screen = get_current_screen();
+		$prefix = ThemePlate()->key . '-';
+		$page_s = (array) $this->config['page'];
+		$sparts = explode( $prefix, $screen->id );
 
-		return ! ( null === $screen || false === strpos( $screen->id, $this->config['page'] ) );
+		if ( null === $screen || false === strpos( $screen->id, '_page_' . $prefix ) ) {
+			return false;
+		}
+
+		foreach ( $page_s as $page ) {
+			if ( $sparts[1] === $page ) {
+				$this->page = $prefix . $page;
+
+				return true;
+			}
+		}
+
+		return false;
 
 	}
 
