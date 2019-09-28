@@ -167,13 +167,41 @@
 
 		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
 			var $this = $( this );
+			var oajax;
+
+			if ( $this.next().hasClass( 'select2-options' ) ) {
+				oajax = {
+					url: themeplate.ajax_url,
+					dataType: 'json',
+					data: function( params ) {
+						return {
+							q: params.term,
+							action: 'tp_posts',
+						};
+					},
+					processResults: function( data ) {
+						var options = [];
+
+						if ( data ) {
+							$.each( data, function( index, text ) {
+								options.push( { id: text[0], text: text[1]  } );
+							});
+						}
+
+						return {
+							results: options
+						};
+					},
+				};
+			}
 
 			$this.select2( {
 				width: '100%',
 				allowClear: $this.data( 'none' ),
 				placeholder: '— Select —',
 				dropdownCssClass: 'themeplate-select2',
-				containerCssClass: 'themeplate-select2'
+				containerCssClass: 'themeplate-select2',
+				ajax: oajax ? oajax : null,
 			});
 
 			if ( ! $this.attr( 'multiple' ) ) {
