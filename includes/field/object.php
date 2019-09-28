@@ -70,15 +70,15 @@ class ThemePlate_Field_Object {
 
 	public static function get_posts() {
 
-		$return  = array();
-		$args    = array_merge( array( 's' => $_GET['q'] ), $_GET['options'] );
-		$results = new WP_Query( $args );
+		$return   = array();
+		$defaults = array(
+			's'      => $_GET['q'],
+			'fields' => 'ids',
+		);
+		$query    = new WP_Query( array_merge( $defaults, $_GET['options'] ) );
 
-		if ( $results->have_posts() ) {
-			while ( $results->have_posts() ) {
-				$results->the_post();
-				$return[] = array( get_the_ID(), get_the_title() );
-			}
+		foreach ( $query->posts as $post ) {
+			$return[] = array( $post, get_the_title( $post ) );
 		}
 
 		echo json_encode( $return );
