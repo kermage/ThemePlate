@@ -87,4 +87,44 @@ class ThemePlate_Field_Object {
 
 	}
 
+
+	public static function get_users() {
+
+		$return   = array();
+		$defaults = array(
+			'search' => $_GET['q'],
+			'fields' => array( 'ID', 'display_name' ),
+		);
+		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'] ) );
+
+		foreach ( $query->get_results() as $user ) {
+			$return[] = array( $user->ID, $user->display_name );
+		}
+
+		echo json_encode( $return );
+
+		wp_die();
+
+	}
+
+
+	public static function get_terms() {
+
+		$return   = array();
+		$defaults = array(
+			'search' => $_GET['q'],
+			'fields' => 'id=>name',
+		);
+		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
+
+		foreach ( $query->get_terms() as $id => $name ) {
+			$return[] = array( $id, $name );
+		}
+
+		echo json_encode( $return );
+
+		wp_die();
+
+	}
+
 }
