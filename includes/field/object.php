@@ -65,4 +65,34 @@ class ThemePlate_Field_Object {
 
 	}
 
+
+	public static function ajax_actions() {
+
+		add_action( 'wp_ajax_tp_posts', 'ThemePlate_Field_Object::get_posts' );
+
+	}
+
+
+	public static function get_posts() {
+
+		$return  = array();
+		$results = new WP_Query(
+			array(
+				's' => $_GET['q'],
+			)
+		);
+
+		if ( $results->have_posts() ) {
+			while ( $results->have_posts() ) {
+				$results->the_post();
+				$return[] = array( get_the_ID(), get_the_title() );
+			}
+		}
+
+		echo json_encode( $return );
+
+		wp_die();
+
+	}
+
 }

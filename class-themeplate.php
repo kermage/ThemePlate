@@ -45,6 +45,8 @@ class ThemePlate {
 		add_action( 'init', array( 'ThemePlate_Cleaner', 'instance' ) );
 		add_action( 'plugins_loaded', array( $this, 'force_load_first' ) );
 
+		ThemePlate_Field_Object::ajax_actions();
+
 	}
 
 
