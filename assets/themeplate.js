@@ -177,6 +177,7 @@
 						return {
 							q: params.term,
 							action: 'tp_posts',
+							options: $( this ).siblings( '.select2-options' ).data( 'options' ),
 						};
 					},
 					processResults: function( data ) {

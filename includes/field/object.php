@@ -66,11 +66,8 @@ class ThemePlate_Field_Object {
 	public static function get_posts() {
 
 		$return  = array();
-		$results = new WP_Query(
-			array(
-				's' => $_GET['q'],
-			)
-		);
+		$args    = array_merge( array( 's' => $_GET['q'] ), $_GET['options'] );
+		$results = new WP_Query( $args );
 
 		if ( $results->have_posts() ) {
 			while ( $results->have_posts() ) {
