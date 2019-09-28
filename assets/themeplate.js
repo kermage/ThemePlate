@@ -174,10 +174,12 @@
 					url: themeplate.ajax_url,
 					dataType: 'json',
 					data: function( params ) {
+						$this = $( this ).siblings( '.select2-options' );
+
 						return {
 							q: params.term,
-							action: 'tp_posts',
-							options: $( this ).siblings( '.select2-options' ).data( 'options' ),
+							action: $this.data( 'action' ),
+							options: $this.data( 'options' ),
 						};
 					},
 					processResults: function( data ) {

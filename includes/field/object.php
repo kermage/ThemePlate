@@ -16,6 +16,7 @@ class ThemePlate_Field_Object {
 			default:
 			case 'post':
 			case 'page':
+				$action   = 'tp_posts';
 				$defaults = array( 'post_type' => $field['type'], );
 
 				if ( ThemePlate_Helper_Main::is_sequential( $field['options'] ) ) {
@@ -24,6 +25,7 @@ class ThemePlate_Field_Object {
 
 				break;
 			case 'user':
+				$action   = 'tp_users';
 				$defaults = array( 'role' => '' );
 
 				if ( ThemePlate_Helper_Main::is_sequential( $field['options'] ) ) {
@@ -32,6 +34,7 @@ class ThemePlate_Field_Object {
 
 				break;
 			case 'term':
+				$action   = 'tp_terms';
 				$defaults = array( 'taxonomy' => array() );
 
 				if ( ThemePlate_Helper_Main::is_sequential( $field['options'] ) ) {
@@ -51,7 +54,7 @@ class ThemePlate_Field_Object {
 			echo '<option value=""' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( esc_attr( $field['value'] ) ? '>' . esc_attr( __( '&mdash; None &mdash;' ) ) : ' selected>' . esc_attr( __( '&mdash; Select &mdash;' ) ) ) . '</option>';
 		}
 		echo '</select>';
-		echo '<div class="select2-options" data-options="' . esc_attr( wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '"></div>';
+		echo '<div class="select2-options" data-action="' . $action . '" data-options="' . esc_attr( wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '"></div>';
 
 	}
 
@@ -59,6 +62,8 @@ class ThemePlate_Field_Object {
 	public static function ajax_actions() {
 
 		add_action( 'wp_ajax_tp_posts', 'ThemePlate_Field_Object::get_posts' );
+		add_action( 'wp_ajax_tp_users', 'ThemePlate_Field_Object::get_users' );
+		add_action( 'wp_ajax_tp_terms', 'ThemePlate_Field_Object::get_terms' );
 
 	}
 
