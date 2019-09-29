@@ -177,23 +177,13 @@
 						$this = $( this ).siblings( '.select2-options' );
 
 						return {
-							q: params.term,
+							search: params.term,
 							action: $this.data( 'action' ),
 							options: $this.data( 'options' ),
 						};
 					},
 					processResults: function( data ) {
-						var options = [];
-
-						if ( data ) {
-							$.each( data, function( index, text ) {
-								options.push( { id: text[0], text: text[1]  } );
-							});
-						}
-
-						return {
-							results: options
-						};
+						return data;
 					},
 				};
 			}

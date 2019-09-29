@@ -72,13 +72,16 @@ class ThemePlate_Field_Object {
 
 		$return   = array();
 		$defaults = array(
-			's'      => $_GET['q'],
+			's'      => $_GET['search'],
 			'fields' => 'ids',
 		);
 		$query    = new WP_Query( array_merge( $defaults, $_GET['options'] ) );
 
 		foreach ( $query->posts as $post ) {
-			$return[] = array( $post, get_the_title( $post ) );
+			$return['results'][] = array(
+				'id'   => $post,
+				'text' => get_the_title( $post ),
+			);
 		}
 
 		echo json_encode( $return );
@@ -92,13 +95,16 @@ class ThemePlate_Field_Object {
 
 		$return   = array();
 		$defaults = array(
-			'search' => $_GET['q'],
+			'search' => $_GET['search'],
 			'fields' => array( 'ID', 'display_name' ),
 		);
 		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'] ) );
 
 		foreach ( $query->get_results() as $user ) {
-			$return[] = array( $user->ID, $user->display_name );
+			$return['results'][] = array(
+				'id'   => $user->ID,
+				'text' => $user->display_name,
+			);
 		}
 
 		echo json_encode( $return );
@@ -112,13 +118,16 @@ class ThemePlate_Field_Object {
 
 		$return   = array();
 		$defaults = array(
-			'search' => $_GET['q'],
+			'search' => $_GET['search'],
 			'fields' => 'id=>name',
 		);
 		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
 
 		foreach ( $query->get_terms() as $id => $name ) {
-			$return[] = array( $id, $name );
+			$return['results'][] = array(
+				'id'   => $id,
+				'text' => $name,
+			);
 		}
 
 		echo json_encode( $return );
