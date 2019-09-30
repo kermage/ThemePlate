@@ -178,6 +178,7 @@
 
 						return {
 							search: params.term,
+							page: { paged: params.page || 1 },
 							action: $this.data( 'action' ),
 							options: $this.data( 'options' ),
 						};

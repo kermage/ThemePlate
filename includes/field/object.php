@@ -70,12 +70,21 @@ class ThemePlate_Field_Object {
 
 	public static function get_posts() {
 
-		$return   = array();
+		$return   = array(
+			'results'    => array(),
+			'pagination' => array(
+				'more' => false,
+			),
+		);
 		$defaults = array(
 			's'      => $_GET['search'],
 			'fields' => 'ids',
 		);
-		$query    = new WP_Query( array_merge( $defaults, $_GET['options'] ) );
+		$query    = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+
+		if ( $_GET['page']['paged'] < $query->max_num_pages ) {
+			$return['pagination']['more'] = true;
+		}
 
 		foreach ( $query->posts as $post ) {
 			$return['results'][] = array(
