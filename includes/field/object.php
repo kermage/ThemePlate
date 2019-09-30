@@ -68,6 +68,9 @@ class ThemePlate_Field_Object {
 	}
 
 
+	private static $count = 10;
+
+
 	public static function get_posts() {
 
 		$return   = array(
@@ -77,8 +80,9 @@ class ThemePlate_Field_Object {
 			),
 		);
 		$defaults = array(
-			's'      => $_GET['search'],
-			'fields' => 'ids',
+			's'              => $_GET['search'],
+			'fields'         => 'ids',
+			'posts_per_page' => self::$count,
 		);
 		$query    = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
 
@@ -102,12 +106,22 @@ class ThemePlate_Field_Object {
 
 	public static function get_users() {
 
-		$return   = array();
+		$return   = array(
+			'results'    => array(),
+			'pagination' => array(
+				'more' => false,
+			),
+		);
 		$defaults = array(
 			'search' => $_GET['search'],
 			'fields' => array( 'ID', 'display_name' ),
+			'number' => self::$count,
 		);
-		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'] ) );
+		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+
+		if ( $_GET['page']['paged'] < ceil( $query->get_total() / self::$count ) ) {
+			$return['pagination']['more'] = true;
+		}
 
 		foreach ( $query->get_results() as $user ) {
 			$return['results'][] = array(
@@ -125,12 +139,25 @@ class ThemePlate_Field_Object {
 
 	public static function get_terms() {
 
-		$return   = array();
+		$return   = array(
+			'results'    => array(),
+			'pagination' => array(
+				'more' => false,
+			),
+		);
+		$offset   = ( $_GET['page']['paged'] > 0 ) ?  self::$count * ( $_GET['page']['paged'] - 1 ) : 1;
 		$defaults = array(
 			'search' => $_GET['search'],
 			'fields' => 'id=>name',
+			'number' => self::$count,
+			'offset' => $offset,
 		);
+		$total    = wp_count_terms( $_GET['options']['taxonomy'] );
 		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
+
+		if ( $_GET['page']['paged'] < ceil( $total / self::$count ) ) {
+			$return['pagination']['more'] = true;
+		}
 
 		foreach ( $query->get_terms() as $id => $name ) {
 			$return['results'][] = array(
