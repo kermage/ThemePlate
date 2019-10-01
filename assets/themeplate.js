@@ -172,6 +172,8 @@
 			if ( $this.next().hasClass( 'select2-options' ) ) {
 				oajax = {
 					url: themeplate.ajax_url,
+					delay: 250,
+					cache: true,
 					dataType: 'json',
 					data: function( params ) {
 						$this = $( this ).siblings( '.select2-options' );
