@@ -146,6 +146,7 @@
 				container: $( this ).parents( '.wrapper' ),
 				format: 'yyyy-mm-dd',
 				multidate: $( this ).hasClass( 'multiple' ),
+				clearBtn: $( this ).data( 'none' ),
 			}).on( 'changeDate', function( e ) {
 				var $element = $( e.target );
 				var selected = $element.datepicker( 'getFormattedDate' );
