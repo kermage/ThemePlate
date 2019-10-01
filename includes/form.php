@@ -53,7 +53,7 @@ class ThemePlate_Form {
 		wp_enqueue_style( 'themeplate-datepicker-style', TP_URL . 'assets/datepicker.min.css', array(), '1.9.0' );
 		wp_enqueue_script( 'themeplate-datepicker-script', TP_URL . 'assets/datepicker.min.js', array(), '1.9.0', true );
 
-		wp_localize_script( 'themeplate-script', 'themeplate', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'themeplate-script', 'ThemePlate', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 		if ( 'post' !== $object_type ) {
 			return;

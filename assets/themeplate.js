@@ -1,4 +1,4 @@
-/* global wp */
+/* global wp, ThemePlate */
 
 (function( $ ) {
 
@@ -171,7 +171,7 @@
 
 			if ( $this.next().hasClass( 'select2-options' ) ) {
 				oajax = {
-					url: themeplate.ajax_url,
+					url: ThemePlate.ajax_url,
 					delay: 250,
 					cache: true,
 					dataType: 'json',
