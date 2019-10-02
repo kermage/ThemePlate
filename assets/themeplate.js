@@ -201,6 +201,27 @@
 				ajax: oajax ? oajax : null,
 			});
 
+			if ( $this.siblings( '.select2-options' ).data( 'value' ) ) {
+				$.ajax( {
+					url: ThemePlate.ajax_url,
+					dataType: 'json',
+					data: {
+						search: '',
+						page: { paged: 1 },
+						action: $this.siblings( '.select2-options' ).data( 'action' ),
+						options: $this.siblings( '.select2-options' ).data( 'options' ),
+						ids__in: $this.siblings( '.select2-options' ).data( 'value' ),
+					},
+					success: function( data ) {
+						var selected = $.map( data.results, function( item ) {
+							return new Option( item.text, item.id, true, true );
+						});
+
+						$this.append( selected ).trigger( 'change' );
+					},
+				});
+			}
+
 			if ( ! $this.attr( 'multiple' ) ) {
 				return;
 			}

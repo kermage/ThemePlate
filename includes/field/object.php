@@ -83,6 +83,7 @@ class ThemePlate_Field_Object {
 			's'              => $_GET['search'],
 			'fields'         => 'ids',
 			'posts_per_page' => self::$count,
+			'post__in'       => $_GET['ids__in'],
 		);
 		$query    = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
 
@@ -113,9 +114,10 @@ class ThemePlate_Field_Object {
 			),
 		);
 		$defaults = array(
-			'search' => $_GET['search'],
-			'fields' => array( 'ID', 'display_name' ),
-			'number' => self::$count,
+			'search'  => $_GET['search'],
+			'fields'  => array( 'ID', 'display_name' ),
+			'number'  => self::$count,
+			'include' => $_GET['ids__in'],
 		);
 		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
 
@@ -147,10 +149,11 @@ class ThemePlate_Field_Object {
 		);
 		$offset   = ( $_GET['page']['paged'] > 0 ) ?  self::$count * ( $_GET['page']['paged'] - 1 ) : 1;
 		$defaults = array(
-			'search' => $_GET['search'],
-			'fields' => 'id=>name',
-			'number' => self::$count,
-			'offset' => $offset,
+			'search'  => $_GET['search'],
+			'fields'  => 'id=>name',
+			'number'  => self::$count,
+			'include' => $_GET['ids__in'],
+			'offset'  => $offset,
 		);
 		$total    = wp_count_terms( $_GET['options']['taxonomy'] );
 		$query    = new WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
