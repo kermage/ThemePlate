@@ -82,7 +82,7 @@ class ThemePlate_Field_Object {
 		$defaults = array(
 			's'              => $_GET['search'],
 			'fields'         => 'ids',
-			'posts_per_page' => self::$count,
+			'posts_per_page' => $_GET['ids__in'] ? -1 : self::$count,
 			'post__in'       => $_GET['ids__in'],
 		);
 		$query    = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
@@ -116,7 +116,7 @@ class ThemePlate_Field_Object {
 		$defaults = array(
 			'search'  => $_GET['search'],
 			'fields'  => array( 'ID', 'display_name' ),
-			'number'  => self::$count,
+			'number'  => $_GET['ids__in'] ? -1 : self::$count,
 			'include' => $_GET['ids__in'],
 		);
 		$query    = new WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
@@ -151,7 +151,7 @@ class ThemePlate_Field_Object {
 		$defaults = array(
 			'search'  => $_GET['search'],
 			'fields'  => 'id=>name',
-			'number'  => self::$count,
+			'number'  => $_GET['ids__in'] ? 0 : self::$count,
 			'include' => $_GET['ids__in'],
 			'offset'  => $offset,
 		);
