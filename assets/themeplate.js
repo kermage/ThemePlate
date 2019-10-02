@@ -1,4 +1,4 @@
-/* global wp, ThemePlate */
+/* global wp, ThemePlate, Option */
 
 (function( $ ) {
 
@@ -142,7 +142,7 @@
 		});
 
 		$( '.themeplate-date-picker:not( .hidden .themeplate-date-picker ) ' ).each( function() {
-			$( this ).datepicker({
+			$( this ).datepicker( {
 				container: $( this ).parents( '.wrapper' ),
 				format: 'yyyy-mm-dd',
 				multidate: $( this ).hasClass( 'multiple' ),
