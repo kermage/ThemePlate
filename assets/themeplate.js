@@ -170,7 +170,7 @@
 			var $this = $( this );
 			var oajax;
 
-			if ( $this.next( '.select2-options' ).length !== 0 ) {
+			if ( $this.siblings( '.select2-options' ).length !== 0 ) {
 				oajax = {
 					url: ThemePlate.ajax_url,
 					delay: 250,
