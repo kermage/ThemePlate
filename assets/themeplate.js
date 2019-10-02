@@ -213,8 +213,16 @@
 						ids__in: $this.siblings( '.select2-options' ).data( 'value' ),
 					},
 					success: function( data ) {
+						var values   = $this.siblings( '.select2-options' ).data( 'value' );
 						var selected = $.map( data.results, function( item ) {
-							return new Option( item.text, item.id, true, true );
+							return {
+								index: values.indexOf( item.id ),
+								option: new Option( item.text, item.id, true, true ),
+							};
+						}).sort( function( a, b ) {
+							return a.index - b.index;
+						}).map( function( item ) {
+							return item.option;
 						});
 
 						$this.append( selected ).trigger( 'change' );
