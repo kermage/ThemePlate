@@ -40,6 +40,11 @@
 
 	$( '.meta-box-sortables' ).on( 'sortstop', function( event, ui ) {
 		var $field = $( ui.item ).find( '.themeplate-wysiwyg' );
+
+		if ( $field.length === 0 ) {
+			return;
+		}
+
 		var isHtml = $field.closest( '.wp-editor-wrap' ).hasClass( 'html-active' );
 		var fieldID = $field.attr( 'id' );
 
