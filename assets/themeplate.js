@@ -218,10 +218,9 @@
 						ids__in: s2data.value,
 					},
 					success: function( data ) {
-						var values   = s2data.value;
 						var selected = $.map( data.results, function( item ) {
 							return {
-								index: values.indexOf( item.id ),
+								index: $.isEmptyObject( s2data.value ) ? 0 : s2data.value.indexOf( item.id ),
 								option: new Option( item.text, item.id, true, true ),
 							};
 						}).sort( function( a, b ) {
