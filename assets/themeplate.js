@@ -168,7 +168,7 @@
 
 		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
 			var $this = $( this );
-			var oajax;
+			var oajax, ovalue;
 
 			if ( $this.siblings( '.select2-options' ).length !== 0 ) {
 				oajax = {
@@ -190,6 +190,8 @@
 						return data;
 					},
 				};
+
+				ovalue = $this.siblings( '.select2-options' ).data( 'value' );
 			}
 
 			$this.select2( {
@@ -201,7 +203,7 @@
 				ajax: oajax ? oajax : null,
 			});
 
-			if ( $this.siblings( '.select2-options' ).data( 'value' ) ) {
+			if ( ovalue && ovalue !== '""' ) {
 				$.ajax( {
 					url: ThemePlate.ajax_url,
 					dataType: 'json',
