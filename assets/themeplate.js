@@ -168,9 +168,14 @@
 
 		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
 			var $this = $( this );
-			var oajax, ovalue;
+			var s2data = {};
+			var oajax;
 
 			if ( $this.siblings( '.select2-options' ).length !== 0 ) {
+				s2data.action  = $this.siblings( '.select2-options' ).data( 'action' );
+				s2data.options = $this.siblings( '.select2-options' ).data( 'options' );
+				s2data.value   = $this.siblings( '.select2-options' ).data( 'value' );
+
 				oajax = {
 					url: ThemePlate.ajax_url,
 					delay: 250,
@@ -182,16 +187,14 @@
 						return {
 							search: params.term,
 							page: { paged: params.page || 1 },
-							action: $this.data( 'action' ),
-							options: $this.data( 'options' ),
+							action: s2data.action,
+							options: s2data.options,
 						};
 					},
 					processResults: function( data ) {
 						return data;
 					},
 				};
-
-				ovalue = $this.siblings( '.select2-options' ).data( 'value' );
 			}
 
 			$this.select2( {
@@ -203,19 +206,19 @@
 				ajax: oajax ? oajax : null,
 			});
 
-			if ( ovalue && ovalue !== '""' ) {
+			if ( ! $.isEmptyObject( s2data ) && s2data.value !== '""' ) {
 				$.ajax( {
 					url: ThemePlate.ajax_url,
 					dataType: 'json',
 					data: {
 						search: '',
 						page: { paged: 1 },
-						action: $this.siblings( '.select2-options' ).data( 'action' ),
-						options: $this.siblings( '.select2-options' ).data( 'options' ),
-						ids__in: $this.siblings( '.select2-options' ).data( 'value' ),
+						action: s2data.action,
+						options: s2data.options,
+						ids__in: s2data.value,
 					},
 					success: function( data ) {
-						var values   = $this.siblings( '.select2-options' ).data( 'value' );
+						var values   = s2data.value;
 						var selected = $.map( data.results, function( item ) {
 							return {
 								index: values.indexOf( item.id ),
