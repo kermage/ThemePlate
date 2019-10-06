@@ -168,10 +168,10 @@ class ThemePlate_Cleaner {
 
 		if ( empty( $args['walker'] ) ) {
 			$args['walker'] = new ThemePlate_NavWalker();
+		}
 
-			if ( 'wp_page_menu' === $args['fallback_cb'] ) {
-				$args['fallback_cb'] = 'ThemePlate_NavWalker::fallback';
-			}
+		if ( $args['walker'] instanceof ThemePlate_NavWalker && 'wp_page_menu' === $args['fallback_cb'] ) {
+			$args['fallback_cb'] = 'ThemePlate_NavWalker::fallback';
 		}
 
 		if ( empty( $args['items_wrap'] ) ) {
