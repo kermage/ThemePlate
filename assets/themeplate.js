@@ -176,6 +176,10 @@
 				s2data.options = $this.siblings( '.select2-options' ).data( 'options' );
 				s2data.value   = $this.siblings( '.select2-options' ).data( 'value' );
 
+				if ( $.isEmptyObject( s2data.value ) ) {
+					s2data.value = [ s2data.value ];
+				}
+
 				oajax = {
 					url: ThemePlate.ajax_url,
 					delay: 250,
