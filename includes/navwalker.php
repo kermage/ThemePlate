@@ -10,6 +10,9 @@
 
 class ThemePlate_NavWalker extends Walker {
 
+	public $tree_type = array( 'post_type', 'taxonomy', 'custom' );
+
+
 	public $db_fields = array(
 		'parent' => 'menu_item_parent',
 		'id'     => 'db_id',
