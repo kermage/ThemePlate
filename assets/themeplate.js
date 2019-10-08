@@ -136,7 +136,7 @@
 	}
 
 
-	$( document ).on( 'ready clone', function() {
+	function handleFields() {
 		$( '.themeplate-color-picker:not( .hidden .themeplate-color-picker ) ' ).each( function() {
 			$( this ).wpColorPicker();
 		});
@@ -253,6 +253,9 @@
 				}
 			});
 		});
-	});
+	}
+
+	$( window ).on( 'load', handleFields );
+	$( document ).on( 'clone', handleFields );
 
 }( jQuery ));
