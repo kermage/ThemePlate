@@ -77,9 +77,17 @@ class ThemePlate_NavWalker extends Walker {
 		// phpcs:disable WordPress.WhiteSpace.OperatorSpacing.SpacingBefore
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
-		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
 		// phpcs:enable
+
+		if ( '_blank' === $item->target && empty( $item->xfn ) ) {
+			$atts['rel'] = 'noopener noreferrer';
+		} else {
+			$atts['rel'] = $item->xfn;
+		}
+
+		$atts['aria-current'] = $item->current ? 'page' : '';
+
 		$atts = array_merge( $atts, $this->attributes( $item, $args ) );
 		$atts = array_filter( $atts );
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
