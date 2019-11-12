@@ -48,8 +48,8 @@ class ThemePlate_Form {
 		wp_enqueue_script( 'themeplate-wysiwyg', TP_URL . 'assets/wysiwyg.js', array(), TP_VERSION, true );
 		wp_enqueue_script( 'themeplate-show-hide', TP_URL . 'assets/show-hide.js', array(), TP_VERSION, true );
 		wp_enqueue_script( 'themeplate-repeater', TP_URL . 'assets/repeater.js', array(), TP_VERSION, true );
-		wp_enqueue_style( 'themeplate-select2-style', TP_URL . 'assets/select2.min.css', array(), '4.0.5' );
-		wp_enqueue_script( 'themeplate-select2-script', TP_URL . 'assets/select2.full.min.js', array(), '4.0.5', true );
+		wp_enqueue_style( 'themeplate-select2-style', TP_URL . 'assets/select2.min.css', array(), '4.0.12' );
+		wp_enqueue_script( 'themeplate-select2-script', TP_URL . 'assets/select2.full.min.js', array(), '4.0.12', true );
 		wp_enqueue_style( 'themeplate-datepicker-style', TP_URL . 'assets/datepicker.min.css', array(), '1.9.0' );
 		wp_enqueue_script( 'themeplate-datepicker-script', TP_URL . 'assets/datepicker.min.js', array(), '1.9.0', true );
 
