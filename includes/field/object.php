@@ -68,6 +68,7 @@ class ThemePlate_Field_Object {
 
 
 	private static $count = 10;
+	private static $prefixes = array();
 
 
 	public static function get_posts() {
@@ -93,13 +94,33 @@ class ThemePlate_Field_Object {
 		foreach ( $query->posts as $post ) {
 			$return['results'][] = array(
 				'id'   => $post,
-				'text' => get_the_title( $post ),
+				'text' => self::get_prefix( $post, $_GET['options'] ) . get_the_title( $post ),
 			);
 		}
 
 		echo json_encode( $return );
 
 		wp_die();
+
+	}
+
+
+	private static function get_prefix( $id, $options ) {
+
+		$prefix = '';
+
+		if ( is_array( $options['post_type'] ) && 1 < count( $options['post_type' ] ) ) {
+			$type   = get_post_type( $id );
+
+			if ( ! array_key_exists( $type, self::$prefixes ) ) {
+				$object = get_post_type_object( $type );
+				self::$prefixes[ $type ] = $object->labels->singular_name;
+			}
+
+			$prefix = self::$prefixes[ $type ] . ' | ';
+		}
+
+		return $prefix;
 
 	}
 
