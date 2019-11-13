@@ -46,7 +46,6 @@ class ThemePlate_Field_Object {
 
 		$args = ThemePlate_Helper_Main::fool_proof( $defaults, $field['options'] );
 
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
 		echo '<select class="themeplate-select2" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . ( $field['required'] ? ' required="required"' : '' ) . '>';
 		if ( ! $field['value'] ) {
 			echo '<option></option>';
