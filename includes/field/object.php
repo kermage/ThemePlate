@@ -85,6 +85,13 @@ class ThemePlate_Field_Object {
 			'posts_per_page' => $_GET['ids__in'] ? -1 : self::$count,
 			'post__in'       => $_GET['ids__in'],
 		);
+
+		if ( is_array( $_GET['options']['post_type'] ) && 1 < count( $_GET['options']['post_type' ] ) ) {
+			$defaults['orderby'] = array(
+				'post_type' => 'ASC',
+			);
+		}
+
 		$query    = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
 
 		if ( $_GET['page']['paged'] < $query->max_num_pages ) {
