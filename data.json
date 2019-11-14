@@ -17,5 +17,6 @@
   "icons": {
     "1x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-128x128.png",
     "2x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-256x256.png"
-  }
+  },
+  "upgrade_notice" : "Here's why you should upgrade...WordPress version 5.3!"
 }
