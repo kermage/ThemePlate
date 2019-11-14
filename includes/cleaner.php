@@ -98,7 +98,7 @@ class ThemePlate_Cleaner {
 
 	public function style_tag( $input ) {
 
-		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='(.*)'\s?(type='text/css')?\s+media='(.*)' />!", $input, $matches ); // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+		preg_match_all( "!<link rel='stylesheet'\s?(id='[^']+')?\s+href='([^\s]+)'\s?(type='text/css')?\s+media='(.*)' />!", $input, $matches ); // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 		// Only display media if it is meaningful
 
 		$media = '';
