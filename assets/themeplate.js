@@ -233,7 +233,7 @@
 							return item.option;
 						});
 
-						$this.append( selected ).trigger( 'change' );
+						$this.html( selected ).trigger( 'change' );
 					},
 				});
 			}
