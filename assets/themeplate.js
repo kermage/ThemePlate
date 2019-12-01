@@ -238,6 +238,8 @@
 				});
 			}
 
+			$this.removeAttr( 'disabled' );
+
 			if ( ! $this.attr( 'multiple' ) ) {
 				return;
 			}
