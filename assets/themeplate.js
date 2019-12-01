@@ -233,12 +233,12 @@
 							return item.option;
 						});
 
-						$this.html( selected ).trigger( 'change' );
+						$this.html( selected ).removeAttr( 'disabled' ).trigger( 'change' );
 					},
 				});
+			} else {
+				$this.removeAttr( 'disabled' );
 			}
-
-			$this.removeAttr( 'disabled' );
 
 			if ( ! $this.attr( 'multiple' ) ) {
 				return;
