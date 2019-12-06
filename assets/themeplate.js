@@ -142,14 +142,14 @@
 		});
 
 		$( '.themeplate-date-picker:not( .hidden .themeplate-date-picker ) ' ).each( function() {
-			$( this ).datepicker( {
+			$( this ).bootstrapDP( {
 				container: $( this ).parents( '.wrapper' ),
 				format: 'yyyy-mm-dd',
 				multidate: $( this ).hasClass( 'multiple' ),
 				clearBtn: $( this ).data( 'none' ),
 			}).on( 'changeDate', function( e ) {
 				var $element = $( e.target );
-				var selected = $element.datepicker( 'getFormattedDate' );
+				var selected = $element.bootstrapDP( 'getFormattedDate' );
 
 				$element.find( 'input' ).val( selected );
 
@@ -162,7 +162,7 @@
 			var loaded = $( this ).find( 'input' ).val();
 
 			if ( loaded ) {
-				$( this ).datepicker( 'setDate', preloadDates( loaded ) );
+				$( this ).bootstrapDP( 'setDate', preloadDates( loaded ) );
 			}
 		});
 
