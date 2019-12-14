@@ -329,7 +329,7 @@
 	padding-right: 0 !important;
 }
 
-.themeplate-clone.required .attachment-close {
+.themeplate-clone.required > .attachment-close {
 	display: none;
 }
 
