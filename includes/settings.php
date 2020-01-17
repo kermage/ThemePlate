@@ -88,12 +88,13 @@ class ThemePlate_Settings {
 
 		$screen = get_current_screen();
 		$prefix = ThemePlate()->key . '-';
-		$page_s = (array) $this->config['page'];
-		$sparts = explode( $prefix, $screen->id );
 
 		if ( null === $screen || false === strpos( $screen->id, '_page_' . $prefix ) ) {
 			return false;
 		}
+
+		$page_s = (array) $this->config['page'];
+		$sparts = explode( $prefix, $screen->id );
 
 		foreach ( $page_s as $page ) {
 			if ( $sparts[1] === $page ) {
