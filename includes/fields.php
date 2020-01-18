@@ -109,6 +109,13 @@ class ThemePlate_Fields {
 
 	private function layout( $field, $value, $name ) {
 
+		$current = count( (array) $value );
+
+		if ( $current < $field['minimum'] ) {
+			$balance = $field['minimum'] - $current;
+			$value   = array_merge( (array) $value, array_fill( $current, $balance, null ) );
+		}
+
 		/* phpcs:disable Generic.WhiteSpace.ScopeIndent.IncorrectExact */
 		echo '<div class="field-wrapper type-' . esc_attr( $field['type'] ) . ' ' . esc_attr( $field['style'] ) . '">';
 			ThemePlate_Helper_Meta::render_options( $field );
