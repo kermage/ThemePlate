@@ -13,18 +13,19 @@ class ThemePlate_Field_Checkbox {
 	public static function render( $field, $list = false ) {
 
 		$seq = ThemePlate_Helper_Main::is_sequential( $field['options'] );
+		$tag = $list ? 'p' : 'span';
 		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
 		if ( ! empty( $field['options'] ) ) {
 			echo '<fieldset id="' . esc_attr( $field['id'] ) . '">';
 			foreach ( $field['options'] as $value => $option ) {
 				$value = ( $seq ? $value + 1 : $value );
-				echo '<' . ( $list ? 'p' : 'span' ) . '>';
+				echo '<' . $tag . '>';
 				echo '<label><input type="checkbox" name="' . esc_attr( $field['name'] ) . '[]" value="' . esc_attr( $value ) . '"';
 				if ( in_array( (string) $value, (array) $field['value'], true ) ) {
 					echo ' checked="checked"';
 				}
 				echo ( $field['required'] ? ' required="required"' : '' ) . ' />' . esc_html( $option ) . '</label>';
-				echo '</' . ( $list ? 'p' : 'span' ) . '>';
+				echo '</' . $tag . '>';
 			}
 			echo '</fieldset>';
 		} else {
