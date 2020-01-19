@@ -75,9 +75,9 @@
 			.slice( 0, $field.data( 'min' ) ).addClass( 'required' );
 
 		if ( $field.data( 'max' ) > 0 && $field.find( '.themeplate-clone' ).length - 1 >= $field.data( 'max' ) + $delayed ) {
-			$field.find( '.clone-add' ).hide();
+			$field.addClass( 'maxed' ).find( '.clone-add' ).hide();
 		} else {
-			$field.find( '.clone-add' ).show();
+			$field.removeClass( 'maxed' ).find( '.clone-add' ).show();
 		}
 	}
 

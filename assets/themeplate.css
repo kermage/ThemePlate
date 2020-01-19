@@ -156,6 +156,10 @@
 	border-bottom: 1px solid #ddd;
 }
 
+.type-group > .field-input.maxed > .themeplate-clone:nth-last-of-type( 2 ) {
+	border-bottom: 0;
+}
+
 .type-group.boxed .themeplate-clone {
 	padding-bottom: 1em;
 }
