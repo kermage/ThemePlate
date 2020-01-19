@@ -168,7 +168,7 @@ window.ThemePlate = window.ThemePlate || {};
 			return false;
 		}
 
-		if ( TP.checkersElements[checker].length === 0	) {
+		if ( TP.checkersElements[checker].length === 0 ) {
 			return false;
 		}
 
@@ -176,7 +176,7 @@ window.ThemePlate = window.ThemePlate || {};
 	};
 
 	TP.isMet = function( conditions, logic = 'OR' ) {
-		var result = ( logic != 'OR' );
+		var result = ( logic !== 'OR' );
 
 		for ( var i in conditions ) {
 			if ( ! Object.prototype.hasOwnProperty.call( conditions, i ) ) {

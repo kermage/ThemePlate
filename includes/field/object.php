@@ -17,7 +17,7 @@ class ThemePlate_Field_Object {
 			case 'post':
 			case 'page':
 				$action   = 'tp_posts';
-				$defaults = array( 'post_type' => $field['type'], );
+				$defaults = array( 'post_type' => $field['type'] );
 
 				if ( ThemePlate_Helper_Main::is_sequential( $field['options'] ) ) {
 					$field['options'] = array( 'post_type' => $field['options'] );
@@ -67,7 +67,7 @@ class ThemePlate_Field_Object {
 	}
 
 
-	private static $count = 10;
+	private static $count    = 10;
 	private static $prefixes = array();
 
 
@@ -86,13 +86,13 @@ class ThemePlate_Field_Object {
 			'post__in'       => $_GET['ids__in'],
 		);
 
-		if ( is_array( $_GET['options']['post_type'] ) && 1 < count( $_GET['options']['post_type' ] ) ) {
+		if ( is_array( $_GET['options']['post_type'] ) && 1 < count( $_GET['options']['post_type'] ) ) {
 			$defaults['orderby'] = array(
 				'post_type' => 'ASC',
 			);
 		}
 
-		$query    = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+		$query = new WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
 
 		if ( $_GET['page']['paged'] < $query->max_num_pages ) {
 			$return['pagination']['more'] = true;
@@ -116,11 +116,11 @@ class ThemePlate_Field_Object {
 
 		$prefix = '';
 
-		if ( is_array( $options['post_type'] ) && 1 < count( $options['post_type' ] ) ) {
-			$type   = get_post_type( $id );
+		if ( is_array( $options['post_type'] ) && 1 < count( $options['post_type'] ) ) {
+			$type = get_post_type( $id );
 
 			if ( ! array_key_exists( $type, self::$prefixes ) ) {
-				$object = get_post_type_object( $type );
+				$object                  = get_post_type_object( $type );
 				self::$prefixes[ $type ] = $object->labels->singular_name;
 			}
 
@@ -174,7 +174,7 @@ class ThemePlate_Field_Object {
 				'more' => false,
 			),
 		);
-		$offset   = ( $_GET['page']['paged'] > 0 ) ?  self::$count * ( $_GET['page']['paged'] - 1 ) : 1;
+		$offset   = ( $_GET['page']['paged'] > 0 ) ? self::$count * ( $_GET['page']['paged'] - 1 ) : 1;
 		$defaults = array(
 			'search'  => $_GET['search'],
 			'fields'  => 'id=>name',
