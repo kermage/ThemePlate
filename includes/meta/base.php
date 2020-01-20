@@ -97,11 +97,7 @@ abstract class ThemePlate_Meta_Base {
 
 		$index = 'themeplate_' . $this->config['id'] . '_nonce';
 
-		if ( ! isset( $_POST[ $index ] ) || ! wp_verify_nonce( $_POST[ $index ], 'save_themeplate_' . $this->config['id'] ) ) {
-			return false;
-		}
-
-		return true;
+		return ! ( ! isset( $_POST[ $index ] ) || ! wp_verify_nonce( $_POST[ $index ], 'save_themeplate_' . $this->config['id'] ) );
 
 	}
 
