@@ -1,4 +1,4 @@
-/* global wp, ThemePlate, Option */
+/* global wp, ThemePlate */
 
 (function( $ ) {
 
