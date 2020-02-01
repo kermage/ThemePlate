@@ -208,6 +208,8 @@ class ThemePlate {
 
 	public function post_meta( $args ) {
 
+		$args['id'] = $this->key . '_' . $args['id'];
+
 		try {
 			return new \ThemePlate\Meta\Post( $args );
 		} catch ( Exception $e ) {
@@ -218,6 +220,14 @@ class ThemePlate {
 
 
 	public function settings( $args ) {
+
+		if ( isset( $args['page'] ) ) {
+			foreach ( (array) $args['page'] as $index => $value ) {
+				$args['page'][ $index ] = $this->key . '-' . $value;
+			}
+		} else {
+			$args['page'] = $this->key . '-' . $this->slug;
+		}
 
 		try {
 			return new \ThemePlate\Settings( $args );
@@ -230,6 +240,8 @@ class ThemePlate {
 
 	public function term_meta( $args ) {
 
+		$args['id'] = $this->key . '_' . $args['id'];
+
 		try {
 			return new \ThemePlate\Meta\Term( $args );
 		} catch ( Exception $e ) {
@@ -241,6 +253,8 @@ class ThemePlate {
 
 	public function user_meta( $args ) {
 
+		$args['id'] = $this->key . '_' . $args['id'];
+
 		try {
 			return new \ThemePlate\Meta\User( $args );
 		} catch ( Exception $e ) {
@@ -251,6 +265,8 @@ class ThemePlate {
 
 
 	public function page( $args ) {
+
+		$args['id'] = $this->key . '-' . $args['id'];
 
 		try {
 			return new \ThemePlate\Page( $args );
