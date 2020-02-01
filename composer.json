@@ -16,5 +16,10 @@
 		"themeplate/page": "*",
 		"themeplate/settings": "*"
 	},
+	"extra": {
+		"installer-paths": {
+			"includes/{$name}/": ["vendor:themeplate"]
+		}
+	},
 	"minimum-stability" : "dev"
 }

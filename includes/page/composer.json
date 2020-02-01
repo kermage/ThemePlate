@@ -1,0 +1,21 @@
+{
+    "name": "themeplate/page",
+    "description" : "ThemePlate custom options pages",
+    "type": "wordpress-dropin",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Gene Alyson Fortunado Torcende",
+            "email": "genealyson.torcende@gmail.com"
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.0",
+        "themeplate/core": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThemePlate\\": "src/"
+        }
+    }
+}
