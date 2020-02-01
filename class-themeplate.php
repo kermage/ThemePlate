@@ -28,7 +28,7 @@ class ThemePlate {
 
 	private function __construct( $key, $pages ) {
 
-		spl_autoload_register( array( $this, 'autoload' ) );
+		require TP_PATH . 'vendor/autoload.php';
 
 		$defaults = array(
 			'title' => 'ThemePlate Options',
@@ -37,33 +37,13 @@ class ThemePlate {
 			'slug'  => 'options',
 		);
 		$config   = $this->prepare( $key, $pages );
-		$config   = ThemePlate_Helper_Main::fool_proof( $defaults, $config );
+		$config   = \ThemePlate\Core\Helper\Main::fool_proof( $defaults, $config );
 
 		$this->setup( $config );
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
-		add_action( 'init', array( 'ThemePlate_Cleaner', 'instance' ) );
+		add_action( 'init', array( '\ThemePlate\Cleaner', 'instance' ) );
 		add_action( 'plugins_loaded', array( $this, 'force_load_first' ) );
-
-		ThemePlate_Field_Object::ajax_actions();
-
-	}
-
-
-	private function autoload( $class ) {
-
-		if ( 0 !== strpos( $class, 'ThemePlate' ) ) {
-			return;
-		}
-
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'includes';
-		$base = strtolower( str_replace( 'ThemePlate', '', $class ) );
-		$name = str_replace( '_', DIRECTORY_SEPARATOR, $base );
-		$file = $path . $name . '.php';
-
-		if ( ! class_exists( $class ) && file_exists( $file ) ) {
-			require_once $file;
-		}
 
 	}
 
@@ -77,7 +57,7 @@ class ThemePlate {
 				$config['title'] = $key;
 				$config['key']   = sanitize_title( $key );
 				$this->stall_update();
-			} elseif ( ThemePlate_Helper_Main::is_sequential( $key ) ) {
+			} elseif ( \ThemePlate\Core\Helper\Main::is_sequential( $key ) ) {
 				$config['title'] = array_shift( $key );
 				$config['key']   = array_shift( $key );
 				$this->stalled   = true;
@@ -207,7 +187,7 @@ class ThemePlate {
 	public function post_type( $args ) {
 
 		try {
-			return new ThemePlate_CPT( 'post_type', $args );
+			return new \ThemePlate\CPT\PostType( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -218,7 +198,7 @@ class ThemePlate {
 	public function taxonomy( $args ) {
 
 		try {
-			return new ThemePlate_CPT( 'taxonomy', $args );
+			return new \ThemePlate\CPT\Taxonomy( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -229,7 +209,7 @@ class ThemePlate {
 	public function post_meta( $args ) {
 
 		try {
-			return new ThemePlate_Meta_Post( $args );
+			return new \ThemePlate\Meta\Post( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -240,7 +220,7 @@ class ThemePlate {
 	public function settings( $args ) {
 
 		try {
-			return new ThemePlate_Settings( $args );
+			return new \ThemePlate\Settings( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -251,7 +231,7 @@ class ThemePlate {
 	public function term_meta( $args ) {
 
 		try {
-			return new ThemePlate_Meta_Term( $args );
+			return new \ThemePlate\Meta\Term( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -262,7 +242,7 @@ class ThemePlate {
 	public function user_meta( $args ) {
 
 		try {
-			return new ThemePlate_Meta_User( $args );
+			return new \ThemePlate\Meta\User( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -273,7 +253,7 @@ class ThemePlate {
 	public function page( $args ) {
 
 		try {
-			return new ThemePlate_Page( $args );
+			return new \ThemePlate\Page( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -284,7 +264,7 @@ class ThemePlate {
 	public function column( $args ) {
 
 		try {
-			return new ThemePlate_Columns( $args );
+			return new \ThemePlate\Column( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
