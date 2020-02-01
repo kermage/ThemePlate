@@ -9,6 +9,6 @@ return array(
     'ThemePlate\\Meta\\' => array($baseDir . '/includes/meta/src'),
     'ThemePlate\\Core\\' => array($baseDir . '/includes/core/src'),
     'ThemePlate\\CPT\\' => array($baseDir . '/includes/cpt/src'),
-    'ThemePlate\\' => array($baseDir . '/includes/column/src', $baseDir . '/includes/page/src', $baseDir . '/includes/settings/src'),
+    'ThemePlate\\' => array($baseDir . '/includes', $baseDir . '/includes/column/src', $baseDir . '/includes/page/src', $baseDir . '/includes/settings/src'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
 );

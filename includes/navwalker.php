@@ -7,8 +7,9 @@
  * @since 0.1.0
  */
 
+namespace ThemePlate;
 
-class ThemePlate_NavWalker extends Walker {
+class NavWalker extends \Walker {
 
 	public $tree_type = array( 'post_type', 'taxonomy', 'custom' );
 

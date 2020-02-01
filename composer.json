@@ -21,5 +21,10 @@
 			"includes/{$name}/": ["vendor:themeplate"]
 		}
 	},
+    "autoload": {
+        "psr-4": {
+            "ThemePlate\\": "includes/"
+        }
+    },
 	"minimum-stability" : "dev"
 }

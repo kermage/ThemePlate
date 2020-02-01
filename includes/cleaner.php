@@ -7,8 +7,9 @@
  * @since 0.1.0
  */
 
+namespace ThemePlate;
 
-class ThemePlate_Cleaner {
+class Cleaner {
 
 	private static $instance;
 
@@ -168,11 +169,11 @@ class ThemePlate_Cleaner {
 		}
 
 		if ( empty( $args['walker'] ) ) {
-			$args['walker'] = new ThemePlate_NavWalker();
+			$args['walker'] = new \ThemePlate\NavWalker();
 		}
 
-		if ( $args['walker'] instanceof ThemePlate_NavWalker && 'wp_page_menu' === $args['fallback_cb'] ) {
-			$args['fallback_cb'] = 'ThemePlate_NavWalker::fallback';
+		if ( $args['walker'] instanceof \ThemePlate\NavWalker && 'wp_page_menu' === $args['fallback_cb'] ) {
+			$args['fallback_cb'] = '\ThemePlate\NavWalker::fallback';
 		}
 
 		if ( empty( $args['items_wrap'] ) ) {
