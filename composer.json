@@ -26,10 +26,13 @@
 			"includes/{$name}/": ["vendor:themeplate"]
 		}
 	},
-    "autoload": {
-        "psr-4": {
-            "ThemePlate\\": "includes/"
-        }
-    },
+	"autoload": {
+		"psr-4": {
+			"ThemePlate\\": "includes/"
+		},
+		"files": [
+			"includes/compatibility.php"
+		]
+	},
 	"minimum-stability" : "dev"
 }

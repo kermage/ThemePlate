@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'f9ba4658359058cfac7584e977bd3801' => $baseDir . '/includes/core/src/functions.php',
+    'e428fd54b1705cbff6b55264cbdf2944' => $baseDir . '/includes/compatibility.php',
 );
