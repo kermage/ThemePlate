@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'e428fd54b1705cbff6b55264cbdf2944' => $vendorDir . '/compatibility.php',
+    '721d1736c937f143514d8272923c3222' => $vendorDir . '/Core/functions.php',
 );

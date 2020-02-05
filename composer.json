@@ -21,10 +21,16 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"ThemePlate\\": "includes/"
+			"ThemePlate\\": [
+				"includes/",
+				"includes/column/",
+				"includes/page/",
+				"includes/settings/"
+			]
 		},
 		"files": [
-			"includes/compatibility.php"
+			"includes/compatibility.php",
+			"includes/Core/functions.php"
 		]
 	}
 }

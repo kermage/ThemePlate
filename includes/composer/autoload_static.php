@@ -8,6 +8,7 @@ class ComposerStaticInit09dd6e568a9b09de82b7c72cc8b5cd0b
 {
     public static $files = array (
         'e428fd54b1705cbff6b55264cbdf2944' => __DIR__ . '/..' . '/compatibility.php',
+        '721d1736c937f143514d8272923c3222' => __DIR__ . '/..' . '/Core/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -21,6 +22,9 @@ class ComposerStaticInit09dd6e568a9b09de82b7c72cc8b5cd0b
         'ThemePlate\\' => 
         array (
             0 => 'D:\\GitHub\\ThemePlate\\ThemePlate\\includes',
+            1 => __DIR__ . '/..' . '/column',
+            2 => __DIR__ . '/..' . '/page',
+            3 => __DIR__ . '/..' . '/settings',
         ),
     );
 
