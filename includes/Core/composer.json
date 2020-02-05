@@ -13,10 +13,10 @@
     },
     "autoload": {
         "psr-4": {
-            "ThemePlate\\Core\\": "src/"
+            "ThemePlate\\Core\\": ""
         },
         "files": [
-            "src/functions.php"
+            "functions.php"
         ]
     }
 }
