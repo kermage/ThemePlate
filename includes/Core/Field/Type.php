@@ -11,7 +11,7 @@ namespace ThemePlate\Core\Field;
 
 use ThemePlate\Core\Helper\Main;
 
-class Object {
+class Type {
 
 	public static function render( $field ) {
 

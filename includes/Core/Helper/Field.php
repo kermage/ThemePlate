@@ -17,7 +17,7 @@ use ThemePlate\Core\Field\File;
 use ThemePlate\Core\Field\Html;
 use ThemePlate\Core\Field\Input;
 use ThemePlate\Core\Field\Number;
-use ThemePlate\Core\Field\Object;
+use ThemePlate\Core\Field\Type;
 use ThemePlate\Core\Field\Radio;
 use ThemePlate\Core\Field\Select;
 use ThemePlate\Core\Field\Textarea;
@@ -85,7 +85,7 @@ class Field {
 			case 'page':
 			case 'user':
 			case 'term':
-				Object::render( $field );
+				Type::render( $field );
 				break;
 
 			case 'html':
