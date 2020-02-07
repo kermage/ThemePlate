@@ -16,9 +16,6 @@
 	"require": {
 		"php": ">=5.6.0"
 	},
-	"config": {
-		"vendor-dir": "includes/"
-	},
 	"autoload": {
 		"psr-4": {
 			"ThemePlate\\": [

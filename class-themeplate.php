@@ -28,7 +28,7 @@ class ThemePlate {
 
 	private function __construct( $key, $pages ) {
 
-		require TP_PATH . 'includes/autoload.php';
+		require TP_PATH . 'vendor/autoload.php';
 
 		$defaults = array(
 			'title' => 'ThemePlate Options',
