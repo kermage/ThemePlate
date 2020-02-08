@@ -26,7 +26,6 @@
 			]
 		},
 		"files": [
-			"includes/compatibility.php",
 			"includes/Core/functions.php"
 		]
 	}
