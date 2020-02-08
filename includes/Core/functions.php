@@ -8,7 +8,7 @@
  */
 
 
-if ( ! function_exists( 'themeplate_ajax_actions' ) ) {
+if ( function_exists( 'add_action' ) && ! function_exists( 'themeplate_ajax_actions' ) ) {
 	function themeplate_ajax_actions() {
 		add_action( 'wp_ajax_tp_posts', array( 'ThemePlate\Core\Field\Type', 'get_posts' ) );
 		add_action( 'wp_ajax_tp_users', array( 'ThemePlate\Core\Field\Type', 'get_users' ) );
