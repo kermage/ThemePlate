@@ -148,7 +148,7 @@ window.ThemePlate = window.ThemePlate || {};
 				break;
 			case '=':
 			default:
-				result = ( have == want );
+				result = ( have === want );
 				break;
 		}
 
@@ -221,7 +221,7 @@ window.ThemePlate = window.ThemePlate || {};
 				returned = ! returned;
 			}
 
-			if ( logic == 'OR' ) {
+			if ( logic === 'OR' ) {
 				result = result || returned;
 
 				if ( result ) {
@@ -240,7 +240,7 @@ window.ThemePlate = window.ThemePlate || {};
 	};
 
 	TP.maybeShowHide = function( $container, type, conditions ) {
-		if ( type == 'show' ) {
+		if ( type === 'show' ) {
 			TP.isMet( conditions ) ? $container.show() : $container.hide();
 		} else {
 			TP.isMet( conditions ) ? $container.hide() : $container.show();
@@ -277,7 +277,7 @@ window.ThemePlate = window.ThemePlate || {};
 				continue;
 			}
 
-			if ( key == 'id' ) {
+			if ( key === 'id' ) {
 				continue;
 			}
 

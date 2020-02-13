@@ -75,7 +75,7 @@
 			$parent.find( '.hidden.placeholder' ).remove();
 
 			selection.forEach( function( media ) {
-				src = ( media.type == 'image' ? media.url : media.icon );
+				src = ( media.type === 'image' ? media.url : media.icon );
 				centered = '<div class="centered"><img src="' + src + '"/></div>';
 				filename = '<div class="filename"><div>' + media.filename + '</div></div>';
 				field = '<input type="hidden" name="' + fieldname + '" value="' + media.id + '">';
