@@ -43,7 +43,7 @@ class ThemePlate {
 		$this->setup( $config );
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
-		add_action( 'init', array( '\ThemePlate\Cleaner', 'instance' ) );
+		add_action( 'init', array( \ThemePlate\Cleaner::class, 'instance' ) );
 		add_action( 'plugins_loaded', array( $this, 'force_load_first' ) );
 
 	}

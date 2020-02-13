@@ -123,7 +123,7 @@ abstract class Base {
 			$args = array(
 				'id'            => $field['id'],
 				'title'         => $field['title'],
-				'callback'      => array( 'ThemePlate\Core\Helper\Meta', 'display_column' ),
+				'callback'      => array( ThemePlate\Core\Helper\Meta::class, 'display_column' ),
 				'callback_args' => $field,
 			);
 
