@@ -174,6 +174,8 @@ class NavWalker extends \Walker {
 			return $output;
 		}
 
+		return true;
+
 	}
 
 }
