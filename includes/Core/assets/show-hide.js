@@ -168,11 +168,8 @@ window.ThemePlate = window.ThemePlate || {};
 			return false;
 		}
 
-		if ( TP.checkersElements[checker].length === 0 ) {
-			return false;
-		}
+		return TP.checkersElements[checker].length !== 0;
 
-		return true;
 	};
 
 	TP.isMet = function( conditions, logic = 'OR' ) {
