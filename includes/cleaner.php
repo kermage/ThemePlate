@@ -169,10 +169,10 @@ class Cleaner {
 		}
 
 		if ( empty( $args['walker'] ) ) {
-			$args['walker'] = new \ThemePlate\NavWalker();
+			$args['walker'] = new NavWalker();
 		}
 
-		if ( $args['walker'] instanceof \ThemePlate\NavWalker && 'wp_page_menu' === $args['fallback_cb'] ) {
+		if ( $args['walker'] instanceof NavWalker && 'wp_page_menu' === $args['fallback_cb'] ) {
 			$args['fallback_cb'] = '\ThemePlate\NavWalker::fallback';
 		}
 
