@@ -9,7 +9,6 @@
 
 namespace ThemePlate\Core;
 
-use ThemePlate\Core\Fields;
 use ThemePlate\Core\Helper\Main;
 use ThemePlate\Core\Helper\Meta;
 

@@ -9,8 +9,6 @@
 
 namespace ThemePlate\Core\Helper;
 
-use ThemePlate\Core\Helper\Main;
-
 class Meta {
 
 	public static function should_display( $meta_box, $object_id ) {
