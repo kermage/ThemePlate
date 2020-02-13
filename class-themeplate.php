@@ -8,7 +8,7 @@
 
 class ThemePlate {
 
-	private static $instance;
+	private static $_instance;
 
 	public $key;
 	public $slug;
@@ -17,11 +17,11 @@ class ThemePlate {
 
 	public static function instance( $key, $pages ) {
 
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self( $key, $pages );
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self( $key, $pages );
 		}
 
-		return self::$instance;
+		return self::$_instance;
 
 	}
 
