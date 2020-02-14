@@ -269,6 +269,10 @@ class ThemePlate {
 
 		$args['id'] = $this->key . '-' . $args['id'];
 
+		if ( 'options' === $args['parent'] ) {
+			$args['parent'] = $this->key . '-options';
+		}
+
 		try {
 			return new \ThemePlate\Page( $args );
 		} catch ( Exception $e ) {
