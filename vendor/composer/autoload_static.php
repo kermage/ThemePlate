@@ -27,11 +27,45 @@ class ComposerStaticInit61e6df428cf03b0fbf45466d3905ec43
         ),
     );
 
+    public static $classMap = array (
+        'ThemePlate\\CPT\\Base' => __DIR__ . '/../..' . '/includes/CPT/Base.php',
+        'ThemePlate\\CPT\\PostType' => __DIR__ . '/../..' . '/includes/CPT/PostType.php',
+        'ThemePlate\\CPT\\Taxonomy' => __DIR__ . '/../..' . '/includes/CPT/Taxonomy.php',
+        'ThemePlate\\Cleaner' => __DIR__ . '/../..' . '/includes/Cleaner.php',
+        'ThemePlate\\Column' => __DIR__ . '/../..' . '/includes/Column/Column.php',
+        'ThemePlate\\Core\\Field\\Checkbox' => __DIR__ . '/../..' . '/includes/Core/Field/Checkbox.php',
+        'ThemePlate\\Core\\Field\\Color' => __DIR__ . '/../..' . '/includes/Core/Field/Color.php',
+        'ThemePlate\\Core\\Field\\Date' => __DIR__ . '/../..' . '/includes/Core/Field/Date.php',
+        'ThemePlate\\Core\\Field\\Editor' => __DIR__ . '/../..' . '/includes/Core/Field/Editor.php',
+        'ThemePlate\\Core\\Field\\File' => __DIR__ . '/../..' . '/includes/Core/Field/File.php',
+        'ThemePlate\\Core\\Field\\Html' => __DIR__ . '/../..' . '/includes/Core/Field/Html.php',
+        'ThemePlate\\Core\\Field\\Input' => __DIR__ . '/../..' . '/includes/Core/Field/Input.php',
+        'ThemePlate\\Core\\Field\\Number' => __DIR__ . '/../..' . '/includes/Core/Field/Number.php',
+        'ThemePlate\\Core\\Field\\Radio' => __DIR__ . '/../..' . '/includes/Core/Field/Radio.php',
+        'ThemePlate\\Core\\Field\\Select' => __DIR__ . '/../..' . '/includes/Core/Field/Select.php',
+        'ThemePlate\\Core\\Field\\Textarea' => __DIR__ . '/../..' . '/includes/Core/Field/Textarea.php',
+        'ThemePlate\\Core\\Field\\Type' => __DIR__ . '/../..' . '/includes/Core/Field/Type.php',
+        'ThemePlate\\Core\\Fields' => __DIR__ . '/../..' . '/includes/Core/Fields.php',
+        'ThemePlate\\Core\\Form' => __DIR__ . '/../..' . '/includes/Core/Form.php',
+        'ThemePlate\\Core\\Helper\\Box' => __DIR__ . '/../..' . '/includes/Core/Helper/Box.php',
+        'ThemePlate\\Core\\Helper\\Field' => __DIR__ . '/../..' . '/includes/Core/Helper/Field.php',
+        'ThemePlate\\Core\\Helper\\Main' => __DIR__ . '/../..' . '/includes/Core/Helper/Main.php',
+        'ThemePlate\\Core\\Helper\\Meta' => __DIR__ . '/../..' . '/includes/Core/Helper/Meta.php',
+        'ThemePlate\\Meta\\Base' => __DIR__ . '/../..' . '/includes/Meta/Base.php',
+        'ThemePlate\\Meta\\Post' => __DIR__ . '/../..' . '/includes/Meta/Post.php',
+        'ThemePlate\\Meta\\Term' => __DIR__ . '/../..' . '/includes/Meta/Term.php',
+        'ThemePlate\\Meta\\User' => __DIR__ . '/../..' . '/includes/Meta/User.php',
+        'ThemePlate\\NavWalker' => __DIR__ . '/../..' . '/includes/NavWalker.php',
+        'ThemePlate\\Page' => __DIR__ . '/../..' . '/includes/Page/Page.php',
+        'ThemePlate\\Settings' => __DIR__ . '/../..' . '/includes/Settings/Settings.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit61e6df428cf03b0fbf45466d3905ec43::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit61e6df428cf03b0fbf45466d3905ec43::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit61e6df428cf03b0fbf45466d3905ec43::$classMap;
 
         }, null, ClassLoader::class);
     }
