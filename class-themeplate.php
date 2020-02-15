@@ -223,7 +223,9 @@ class ThemePlate {
 	public function settings( $args ) {
 
 		if ( isset( $args['page'] ) ) {
-			foreach ( (array) $args['page'] as $index => $value ) {
+			$args['page'] = (array) $args['page'];
+
+			foreach ( $args['page'] as $index => $value ) {
 				$args['page'][ $index ] = $this->key . '-' . $value;
 			}
 		} else {
