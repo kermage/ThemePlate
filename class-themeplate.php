@@ -271,7 +271,7 @@ class ThemePlate {
 
 		$args['id'] = $this->key . '-' . $args['id'];
 
-		if ( 'options' === $args['parent'] ) {
+		if ( isset( $args['parent'] ) && 'options' === $args['parent'] ) {
 			$args['parent'] = $this->key . '-options';
 		}
 
