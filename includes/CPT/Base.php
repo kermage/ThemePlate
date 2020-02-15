@@ -45,4 +45,7 @@ abstract class Base {
 
 	}
 
+
+	abstract public function register();
+
 }
