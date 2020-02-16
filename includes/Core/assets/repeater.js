@@ -28,6 +28,7 @@
 		$this.data( 'index', index - 1 );
 		$this.sortable( {
 			handle: '.themeplate-handle',
+			opacity: 0.65,
 			items: '> .themeplate-clone',
 			placeholder: 'themeplate-clone clone-placeholder',
 			start: function ( e, ui ) {

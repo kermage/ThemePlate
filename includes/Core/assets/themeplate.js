@@ -121,6 +121,7 @@
 	});
 
 	$( '.themeplate-file.multiple' ).sortable( {
+		opacity: 0.65,
 		items: '.attachment'
 	});
 
@@ -247,6 +248,7 @@
 			var $ul = $this.next( '.select2-container' ).find( 'ul' );
 
 			$ul.sortable( {
+				opacity: 0.65,
 				stop: function() {
 					$ul.find( '.select2-selection__choice' ).each( function() {
 						var $option = $( $( this ).data( 'data' ).element );

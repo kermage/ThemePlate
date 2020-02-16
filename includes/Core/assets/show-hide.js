@@ -169,7 +169,6 @@ window.ThemePlate = window.ThemePlate || {};
 		}
 
 		return TP.checkersElements[checker].length !== 0;
-
 	};
 
 	TP.isMet = function( conditions, logic = 'OR' ) {
