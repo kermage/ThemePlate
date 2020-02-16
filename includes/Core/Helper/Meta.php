@@ -115,7 +115,7 @@ class Meta {
 			return;
 		}
 
-		if ( 1 === count( $value ) ) {
+		if ( 1 === count( (array) $value ) ) {
 			if ( $args['repeatable'] || $args['multiple'] ) {
 				print_r( $value[0] );
 			} else {
