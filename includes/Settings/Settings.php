@@ -98,7 +98,7 @@ class Settings {
 		}
 
 		$page_s = (array) $this->config['page'];
-		$sparts = explode( '_page_', $screen->id );
+		$sparts = explode( '_page_', $screen->id, 2 );
 
 		foreach ( $page_s as $page ) {
 			if ( $sparts[1] === $page ) {
