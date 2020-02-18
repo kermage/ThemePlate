@@ -17,10 +17,12 @@ class Editor {
 
 		$defaults = array(
 			'editor_class'  => 'themeplate-wysiwyg',
-			'textarea_name' => $field['name'],
 			'textarea_rows' => 10,
 		);
 		$settings = Main::fool_proof( $defaults, $field['options'] );
+
+		$settings['textarea_name'] = $field['name'];
+
 		wp_editor( $field['value'], $field['id'], $settings );
 
 	}
