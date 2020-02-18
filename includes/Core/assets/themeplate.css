@@ -296,6 +296,12 @@
 	margin-left: 0.5em;
 }
 
+.attachment.clone-placeholder::before {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+
 .themeplate .themeplate-select2.select2-selection {
 	border: 1px solid #7e8993;
 }

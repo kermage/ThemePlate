@@ -122,6 +122,7 @@
 
 	$( '.themeplate-file.multiple' ).sortable( {
 		opacity: 0.65,
+		placeholder: 'attachment clone-placeholder',
 		items: '.attachment'
 	});
 
