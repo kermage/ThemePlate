@@ -296,10 +296,14 @@
 	margin-left: 0.5em;
 }
 
+.attachment.clone-placeholder {
+	margin: 8px 0;
+}
+
 .attachment.clone-placeholder::before {
 	content: '';
 	display: block;
-	padding-top: 100%;
+	padding-top: calc( 100% - 16px );
 }
 
 .themeplate .themeplate-select2.select2-selection {
