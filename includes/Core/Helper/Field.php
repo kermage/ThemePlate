@@ -16,6 +16,7 @@ use ThemePlate\Core\Field\Editor;
 use ThemePlate\Core\Field\File;
 use ThemePlate\Core\Field\Html;
 use ThemePlate\Core\Field\Input;
+use ThemePlate\Core\Field\Link;
 use ThemePlate\Core\Field\Number;
 use ThemePlate\Core\Field\Type;
 use ThemePlate\Core\Field\Radio;
@@ -90,6 +91,10 @@ class Field {
 
 			case 'html':
 				Html::render( $field );
+				break;
+
+			case 'link':
+				Link::render( $field );
 				break;
 		}
 
