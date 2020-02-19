@@ -13,8 +13,8 @@ class Link {
 
 	public static function render( $field ) {
 
-		echo '<div class="wrapper">';
-		echo '<input type="button" class="button attachment-add" value="Select Link" />';
+		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-link">';
+		echo '<input type="button" class="button" value="Select Link" />';
 
 		foreach ( array( 'url', 'text', 'target' ) as $attr ) {
 			$value = isset( $field['value'][ $attr ] ) ? $field['value'][ $attr ] : '';
