@@ -15,9 +15,13 @@ class Link {
 
 		echo '<div class="wrapper">';
 		echo '<input type="button" class="button attachment-add" value="Select Link" />';
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '["link"]" value="' . esc_attr( $field['value']['link'] ) . '">';
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '["text"]" value="' . esc_attr( $field['value']['text'] ) . '">';
-		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '["target"]" value="' . esc_attr( $field['value']['target'] ) . '">';
+
+		foreach ( array( 'url', 'text', 'target' ) as $attr ) {
+			$value = isset( $field['value'][ $attr ] ) ? $field['value'][ $attr ] : '';
+
+			echo '<input type="hidden" class="input-' . $attr . '" name="' . esc_attr( $field['name'] ) . '[' . $attr . ']" value="' . esc_attr( $value ) . '">';
+		}
+
 		echo '</div>';
 
 	}
