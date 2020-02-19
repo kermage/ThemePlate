@@ -52,6 +52,8 @@ class Form {
 		wp_enqueue_media();
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_style( 'editor-buttons' );
+		wp_enqueue_script( 'wplink' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_style( 'themeplate-select2-style', Main::get_url( __DIR__ . '/assets/select2.min.css' ), array(), '4.0.12' );
 		wp_enqueue_script( 'themeplate-select2-script', Main::get_url( __DIR__ . '/assets/select2.full.min.js' ), array(), '4.0.12', true );

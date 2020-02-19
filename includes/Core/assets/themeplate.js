@@ -1,4 +1,4 @@
-/* global wp, ThemePlate */
+/* global wp, wpLink, ThemePlate */
 
 (function( $ ) {
 
@@ -124,6 +124,18 @@
 		opacity: 0.65,
 		placeholder: 'attachment clone-placeholder',
 		items: '.attachment'
+	});
+
+
+	$( document ).on( 'click', '.themeplate-link .button', function( e ) {
+		e.preventDefault();
+
+		var $this = $( this );
+		var $parent = $this.parents( '.themeplate-link' );
+		var p_id = $parent.attr( 'id' );
+
+		$parent.append( $( '<textarea id="themeplate-' + p_id + '" class="hidden"></textarea>' ) );
+		wpLink.open( 'themeplate-' + p_id );
 	});
 
 
