@@ -150,7 +150,7 @@
 			setTimeout( function(){
 				$this.siblings( '.link-holder' )
 					.html( '<span>' + $text.val() + '</span>' )
-					.append( '<a href="' + $url.val() + '" target="' + $target.val() + '">' + $url.val() + '</a>' );
+					.append( '<a href="' + $url.val() + '" target="_blank">' + $url.val() + '</a>' );
 			}, 100 );
 		});
 
