@@ -133,9 +133,29 @@
 		var $this = $( this );
 		var $parent = $this.parents( '.themeplate-link' );
 		var p_id = $parent.attr( 'id' );
+		var $textarea = $( '<textarea id="themeplate-' + p_id + '" class="hidden"></textarea>' );
+		var $url = $this.siblings( '.input-url' );
+		var $text = $this.siblings( '.input-text' );
+		var $target = $this.siblings( '.input-target' );
 
-		$parent.append( $( '<textarea id="themeplate-' + p_id + '" class="hidden"></textarea>' ) );
+		$( document ).one( 'wplink-open', function() {
+			$( '#wp-link-text' ).val( $text.val() );
+			$( '#wp-link-url' ).val( $url.val() );
+			$( '#wp-link-target' ).prop( 'checked', $target.val() );
+		});
+
+		$( document ).one( 'wplink-close', function() {
+			$textarea.remove();
+		});
+
+		$parent.append( $textarea );
 		wpLink.open( 'themeplate-' + p_id );
+
+		$( '#wp-link-submit' ).one( 'click', function() {
+			$text.val( $( '#wp-link-text' ).val() );
+			$url.val( $( '#wp-link-url' ).val() );
+			$target.val( $( '#wp-link-target' ).prop( 'checked' ) );
+		});
 	});
 
 
