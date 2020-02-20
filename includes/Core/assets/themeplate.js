@@ -146,6 +146,12 @@
 
 		$( document ).one( 'wplink-close', function() {
 			$textarea.remove();
+
+			setTimeout( function(){
+				$this.siblings( '.link-holder' )
+					.html( '<span>' + $text.val() + '</span>' )
+					.append( '<a href="' + $url.val() + '" target="' + $target.val() + '">' + $url.val() + '</a>' );
+			}, 100 );
 		});
 
 		$parent.append( $textarea );

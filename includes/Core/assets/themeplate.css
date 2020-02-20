@@ -306,6 +306,24 @@
 	padding-top: calc( 100% - 16px );
 }
 
+.themeplate-link {
+	display: flex;
+	align-items: flex-start;
+}
+
+.link-holder {
+	margin-left: 1em;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
+	max-width: calc( 100% - 100px );
+}
+
+.link-holder span {
+	display: block;
+	font-weight: 600;
+}
+
 .themeplate .themeplate-select2.select2-selection {
 	border: 1px solid #7e8993;
 }

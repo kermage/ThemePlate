@@ -22,6 +22,17 @@ class Link {
 			echo '<input type="hidden" class="input-' . $attr . '" name="' . esc_attr( $field['name'] ) . '[' . $attr . ']" value="' . esc_attr( $value ) . '">';
 		}
 
+		echo '<div class="link-holder">';
+
+		if ( isset( $field['value']['text'] ) ) {
+			echo '<span>' . esc_html( $field['value']['text'] ) . '</span>';
+		}
+
+		if ( isset( $field['value']['url'] ) ) {
+			echo '<a href="' . esc_url( $field['value']['url'] ) . '" target="_blank">' . esc_html( $field['value']['url'] ) . '</a>';
+		}
+
+		echo '</div>';
 		echo '</div>';
 
 	}
