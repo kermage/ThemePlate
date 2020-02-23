@@ -40,6 +40,7 @@ class Page {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_menu', array( $this, 'menu' ) );
 		add_action( 'admin_notices', array( $this, 'notices' ) );
+		add_action( 'admin_print_footer_scripts', array( $this, 'footer' ) );
 
 	}
 
@@ -192,6 +193,14 @@ class Page {
 	public function save( $options ) {
 
 		return Box::prepare_save( $options );
+
+	}
+
+
+	public function footer() {
+
+		require_once ABSPATH . 'wp-includes/class-wp-editor.php';
+		\_WP_Editors::wp_link_dialog();
 
 	}
 
