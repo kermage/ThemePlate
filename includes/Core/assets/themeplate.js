@@ -141,7 +141,7 @@
 		$( document ).one( 'wplink-open', function() {
 			$( '#wp-link-text' ).val( $text.val() );
 			$( '#wp-link-url' ).val( $url.val() );
-			$( '#wp-link-target' ).prop( 'checked', $target.val() );
+			$( '#wp-link-target' ).prop( 'checked', $target.val() === '_blank' );
 		});
 
 		$( document ).one( 'wplink-close', function() {
@@ -160,7 +160,7 @@
 		$( '#wp-link-submit' ).one( 'click', function() {
 			$text.val( $( '#wp-link-text' ).val() );
 			$url.val( $( '#wp-link-url' ).val() );
-			$target.val( $( '#wp-link-target' ).prop( 'checked' ) );
+			$target.val( $( '#wp-link-target' ).prop( 'checked' ) ? '_blank' : '_self' );
 		});
 	});
 
