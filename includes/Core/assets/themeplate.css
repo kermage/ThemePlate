@@ -64,7 +64,6 @@
 .field-wrapper {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	margin-top: 1em;
 	padding-top: 1em;
 	border-top: 1px solid #ddd;
@@ -98,7 +97,7 @@
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: auto;
-	max-width: calc( 85% - 1em );
+	max-width: calc( 100% - 185px - 1em );
 }
 
 .type-group .field-wrapper:first-of-type,
@@ -317,6 +316,7 @@
 	flex-shrink: 1;
 	flex-basis: auto;
 	max-width: calc( 100% - 100px );
+	overflow-wrap: break-word;
 }
 
 .link-holder span {
@@ -493,6 +493,7 @@
 	.field-label,
 	.field-input {
 		flex-basis: 100%;
+		max-width: 100%;
 	}
 
 	.field-label {
