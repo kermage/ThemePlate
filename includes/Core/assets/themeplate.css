@@ -445,6 +445,7 @@
 	#side-sortables .field-label,
 	#side-sortables .field-input {
 		flex-basis: 100%;
+		max-width: 100%;
 	}
 
 	#side-sortables .field-label {
