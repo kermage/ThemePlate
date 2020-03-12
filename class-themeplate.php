@@ -31,6 +31,7 @@ class ThemePlate {
 		spl_autoload_register( array( $this, 'autoload' ) );
 
 		require TP_PATH . 'includes/compatibility.php';
+		require TP_PATH . 'includes/Core/functions.php';
 
 		$defaults = array(
 			'title' => 'ThemePlate Options',
