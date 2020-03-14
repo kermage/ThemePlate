@@ -49,7 +49,8 @@ class Type {
 
 		$args = Main::fool_proof( $defaults, $field['options'] );
 
-		echo '<select class="themeplate-select2" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . ( $field['required'] ? ' required="required"' : '' ) . ' disabled>';
+		echo '<select disabled><option>Loading values...</option></select>';
+		echo '<select class="themeplate-select2 select2-hidden-accessible" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . ( $field['required'] ? ' required="required"' : '' ) . '>';
 		if ( $field['value'] ) {
 			foreach ( (array) $field['value'] as $value ) {
 				echo '<option value="' . esc_attr( $value ) . '" selected="selected">' . esc_html( $value ) . '</option>';
