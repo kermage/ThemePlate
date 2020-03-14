@@ -51,7 +51,9 @@ class Type {
 
 		echo '<select class="themeplate-select2" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . ( $field['required'] ? ' required="required"' : '' ) . ' disabled>';
 		if ( $field['value'] ) {
-			echo '<option disabled hidden selected>Loading values...</option>';
+			foreach ( (array) $field['value'] as $value ) {
+				echo '<option value="' . esc_attr( $value ) . '" selected="selected">' . esc_html( $value ) . '</option>';
+			}
 		} elseif ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) {
 			echo '<option value=""' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( esc_attr( $field['value'] ) ? '>' . esc_attr( __( '&mdash; None &mdash;' ) ) : ' selected>' . esc_attr( __( '&mdash; Select &mdash;' ) ) ) . '</option>';
 		}
