@@ -274,11 +274,13 @@
 						});
 
 						$this.html( selected ).trigger( 'change' );
-						$this.siblings( 'select[disabled]' ).remove();
+						$this.siblings( 'select[disabled]' ).remove()
+							.end().addClass( 'loaded' );
 					},
 				});
 			} else {
-				$this.siblings( 'select[disabled]' ).remove();
+				$this.siblings( 'select[disabled]' ).remove()
+					.end().addClass( 'loaded' );
 			}
 
 			if ( ! $this.attr( 'multiple' ) ) {

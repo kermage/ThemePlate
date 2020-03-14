@@ -325,7 +325,11 @@
 	font-weight: 600;
 }
 
-select[disabled] + .themeplate-select2 {
+select[disabled] {
+	position: absolute;
+}
+
+.themeplate-select2:not( .loaded ) + .select2-container {
 	visibility: hidden;
 	opacity: 0;
 }
