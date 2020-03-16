@@ -59,6 +59,7 @@ class ThemePlate {
 
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'includes';
 		$base = str_replace( 'ThemePlate\\', '', $class );
+		$base = str_replace( '\\', DIRECTORY_SEPARATOR, $base );
 		$file = $path . DIRECTORY_SEPARATOR . $base . '.php';
 		$deep = substr_replace( $file, DIRECTORY_SEPARATOR . $base, -4, 0 );
 
