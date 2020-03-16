@@ -1,8 +1,8 @@
 {
-  "new_version"  : "3.14.0",
+  "new_version"  : "3.14.1",
   "url"          : "https://github.com/kermage/ThemePlate",
-  "package"      : "https://github.com/kermage/ThemePlate/releases/download/v3.14.0/themeplate.zip",
-  "last_updated" : "2020-03-14",
+  "package"      : "https://github.com/kermage/ThemePlate/releases/download/v3.14.1/themeplate.zip",
+  "last_updated" : "2020-03-16",
   "author_name"  : "Gene Alyson Fortunado Torcende",
   "author_url"   : "mailto:genealyson.torcende@gmail.com",
   "requires"     : "4.6.0",
@@ -17,6 +17,5 @@
   "icons": {
     "1x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-128x128.png",
     "2x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-256x256.png"
-  },
-  "upgrade_notice" : "Here's why you should upgrade...WordPress version 5.3!"
+  }
 }
