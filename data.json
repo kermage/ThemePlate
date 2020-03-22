@@ -1,8 +1,8 @@
 {
-  "new_version"  : "3.14.1",
+  "new_version"  : "3.14.2",
   "url"          : "https://github.com/kermage/ThemePlate",
-  "package"      : "https://github.com/kermage/ThemePlate/releases/download/v3.14.1/themeplate.zip",
-  "last_updated" : "2020-03-16",
+  "package"      : "https://github.com/kermage/ThemePlate/releases/download/v3.14.2/themeplate.zip",
+  "last_updated" : "2020-03-22",
   "author_name"  : "Gene Alyson Fortunado Torcende",
   "author_url"   : "mailto:genealyson.torcende@gmail.com",
   "requires"     : "4.6.0",
