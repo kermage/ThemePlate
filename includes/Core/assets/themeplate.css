@@ -402,7 +402,8 @@ select[disabled] {
 .clone-placeholder {
 	width: 100%;
 	margin-bottom: 1em;
-	border: 1px dashed #ddd;
+	border: 2px dashed #ddd !important;
+	background-color: #fafafa;
 }
 
 .edit-tags-php .field-label,
