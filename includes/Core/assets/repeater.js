@@ -29,7 +29,7 @@
 		$this.sortable( {
 			handle: '.themeplate-handle',
 			opacity: 0.65,
-			items: '> .themeplate-clone',
+			items: '> .themeplate-clone:not( .hidden )',
 			placeholder: 'themeplate-clone clone-placeholder',
 			start: function ( e, ui ) {
 				ui.placeholder.height( ui.item.height() );
