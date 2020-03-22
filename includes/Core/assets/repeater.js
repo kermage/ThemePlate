@@ -31,6 +31,7 @@
 			axis: 'y',
 			opacity: 0.65,
 			items: '> .themeplate-clone:not( .hidden )',
+			tolerance: 'pointer',
 			placeholder: 'themeplate-clone clone-placeholder',
 			start: function ( e, ui ) {
 				ui.placeholder.height( ui.item.height() );
