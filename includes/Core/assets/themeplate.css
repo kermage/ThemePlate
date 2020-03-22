@@ -98,6 +98,9 @@
 	flex-grow: 1;
 	flex-shrink: 1;
 	flex-basis: auto;
+}
+
+.field-label + .field-input {
 	max-width: calc( 100% - 185px - 1em );
 }
 
