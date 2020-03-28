@@ -53,6 +53,13 @@ abstract class Base {
 	public function save( $object_id ) {
 
 		$meta_box = $this->config;
+		$not_menu = true;
+
+		if ( 'menu' === $meta_box['object_type'] ) {
+			$meta_box['object_type'] = 'post';
+
+			$not_menu = false;
+		}
 
 		foreach ( $meta_box['fields'] as $id => $field ) {
 			$key = $meta_box['id'] . '_' . $id;
@@ -62,7 +69,7 @@ abstract class Base {
 			}
 
 			$stored  = get_metadata( $meta_box['object_type'], $object_id, $key, ! $field['repeatable'] );
-			$updated = $_POST['themeplate'][ $key ]; // phpcs:ignore WordPress.Security.NonceVerification
+			$updated = $not_menu ? $_POST['themeplate'][ $key ] : $_POST['themeplate'][ $key ][ $object_id ]; // phpcs:ignore WordPress.Security.NonceVerification
 			$cleaned = Box::prepare_save( $updated );
 
 			if ( is_array( $cleaned ) ) {
