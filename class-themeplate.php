@@ -292,6 +292,19 @@ class ThemePlate {
 	}
 
 
+	public function menu_meta( $args ) {
+
+		$args['id'] = $this->key . '_' . $args['id'];
+
+		try {
+			return new \ThemePlate\Meta\Menu( $args );
+		} catch ( Exception $e ) {
+			return $e;
+		}
+
+	}
+
+
 	public function page( $args ) {
 
 		$args['id'] = $this->key . '-' . $args['id'];
