@@ -90,6 +90,8 @@ class Fields {
 	public function setup( $metabox_id = '', $object_type = 'post', $object_id = 0 ) {
 
 		foreach ( $this->collection as $id => $field ) {
+			$object_menu = false;
+
 			if ( 'options' === $object_type ) {
 				$field['id'] = $metabox_id . '_' . $id;
 
@@ -99,12 +101,21 @@ class Fields {
 			} else {
 				$field['id'] = $metabox_id . '_' . $id;
 
+				if ( 'menu' === $object_type ) {
+					$object_type = 'post';
+					$object_menu = true;
+				}
+
 				$stored = get_metadata( $object_type, $object_id, $field['id'], ! $field['repeatable'] );
 				$key    = 'themeplate';
 			}
 
 			$value = $stored ?: $field['default'];
 			$name  = $key . '[' . $field['id'] . ']';
+
+			if ( $object_menu ) {
+				$name .= '[' . $object_id . ']';
+			}
 
 			$this->layout( $field, $value, $name );
 		}
