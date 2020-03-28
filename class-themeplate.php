@@ -58,8 +58,7 @@ class ThemePlate {
 		}
 
 		$path = TP_PATH . 'includes';
-		$base = str_replace( 'ThemePlate\\', '', $class );
-		$base = str_replace( '\\', DIRECTORY_SEPARATOR, $base );
+		$base = str_replace( array( 'ThemePlate\\', '\\' ), array( '', DIRECTORY_SEPARATOR ), $class );
 		$file = $path . DIRECTORY_SEPARATOR . $base . '.php';
 		$deep = substr_replace( $file, DIRECTORY_SEPARATOR . $base, -4, 0 );
 
