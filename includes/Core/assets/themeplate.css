@@ -422,6 +422,7 @@ select[disabled] {
 .post-php #after_title-sortables .sortable-placeholder,
 .post-new-php #after_title-sortables .postbox,
 .post-new-php #after_title-sortables .sortable-placeholder,
+.nav-menus-php .themeplate:first-of-type,
 .term-php .themeplate,
 .user-new-php .themeplate,
 .user-edit-php .themeplate,
@@ -551,4 +552,61 @@ select[disabled] {
 	.repeatable .themeplate-clone .attachment-close {
 		top: 7px;
 	}
+}
+
+#menu-management .themeplate .inside {
+	padding-bottom: 10px;
+}
+
+#menu-management .field-label,
+#menu-management .field-input {
+	flex-basis: 100%;
+	max-width: 100%;
+}
+
+#menu-management .field-label {
+	min-width: 0;
+	margin-right: 0;
+}
+
+#menu-management .field-wrapper:not( .boxed ) .field-label {
+	margin-bottom: 1em;
+}
+
+#menu-management .type-group.boxed .field-label {
+	padding-bottom: 0;
+}
+
+#menu-management .type-group .field-wrapper:not( .boxed ) {
+	margin: 0 1em 1em;
+}
+
+#menu-management .type-group .field-wrapper:last-of-type {
+	margin-bottom: 0;
+}
+
+#menu-management .type-group:not( .boxed ) .themeplate-clone {
+	padding-bottom: 1em;
+}
+
+#menu-management .themeplate-file.multiple .attachment {
+	width: 50%;
+}
+
+#menu-management .themeplate-clone {
+	padding-left: 18px;
+	padding-right: 30px;
+}
+
+#menu-management .themeplate-clone .attachment-close {
+	top: 5px;
+	width: 19px;
+	height: 19px;
+	background-size: 107px 12px;
+	background-position-x: -75px;
+}
+
+#menu-management .themeplate-clone .attachment-close:focus,
+#menu-management .themeplate-clone .attachment-close:hover {
+	background-position-x: -28px;
 }

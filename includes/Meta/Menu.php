@@ -47,7 +47,13 @@ class Menu extends Base {
 			return;
 		}
 
-		$this->form->layout_inside( $item_id );
+		printf( '<div id="themeplate_%s" class="tpo postbox description-wide">', esc_attr( $this->config['id'] ) );
+			echo '<h2 class="hndle"><span>' . esc_html( $this->config['title'] ) . '</span></h2>';
+
+			echo '<div class="inside">';
+				$this->form->layout_inside( $item_id );
+			echo '</div>';
+		echo '</div>';
 
 	}
 
