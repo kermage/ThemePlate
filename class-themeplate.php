@@ -57,9 +57,8 @@ class ThemePlate {
 			return;
 		}
 
-		$path = TP_PATH . 'includes';
 		$base = str_replace( array( 'ThemePlate\\', '\\' ), array( '', DIRECTORY_SEPARATOR ), $class );
-		$file = $path . DIRECTORY_SEPARATOR . $base . '.php';
+		$file = TP_PATH . 'includes' . DIRECTORY_SEPARATOR . $base . '.php';
 		$deep = substr_replace( $file, DIRECTORY_SEPARATOR . $base, -4, 0 );
 
 		if ( file_exists( $file ) ) {
