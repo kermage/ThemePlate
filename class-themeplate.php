@@ -57,7 +57,7 @@ class ThemePlate {
 			return;
 		}
 
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'includes';
+		$path = TP_PATH . 'includes';
 		$base = str_replace( 'ThemePlate\\', '', $class );
 		$base = str_replace( '\\', DIRECTORY_SEPARATOR, $base );
 		$file = $path . DIRECTORY_SEPARATOR . $base . '.php';
@@ -182,7 +182,7 @@ class ThemePlate {
 			return;
 		}
 
-		$plugin = basename( __DIR__ ) . '/' . basename( TP_FILE );
+		$plugin = basename( TP_PATH ) . '/' . basename( TP_FILE );
 		$index  = array_search( $plugin, $plugins, true );
 
 		if ( $index > 0 ) {
