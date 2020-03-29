@@ -295,7 +295,8 @@
 	transform: initial;
 }
 
-.themeplate-file .button + .button {
+.themeplate-file .button + .button,
+.themeplate-link .button + .button {
 	margin-left: 0.5em;
 }
 
