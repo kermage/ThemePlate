@@ -127,7 +127,7 @@
 	});
 
 
-	$( document ).on( 'click', '.themeplate-link .button', function( e ) {
+	$( document ).on( 'click', '.themeplate-link .link-select', function( e ) {
 		e.preventDefault();
 
 		var $this = $( this );
@@ -161,7 +161,20 @@
 			$text.val( $( '#wp-link-text' ).val() );
 			$url.val( $( '#wp-link-url' ).val() );
 			$target.val( $( '#wp-link-target' ).prop( 'checked' ) ? '_blank' : '_self' );
+			$this.siblings( '.link-remove' ).removeClass( 'hidden' );
 		});
+	});
+
+	$( document ).on( 'click', '.themeplate-link .link-remove', function( e ) {
+		e.preventDefault();
+
+		var $this = $( this );
+
+		$this.siblings( '.input-url' ).val( '' );
+		$this.siblings( '.input-text' ).val( '' );
+		$this.siblings( '.input-target' ).val( '' );
+		$this.siblings( '.link-holder' ).html( '' );
+		$this.addClass( 'hidden' );
 	});
 
 

@@ -14,7 +14,8 @@ class Link {
 	public static function render( $field ) {
 
 		echo '<div id="' . esc_attr( $field['id'] ) . '" class="themeplate-link">';
-		echo '<input type="button" class="button" value="Select Link" />';
+		echo '<input type="button" class="button link-select" value="Select" />';
+		echo '<input type="button" class="button link-remove' . ( empty( $field['value'] ) ? ' hidden' : '' ) . '" value="Remove" />';
 
 		foreach ( array( 'url', 'text', 'target' ) as $attr ) {
 			$value = isset( $field['value'][ $attr ] ) ? $field['value'][ $attr ] : '';
