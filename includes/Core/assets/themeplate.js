@@ -161,7 +161,11 @@
 			var link_text = $( '#wp-link-text' ).val();
 			var link_url = $( '#wp-link-url' ).val();
 
-			if ( link_text && link_url ) {
+			if ( ! link_text ) {
+				link_text = link_url;
+			}
+
+			if ( link_url ) {
 				$text.val( link_text );
 				$url.val( link_url );
 				$target.val( $( '#wp-link-target' ).prop( 'checked' ) ? '_blank' : '_self' );
