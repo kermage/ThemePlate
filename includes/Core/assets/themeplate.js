@@ -158,10 +158,15 @@
 		wpLink.open( 'themeplate-' + p_id );
 
 		$( '#wp-link-submit' ).one( 'click', function() {
-			$text.val( $( '#wp-link-text' ).val() );
-			$url.val( $( '#wp-link-url' ).val() );
-			$target.val( $( '#wp-link-target' ).prop( 'checked' ) ? '_blank' : '_self' );
-			$this.siblings( '.link-remove' ).removeClass( 'hidden' );
+			var link_text = $( '#wp-link-text' ).val();
+			var link_url = $( '#wp-link-url' ).val();
+
+			if ( link_text && link_url ) {
+				$text.val( link_text );
+				$url.val( link_url );
+				$target.val( $( '#wp-link-target' ).prop( 'checked' ) ? '_blank' : '_self' );
+				$this.siblings( '.link-remove' ).removeClass( 'hidden' );
+			}
 		});
 	});
 
