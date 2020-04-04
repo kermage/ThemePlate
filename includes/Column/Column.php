@@ -36,6 +36,7 @@ class Column {
 		$defaults     = array(
 			'position'      => 0,
 			'callback_args' => array(),
+			'class'         => '',
 		);
 		$this->config = Main::fool_proof( $defaults, $config );
 
@@ -94,8 +95,9 @@ class Column {
 	public function modify( $columns ) {
 
 		$config = $this->config;
+		$column = $config['id'] . ' ' . $config['class'];
 
-		$columns[ $config['id'] ] = $config['title'];
+		$columns[ $column ] = $config['title'];
 
 		$position = $config['position'];
 
