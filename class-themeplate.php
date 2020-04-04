@@ -46,7 +46,6 @@ class ThemePlate {
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'init', array( \ThemePlate\Cleaner::class, 'instance' ) );
-		add_action( 'plugins_loaded', array( $this, 'force_load_first' ) );
 
 	}
 
@@ -172,7 +171,7 @@ class ThemePlate {
 	}
 
 
-	public function force_load_first() {
+	public static function force_load_first() {
 
 		$plugins = get_option( 'active_plugins' );
 
