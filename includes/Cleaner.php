@@ -85,7 +85,7 @@ class Cleaner {
 		add_filter( 'emoji_svg_url', '__return_false' );
 
 		// Wrap embedded media for easier responsive styling
-		add_filter( 'embed_oembed_html', array( $this, 'embed_wrap' ) );
+		add_filter( 'embed_oembed_html', array( $this, 'embed_wrap' ), 10, 3 );
 
 		add_filter( 'wp_nav_menu_args', array( $this, 'clean_walker' ) );
 
@@ -157,9 +157,44 @@ class Cleaner {
 	}
 
 
-	public function embed_wrap( $cache ) {
+	public function embed_wrap( $cache, $url, $attr ) {
 
-		return '<div class="embed-responsive">' . $cache . '</div>';
+		return '<div class="embed-responsive embed-responsive-' . $this->calculate_ratio( $attr ) . '">' . $cache . '</div>';
+
+	}
+
+
+	private function calculate_ratio( $attr ) {
+
+		$ratio    = '1by1';
+		$dividend = $attr['width'];
+		$divisor  = $attr['height'];
+
+		if ( isset( $attr['width'] ) && isset( $attr['height'] ) && $attr['width'] !== $attr['height'] ) {
+			if ( $attr['height'] > $attr['width'] ) {
+				$dividend = $attr['height'];
+				$divisor  = $attr['width'];
+			}
+
+			$gcd = -1;
+
+			while ( -1 === $gcd ) {
+				$remainder = $dividend % $divisor;
+
+				if ( 0 === $remainder ) {
+					$gcd = $divisor;
+				} else {
+					$dividend = $divisor;
+					$divisor  = $remainder;
+				}
+			}
+
+			$hr    = $attr['width'] / $gcd;
+			$vr    = $attr['height'] / $gcd;
+			$ratio = $hr . 'by' . $vr;
+		}
+
+		return $ratio;
 
 	}
 
