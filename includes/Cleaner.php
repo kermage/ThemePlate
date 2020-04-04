@@ -58,13 +58,15 @@ class Cleaner {
 		// Remove the link to comments feed
 		add_filter( 'feed_links_show_comments_feed', '__return_false' );
 
-		// Query strings from static resources
-		add_filter( 'style_loader_src', array( $this, 'query_strings' ), 15 );
-		add_filter( 'script_loader_src', array( $this, 'query_strings' ), 15 );
+		if ( ! is_admin() ) {
+			// Query strings from static resources
+			add_filter( 'style_loader_src', array( $this, 'query_strings' ), 15 );
+			add_filter( 'script_loader_src', array( $this, 'query_strings' ), 15 );
 
-		// Output of <link> and <script> tags
-		add_filter( 'style_loader_tag', array( $this, 'style_tag' ) );
-		add_filter( 'script_loader_tag', array( $this, 'script_tag' ) );
+			// Output of <link> and <script> tags
+			add_filter( 'style_loader_tag', array( $this, 'style_tag' ) );
+			add_filter( 'script_loader_tag', array( $this, 'script_tag' ) );
+		}
 
 		// Remove unnecessary body and post classes
 		add_filter( 'body_class', array( $this, 'body_class' ) );
