@@ -34,6 +34,22 @@ if ( ! defined( 'TP_PATH' ) ) {
 // Load the main ThemePlate class
 require_once TP_PATH . 'class-' . basename( TP_FILE );
 
+if ( ! function_exists( 'ThemePlate' ) ) {
+	function ThemePlate( $key = null, $pages = null ) {
+
+		if ( ! empty( $pages ) ) {
+			_deprecated_argument( __FUNCTION__, '3.0.0', 'Use ThemePlate()->page( $args ) to create options pages instead.' );
+		}
+
+		if ( ! empty( $key ) && ! is_array( $key ) ) {
+			_deprecated_argument( __FUNCTION__, '2.11.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' )</b>.' );
+		}
+
+		return ThemePlate::instance( $key, $pages );
+
+	}
+}
+
 // Instantiate the ThemePlate updater
 require_once TP_PATH . 'class-external-update-manager.php';
 new External_Update_Manager( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/data.json' );
