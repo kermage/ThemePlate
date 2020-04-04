@@ -37,7 +37,7 @@ require_once TP_PATH . 'class-' . basename( TP_FILE );
 add_action( 'plugins_loaded', array( ThemePlate::class, 'force_load_first' ) );
 
 if ( ! function_exists( 'ThemePlate' ) ) {
-	function ThemePlate( $key = null, $pages = null ) {
+	function ThemePlate( $key = null, $pages = null ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
 
 		if ( ! empty( $pages ) ) {
 			_deprecated_argument( __FUNCTION__, '3.0.0', 'Use ThemePlate()->page( $args ) to create options pages instead.' );
