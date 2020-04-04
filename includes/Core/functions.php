@@ -21,3 +21,7 @@ if ( function_exists( 'add_action' ) && ! function_exists( 'themeplate_ajax_acti
 if ( ! defined( 'TP_CORE_VERSION' ) ) {
 	define( 'TP_CORE_VERSION', '1.0.0' );
 }
+
+if ( ! defined( 'TP_CORE_PATH' ) ) {
+	define( 'TP_CORE_PATH', __DIR__ );
+}
