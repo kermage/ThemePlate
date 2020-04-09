@@ -157,37 +157,39 @@ class Fields {
 						$field['id']    = $base_id . '_' . $i;
 						$field['name']  = $name . '[' . $i . ']';
 
-						echo '<div class="themeplate-clone">';
-							echo '<div class="themeplate-handle"></div>';
-							$this->render( $field );
-							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-							echo '<fieldset>';
-								echo '<button type="button" class="button-link clone-move" data-move="up">Move Up</button>';
-								echo '<button type="button" class="button-link clone-move" data-move="down">Move Down</button>';
-							echo '</fieldset>';
-						echo '</div>';
+						$this->cloner( $field );
 					}
 
 					$field['value'] = $field['default'];
 					$field['id']    = $base_id . '_i-x';
 					$field['name']  = $name . '[i-x]';
 
-					echo '<div class="themeplate-clone hidden">';
-						echo '<div class="themeplate-handle"></div>';
-						$this->render( $field );
-						echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
-						echo '<fieldset>';
-							echo '<button type="button" class="button-link clone-move" data-move="up">Move Up</button>';
-							echo '<button type="button" class="button-link clone-move" data-move="down">Move Down</button>';
-						echo '</fieldset>';
-					echo '</div>';
-					echo '<input type="button" class="button clone-add" value="Add Field" />';
+					$this->cloner( $field, true );
 				}
 
 				echo ! empty( $field['information'] ) ? '<p class="description">' . $field['information'] . '</p>' : ''; // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			echo '</div>';
 		echo '</div>';
 		/* phpcs:enable */
+
+	}
+
+
+	private function cloner( $field, $last = false ) {
+
+		echo '<div class="themeplate-clone' . ( $last ? ' hidden' : '' ) . '">';
+			echo '<div class="themeplate-handle"></div>';
+			$this->render( $field );
+			echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+			echo '<fieldset>';
+				echo '<button type="button" class="button-link clone-move" data-move="up">Move Up</button>';
+				echo '<button type="button" class="button-link clone-move" data-move="down">Move Down</button>';
+			echo '</fieldset>';
+		echo '</div>';
+
+		if ( $last ) {
+			echo '<input type="button" class="button clone-add" value="Add Field" />';
+		}
 
 	}
 
