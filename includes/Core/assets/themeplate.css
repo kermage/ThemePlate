@@ -382,6 +382,23 @@ select[disabled] {
 	display: none;
 }
 
+.themeplate-clone:first-child .clone-move:first-child {
+	display: none;
+}
+
+.themeplate-clone:nth-last-child( 3 ) .clone-move:last-child {
+	display: none;
+}
+
+.themeplate-clone fieldset {
+	margin: 0.5em 0 1em;
+	text-align: right;
+}
+
+.clone-move + .clone-move {
+	margin-left: 1em;
+}
+
 .themeplate-clone,
 .themeplate-clone > .field-wrapper {
 	margin-top: 0;

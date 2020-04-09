@@ -161,6 +161,10 @@ class Fields {
 							echo '<div class="themeplate-handle"></div>';
 							$this->render( $field );
 							echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+							echo '<fieldset>';
+								echo '<button type="button" class="button-link clone-move" data-move="up">Move Up</button>';
+								echo '<button type="button" class="button-link clone-move" data-move="down">Move Down</button>';
+							echo '</fieldset>';
 						echo '</div>';
 					}
 
@@ -172,6 +176,10 @@ class Fields {
 						echo '<div class="themeplate-handle"></div>';
 						$this->render( $field );
 						echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
+						echo '<fieldset>';
+							echo '<button type="button" class="button-link clone-move" data-move="up">Move Up</button>';
+							echo '<button type="button" class="button-link clone-move" data-move="down">Move Down</button>';
+						echo '</fieldset>';
 					echo '</div>';
 					echo '<input type="button" class="button clone-add" value="Add Field" />';
 				}

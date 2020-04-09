@@ -21,6 +21,18 @@
 		$( this ).closest( '.themeplate-clone' ).remove();
 	});
 
+	$( document ).on( 'click', '.clone-move', function( e ) {
+		e.preventDefault();
+
+		var $field = $( this ).parents( '.themeplate-clone' );
+
+		if ( 'up' === $( this ).data( 'move' ) ) {
+			$field.prev().before( $field );
+		} else {
+			$field.next().after( $field );
+		}
+	});
+
 	$( '.field-input.repeatable' ).each( function () {
 		var $this = $( this );
 		var index = $this.children( '.themeplate-clone' ).length;
