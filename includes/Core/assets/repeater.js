@@ -31,6 +31,8 @@
 		} else {
 			$field.next().after( $field );
 		}
+
+		setRequired( $field.parent( '.repeatable' ) );
 	});
 
 	$( '.field-input.repeatable' ).each( function () {
