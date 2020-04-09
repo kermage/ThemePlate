@@ -391,12 +391,11 @@ select[disabled] {
 }
 
 .themeplate-clone fieldset {
-	margin: 0.5em 0 1em;
-	text-align: right;
+	margin: 0.5em;
 }
 
-.clone-move + .clone-move {
-	margin-left: 1em;
+.themeplate-clone fieldset .clone-move {
+	margin: 1em;
 }
 
 .themeplate-clone,
