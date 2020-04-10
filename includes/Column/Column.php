@@ -124,7 +124,7 @@ class Column {
 			$column_name = $name_id;
 		}
 
-		if ( $column_name !== $config['id'] ) {
+		if ( $column_name !== $config['id'] . ' ' . $config['class'] ) {
 			return $content_name;
 		}
 
