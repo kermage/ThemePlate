@@ -174,7 +174,10 @@ class Fields {
 
 	private function render( $field ) {
 
-		if ( 'group' !== $field['type'] ) {
+		if ( 'custom' === $field['type'] ) {
+			call_user_func( $field['callback'], $field );
+			return;
+		} elseif ( 'group' !== $field['type'] ) {
 			Field::render( $field );
 			return;
 		}
