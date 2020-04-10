@@ -54,4 +54,4 @@ if ( ! function_exists( 'ThemePlate' ) ) {
 
 // Instantiate the ThemePlate updater
 require_once TP_PATH . 'class-external-update-manager.php';
-new External_Update_Manager( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/data.json' );
+EUM_Handler::run( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/data.json' );
