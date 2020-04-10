@@ -25,6 +25,46 @@ use ThemePlate\Core\Field\Textarea;
 
 class Field {
 
+	public static function filter( $field ) {
+
+		$defaults = array(
+			'type'       => 'text',
+			'options'    => array(),
+			'multiple'   => false,
+			'none'       => false,
+			'default'    => '',
+			'style'      => '',
+			'repeatable' => false,
+			'required'   => false,
+			'column'     => false,
+			'minimum'    => 0,
+			'maximum'    => 0,
+		);
+		$field    = Main::fool_proof( $defaults, $field );
+		$field    = Meta::normalize_options( $field );
+		$field    = Field::deprecate_check( $field );
+
+		if ( $field['minimum'] < 0 ) {
+			$field['minimum'] = 0;
+		}
+
+		if ( $field['maximum'] < 0 ) {
+			$field['maximum'] = 0;
+		}
+
+		if ( $field['maximum'] && $field['maximum'] < $field['minimum'] ) {
+			$field['maximum'] = $field['minimum'];
+		}
+
+		if ( $field['required'] && ! $field['minimum'] ) {
+			$field['minimum'] = 1;
+		}
+
+		return $field;
+
+	}
+
+
 	public static function render( $field ) {
 
 		$list = false;
