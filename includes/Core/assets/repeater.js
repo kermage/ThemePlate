@@ -11,20 +11,20 @@
 
 		setIndex( $cloned, getIndex( $field ) );
 		$cloned.removeClass( 'hidden' ).insertBefore( $field ).trigger( 'clone' );
-		setRequired( $( this ).parent( '.repeatable' ) );
+		setRequired( $( this ).closest( '.repeatable' ) );
 	});
 
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
-		setRequired( $( this ).parents( '.repeatable' ), true );
+		setRequired( $( this ).closest( '.repeatable' ), true );
 		$( this ).closest( '.themeplate-clone' ).remove();
 	});
 
 	$( document ).on( 'click', '.clone-move', function( e ) {
 		e.preventDefault();
 
-		var $field = $( this ).parents( '.themeplate-clone' );
+		var $field = $( this ).closest( '.themeplate-clone' );
 
 		if ( 'up' === $( this ).data( 'move' ) ) {
 			$field.prev().before( $field );
@@ -32,7 +32,7 @@
 			$field.next().after( $field );
 		}
 
-		setRequired( $field.parent( '.repeatable' ) );
+		setRequired( $field.closest( '.repeatable' ) );
 	});
 
 	$( '.field-input.repeatable' ).each( function () {
