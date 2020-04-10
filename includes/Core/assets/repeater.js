@@ -17,8 +17,10 @@
 	$( document ).on( 'click', '.themeplate-clone .attachment-close', function( e ) {
 		e.preventDefault();
 
-		setRequired( $( this ).closest( '.repeatable' ), true );
-		$( this ).closest( '.themeplate-clone' ).remove();
+		if ( confirm( 'Are you sure?' ) ) {
+			setRequired( $( this ).closest( '.repeatable' ), true );
+			$( this ).closest( '.themeplate-clone' ).remove();
+		}
 	});
 
 	$( document ).on( 'click', '.clone-move', function( e ) {
