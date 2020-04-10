@@ -163,6 +163,7 @@ class Fields {
 					$field['value'] = $field['default'];
 					$field['id']    = $base_id . '_i-x';
 					$field['name']  = $name . '[i-x]';
+					$field['count'] = count( (array) $value );
 
 					$this->cloner( $field, true );
 				}
@@ -193,6 +194,10 @@ class Fields {
 
 		if ( $last ) {
 			echo '<input type="button" class="button clone-add" value="Add Field" />';
+
+			if ( $field['repeatable'] && $field['maximum'] ) {
+				echo '<div class="button disabled themeplate-counter">Remaining : <strong>' . ( $field['maximum'] - $field['count'] ) . '</strong></div>';
+			}
 		}
 
 	}

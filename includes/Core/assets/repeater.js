@@ -93,6 +93,8 @@
 		$field.find( '> .themeplate-clone' ).removeClass( 'required' )
 			.slice( 0, $field.data( 'min' ) ).addClass( 'required' );
 
+		$field.find( '> .themeplate-counter strong' ).html( $field.data( 'max' ) + $delayed - $field.find( '> .themeplate-clone' ).length + 1 );
+
 		if ( $field.data( 'max' ) > 0 && $field.find( '> .themeplate-clone' ).length - 1 >= $field.data( 'max' ) + $delayed ) {
 			$field.addClass( 'maxed' ).find( '> .clone-add' ).hide();
 		} else {
