@@ -382,19 +382,19 @@ select[disabled] {
 	display: none;
 }
 
-.themeplate-clone:first-child .clone-move:first-child {
+.themeplate-clone:first-child > .themeplate-mover .clone-move:first-child {
 	display: none;
 }
 
-.themeplate-clone:nth-last-child( 4 ) .clone-move:last-child {
+.themeplate-clone:nth-last-child( 4 ) > .themeplate-mover .clone-move:last-child {
 	display: none;
 }
 
-.themeplate-clone fieldset {
+.themeplate-mover {
 	margin: 0.5em;
 }
 
-.themeplate-clone fieldset .clone-move {
+.themeplate-mover .clone-move {
 	margin: 1em;
 }
 

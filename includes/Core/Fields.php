@@ -153,7 +153,7 @@ class Fields {
 			echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
 
 		if ( 'group' === $field['type'] ) {
-			echo '<fieldset>';
+			echo '<fieldset class="themeplate-mover">';
 				echo '<button type="button" class="button-link clone-move" data-move="up">Move Up</button>';
 				echo '<button type="button" class="button-link clone-move" data-move="down">Move Down</button>';
 			echo '</fieldset>';
