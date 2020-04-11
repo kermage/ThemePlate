@@ -404,6 +404,11 @@ select[disabled] {
 	margin-bottom: 1em;
 }
 
+.themeplate-counter:empty {
+	visibility: hidden;
+	opacity: 0;
+}
+
 .themeplate-handle {
 	height: 17px;
 	width: 9px;
