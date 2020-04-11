@@ -163,10 +163,13 @@ class Fields {
 
 		if ( $last ) {
 			echo '<input type="button" class="button clone-add" value="Add Field" />';
+			echo '<div class="button disabled themeplate-counter">';
 
 			if ( $field['repeatable'] && $field['maximum'] ) {
-				echo '<div class="button disabled themeplate-counter">Remaining : <strong>' . ( $field['maximum'] - $field['count'] ) . '</strong></div>';
+				echo 'Remaining : <strong>' . ( $field['maximum'] - $field['count'] ) . '</strong>';
 			}
+
+			echo '</div>';
 		}
 
 	}
