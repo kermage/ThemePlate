@@ -173,12 +173,14 @@ class ThemePlate {
 
 	public static function force_load_first( $plugins ) {
 
-		$plugin = basename( TP_PATH ) . '/' . basename( TP_FILE );
-		$index  = array_search( $plugin, $plugins, true );
+		if ( ! empty( $plugins ) ) {
+			$plugin = basename( TP_PATH ) . '/' . basename( TP_FILE );
+			$index  = array_search( $plugin, $plugins, true );
 
-		if ( $index > 0 ) {
-			unset( $plugins[ $index ] );
-			array_unshift( $plugins, $plugin );
+			if ( $index > 0 ) {
+				unset( $plugins[ $index ] );
+				array_unshift( $plugins, $plugin );
+			}
 		}
 
 		return $plugins;
