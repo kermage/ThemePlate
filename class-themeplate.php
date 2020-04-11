@@ -171,22 +171,17 @@ class ThemePlate {
 	}
 
 
-	public static function force_load_first() {
-
-		$plugins = get_option( 'active_plugins' );
-
-		if ( empty( $plugins ) ) {
-			return;
-		}
+	public static function force_load_first( $plugins ) {
 
 		$plugin = basename( TP_PATH ) . '/' . basename( TP_FILE );
 		$index  = array_search( $plugin, $plugins, true );
 
 		if ( $index > 0 ) {
-			array_splice( $plugins, $index, 1 );
+			unset( $plugins[ $index ] );
 			array_unshift( $plugins, $plugin );
-			update_option( 'active_plugins', $plugins );
 		}
+
+		return $plugins;
 
 	}
 

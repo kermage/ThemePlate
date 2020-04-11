@@ -34,7 +34,7 @@ if ( ! defined( 'TP_PATH' ) ) {
 // Load the main ThemePlate class
 require_once TP_PATH . 'class-' . basename( TP_FILE );
 
-add_action( 'plugins_loaded', array( ThemePlate::class, 'force_load_first' ) );
+add_filter( 'pre_update_option_active_plugins', array( ThemePlate::class, 'force_load_first' ) );
 
 if ( ! function_exists( 'ThemePlate' ) ) {
 	function ThemePlate( $key = null, $pages = null ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
