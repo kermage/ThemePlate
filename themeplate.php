@@ -6,7 +6,7 @@
  * Author:      Gene Alyson Fortunado Torcende
  * Author URI:  mailto:genealyson.torcende@gmail.com
  * Description: A toolkit to handle everything related in developing a full-featured WordPress theme.
- * Version:     3.16.0
+ * Version:     3.16.1
  * License:     GNU General Public License v3.0
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
