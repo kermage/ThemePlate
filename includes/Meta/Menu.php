@@ -88,11 +88,7 @@ class Menu extends Base {
 
 		$screen = get_current_screen();
 
-		if ( null === $screen || 'nav-menus' !== $screen->base ) {
-			return false;
-		}
-
-		return true;
+		return ! ( null === $screen || 'nav-menus' !== $screen->base );
 
 	}
 
