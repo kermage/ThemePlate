@@ -43,10 +43,6 @@ if ( ! function_exists( 'ThemePlate' ) ) {
 			_deprecated_argument( __FUNCTION__, '3.0.0', 'Use ThemePlate()->page( $args ) to create options pages instead.' );
 		}
 
-		if ( ! empty( $key ) && ! is_array( $key ) ) {
-			_deprecated_argument( __FUNCTION__, '2.11.0', 'Use the newer way to initialize by passing <b>array( \'Options Title\', \'prefixed_key\' )</b>.' );
-		}
-
 		return ThemePlate::instance( $key, $pages );
 
 	}

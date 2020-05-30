@@ -188,22 +188,6 @@ class ThemePlate {
 	}
 
 
-	public function menu( $id, $title ) {
-
-		_deprecated_function( __METHOD__, '2.11.0', 'ThemePlate()->page( $args ) to add an options page' );
-
-		$args = array(
-			'id'     => $id,
-			'title'  => $title,
-			'parent' => $this->slug,
-		);
-
-		$this->page( $args );
-		$this->stall_update();
-
-	}
-
-
 	public function post_type( $args ) {
 
 		try {
