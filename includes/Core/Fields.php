@@ -10,7 +10,6 @@
 namespace ThemePlate\Core;
 
 use ThemePlate\Core\Helper\Field;
-use ThemePlate\Core\Helper\Main;
 use ThemePlate\Core\Helper\Meta;
 
 class Fields {

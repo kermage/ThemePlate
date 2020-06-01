@@ -9,10 +9,8 @@
 
 namespace ThemePlate\Meta;
 
-use ThemePlate\Column;
 use ThemePlate\Core\Helper\Box;
 use ThemePlate\Core\Helper\Main;
-use ThemePlate\Core\Helper\Meta;
 
 class Menu extends Base {
 
