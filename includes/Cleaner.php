@@ -170,7 +170,7 @@ class Cleaner {
 		$dividend = $attr['width'];
 		$divisor  = $attr['height'];
 
-		if ( isset( $attr['width'] ) && isset( $attr['height'] ) && $attr['width'] !== $attr['height'] ) {
+		if ( isset( $attr['width'], $attr['height'] ) && $attr['width'] !== $attr['height'] ) {
 			if ( $attr['height'] > $attr['width'] ) {
 				$dividend = $attr['height'];
 				$divisor  = $attr['width'];
