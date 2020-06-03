@@ -29,7 +29,7 @@ class File {
 				$type    = wp_ext2type( $info['ext'] );
 				$preview = ( 'image' === $type ? wp_get_attachment_url( $file ) : includes_url( '/images/media/' ) . $type . '.png' );
 				echo '<div class="attachment"><div class="attachment-preview landscape"><div class="thumbnail">';
-				echo '<div class="centered"><img src="' . esc_attr( $preview ) . '"/></div>';
+				echo '<div class="centered"><img src="' . esc_attr( $preview ) . '" alt="' . esc_attr( get_the_title( $file ) ) . '"/></div>';
 				echo '<div class="filename"><div>' . esc_html( $name ) . '</div></div>';
 				echo '</div></div>';
 				echo '<button type="button" class="button-link attachment-close media-modal-icon"><span class="screen-reader-text">Remove</span></button>';
