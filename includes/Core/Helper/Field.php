@@ -42,7 +42,7 @@ class Field {
 		);
 		$field    = Main::fool_proof( $defaults, $field );
 		$field    = Meta::normalize_options( $field );
-		$field    = Field::deprecate_check( $field );
+		$field    = self::deprecate_check( $field );
 
 		if ( $field['minimum'] < 0 ) {
 			$field['minimum'] = 0;
