@@ -31,6 +31,9 @@ if ( ! defined( 'TP_PATH' ) ) {
 	define( 'TP_PATH', plugin_dir_path( TP_FILE ) );
 }
 
+// Autoload classes with Composer
+require_once TP_PATH . 'vendor/autoload.php';
+
 // Load the main ThemePlate class
 require_once TP_PATH . 'class-' . basename( TP_FILE );
 
@@ -49,5 +52,4 @@ if ( ! function_exists( 'ThemePlate' ) ) {
 }
 
 // Instantiate the ThemePlate updater
-require_once TP_PATH . 'class-external-update-manager.php';
 EUM_Handler::run( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/master/update-data.json' );
