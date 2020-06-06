@@ -28,8 +28,6 @@ class ThemePlate {
 
 	private function __construct( $key, $pages ) {
 
-		require TP_PATH . 'includes/compatibility.php';
-
 		$defaults = array(
 			'title' => 'ThemePlate Options',
 			'key'   => 'tp',

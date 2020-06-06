@@ -34,10 +34,12 @@ if ( ! defined( 'TP_PATH' ) ) {
 // Autoload classes with Composer
 require_once TP_PATH . 'vendor/autoload.php';
 
-// Load the main ThemePlate class
-require_once TP_PATH . 'class-' . basename( TP_FILE );
+// Instantiate the ThemePlate updater
+EUM_Handler::run( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/master/update-data.json' );
+
 
 add_filter( 'pre_update_option_active_plugins', array( ThemePlate::class, 'force_load_first' ) );
+
 
 if ( ! function_exists( 'ThemePlate' ) ) {
 	function ThemePlate( $key = null, $pages = null ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
@@ -50,6 +52,3 @@ if ( ! function_exists( 'ThemePlate' ) ) {
 
 	}
 }
-
-// Instantiate the ThemePlate updater
-EUM_Handler::run( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/master/update-data.json' );
