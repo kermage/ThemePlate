@@ -9,7 +9,7 @@
  * @package External Update Manager
  * @link    https://github.com/kermage/External-Update-Manager
  * @author  Gene Alyson Fortunado Torcende
- * @version 2.0.0
+ * @version 2.1.0
  * @license GPL-3.0
  */
 
@@ -51,16 +51,16 @@ if ( ! class_exists( 'EUM_Handler' ) ) {
 
 }
 
-if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
+if ( ! class_exists( 'External_Update_Manager_2_1_0' ) ) {
 
-	EUM_Handler::add_version( '2.0.0' );
+	EUM_Handler::add_version( '2.1.0' );
 
 	/**
 	 * @package External Update Manager
 	 * @since   0.1.0
 	 */
 	// phpcs:ignore Generic.Files.OneObjectStructurePerFile.MultipleFound
-	class External_Update_Manager_2_0_0 {
+	class External_Update_Manager_2_1_0 {
 
 		private $update_url;
 		private $custom_arg;
@@ -69,15 +69,17 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 		private $item_slug;
 		private $item_key;
 		private $item_name;
+		private $transient;
 		private $item_version = '';
-		private $transient    = 'eum_';
 		private $has_update   = false;
 
 		public function __construct( $full_path, $update_url, $custom_arg ) {
 			$this->update_url = $update_url;
 			$this->custom_arg = $custom_arg;
+
 			$this->get_file_details( $full_path );
-			$this->transient .= $this->item_type . '_' . $this->item_slug;
+
+			$this->transient = 'eum_' . $this->item_type . '_' . $this->item_slug;
 
 			add_filter( 'site_transient_update_' . $this->item_type . 's', array( $this, 'set_available_update' ) );
 			add_filter( 'delete_site_transient_update_' . $this->item_type . 's', array( $this, 'reset_cached_data' ) );
@@ -90,8 +92,8 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 
 			add_filter( 'upgrader_source_selection', array( $this, 'fix_directory_name' ), 10, 4 );
 			add_action( 'admin_init', array( $this, 'do_notices' ) );
-
-			$this->maybe_delete_transient();
+			add_action( 'load-update-core.php', array( $this, 'maybe_delete_transient' ) );
+			add_action( 'upgrader_process_complete', array( $this, 'maybe_delete_transient' ), 10, 2 );
 		}
 
 		private function get_file_details( $path ) {
@@ -120,6 +122,10 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 
 				$this->item_name    = $data['Name'];
 				$this->item_version = $data['Version'];
+			}
+
+			if ( is_array( $this->item_version ) ) {
+				$this->item_version = '';
 			}
 		}
 
@@ -234,7 +240,7 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 
 				$formatted->name    = $this->item_name;
 				$formatted->slug    = $this->item_slug;
-				$formatted->version = $this->item_version;
+				$formatted->version = $formatted->new_version;
 				$formatted->package = $formatted->download_link;
 
 				if ( ! empty( $unformatted->author_profile ) ) {
@@ -257,8 +263,11 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 			return $formatted;
 		}
 
-		private function maybe_delete_transient() {
-			if ( isset( $_GET['force-check'] ) && 'update-core.php' === $GLOBALS['pagenow'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+		public function maybe_delete_transient( $upgrader = null, $hook_extra = null ) {
+			if (
+				isset( $_GET['force-check'] ) || // phpcs:ignore WordPress.Security.NonceVerification
+				( $hook_extra['type'] === $this->item_type && in_array( $this->item_key, $hook_extra[ $this->item_type . 's' ], true ) )
+			) {
 				delete_site_transient( $this->transient );
 			}
 		}
@@ -267,8 +276,10 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 			/** @var WP_Filesystem_Base $wp_filesystem */
 			global $wp_filesystem;
 
-			if ( ( isset( $hook_extra['theme'] ) && $hook_extra['theme'] === $this->item_key ) ||
-				( isset( $hook_extra['plugin'] ) && $hook_extra['plugin'] === $this->item_key ) ) {
+			if (
+				( isset( $hook_extra['theme'] ) && $hook_extra['theme'] === $this->item_key ) ||
+				( isset( $hook_extra['plugin'] ) && $hook_extra['plugin'] === $this->item_key )
+			) {
 				$corrected_source = trailingslashit( $remote_source ) . $this->item_slug . '/';
 
 				if ( $source === $corrected_source ) {
@@ -299,9 +310,11 @@ if ( ! class_exists( 'External_Update_Manager_2_0_0' ) ) {
 		public function show_update_message() {
 			global $pagenow;
 
-			if ( 'update-core.php' === $pagenow ||
+			if (
+				'update-core.php' === $pagenow ||
 				( 'theme' === $this->item_type && 'themes.php' === $pagenow ) ||
-				( 'plugin' === $this->item_type && 'plugins.php' === $pagenow ) ) {
+				( 'plugin' === $this->item_type && 'plugins.php' === $pagenow )
+			) {
 				return;
 			}
 

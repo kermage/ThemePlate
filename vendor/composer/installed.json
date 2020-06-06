@@ -1,0 +1,50 @@
+[
+    {
+        "name": "kermage/external-update-manager",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kermage/External-Update-Manager.git",
+            "reference": "b83d5aebbe58b1a4284ae36eefc40218926f0856"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kermage/External-Update-Manager/zipball/b83d5aebbe58b1a4284ae36eefc40218926f0856",
+            "reference": "b83d5aebbe58b1a4284ae36eefc40218926f0856",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "php": ">=5.6.0"
+        },
+        "require-dev": {
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+            "phpcompatibility/phpcompatibility-wp": "^2.1",
+            "wp-coding-standards/wpcs": "^2.2"
+        },
+        "time": "2020-06-01T16:21:29+00:00",
+        "type": "wordpress-dropin",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "class-external-update-manager.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Gene Alyson Fortunado Torcende",
+                "email": "genealyson.torcende@gmail.com"
+            }
+        ],
+        "description": "A drop-in library for WordPress themes or plugins to manage updates.",
+        "keywords": [
+            "dropin",
+            "wordpress"
+        ]
+    }
+]
