@@ -21,6 +21,19 @@
 		"wp-coding-standards/wpcs": "^2.2",
 		"phpcompatibility/phpcompatibility-wp": "^2.1"
 	},
+	"autoload": {
+		"psr-4": {
+			"ThemePlate\\": [
+				"includes/",
+				"includes/column/",
+				"includes/page/",
+				"includes/settings/"
+			]
+		},
+		"files": [
+			"includes/Core/functions.php"
+		]
+	},
 	"scripts": {
 		"lint": "phpcs --colors -p -s -v",
 		"fix": "phpcbf -p -v"

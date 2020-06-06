@@ -28,10 +28,8 @@ class ThemePlate {
 
 	private function __construct( $key, $pages ) {
 
-		spl_autoload_register( array( $this, 'autoload' ) );
-
+		require TP_PATH . 'vendor/autoload.php';
 		require TP_PATH . 'includes/compatibility.php';
-		require TP_PATH . 'includes/Core/functions.php';
 
 		$defaults = array(
 			'title' => 'ThemePlate Options',
@@ -46,27 +44,6 @@ class ThemePlate {
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'init', array( \ThemePlate\Cleaner::class, 'instance' ) );
-
-	}
-
-
-	private function autoload( $class ) {
-
-		if ( 0 !== strpos( $class, 'ThemePlate\\' ) ) {
-			return;
-		}
-
-		$base = str_replace( array( 'ThemePlate\\', '\\' ), array( '', DIRECTORY_SEPARATOR ), $class );
-		$file = TP_PATH . 'includes' . DIRECTORY_SEPARATOR . $base . '.php';
-		$deep = substr_replace( $file, DIRECTORY_SEPARATOR . $base, -4, 0 );
-
-		if ( file_exists( $file ) ) {
-			require $file;
-		}
-
-		if ( file_exists( $deep ) ) {
-			require $deep;
-		}
 
 	}
 
