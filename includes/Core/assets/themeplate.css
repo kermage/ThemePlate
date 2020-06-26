@@ -338,6 +338,13 @@ select[disabled] {
 	opacity: 0;
 }
 
+.themeplate .select2-container {
+	padding: 0;
+	border: 0;
+	box-shadow: none;
+	min-height: unset;
+}
+
 .themeplate .select2-search__field {
 	/* stylelint-disable-next-line declaration-no-important */
 	width: 100% !important;
