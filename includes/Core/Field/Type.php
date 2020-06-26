@@ -138,7 +138,7 @@ class Type {
 			),
 		);
 		$defaults = array(
-			'search'  => isset( $_GET['search'] ) ? $_GET['search'] : '',
+			'search'  => isset( $_GET['search'] ) ? '*' . $_GET['search'] . '*' : '',
 			'fields'  => array( 'ID', 'display_name' ),
 			'number'  => isset( $_GET['ids__in'] ) ? -1 : self::$count,
 			'include' => isset( $_GET['ids__in'] ) ? $_GET['ids__in'] : '',
