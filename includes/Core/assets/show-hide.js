@@ -38,6 +38,10 @@ window.ThemePlate = window.ThemePlate || {};
 
 			if ( $.isNumeric( current ) ) {
 				current = parseInt( current );
+			} else if ( $.isArray( current ) ) {
+				current = current.map( function( item ) {
+					return $.isNumeric( item ) ? parseInt( item ) : item;
+				} );
 			}
 
 			return TP.compareValue( current, value, operator );
