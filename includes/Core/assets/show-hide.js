@@ -95,7 +95,7 @@ window.ThemePlate = window.ThemePlate || {};
 		var type = $element.prop( 'tagName' );
 
 		if ( type !== 'FIELDSET' ) {
-			return $element.val();
+			return $element.attr( 'type' ) === 'checkbox' ? $element.is( ':checked' ) : $element.val();
 		}
 
 		var $items = $element.find( ':checked' );
