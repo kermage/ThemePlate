@@ -81,9 +81,20 @@ class Form {
 
 	public function layout_postbox( $object_id ) {
 
+		global $wp_version;
+
 		$meta_box = $this->config;
 
 		printf( '<div id="themeplate_%s" class="tpo postbox">', esc_attr( $meta_box['id'] ) );
+
+		if ( version_compare( $wp_version, '5.5', '<' ) ) {
+			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
+				echo '<span class="screen-reader-text">' . esc_html( sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) ) . '</span>';
+				echo '<span class="toggle-indicator" aria-hidden="true"></span>';
+			echo '</button>';
+
+			echo '<h2 class="hndle"><span>' . esc_html( $meta_box['title'] ) . '</span></h2>';
+		} else {
 			echo '<div class="postbox-header">';
 				echo '<h2 class="hndle"><span>' . esc_html( $meta_box['title'] ) . '</span></h2>';
 
@@ -94,6 +105,7 @@ class Form {
 					echo '</button>';
 				echo '</div>';
 			echo '</div>';
+		}
 
 			echo '<div class="inside">';
 				$this->layout_inside( $object_id );
