@@ -45,8 +45,17 @@ class Menu extends Base {
 			return;
 		}
 
+		global $wp_version;
+
 		printf( '<div id="themeplate_%s" class="tpo postbox description-wide">', esc_attr( $this->config['id'] ) );
-			echo '<h2 class="hndle"><span>' . esc_html( $this->config['title'] ) . '</span></h2>';
+
+			if ( version_compare( $wp_version, '5.5', '<' ) ) {
+				echo '<h2 class="hndle"><span>' . esc_html( $this->config['title'] ) . '</span></h2>';
+			} else {
+				echo '<div class="postbox-header">';
+					echo '<h2 class="hndle"><span>' . esc_html( $this->config['title'] ) . '</span></h2>';
+				echo '</div>';
+			}
 
 			echo '<div class="inside">';
 				$this->form->layout_inside( $item_id );
