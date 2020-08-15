@@ -84,12 +84,16 @@ class Form {
 		$meta_box = $this->config;
 
 		printf( '<div id="themeplate_%s" class="tpo postbox">', esc_attr( $meta_box['id'] ) );
-			echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
-				echo '<span class="screen-reader-text">' . esc_html( sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) ) . '</span>';
-				echo '<span class="toggle-indicator" aria-hidden="true"></span>';
-			echo '</button>';
+			echo '<div class="postbox-header">';
+				echo '<h2 class="hndle"><span>' . esc_html( $meta_box['title'] ) . '</span></h2>';
 
-			echo '<h2 class="hndle"><span>' . esc_html( $meta_box['title'] ) . '</span></h2>';
+				echo '<div class="handle-actions hide-if-no-js">';
+					echo '<button type="button" class="handlediv button-link" aria-expanded="true">';
+						echo '<span class="screen-reader-text">' . esc_html( sprintf( __( 'Toggle panel: %s' ), $meta_box['title'] ) ) . '</span>';
+						echo '<span class="toggle-indicator" aria-hidden="true"></span>';
+					echo '</button>';
+				echo '</div>';
+			echo '</div>';
 
 			echo '<div class="inside">';
 				$this->layout_inside( $object_id );
