@@ -83,6 +83,8 @@ class Fields {
 
 			if ( $object_menu ) {
 				$name .= '[' . $object_id . ']';
+
+				$object_type = 'menu';
 			}
 
 			$this->layout( $field, $value, $name );
