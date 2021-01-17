@@ -43,7 +43,7 @@ class Form {
 
 	public function enqueue( $object_type ) {
 
-		if ( wp_script_is( 'themeplate-script', 'enqueued' ) ) {
+		if ( wp_script_is( 'themeplate-script' ) ) {
 			return;
 		}
 
