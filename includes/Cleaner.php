@@ -209,12 +209,18 @@ class Cleaner {
 			$args['walker'] = new NavWalker();
 		}
 
-		if ( $args['walker'] instanceof NavWalker && 'wp_page_menu' === $args['fallback_cb'] ) {
-			$args['fallback_cb'] = '\ThemePlate\NavWalker::fallback';
-		}
+		if ( $args['walker'] instanceof NavWalker ) {
+			if ( 'wp_page_menu' === $args['fallback_cb'] ) {
+				$args['fallback_cb'] = '\ThemePlate\NavWalker::fallback';
+			}
 
-		if ( empty( $args['items_wrap'] ) ) {
-			$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+			if ( '<ul id="%1$s" class="%2$s">%3$s</ul>' === $args['items_wrap'] ) {
+				$args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
+			}
+
+			if ( 'preserve' === $args['item_spacing'] ) {
+				$args['item_spacing'] = 'discard';
+			}
 		}
 
 		return $args;
