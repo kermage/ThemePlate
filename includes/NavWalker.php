@@ -11,7 +11,18 @@ namespace ThemePlate;
 
 class NavWalker extends \Walker_Nav_Menu {
 
+	private $classes = array();
+	public $class    = array();
+
+
 	public function __construct() {
+
+		$this->classes = array_merge( array(
+			'sub-menu' => 'sub-menu',
+			'has-sub'  => 'has-sub',
+			'active'   => 'active',
+			'item'     => '',
+		), $this->class );
 
 		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), 0 );
 		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), 0, 4 );
@@ -19,14 +30,6 @@ class NavWalker extends \Walker_Nav_Menu {
 		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), 0, 3 );
 
 	}
-
-
-	public $class = array(
-		'sub-menu' => 'sub-menu',
-		'has-sub'  => 'has-sub',
-		'active'   => 'active',
-		'item'     => '',
-	);
 
 
 	public function attributes( $item, $args ) {
@@ -38,24 +41,24 @@ class NavWalker extends \Walker_Nav_Menu {
 
 	public function submenu_css_class() {
 
-		return array( $this->class['sub-menu'] );
+		return array( $this->classes['sub-menu'] );
 
 	}
 
 
 	public function css_class( $classes, $item, $args ) {
 
-		$classes = array( $this->class['item'] );
+		$classes = array( $this->classes['item'] );
 
 		if ( $args->walker->has_children ) {
-			$classes[] = $this->class['has-sub'];
+			$classes[] = $this->classes['has-sub'];
 		}
 
 		if ( $item->current ) {
-			$classes[] = $this->class['active'];
+			$classes[] = $this->classes['active'];
 		}
 
-		return $classes;
+		return array_filter( $classes );
 
 	}
 
