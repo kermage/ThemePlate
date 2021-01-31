@@ -13,10 +13,10 @@ class NavWalker extends \Walker_Nav_Menu {
 
 	public function __construct() {
 
-		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), 10 );
-		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), 10, 4 );
-		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), 10, 2 );
-		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), 10, 3 );
+		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), 0 );
+		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), 0, 4 );
+		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), 0, 2 );
+		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), 0, 3 );
 
 	}
 
