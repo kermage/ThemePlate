@@ -25,6 +25,7 @@ class NavWalker extends \Walker_Nav_Menu {
 		'sub-menu' => 'sub-menu',
 		'has-sub'  => 'has-sub',
 		'active'   => 'active',
+		'item'     => '',
 	);
 
 
@@ -37,14 +38,14 @@ class NavWalker extends \Walker_Nav_Menu {
 
 	public function submenu_css_class() {
 
-		return array( $this->class['sub-menu' ] );
+		return array( $this->class['sub-menu'] );
 
 	}
 
 
 	public function css_class( $classes, $item, $args ) {
 
-		$classes = array();
+		$classes = array( $this->class['item'] );
 
 		if ( $args->walker->has_children ) {
 			$classes[] = $this->class['has-sub'];
@@ -54,7 +55,7 @@ class NavWalker extends \Walker_Nav_Menu {
 			$classes[] = $this->class['active'];
 		}
 
-		return array_unique( $classes );
+		return $classes;
 
 	}
 
