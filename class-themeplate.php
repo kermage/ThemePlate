@@ -153,7 +153,7 @@ class ThemePlate {
 	public static function force_load_first( $plugins ) {
 
 		if ( ! empty( $plugins ) ) {
-			$plugin = basename( TP_PATH ) . '/' . basename( TP_FILE );
+			$plugin = basename( dirname( TP_FILE ) ) . '/' . basename( TP_FILE );
 			$index  = array_search( $plugin, $plugins, true );
 
 			if ( $index > 0 ) {

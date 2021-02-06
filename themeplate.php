@@ -27,12 +27,8 @@ if ( ! defined( 'TP_FILE' ) ) {
 	define( 'TP_FILE', __FILE__ );
 }
 
-if ( ! defined( 'TP_PATH' ) ) {
-	define( 'TP_PATH', plugin_dir_path( TP_FILE ) );
-}
-
 // Autoload classes with Composer
-require_once TP_PATH . 'vendor/autoload.php';
+require_once plugin_dir_path( TP_FILE ) . 'vendor/autoload.php';
 
 // Instantiate the ThemePlate updater
 EUM_Handler::run( TP_FILE, 'https://raw.githubusercontent.com/kermage/ThemePlate/master/update-data.json' );
