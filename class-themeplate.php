@@ -42,6 +42,11 @@ class ThemePlate {
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'init', array( \ThemePlate\Cleaner::class, 'instance' ) );
 
+		if ( defined( 'TP_DEVELOPMENT' ) ) {
+			$this->stall_update();
+			add_filter( 'admin_notices', array( $this, 'in_dev_mode' ), 0 );
+		}
+
 	}
 
 
@@ -158,6 +163,13 @@ class ThemePlate {
 		}
 
 		return $plugins;
+
+	}
+
+
+	public function in_dev_mode() {
+
+		echo '<div class="notice notice-warning"><p><strong>ThemePlate</strong> in development mode: <em>' . TP_FILE . '</em></p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	}
 
