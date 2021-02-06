@@ -90,4 +90,13 @@ class Main {
 
 	}
 
+
+	public static function asset_url( $file ) {
+
+		$url = defined( 'TP_CORE_URL' ) ? untrailingslashit( TP_CORE_URL ) : self::get_url( TP_CORE_PATH );
+
+		return $url . '/assets/' . $file;
+
+	}
+
 }
