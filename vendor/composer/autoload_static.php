@@ -24,13 +24,11 @@ class ComposerStaticInit1940a53e868c49be4ea15081feb352d4
         'ThemePlate\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
-            1 => __DIR__ . '/../..' . '/includes/column',
-            2 => __DIR__ . '/../..' . '/includes/page',
-            3 => __DIR__ . '/../..' . '/includes/settings',
         ),
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'ThemePlate\\CPT\\Base' => __DIR__ . '/../..' . '/includes/CPT/Base.php',
         'ThemePlate\\CPT\\PostType' => __DIR__ . '/../..' . '/includes/CPT/PostType.php',
         'ThemePlate\\CPT\\Taxonomy' => __DIR__ . '/../..' . '/includes/CPT/Taxonomy.php',

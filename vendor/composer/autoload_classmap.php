@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'ThemePlate\\CPT\\Base' => $baseDir . '/includes/CPT/Base.php',
     'ThemePlate\\CPT\\PostType' => $baseDir . '/includes/CPT/PostType.php',
     'ThemePlate\\CPT\\Taxonomy' => $baseDir . '/includes/CPT/Taxonomy.php',

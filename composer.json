@@ -29,12 +29,14 @@
 	"autoload": {
 		"psr-4": {
 			"ThemePlate\\": [
-				"includes/",
-				"includes/column/",
-				"includes/page/",
-				"includes/settings/"
+				"includes/"
 			]
 		},
+		"classmap": [
+			"includes/Column/",
+			"includes/Page/",
+			"includes/Settings/"
+		],
 		"files": [
 			"class-themeplate.php",
 			"includes/compatibility.php",

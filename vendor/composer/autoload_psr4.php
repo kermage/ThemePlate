@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ThemePlate\\' => array($baseDir . '/includes', $baseDir . '/includes/column', $baseDir . '/includes/page', $baseDir . '/includes/settings'),
+    'ThemePlate\\' => array($baseDir . '/includes'),
 );
