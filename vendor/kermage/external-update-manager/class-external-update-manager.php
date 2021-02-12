@@ -9,7 +9,7 @@
  * @package External Update Manager
  * @link    https://github.com/kermage/External-Update-Manager
  * @author  Gene Alyson Fortunado Torcende
- * @version 2.1.0
+ * @version 2.1.1
  * @license GPL-3.0
  */
 
@@ -51,16 +51,16 @@ if ( ! class_exists( 'EUM_Handler' ) ) {
 
 }
 
-if ( ! class_exists( 'External_Update_Manager_2_1_0' ) ) {
+if ( ! class_exists( 'External_Update_Manager_2_1_1' ) ) {
 
-	EUM_Handler::add_version( '2.1.0' );
+	EUM_Handler::add_version( '2.1.1' );
 
 	/**
 	 * @package External Update Manager
 	 * @since   0.1.0
 	 */
 	// phpcs:ignore Generic.Files.OneObjectStructurePerFile.MultipleFound
-	class External_Update_Manager_2_1_0 {
+	class External_Update_Manager_2_1_1 {
 
 		private $update_url;
 		private $custom_arg;
@@ -132,7 +132,7 @@ if ( ! class_exists( 'External_Update_Manager_2_1_0' ) ) {
 		public function set_available_update( $transient ) {
 			$remote_data = $this->get_remote_data();
 
-			if ( ! is_object( $remote_data ) ) {
+			if ( empty( $transient ) || ! is_object( $remote_data ) ) {
 				return $transient;
 			}
 
@@ -266,7 +266,10 @@ if ( ! class_exists( 'External_Update_Manager_2_1_0' ) ) {
 		public function maybe_delete_transient( $upgrader = null, $hook_extra = null ) {
 			if (
 				isset( $_GET['force-check'] ) || // phpcs:ignore WordPress.Security.NonceVerification
-				( $hook_extra['type'] === $this->item_type && in_array( $this->item_key, $hook_extra[ $this->item_type . 's' ], true ) )
+				(
+					! empty( $hook_extra['type'] ) && ! empty( $hook_extra[ $this->item_type . 's' ] ) &&
+					$hook_extra['type'] === $this->item_type && in_array( $this->item_key, $hook_extra[ $this->item_type . 's' ], true )
+				)
 			) {
 				delete_site_transient( $this->transient );
 			}
