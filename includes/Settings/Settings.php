@@ -12,6 +12,7 @@ namespace ThemePlate;
 use ThemePlate\Core\Form;
 use ThemePlate\Core\Helper\Box;
 use ThemePlate\Core\Helper\Main;
+use ThemePlate\Core\Helper\Meta;
 
 class Settings {
 
@@ -39,6 +40,7 @@ class Settings {
 			'priority' => 'default',
 		);
 		$config   = Main::fool_proof( $defaults, $config );
+		$config   = Meta::normalize_options( $config );
 
 		$config['object_type'] = 'options';
 
@@ -102,6 +104,10 @@ class Settings {
 
 		foreach ( $page_s as $page ) {
 			if ( $sparts[1] === $page ) {
+				if ( ! Meta::should_display( $this->config, $page ) ) {
+					return false;
+				}
+
 				$this->page = $page;
 
 				return true;

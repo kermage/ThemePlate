@@ -35,7 +35,7 @@ class Meta {
 		$result = true;
 
 		if ( $callback ) {
-			$result = $callback();
+			$result = $callback( $object_id );
 		}
 
 		if ( $id ) {
@@ -69,17 +69,19 @@ class Meta {
 		$container  = array_merge( $additional, $container );
 		$value      = $container[ $type ];
 
-		if ( is_callable( $value ) ) {
-			$container[ $type . '_cb' ] = $value;
-			unset( $container[ $type ] );
-		} elseif ( is_array( $value ) ) {
-			if ( ! Main::is_sequential( $value ) ) {
-				$value              = array( $value );
-				$container[ $type ] = array( $container[ $type ] );
+		if ( ! Main::is_sequential( $value ) ) {
+			$value              = array( $value );
+			$container[ $type ] = array( $container[ $type ] );
+		}
+
+		if ( 1 === count( $value ) ) {
+			if ( isset( $value[0]['key'] ) && 'id' === $value[0]['key'] ) {
+				$container[ $type . '_id' ] = $value[0]['value'];
+				unset( $container[ $type ] );
 			}
 
-			if ( ( 1 === count( $value ) ) && isset( $value[0]['key'] ) && 'id' === $value[0]['key'] ) {
-				$container[ $type . '_id' ] = $value[0]['value'];
+			if ( is_callable( $value[0] ) ) {
+				$container[ $type . '_cb' ] = $value[0];
 				unset( $container[ $type ] );
 			}
 		}

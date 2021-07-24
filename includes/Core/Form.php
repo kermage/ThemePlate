@@ -35,7 +35,6 @@ class Form {
 			'style' => '',
 		);
 		$this->config = Main::fool_proof( $defaults, $config );
-		$this->config = Meta::normalize_options( $this->config );
 		$this->fields = new Fields( $config['fields'] );
 
 	}
