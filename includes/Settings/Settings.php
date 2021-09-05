@@ -13,6 +13,7 @@ use ThemePlate\Core\Form;
 use ThemePlate\Core\Helper\Box;
 use ThemePlate\Core\Helper\Main;
 use ThemePlate\Core\Helper\Meta;
+use ThemePlate\Core\Helper\Data;
 
 class Settings {
 
@@ -44,13 +45,17 @@ class Settings {
 
 		$config['object_type'] = 'options';
 
-		$this->config = $config;
-
 		try {
 			$this->form = new Form( $config );
 		} catch ( \Exception $e ) {
 			throw new \Exception( $e );
 		}
+
+		$config['fields'] = $this->form->get_fields();
+
+		$this->config = $config;
+
+		Data::store( $this->config );
 
 		add_action( 'current_screen', array( $this, 'create' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );

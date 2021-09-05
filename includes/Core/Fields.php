@@ -47,6 +47,8 @@ class Fields {
 				}
 			}
 
+			$field['id'] = $id;
+
 			$processed[ $id ] = $field;
 		}
 
