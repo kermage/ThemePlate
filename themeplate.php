@@ -19,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use ThemePlate\Core\Helper\Main;
+
 /* ==================================================
 Global constants
 ================================================== */
@@ -39,6 +41,14 @@ add_filter( 'pre_update_option_active_plugins', array( ThemePlate::class, 'force
 
 if ( ! function_exists( 'ThemePlate' ) ) {
 	function ThemePlate( $key = null, $pages = null ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
+
+		if ( ! empty( $key ) ) {
+			if ( ! is_array( $key ) ) {
+				_deprecated_argument( __FUNCTION__, '2.11.0', 'Initialize by passing <b>array( \'Options Title\', \'prefixed_key\' )</b>.' );
+			} elseif ( Main::is_sequential( $key ) ) {
+				_deprecated_argument( __FUNCTION__, '3.0.0', 'Initialize by passing <b>array( \'title\' => \'Options Title\', \'key\' => \'prefixed_key\' )</b>.' );
+			}
+		}
 
 		if ( ! empty( $pages ) ) {
 			_deprecated_argument( __FUNCTION__, '3.0.0', 'Use ThemePlate()->page( $args ) to create options pages instead.' );

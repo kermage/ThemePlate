@@ -5,6 +5,17 @@
  * @since 0.1.0
  */
 
+use ThemePlate\Cleaner;
+use ThemePlate\Column;
+use ThemePlate\Core\Helper\Main;
+use ThemePlate\CPT\PostType;
+use ThemePlate\CPT\Taxonomy;
+use ThemePlate\Meta\Menu;
+use ThemePlate\Meta\Post;
+use ThemePlate\Meta\Term;
+use ThemePlate\Meta\User;
+use ThemePlate\Page;
+use ThemePlate\Settings;
 
 class ThemePlate {
 
@@ -35,12 +46,12 @@ class ThemePlate {
 			'slug'  => 'options',
 		);
 		$config   = $this->prepare( $key, $pages );
-		$config   = \ThemePlate\Core\Helper\Main::fool_proof( $defaults, $config );
+		$config   = Main::fool_proof( $defaults, $config );
 
 		$this->setup( $config );
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
-		add_action( 'init', array( \ThemePlate\Cleaner::class, 'instance' ) );
+		add_action( 'init', array( Cleaner::class, 'instance' ) );
 
 		if ( defined( 'TP_DEVELOPMENT' ) ) {
 			$this->stall_update();
@@ -59,7 +70,7 @@ class ThemePlate {
 				$config['title'] = $key;
 				$config['key']   = sanitize_title( $key );
 				$this->stall_update();
-			} elseif ( \ThemePlate\Core\Helper\Main::is_sequential( $key ) ) {
+			} elseif ( Main::is_sequential( $key ) ) {
 				$config['title'] = array_shift( $key );
 				$config['key']   = array_shift( $key );
 				$this->stalled   = true;
@@ -91,6 +102,7 @@ class ThemePlate {
 	public function unset_transient( $value ) {
 
 		unset( $value->response[ plugin_basename( TP_FILE ) ] );
+
 		return $value;
 
 	}
@@ -177,7 +189,7 @@ class ThemePlate {
 	public function post_type( $args ) {
 
 		try {
-			return new \ThemePlate\CPT\PostType( $args );
+			return new PostType( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -188,7 +200,7 @@ class ThemePlate {
 	public function taxonomy( $args ) {
 
 		try {
-			return new \ThemePlate\CPT\Taxonomy( $args );
+			return new Taxonomy( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -201,7 +213,7 @@ class ThemePlate {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new \ThemePlate\Meta\Post( $args );
+			return new Post( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -222,7 +234,7 @@ class ThemePlate {
 		}
 
 		try {
-			return new \ThemePlate\Settings( $args );
+			return new Settings( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -235,7 +247,7 @@ class ThemePlate {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new \ThemePlate\Meta\Term( $args );
+			return new Term( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -248,7 +260,7 @@ class ThemePlate {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new \ThemePlate\Meta\User( $args );
+			return new User( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -261,7 +273,7 @@ class ThemePlate {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new \ThemePlate\Meta\Menu( $args );
+			return new Menu( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -278,7 +290,7 @@ class ThemePlate {
 		}
 
 		try {
-			return new \ThemePlate\Page( $args );
+			return new Page( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -289,7 +301,7 @@ class ThemePlate {
 	public function column( $args ) {
 
 		try {
-			return new \ThemePlate\Column( $args );
+			return new Column( $args );
 		} catch ( Exception $e ) {
 			return $e;
 		}
