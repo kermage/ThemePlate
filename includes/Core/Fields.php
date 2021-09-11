@@ -62,14 +62,13 @@ class Fields {
 		foreach ( $this->collection as $id => $field ) {
 			$object_menu = false;
 
+			$field['id'] = $metabox_id . '_' . $id;
 			if ( 'options' === $object_type ) {
-				$field['id'] = $metabox_id . '_' . $id;
 
 				$options = get_option( $object_id );
 				$stored  = isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : '';
 				$key     = $object_id;
 			} else {
-				$field['id'] = $metabox_id . '_' . $id;
 
 				if ( 'menu' === $object_type ) {
 					$object_type = 'post';
@@ -182,11 +181,13 @@ class Fields {
 
 		if ( 'custom' === $field['type'] ) {
 			call_user_func( $field['callback'], $field );
+
 			return;
 		}
 
 		if ( 'group' !== $field['type'] ) {
 			Field::render( $field );
+
 			return;
 		}
 

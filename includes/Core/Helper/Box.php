@@ -36,7 +36,7 @@ class Box {
 
 		foreach ( $data as $key => $value ) {
 			if ( is_array( $value ) ) {
-				$data[ $key ] = self::filter( $data[ $key ] );
+				$data[ $key ] = self::filter( $value );
 			}
 
 			if ( empty( $value ) ) {
