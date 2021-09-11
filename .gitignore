@@ -1,5 +1,5 @@
 /.idea/
-/bin/
+/.cache/
 /tests/
 /bump
 /push

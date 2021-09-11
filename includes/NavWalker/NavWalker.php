@@ -9,7 +9,13 @@
 
 namespace ThemePlate;
 
-class NavWalker extends \Walker_Nav_Menu {
+use Walker_Nav_Menu;
+
+if ( ! class_exists( 'Walker_Nav_Menu' ) ) {
+	return;
+}
+
+class NavWalker extends Walker_Nav_Menu {
 
 	private $defaults = array(
 		'sub-menu' => 'sub-menu',
@@ -18,7 +24,7 @@ class NavWalker extends \Walker_Nav_Menu {
 		'item'     => '',
 	);
 
-	public $classes = [];
+	public $classes = array();
 
 
 	public function __construct() {
