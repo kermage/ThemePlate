@@ -25,11 +25,12 @@ class NavWalker extends Walker_Nav_Menu {
 	);
 
 	public $classes = array();
+	public $class   = array();
 
 
 	public function __construct() {
 
-		$this->classes = array_merge( $this->defaults, $this->classes );
+		$this->classes = array_merge( $this->defaults, $this->class, $this->classes );
 
 		$priority = $this->priority ?? 0;
 
@@ -37,6 +38,13 @@ class NavWalker extends Walker_Nav_Menu {
 		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), $priority, 4 );
 		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), $priority, 4 );
 		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), $priority, 4 );
+
+	}
+
+
+	public function attributes( $item, $args ) {
+
+		return array();
 
 	}
 
@@ -77,6 +85,8 @@ class NavWalker extends Walker_Nav_Menu {
 
 
 	public function link_attributes( $atts, $item, $args, $depth ) {
+
+		$atts = array_merge( $atts, $this->attributes( $item, $args ) );
 
 		return array_filter( $atts );
 
