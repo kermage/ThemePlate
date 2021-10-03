@@ -15,9 +15,11 @@
 	],
 	"config": {
 		"optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
+		"preferred-install": "dist",
+		"sort-packages": true
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"require": {
 		"php": ">=5.6.0",
 		"ext-json": "*",
