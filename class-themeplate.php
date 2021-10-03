@@ -21,9 +21,9 @@ class ThemePlate {
 
 	private static $_instance;
 
-	public $key;
-	public $slug;
-	public $stalled;
+	private $key;
+	private $slug;
+	private $stalled;
 
 
 	public static function instance( $key, $pages ) {
@@ -305,6 +305,48 @@ class ThemePlate {
 		} catch ( Exception $e ) {
 			return $e;
 		}
+
+	}
+
+
+	public function set_stalled( $value ) {
+
+		$this->stalled = $value;
+
+	}
+
+
+	public function get_key() {
+
+		return $this->key;
+
+	}
+
+
+	public function __set( $name, $value ) {
+
+		$method = 'set_' . $name;
+
+		if ( method_exists( $this, $method ) ) {
+			$this->$method( $value );
+
+			return;
+		}
+
+		throw new Error( 'Cannot access private property ' . __CLASS__ . '::$' . $name );
+
+	}
+
+
+	public function __get( $name ) {
+
+		$method = 'get_' . $name;
+
+		if ( method_exists( $this, $method ) ) {
+			return $this->$method();
+		}
+
+		throw new Error( 'Cannot access private property ' . __CLASS__ . '::$' . $name );
 
 	}
 
