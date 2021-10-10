@@ -32,7 +32,7 @@ class NavWalker extends Walker_Nav_Menu {
 
 		$this->classes = array_merge( $this->defaults, $this->class, $this->classes );
 
-		$priority = $this->priority ?? 0;
+		$priority = isset( $this->priority ) ? $this->priority : 0;
 
 		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), $priority, 3 );
 		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), $priority, 4 );

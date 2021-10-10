@@ -27,7 +27,11 @@ class Data {
 
 	public static function retreive( $key, $id ) {
 
-		return self::$storages[ strtolower( $key ) ][ $id ] ?? Field::filter( array() );
+		if ( isset( self::$storages[ strtolower( $key ) ][ $id ] ) ) {
+			return self::$storages[ strtolower( $key ) ][ $id ];
+		}
+
+		return Field::filter( array() );
 
 	}
 
@@ -57,7 +61,7 @@ class Data {
 	public static function get_option( $key, $page ) {
 
 		$options = get_option( $page );
-		$value   = $options[ $key ] ?? '';
+		$value   = isset( $options[ $key ] ) ? $options[ $key ] : '';
 
 		return $value ?: self::get_default( $page, $key );
 
