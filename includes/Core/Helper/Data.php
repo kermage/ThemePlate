@@ -16,10 +16,12 @@ class Data {
 
 	public static function store( $config ) {
 
-		$key = 'options' === $config['object_type'] ? $config['page'] : $config['object_type'];
+		$keys = 'options' === $config['object_type'] ? $config['page'] : $config['object_type'];
 
 		foreach ( $config['fields'] as $field ) {
-			self::$storages[ strtolower( $key ) ][ $config['id'] . '_' . $field['id'] ] = $field;
+			foreach ( (array) $keys as $key ) {
+				self::$storages[ strtolower( $key ) ][ $config['id'] . '_' . $field['id'] ] = $field;
+			}
 		}
 
 	}
