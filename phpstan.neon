@@ -1,0 +1,8 @@
+parameters:
+  level: 5
+  bootstrapFiles:
+    - .cache/bootstrap.php
+  scanDirectories:
+    - .cache/wordpress
+  excludePaths:
+    - .cache/wordpress/wp-admin/includes/noop.php
