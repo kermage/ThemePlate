@@ -16,11 +16,14 @@ class Select {
 	public static function render( $field ) {
 
 		$seq = Main::is_sequential( $field['options'] );
+		if ( 'select2' === $field['type'] ) {
+			echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
+		}
 		echo '<select' . ( 'select2' === $field['type'] ? ' class="themeplate-select2"' : '' ) . ' name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . ( $field['required'] ? ' required="required"' : '' ) . '>';
 		if ( 'select2' === $field['type'] && ! $field['value'] ) {
-			echo '<option></option>';
-		} elseif ( 'select2' !== $field['type'] && ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) ) {
-			echo '<option value=""' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( esc_attr( $field['value'] ) ? '>' . esc_attr( __( '&mdash; None &mdash;' ) ) : ' selected>' . esc_attr( __( '&mdash; Select &mdash;' ) ) ) . '</option>';
+			echo '<option hidden></option>';
+		} elseif ( 'select2' !== $field['type'] && ( ! $field['value'] || $field['none'] ) ) {
+			echo '<option value=""' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( $field['value'] ? '>' . esc_attr( __( '&mdash; None &mdash;' ) ) : ' selected>' . esc_attr( __( '&mdash; Select &mdash;' ) ) ) . '</option>';
 		}
 		if ( 'select2' === $field['type'] && $field['multiple'] && $field['value'] ) {
 			$ordered = array();

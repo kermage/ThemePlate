@@ -49,14 +49,15 @@ class Type {
 
 		$args = Main::fool_proof( $defaults, $field['options'] );
 
+		echo '<input type="hidden" name="' . esc_attr( $field['name'] ) . '" />';
 		echo '<select disabled><option>Loading values...</option></select>';
 		echo '<select class="themeplate-select2 select2-hidden-accessible" name="' . esc_attr( $field['name'] ) . ( $field['multiple'] ? '[]' : '' ) . '" id="' . esc_attr( $field['id'] ) . '"' . ( $field['multiple'] ? ' multiple="multiple"' : '' ) . ( $field['none'] ? ' data-none="true"' : '' ) . ( $field['required'] ? ' required="required"' : '' ) . '>';
 		if ( $field['value'] ) {
 			foreach ( (array) $field['value'] as $value ) {
 				echo '<option value="' . esc_attr( $value ) . '" selected="selected">' . esc_html( $value ) . '</option>';
 			}
-		} elseif ( ( $field['none'] && $field['value'] ) || ( ! $field['multiple'] && ! $field['value'] ) ) {
-			echo '<option value=""' . ( $field['none'] && $field['value'] ? '' : ' disabled hidden' ) . ( esc_attr( $field['value'] ) ? '>' . esc_attr( __( '&mdash; None &mdash;' ) ) : ' selected>' . esc_attr( __( '&mdash; Select &mdash;' ) ) ) . '</option>';
+		} else {
+			echo '<option hidden></option>';
 		}
 		echo '</select>';
 		echo '<div class="select2-options" data-action="' . $action . '" data-options="' . esc_attr( wp_json_encode( $args, JSON_NUMERIC_CHECK ) ) . '" data-value="' . esc_attr( wp_json_encode( $field['value'], JSON_NUMERIC_CHECK ) ) . '"></div>';
