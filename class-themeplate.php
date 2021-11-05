@@ -53,6 +53,8 @@ class ThemePlate {
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'init', array( Cleaner::class, 'instance' ) );
 
+		$this->cleanup();
+
 		if ( defined( 'TP_DEVELOPMENT' ) ) {
 			$this->stall_update();
 			add_filter( 'admin_notices', array( $this, 'in_dev_mode' ), 0 );
@@ -175,6 +177,20 @@ class ThemePlate {
 		}
 
 		return $plugins;
+
+	}
+
+
+	public function cleanup() {
+
+		add_theme_support( 'tpc_wp_head' );
+		add_theme_support( 'tpc_emoji_detection' );
+		add_theme_support( 'tpc_query_strings' );
+		add_theme_support( 'tpc_dependency_tag' );
+		add_theme_support( 'tpc_unnecessary_class' );
+		add_theme_support( 'tpc_extra_styles' );
+		add_theme_support( 'tpc_embed_wrap' );
+		add_theme_support( 'tpc_nav_walker' );
 
 	}
 
