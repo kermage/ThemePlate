@@ -32,7 +32,7 @@ return array(
     'ThemePlate\\Core\\Helper\\Field' => $baseDir . '/includes/Core/Helper/Field.php',
     'ThemePlate\\Core\\Helper\\Main' => $baseDir . '/includes/Core/Helper/Main.php',
     'ThemePlate\\Core\\Helper\\Meta' => $baseDir . '/includes/Core/Helper/Meta.php',
-    'ThemePlate\\Core\\Storage' => $baseDir . '/includes/Core/Storage.php',
+    'ThemePlate\\Helpers' => $baseDir . '/includes/Helpers.php',
     'ThemePlate\\Meta\\Base' => $baseDir . '/includes/Meta/Base.php',
     'ThemePlate\\Meta\\Menu' => $baseDir . '/includes/Meta/Menu.php',
     'ThemePlate\\Meta\\Post' => $baseDir . '/includes/Meta/Post.php',
