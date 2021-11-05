@@ -6,7 +6,7 @@ abstract class BaseFeature {
 
 	public const PREFIX = 'tpc_';
 
-	public function __construct() {
+	public function register() {
 
 		if ( current_theme_supports( $this->feature() ) ) {
 			$this->action();
@@ -20,7 +20,7 @@ abstract class BaseFeature {
 
 	}
 
-	protected function feature(): string {
+	public function feature(): string {
 
 		return self::PREFIX . $this->key();
 

@@ -27,14 +27,26 @@ class Cleaner {
 
 	private function __construct() {
 
-		$features = glob( __DIR__ . '/src/Features/*.php' );
+		foreach ( self::features() as $feature ) {
+			$feature->register();
+		}
 
-		foreach ( $features as $feature ) {
+	}
+
+
+	public static function features() {
+
+		$list = array();
+
+		foreach ( glob( __DIR__ . '/src/Features/*.php' ) as $feature ) {
 			$feature = basename( $feature, '.php' );
 			$feature = __NAMESPACE__ . '\\Cleaner\\Features\\' . $feature;
+			$cleaner = new $feature();
 
-			new $feature();
+			$list[ $cleaner->feature() ] = $cleaner;
 		}
+
+		return $list;
 
 	}
 
