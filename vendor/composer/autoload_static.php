@@ -63,6 +63,7 @@ class ComposerStaticInit1940a53e868c49be4ea15081feb352d4
         'ThemePlate\\Core\\Helper\\Field' => __DIR__ . '/../..' . '/includes/Core/Helper/Field.php',
         'ThemePlate\\Core\\Helper\\Main' => __DIR__ . '/../..' . '/includes/Core/Helper/Main.php',
         'ThemePlate\\Core\\Helper\\Meta' => __DIR__ . '/../..' . '/includes/Core/Helper/Meta.php',
+        'ThemePlate\\Helpers' => __DIR__ . '/../..' . '/includes/Helpers.php',
         'ThemePlate\\Meta\\Base' => __DIR__ . '/../..' . '/includes/Meta/Base.php',
         'ThemePlate\\Meta\\Menu' => __DIR__ . '/../..' . '/includes/Meta/Menu.php',
         'ThemePlate\\Meta\\Post' => __DIR__ . '/../..' . '/includes/Meta/Post.php',
