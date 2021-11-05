@@ -1,0 +1,25 @@
+{
+    "name": "themeplate/cleaner",
+    "description": "ThemePlate markup cleaner",
+    "license": "GPL-3.0-only",
+    "authors": [
+        {
+            "name": "Gene Alyson Fortunado Torcende",
+            "email": "genealyson.torcende@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0"
+    },
+    "suggest": {
+        "themeplate/navwalker": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ThemePlate\\Cleaner\\": "src"
+        },
+        "files": [
+            "Cleaner.php"
+        ]
+    }
+}
