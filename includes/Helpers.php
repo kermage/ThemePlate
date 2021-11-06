@@ -9,6 +9,7 @@ namespace ThemePlate;
 
 use Exception;
 use ThemePlate\Column;
+use ThemePlate\Core\Helper\Field;
 use ThemePlate\CPT\PostType;
 use ThemePlate\CPT\Taxonomy;
 use ThemePlate\Meta\Menu;
@@ -19,6 +20,9 @@ use ThemePlate\Page;
 use ThemePlate\Settings;
 
 trait Helpers {
+
+	private $storages = array();
+
 
 	public function post_type( $args ) {
 
@@ -47,7 +51,11 @@ trait Helpers {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new Post( $args );
+			$meta = new Post( $args );
+
+			$this->store( $meta->get_config() );
+
+			return $meta;
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -68,7 +76,11 @@ trait Helpers {
 		}
 
 		try {
-			return new Settings( $args );
+			$settings = new Settings( $args );
+
+			$this->store( $settings->get_config() );
+
+			return $settings;
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -81,7 +93,11 @@ trait Helpers {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new Term( $args );
+			$meta = new Term( $args );
+
+			$this->store( $meta->get_config() );
+
+			return $meta;
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -94,7 +110,11 @@ trait Helpers {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new User( $args );
+			$meta = new User( $args );
+
+			$this->store( $meta->get_config() );
+
+			return $meta;
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -107,7 +127,11 @@ trait Helpers {
 		$args['id'] = $this->key . '_' . $args['id'];
 
 		try {
-			return new Menu( $args );
+			$meta = new Menu( $args );
+
+			$this->store( $meta->get_config() );
+
+			return $meta;
 		} catch ( Exception $e ) {
 			return $e;
 		}
@@ -139,6 +163,62 @@ trait Helpers {
 		} catch ( Exception $e ) {
 			return $e;
 		}
+
+	}
+
+
+	private function store( $config ) {
+
+		$keys = 'options' === $config['object_type'] ? $config['page'] : $config['object_type'];
+
+		foreach ( $config['fields'] as $field ) {
+			foreach ( (array) $keys as $key ) {
+				$this->storages[ strtolower( $key ) ][ $config['id'] . '_' . $field['id'] ] = $field;
+			}
+		}
+
+	}
+
+
+	private function retreive( $key, $id ) {
+
+		if ( isset( $this->storages[ strtolower( $key ) ][ $id ] ) ) {
+			return $this->storages[ strtolower( $key ) ][ $id ];
+		}
+
+		return Field::filter( array() );
+
+	}
+
+
+	private function get_default( $key, $id ) {
+
+		$config = $this->retreive( $key, $id );
+
+		return $config['default'];
+
+	}
+
+
+	public function get_meta( $meta_key, $post_id = false, $meta_type = 'post', $single = true ) {
+
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+
+		$value = get_metadata( $meta_type, $post_id, $meta_key, $single );
+
+		return $value ?: $this->get_default( $meta_type, $meta_key );
+
+	}
+
+
+	public function get_option( $key, $page ) {
+
+		$options = get_option( $page );
+		$value   = isset( $options[ $key ] ) ? $options[ $key ] : '';
+
+		return $value ?: $this->get_default( $page, $key );
 
 	}
 
