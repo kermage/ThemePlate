@@ -205,7 +205,11 @@ trait Helpers {
 
 		$value = get_metadata( $meta_type, $post_id, $meta_key, $single );
 
-		return $value ?: $this->get_default( $meta_type, $meta_key );
+		if ( $value ) {
+			return $value;
+		}
+
+		return $this->get_default( $meta_type, $meta_key );
 
 	}
 
@@ -215,7 +219,11 @@ trait Helpers {
 		$options = get_option( $page );
 		$value   = isset( $options[ $key ] ) ? $options[ $key ] : '';
 
-		return $value ?: $this->get_default( $page, $key );
+		if ( $value ) {
+			return $value;
+		}
+
+		return $this->get_default( $page, $key );
 
 	}
 
