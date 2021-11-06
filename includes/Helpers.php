@@ -8,7 +8,6 @@
 namespace ThemePlate;
 
 use Exception;
-use ThemePlate\Column;
 use ThemePlate\Core\Helper\Field;
 use ThemePlate\CPT\PostType;
 use ThemePlate\CPT\Taxonomy;
@@ -16,8 +15,6 @@ use ThemePlate\Meta\Menu;
 use ThemePlate\Meta\Post;
 use ThemePlate\Meta\Term;
 use ThemePlate\Meta\User;
-use ThemePlate\Page;
-use ThemePlate\Settings;
 
 trait Helpers {
 
