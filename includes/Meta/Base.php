@@ -13,7 +13,6 @@ use ThemePlate\Core\Form;
 use ThemePlate\Core\Helper\Box;
 use ThemePlate\Core\Helper\Main;
 use ThemePlate\Core\Helper\Meta;
-use ThemePlate\Core\Helper\Data;
 
 abstract class Base {
 
@@ -48,7 +47,12 @@ abstract class Base {
 		$this->config = Main::fool_proof( $defaults, $config );
 		$this->config = Meta::normalize_options( $this->config );
 
-		Data::store( $this->config );
+	}
+
+
+	public function get_config() {
+
+		return $this->config;
 
 	}
 

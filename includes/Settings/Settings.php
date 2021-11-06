@@ -13,7 +13,6 @@ use ThemePlate\Core\Form;
 use ThemePlate\Core\Helper\Box;
 use ThemePlate\Core\Helper\Main;
 use ThemePlate\Core\Helper\Meta;
-use ThemePlate\Core\Helper\Data;
 
 class Settings {
 
@@ -55,10 +54,15 @@ class Settings {
 
 		$this->config = $config;
 
-		Data::store( $this->config );
-
 		add_action( 'current_screen', array( $this, 'create' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'scripts_styles' ), 11 );
+
+	}
+
+
+	public function get_config() {
+
+		return $this->config;
 
 	}
 
