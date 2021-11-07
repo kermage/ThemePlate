@@ -27,17 +27,17 @@ class NavWalker extends Walker_Nav_Menu {
 	public $classes = array();
 	public $class   = array();
 
+	public $priority = 0;
+
 
 	public function __construct() {
 
 		$this->classes = array_merge( $this->defaults, $this->class, $this->classes );
 
-		$priority = isset( $this->priority ) ? $this->priority : 0;
-
-		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), $priority, 3 );
-		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), $priority, 4 );
-		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), $priority, 4 );
-		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), $priority, 4 );
+		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), $this->priority, 3 );
+		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), $this->priority, 4 );
+		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), $this->priority, 4 );
+		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), $this->priority, 4 );
 
 	}
 
