@@ -199,6 +199,15 @@ class ThemePlate {
 	}
 
 
+	public function __isset( $name ) {
+
+		$method = 'set_' . $name;
+
+		return method_exists( $this, $method );
+
+	}
+
+
 	public function __set( $name, $value ) {
 
 		$method = 'set_' . $name;
