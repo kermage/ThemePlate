@@ -7,6 +7,7 @@
 
 use ThemePlate\Cleaner;
 use ThemePlate\Core\Helper\Main;
+use ThemePlate\Core\Data;
 use ThemePlate\Helpers;
 
 class ThemePlate {
@@ -19,6 +20,7 @@ class ThemePlate {
 	private $key;
 	private $slug;
 	private $stalled;
+	private $storage;
 
 
 	public static function instance( $key, $pages ) {
@@ -44,6 +46,8 @@ class ThemePlate {
 		$config   = Main::fool_proof( $defaults, $config );
 
 		$this->setup( $config );
+
+		$this->storage = new Data();
 
 		add_filter( 'edit_form_after_title', array( $this, 'after_title' ), 11 );
 		add_action( 'init', array( Cleaner::class, 'instance' ) );
