@@ -197,10 +197,10 @@ trait Helpers {
 	}
 
 
-	public function get_meta( $meta_key, $post_id = false, $meta_type = 'post', $single = true ) {
+	public function get_meta( $meta_key, $post_id = 0, $meta_type = 'post', $single = true ) {
 
 		if ( ! $post_id ) {
-			$post_id = get_the_ID();
+			$post_id = (int) get_the_ID();
 		}
 
 		$value = get_metadata( $meta_type, $post_id, $meta_key, $single );
