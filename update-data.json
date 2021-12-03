@@ -1,25 +1,25 @@
 {
-	"new_version"    : "3.18.1",
-	"homepage"       : "https://github.com/kermage/ThemePlate",
-	"download_link"  : "https://github.com/kermage/ThemePlate/releases/download/v3.18.1/themeplate.zip",
-	"last_updated"   : "2021-10-11",
-	"author"         : "Gene Alyson Fortunado Torcende",
-	"author_profile" : "https://github.com/kermage",
-	"requires"       : "4.6.0",
-	"tested"         : "5.8.1",
-	"requires_php"   : "5.6",
-	"donate_link"    : "https://www.paypal.me/GAFT",
-	"sections"       : {
-		"description"  : "<h1>ThemePlate -- <img alt='Scrutinizer Build Status' src='https://scrutinizer-ci.com/g/kermage/ThemePlate/badges/build.png'> <img alt='Scrutinizer Code Quality' src='https://scrutinizer-ci.com/g/kermage/ThemePlate/badges/quality-score.png'></h1><blockquote><p><em>'A toolkit to handle everything related in developing a full-featured WordPress site'</em></p></blockquote><ul><li>Add meta boxes to posts, terms, users, and menu items</li><li>Register custom post types and custom taxonomies</li><li>Create options pages and add custom admin columns</li><li>Frontend markup cleaner with a clean navwalker</li></ul><h3>Features</h3><ul><li>Fully compatible with the new block editor: Gutenberg</li><li>Work similarly to native WordPress function/methods</li><li>Look seamlessly beautiful to WordPress pages/panels</li><li>Easy, simple, and straightforward as much as possible</li></ul>",
-		"installation" : "<h1>Getting Started</h1><h4>1. Install the toolkit</h4><ul><li>As a theme required plugin: Refer <a href='http://tgmpluginactivation.com/installation/'>here</a></li><li>As a must-use plugin: Refer <a href='https://wordpress.org/support/article/must-use-plugins/'>here</a></li></ul><h4>2. Add to theme's <code>functions.php</code> or plugin's <code>main php file</code></h4><pre>\nif ( class_exists( 'ThemePlate' ) ) :\n\tThemePlate( array(\n\t\t'title' => 'Project Name',\n\t\t'key'   => 'project_prefix'\n\t) );\n\trequire_once 'post-types.php';\n\trequire_once 'settings.php';\n\trequire_once 'meta-boxes.php';\nendif;\n</pre><ul><li>Initialize with an array consisting of a <em><strong>title</strong></em> and a <em><strong>key</strong></em> to be used as:<ul><li>page and menu title in the pre-created options page</li><li>prefix to the registered option names and in every meta key</li></ul></li><li>Require files containing the definition of <em><strong><code>ThemePlate-d</code></strong></em> items</li></ul><h4>3. Define items to be <em><code>ThemePlate-d</code></em></h4><ul><li><code>ThemePlate()->post_type( $args );</code></li><li><code>ThemePlate()->taxonomy( $args );</code></li><li><code>ThemePlate()->settings( $args );</code></li><li><code>ThemePlate()->post_meta( $args );</code></li><li><code>ThemePlate()->term_meta( $args );</code></li><li><code>ThemePlate()->user_meta( $args );</code></li><li><code>ThemePlate()->menu_meta( $args );</code></li><li><code>ThemePlate()->page( $args );</code></li><li><code>ThemePlate()->column( $args );</code></li></ul>",
-		"other_notes"  : "<h1>See the <a href='https://github.com/kermage/ThemePlate/wiki'>Wiki</a> section</h1><h3>Yeoman Generator</h3><p>Check <a href='https://www.npmjs.com/package/generator-themeplate'>generator-themeplate</a> to kickstart a <strong>ThemePlate</strong> powered WP site.</p>"
+	"new_version": "3.18.2",
+	"homepage": "https://github.com/kermage/ThemePlate",
+	"download_link": "https://github.com/kermage/ThemePlate/releases/download/v3.18.2/themeplate.zip",
+	"last_updated": "2021-12-03",
+	"author": "Gene Alyson Fortunado Torcende",
+	"author_profile": "https://github.com/kermage",
+	"requires": "4.6.0",
+	"tested": "5.8.2",
+	"requires_php": "5.6",
+	"donate_link": "https://www.paypal.me/GAFT",
+	"sections": {
+		"description": "<h1>ThemePlate -- <img alt='Scrutinizer Build Status' src='https://scrutinizer-ci.com/g/kermage/ThemePlate/badges/build.png'> <img alt='Scrutinizer Code Quality' src='https://scrutinizer-ci.com/g/kermage/ThemePlate/badges/quality-score.png'></h1><blockquote><p><em>'A toolkit to handle everything related in developing a full-featured WordPress site'</em></p></blockquote><ul><li>Add meta boxes to posts, terms, users, and menu items</li><li>Register custom post types and custom taxonomies</li><li>Create options pages and add custom admin columns</li><li>Frontend markup cleaner with a clean navwalker</li></ul><h3>Features</h3><ul><li>Fully compatible with the new block editor: Gutenberg</li><li>Work similarly to native WordPress function/methods</li><li>Look seamlessly beautiful to WordPress pages/panels</li><li>Easy, simple, and straightforward as much as possible</li></ul>",
+		"installation": "<h1>Getting Started</h1><h4>1. Install the toolkit</h4><ul><li>As a theme required plugin: Refer <a href='http://tgmpluginactivation.com/installation/'>here</a></li><li>As a must-use plugin: Refer <a href='https://wordpress.org/support/article/must-use-plugins/'>here</a></li></ul><h4>2. Add to theme's <code>functions.php</code> or plugin's <code>main php file</code></h4><pre>\nif ( class_exists( 'ThemePlate' ) ) :\n\tThemePlate( array(\n\t\t'title' => 'Project Name',\n\t\t'key'   => 'project_prefix'\n\t) );\n\trequire_once 'post-types.php';\n\trequire_once 'settings.php';\n\trequire_once 'meta-boxes.php';\nendif;\n</pre><ul><li>Initialize with an array consisting of a <em><strong>title</strong></em> and a <em><strong>key</strong></em> to be used as:<ul><li>page and menu title in the pre-created options page</li><li>prefix to the registered option names and in every meta key</li></ul></li><li>Require files containing the definition of <em><strong><code>ThemePlate-d</code></strong></em> items</li></ul><h4>3. Define items to be <em><code>ThemePlate-d</code></em></h4><ul><li><code>ThemePlate()->post_type( $args );</code></li><li><code>ThemePlate()->taxonomy( $args );</code></li><li><code>ThemePlate()->settings( $args );</code></li><li><code>ThemePlate()->post_meta( $args );</code></li><li><code>ThemePlate()->term_meta( $args );</code></li><li><code>ThemePlate()->user_meta( $args );</code></li><li><code>ThemePlate()->menu_meta( $args );</code></li><li><code>ThemePlate()->page( $args );</code></li><li><code>ThemePlate()->column( $args );</code></li></ul>",
+		"other_notes": "<h1>See the <a href='https://github.com/kermage/ThemePlate/wiki'>Wiki</a> section</h1><h3>Yeoman Generator</h3><p>Check <a href='https://www.npmjs.com/package/generator-themeplate'>generator-themeplate</a> to kickstart a <strong>ThemePlate</strong> powered WP site.</p>"
 	},
-	"banners"        : {
-		"low"  : "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/banner-772x250.png",
-		"high" : "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/banner-1544x500.png"
+	"banners": {
+		"low": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/banner-772x250.png",
+		"high": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/banner-1544x500.png"
 	},
-	"icons"          : {
-		"1x" : "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-128x128.png",
-		"2x" : "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-256x256.png"
+	"icons": {
+		"1x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-128x128.png",
+		"2x": "https://raw.githubusercontent.com/kermage/ThemePlate/wp-update/icon-256x256.png"
 	}
 }
