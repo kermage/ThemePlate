@@ -1,7 +1,7 @@
 {
 	"name": "themeplate/navwalker",
 	"description": "ThemePlate clean navwalker",
-	"license": "GPL-3.0",
+	"license": "GPL-3.0-only",
 	"authors": [
 		{
 			"name": "Gene Alyson Fortunado Torcende",
