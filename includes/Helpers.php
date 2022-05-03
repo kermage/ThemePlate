@@ -8,7 +8,6 @@
 namespace ThemePlate;
 
 use Exception;
-use ThemePlate\Core\Helper\Field;
 use ThemePlate\CPT\PostType;
 use ThemePlate\CPT\Taxonomy;
 use ThemePlate\Meta\Menu;
@@ -17,9 +16,6 @@ use ThemePlate\Meta\Term;
 use ThemePlate\Meta\User;
 
 trait Helpers {
-
-	private $storages = array();
-
 
 	public function post_type( $args ) {
 
