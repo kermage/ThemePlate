@@ -181,7 +181,11 @@ trait Helpers {
 	}
 
 
-	public function get_option( $key, $page ) {
+	public function get_option( $key, $page = '' ) {
+
+		if ( '' === $page ) {
+			$page = $this->key . '-' . $this->slug;
+		}
 
 		$options = get_option( $page );
 		$value   = isset( $options[ $key ] ) ? $options[ $key ] : '';
