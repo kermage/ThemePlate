@@ -210,6 +210,12 @@ class ThemePlate {
 
 	public function __set( $name, $value ) {
 
+		if ( ! property_exists( $this, $name ) ) {
+			$this->$name = $value;
+
+			return;
+		}
+
 		$method = 'set_' . $name;
 
 		if ( method_exists( $this, $method ) ) {
@@ -224,6 +230,10 @@ class ThemePlate {
 
 
 	public function __get( $name ) {
+
+		if ( ! property_exists( $this, $name ) ) {
+			return;
+		}
 
 		$method = 'get_' . $name;
 
