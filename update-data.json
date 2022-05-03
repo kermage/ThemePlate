@@ -1,12 +1,12 @@
 {
-	"new_version": "3.18.2",
+	"new_version": "3.18.3",
 	"homepage": "https://github.com/kermage/ThemePlate",
-	"download_link": "https://github.com/kermage/ThemePlate/releases/download/v3.18.2/themeplate.zip",
-	"last_updated": "2021-12-03",
+	"download_link": "https://github.com/kermage/ThemePlate/releases/download/v3.18.3/themeplate.zip",
+	"last_updated": "2022-05-03",
 	"author": "Gene Alyson Fortunado Torcende",
 	"author_profile": "https://github.com/kermage",
 	"requires": "4.6.0",
-	"tested": "5.8.2",
+	"tested": "5.9.3",
 	"requires_php": "5.6",
 	"donate_link": "https://www.paypal.me/GAFT",
 	"sections": {
