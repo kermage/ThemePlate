@@ -16,6 +16,7 @@ class ThemePlate {
 
 
 	private static $_instance;
+	private static $initialized = false;
 
 	private $key;
 	private $slug;
@@ -56,6 +57,15 @@ class ThemePlate {
 			$this->stall_update();
 			add_filter( 'admin_notices', array( $this, 'in_dev_mode' ), 0 );
 		}
+
+		self::$initialized = true;
+
+	}
+
+
+	public static function is_initialized() {
+
+		return self::$initialized;
 
 	}
 
