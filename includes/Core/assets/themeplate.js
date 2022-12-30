@@ -199,11 +199,19 @@
 
 
 	function handleFields() {
-		$( '.themeplate-color-picker:not( .hidden .themeplate-color-picker ) ' ).each( function() {
+		$( '.themeplate-color-picker' ).each( function() {
+			if ( $( this ).closest( '.themeplate-clone' ).hasClass( 'hidden' ) ) {
+				return;
+			}
+
 			$( this ).wpColorPicker();
 		});
 
-		$( '.themeplate-date-picker:not( .hidden .themeplate-date-picker ) ' ).each( function() {
+		$( '.themeplate-date-picker' ).each( function() {
+			if ( $( this ).closest( '.themeplate-clone' ).hasClass( 'hidden' ) ) {
+				return;
+			}
+
 			$( this ).bootstrapDP( {
 				container: $( this ).parents( '.wrapper' ),
 				format: 'yyyy-mm-dd',
@@ -228,7 +236,11 @@
 			}
 		});
 
-		$( '.themeplate-select2:not( .hidden .themeplate-select2 ) ' ).each( function() {
+		$( '.themeplate-select2' ).each( function() {
+			if ( $( this ).closest( '.themeplate-clone' ).hasClass( 'hidden' ) ) {
+				return;
+			}
+
 			var $this = $( this );
 			var s2data = {};
 			var oajax;
