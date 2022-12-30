@@ -282,6 +282,10 @@
 				dropdownCssClass: 'themeplate-select2',
 				containerCssClass: 'themeplate-select2',
 				ajax: oajax ? oajax : null,
+				templateSelection: function (data, container) {
+					$( data.element ).attr( 'data-title', data.text );
+					return data.text;
+				}
 			});
 
 			if ( ! $.isEmptyObject( s2data ) && s2data.value !== '""' ) {
@@ -326,8 +330,8 @@
 			$ul.sortable( {
 				opacity: 0.65,
 				stop: function() {
-					$ul.find( '.select2-selection__choice' ).each( function() {
-						var $option = $( $( this ).data( 'data' ).element );
+					$ul.find( '.select2-selection__choice' ).each( function( i, obj ) {
+						var $option = $this.find( '[data-title="' + obj.title + '"]' );
 						$option.detach().appendTo( $this );
 					});
 				}

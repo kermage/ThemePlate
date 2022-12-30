@@ -53,8 +53,8 @@ class Form {
 		wp_enqueue_style( 'editor-buttons' );
 		wp_enqueue_script( 'wplink' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
-		wp_enqueue_style( 'themeplate-select2-style', Main::asset_url( 'select2.min.css' ), array(), '4.0.12' );
-		wp_enqueue_script( 'themeplate-select2-script', Main::asset_url( 'select2.full.min.js' ), array(), '4.0.12', true );
+		wp_enqueue_style( 'themeplate-select2-style', Main::asset_url( 'select2.min.css' ), array(), '4.0.13' );
+		wp_enqueue_script( 'themeplate-select2-script', Main::asset_url( 'select2.full.min.js' ), array(), '4.0.13', true );
 		wp_enqueue_style( 'themeplate-datepicker-style', Main::asset_url( 'datepicker.min.css' ), array(), '1.9.0' );
 		wp_enqueue_script( 'themeplate-datepicker-script', Main::asset_url( 'datepicker.min.js' ), array(), '1.9.0', true );
 		wp_add_inline_script( 'themeplate-datepicker-script', 'if ( ! jQuery.fn.bootstrapDP && jQuery.fn.datepicker && jQuery.fn.datepicker.noConflict ) jQuery.fn.bootstrapDP = jQuery.fn.datepicker.noConflict();' );
