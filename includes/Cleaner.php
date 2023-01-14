@@ -211,7 +211,7 @@ class Cleaner {
 
 		if ( $args['walker'] instanceof NavWalker ) {
 			if ( 'wp_page_menu' === $args['fallback_cb'] ) {
-				$args['fallback_cb'] = '\ThemePlate\NavWalker::fallback';
+				$args['fallback_cb'] = array( $args['walker'], 'fallback' );
 			}
 
 			if ( '<ul id="%1$s" class="%2$s">%3$s</ul>' === $args['items_wrap'] ) {

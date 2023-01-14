@@ -22,41 +22,53 @@ class NavWalker extends Walker_Nav_Menu {
 		'has-sub'  => 'has-sub',
 		'active'   => 'active',
 		'item'     => '',
+		'depth'    => '',
+	);
+
+	public static $fallback = array(
+		'Click here',
+		'to add',
+		'a menu',
 	);
 
 	public $classes = array();
 	public $class   = array();
-
-	public $priority = 0;
 
 
 	public function __construct() {
 
 		$this->classes = array_merge( $this->defaults, $this->class, $this->classes );
 
-		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), $this->priority, 3 );
-		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), $this->priority, 4 );
-		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), $this->priority, 4 );
-		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), $this->priority, 4 );
-
-	}
-
-
-	public function attributes( $item, $args ) {
-
-		return array();
+		add_filter( 'nav_menu_submenu_css_class', array( $this, 'submenu_css_class' ), PHP_INT_MAX, 3 );
+		add_filter( 'nav_menu_css_class', array( $this, 'css_class' ), PHP_INT_MAX, 4 );
+		add_filter( 'nav_menu_item_id', array( $this, 'item_id' ), PHP_INT_MAX, 4 );
+		add_filter( 'nav_menu_link_attributes', array( $this, 'link_attributes' ), PHP_INT_MAX, 4 );
 
 	}
 
 
 	public function submenu_css_class( $classes, $args, $depth ) {
 
-		return array( $this->classes['sub-menu'] );
+		if ( ! $args->walker instanceof $this ) {
+			return $classes;
+		}
+
+		$classes = array( $this->classes['sub-menu'] );
+
+		if ( ! empty( $this->classes['depth'] ) ) {
+			$classes[] = $this->classes['depth'] . $depth;
+		}
+
+		return $classes;
 
 	}
 
 
-	public function css_class( $classes, $item, $args ) {
+	public function css_class( $classes, $menu_item, $args, $depth ) {
+
+		if ( ! $args->walker instanceof $this ) {
+			return $classes;
+		}
 
 		$classes = array( $this->classes['item'] );
 
@@ -64,8 +76,12 @@ class NavWalker extends Walker_Nav_Menu {
 			$classes[] = $this->classes['has-sub'];
 		}
 
-		if ( $item->current ) {
+		if ( isset( $menu_item->current ) && $menu_item->current ) {
 			$classes[] = $this->classes['active'];
+		}
+
+		if ( ! empty( $this->classes['depth'] ) ) {
+			$classes[] = $this->classes['depth'] . $depth;
 		}
 
 		return array_filter( $classes );
@@ -73,20 +89,30 @@ class NavWalker extends Walker_Nav_Menu {
 	}
 
 
-	public function item_id( $id, $item, $args, $depth ) {
+	public function item_id( $menu_id, $menu_item, $args, $depth ) {
 
-		if ( 'menu-item-' . $item->ID === $id ) {
-			$id = '';
+		if ( ! $args->walker instanceof $this ) {
+			return $menu_id;
 		}
 
-		return $id;
+		if ( 'menu-item-' . $menu_item->ID === $menu_id ) {
+			$menu_id = '';
+		}
+
+		return $menu_id;
 
 	}
 
 
-	public function link_attributes( $atts, $item, $args, $depth ) {
+	public function link_attributes( $atts, $menu_item, $args, $depth ) {
 
-		$atts = array_merge( $atts, $this->attributes( $item, $args ) );
+		if ( ! $args->walker instanceof $this ) {
+			return $atts;
+		}
+
+		if ( method_exists( $this, 'attributes' ) ) {
+			$atts = array_merge( $atts, call_user_func_array( array( $this, 'attributes' ), func_get_args() ) );
+		}
 
 		return array_filter( $atts );
 
@@ -94,10 +120,6 @@ class NavWalker extends Walker_Nav_Menu {
 
 
 	public static function fallback( $args ) {
-
-		if ( ! current_user_can( 'edit_theme_options' ) ) {
-			return false;
-		}
 
 		$output = '';
 
@@ -126,9 +148,35 @@ class NavWalker extends Walker_Nav_Menu {
 		}
 
 		$output .= '>';
-		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">Click here</a></li>';
-		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">to add</a></li>';
-		$output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">a menu</a></li>';
+		$classes = array();
+
+		if ( $args['walker'] instanceof self ) {
+			$classes = array( $args['walker']->classes['item'] );
+			$classes = array_filter( $classes );
+
+			if ( ! empty( $args['walker']->classes['depth'] ) ) {
+				$classes[] = $args['walker']->classes['depth'] . 0;
+			}
+		}
+
+		$links = static::$fallback;
+
+		if ( ! is_array( $links ) ) {
+			$links = (array) $links;
+		}
+
+		$links[] = 'theme_location: ' . $args['theme_location'];
+
+		foreach ( $links as $link_text ) {
+			$output .= sprintf(
+				'<li%1$s><a href="%2$s" target="%3$s">%4$s</a></li>',
+				$classes ? ' class="' . implode( ' ', $classes ) . '"' : '',
+				admin_url( 'nav-menus.php' ),
+				current_user_can( 'edit_theme_options' ) ? '_self' : '_blank',
+				$link_text
+			);
+		}
+
 		$output .= '</ul>';
 
 		if ( $args['container'] ) {
