@@ -7,7 +7,7 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Core\Helper;
+namespace ThemePlate\Legacy\Core\Helper;
 
 class Box {
 

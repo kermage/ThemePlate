@@ -7,9 +7,9 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Core;
+namespace ThemePlate\Legacy\Core;
 
-use ThemePlate\Core\Helper\Field;
+use ThemePlate\Legacy\Core\Helper\Field;
 
 class Data {
 

@@ -7,9 +7,9 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Core\Field;
+namespace ThemePlate\Legacy\Core\Field;
 
-use ThemePlate\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Helper\Main;
 
 class Select {
 

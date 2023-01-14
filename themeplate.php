@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ThemePlate\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Helper\Main;
 
 /* ==================================================
 Global constants

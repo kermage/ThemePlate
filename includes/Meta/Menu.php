@@ -7,10 +7,10 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Meta;
+namespace ThemePlate\Legacy\Meta;
 
-use ThemePlate\Core\Helper\Box;
-use ThemePlate\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Helper\Box;
+use ThemePlate\Legacy\Core\Helper\Main;
 
 class Menu extends Base {
 

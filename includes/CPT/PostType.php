@@ -7,9 +7,9 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\CPT;
+namespace ThemePlate\Legacy\CPT;
 
-use ThemePlate\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Helper\Main;
 
 class PostType extends Base {
 

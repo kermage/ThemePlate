@@ -7,10 +7,10 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Core;
+namespace ThemePlate\Legacy\Core;
 
-use ThemePlate\Core\Helper\Main;
-use ThemePlate\Core\Helper\Meta;
+use ThemePlate\Legacy\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Helper\Meta;
 
 class Form {
 

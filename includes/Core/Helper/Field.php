@@ -7,21 +7,21 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Core\Helper;
+namespace ThemePlate\Legacy\Core\Helper;
 
-use ThemePlate\Core\Field\Checkbox;
-use ThemePlate\Core\Field\Color;
-use ThemePlate\Core\Field\Date;
-use ThemePlate\Core\Field\Editor;
-use ThemePlate\Core\Field\File;
-use ThemePlate\Core\Field\Html;
-use ThemePlate\Core\Field\Input;
-use ThemePlate\Core\Field\Link;
-use ThemePlate\Core\Field\Number;
-use ThemePlate\Core\Field\Type;
-use ThemePlate\Core\Field\Radio;
-use ThemePlate\Core\Field\Select;
-use ThemePlate\Core\Field\Textarea;
+use ThemePlate\Legacy\Core\Field\Checkbox;
+use ThemePlate\Legacy\Core\Field\Color;
+use ThemePlate\Legacy\Core\Field\Date;
+use ThemePlate\Legacy\Core\Field\Editor;
+use ThemePlate\Legacy\Core\Field\File;
+use ThemePlate\Legacy\Core\Field\Html;
+use ThemePlate\Legacy\Core\Field\Input;
+use ThemePlate\Legacy\Core\Field\Link;
+use ThemePlate\Legacy\Core\Field\Number;
+use ThemePlate\Legacy\Core\Field\Type;
+use ThemePlate\Legacy\Core\Field\Radio;
+use ThemePlate\Legacy\Core\Field\Select;
+use ThemePlate\Legacy\Core\Field\Textarea;
 
 class Field {
 

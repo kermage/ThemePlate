@@ -5,10 +5,10 @@
  * @since 0.1.0
  */
 
-use ThemePlate\Cleaner;
-use ThemePlate\Core\Helper\Main;
-use ThemePlate\Core\Data;
-use ThemePlate\Helpers;
+use ThemePlate\Legacy\Cleaner;
+use ThemePlate\Legacy\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Data;
+use ThemePlate\Legacy\Helpers;
 
 class ThemePlate {
 

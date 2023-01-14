@@ -5,15 +5,15 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate;
+namespace ThemePlate\Legacy;
 
 use Exception;
-use ThemePlate\CPT\PostType;
-use ThemePlate\CPT\Taxonomy;
-use ThemePlate\Meta\Menu;
-use ThemePlate\Meta\Post;
-use ThemePlate\Meta\Term;
-use ThemePlate\Meta\User;
+use ThemePlate\Legacy\CPT\PostType;
+use ThemePlate\Legacy\CPT\Taxonomy;
+use ThemePlate\Legacy\Meta\Menu;
+use ThemePlate\Legacy\Meta\Post;
+use ThemePlate\Legacy\Meta\Term;
+use ThemePlate\Legacy\Meta\User;
 
 trait Helpers {
 

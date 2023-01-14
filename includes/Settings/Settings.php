@@ -7,12 +7,12 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate;
+namespace ThemePlate\Legacy;
 
-use ThemePlate\Core\Form;
-use ThemePlate\Core\Helper\Box;
-use ThemePlate\Core\Helper\Main;
-use ThemePlate\Core\Helper\Meta;
+use ThemePlate\Legacy\Core\Form;
+use ThemePlate\Legacy\Core\Helper\Box;
+use ThemePlate\Legacy\Core\Helper\Main;
+use ThemePlate\Legacy\Core\Helper\Meta;
 
 class Settings {
 

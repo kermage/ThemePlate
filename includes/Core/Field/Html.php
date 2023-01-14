@@ -7,7 +7,7 @@
  * @since 0.1.0
  */
 
-namespace ThemePlate\Core\Field;
+namespace ThemePlate\Legacy\Core\Field;
 
 class Html {
 
