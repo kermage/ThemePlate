@@ -12,12 +12,12 @@ namespace ThemePlate;
 use ThemePlate\Legacy\Cleaner as LegacyCleaner;
 use ThemePlate\Legacy\NavWalker as LegacyNavWalker;
 
-if ( class_exists( LegacyCleaner::class ) ) {
+if ( ! class_exists( Cleaner::class ) && class_exists( LegacyCleaner::class ) ) {
 	class Cleaner extends LegacyCleaner {
 	}
 }
 
-if ( class_exists( LegacyNavWalker::class ) ) {
+if ( ! class_exists( NavWalker::class ) && class_exists( LegacyNavWalker::class ) ) {
 	class NavWalker extends LegacyNavWalker {
 	}
 }
