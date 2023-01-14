@@ -7,6 +7,8 @@
  * @since 0.1.0
  */
 
+require_once 'legacy-' . basename( __FILE__ );
+
 use ThemePlate\Cleaner;
 use ThemePlate\NavWalker;
 
