@@ -13,11 +13,9 @@ use ThemePlate\Legacy\Cleaner as LegacyCleaner;
 use ThemePlate\Legacy\NavWalker as LegacyNavWalker;
 
 if ( ! class_exists( Cleaner::class ) && class_exists( LegacyCleaner::class ) ) {
-	class Cleaner extends LegacyCleaner {
-	}
+	class_alias( LegacyCleaner::class, Cleaner::class );
 }
 
 if ( ! class_exists( NavWalker::class ) && class_exists( LegacyNavWalker::class ) ) {
-	class NavWalker extends LegacyNavWalker {
-	}
+	class_alias( LegacyNavWalker::class, NavWalker::class );
 }
