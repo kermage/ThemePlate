@@ -7,17 +7,11 @@
  * @since 0.1.0
  */
 
-require_once 'legacy-' . basename( __FILE__ );
-
-use ThemePlate\Cleaner;
-use ThemePlate\NavWalker;
-
-if ( ! class_exists( ThemePlate_Cleaner::class ) && class_exists( Cleaner::class ) ) {
-	class ThemePlate_Cleaner extends ThemePlate\Cleaner {
+if ( function_exists( 'add_action' ) && ! function_exists( 'themeplate_compatibility' ) ) {
+	function themeplate_compatibility() {
+		require_once 'legacy-' . basename( __FILE__ );
+		require_once 'namespace-' . basename( __FILE__ );
 	}
-}
 
-if ( ! class_exists( ThemePlate_NavWalker::class ) && class_exists( NavWalker::class ) ) {
-	class ThemePlate_NavWalker extends ThemePlate\NavWalker {
-	}
+	add_action( 'after_setup_theme', 'themeplate_compatibility' );
 }
