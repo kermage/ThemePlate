@@ -1,6 +1,7 @@
 * text=auto
 
 /.cache export-ignore
+/.github export-ignore
 /bin export-ignore
 /tests export-ignore
 .editorconfig export-ignore
