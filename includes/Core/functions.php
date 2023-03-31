@@ -10,9 +10,9 @@
 
 if ( function_exists( 'add_action' ) && ! function_exists( 'themeplate_ajax_actions' ) ) {
 	function themeplate_ajax_actions() {
-		add_action( 'wp_ajax_tp_posts', array( ThemePlate\Core\Field\Type::class, 'get_posts' ) );
-		add_action( 'wp_ajax_tp_users', array( ThemePlate\Core\Field\Type::class, 'get_users' ) );
-		add_action( 'wp_ajax_tp_terms', array( ThemePlate\Core\Field\Type::class, 'get_terms' ) );
+		add_action( 'wp_ajax_tp_posts', array( ThemePlate\Legacy\Core\Field\Type::class, 'get_posts' ) );
+		add_action( 'wp_ajax_tp_users', array( ThemePlate\Legacy\Core\Field\Type::class, 'get_users' ) );
+		add_action( 'wp_ajax_tp_terms', array( ThemePlate\Legacy\Core\Field\Type::class, 'get_terms' ) );
 	}
 
 	themeplate_ajax_actions();
