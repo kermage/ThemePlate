@@ -47,7 +47,11 @@
 			var fieldID = $( this ).attr( 'id' );
 			var editor = tinymce.get( fieldID );
 
-			window.setTimeout( function() {
+			if ( ! editor ) {
+				return;
+			}
+
+			setTimeout( function() {
 				editor.destroy();
 				tinymce.init( tinyMCEPreInit.mceInit[ fieldID ] );
 			}, 100 );
