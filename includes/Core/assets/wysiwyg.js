@@ -58,13 +58,7 @@
 		}, 100 );
 	});
 
-	$( '.meta-box-sortables' ).on( 'sortstop', function( event, ui ) {
-		var $field = $( ui.item ).find( '.themeplate-wysiwyg' );
-
-		if ( $field.length === 0 ) {
-			return;
-		}
-
+	function reInitEditor( $field ) {
 		var isHtml = $field.closest( '.wp-editor-wrap' ).hasClass( 'html-active' );
 		var fieldID = $field.attr( 'id' );
 
@@ -78,6 +72,18 @@
 		if ( isHtml ) {
 			$( '#' + fieldID + '-html' ).click();
 		}
+	}
+
+	$( '.meta-box-sortables' ).on( 'sortstop', function( event, ui ) {
+		$( ui.item ).find( '.themeplate-wysiwyg' ).each( function() {
+			reInitEditor( $( this ) );
+		});
+	});
+
+	$( '.handle-order-higher, .handle-order-lower' ).on( 'focus', function() {
+		$( this ).closest( '.postbox' ).find( '.themeplate-wysiwyg' ).each( function() {
+			reInitEditor( $( this ) );
+		});
 	});
 
 }( jQuery ));
