@@ -90,9 +90,9 @@ class Type {
 			);
 		}
 
-		$query = new \WP_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+		$query = new \WP_Query( array_merge( $defaults, $_GET['options'], $_GET['_page'] ) );
 
-		if ( $_GET['page']['paged'] < $query->max_num_pages ) {
+		if ( $_GET['_page']['paged'] < $query->max_num_pages ) {
 			$return['pagination']['more'] = true;
 		}
 
@@ -144,9 +144,9 @@ class Type {
 			'number'  => isset( $_GET['ids__in'] ) ? -1 : self::$count,
 			'include' => isset( $_GET['ids__in'] ) ? $_GET['ids__in'] : '',
 		);
-		$query    = new \WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['page'] ) );
+		$query    = new \WP_User_Query( array_merge( $defaults, $_GET['options'], $_GET['_page'] ) );
 
-		if ( $_GET['page']['paged'] < ceil( $query->get_total() / self::$count ) ) {
+		if ( $_GET['_page']['paged'] < ceil( $query->get_total() / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 
@@ -172,7 +172,7 @@ class Type {
 				'more' => false,
 			),
 		);
-		$offset   = ( $_GET['page']['paged'] > 0 ) ? self::$count * ( $_GET['page']['paged'] - 1 ) : 1;
+		$offset   = ( $_GET['_page']['paged'] > 0 ) ? self::$count * ( $_GET['_page']['paged'] - 1 ) : 1;
 		$defaults = array(
 			'search'  => isset( $_GET['search'] ) ? $_GET['search'] : '',
 			'fields'  => 'id=>name',
@@ -183,7 +183,7 @@ class Type {
 		$total    = wp_count_terms( $_GET['options']['taxonomy'] );
 		$query    = new \WP_Term_Query( array_merge( $defaults, $_GET['options'] ) );
 
-		if ( ! is_wp_error( $total ) && $_GET['page']['paged'] < ceil( $total / self::$count ) ) {
+		if ( ! is_wp_error( $total ) && $_GET['_page']['paged'] < ceil( $total / self::$count ) ) {
 			$return['pagination']['more'] = true;
 		}
 
