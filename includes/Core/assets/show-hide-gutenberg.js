@@ -87,11 +87,9 @@
 		});
 	}
 
-
-	setTimeout( function() {
-		console.log( 'ThemePlate show-hide-gutenberg' );
-		applyCurrentChanges();
-	}, 3000 );
-	$( window ).on( 'load', listenDataChanges );
+	wp.domReady( function() {
+		setTimeout( applyCurrentChanges, 100 );
+		listenDataChanges();
+	});
 
 }( jQuery, window.ThemePlate ));

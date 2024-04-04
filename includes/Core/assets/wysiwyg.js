@@ -38,24 +38,24 @@
 		quicktags( qtSettings );
 	});
 
-	$( window ).on( 'load', function() {
+	wp.domReady( function() {
 		if ( ! ( window.wp && wp.data && wp.data.select && wp.data.select( 'core/editor' ) ) ) {
 			return;
 		}
 
-		$( '.themeplate-wysiwyg' ).each( function() {
-			var fieldID = $( this ).attr( 'id' );
-			var editor = tinymce.get( fieldID );
+		setTimeout( function() {
+			$( '.themeplate-wysiwyg' ).each( function() {
+				var fieldID = $( this ).attr( 'id' );
+				var editor = tinymce.get( fieldID );
 
-			if ( ! editor ) {
-				return;
-			}
+				if ( null === editor ) {
+					return;
+				}
 
-			setTimeout( function() {
 				editor.destroy();
 				tinymce.init( tinyMCEPreInit.mceInit[ fieldID ] );
-			}, 100 );
-		});
+			});
+		}, 100 );
 	});
 
 	$( '.meta-box-sortables' ).on( 'sortstop', function( event, ui ) {

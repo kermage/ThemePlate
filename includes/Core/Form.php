@@ -59,8 +59,8 @@ class Form {
 		wp_enqueue_script( 'themeplate-datepicker-script', Main::asset_url( 'datepicker.min.js' ), array(), '1.9.0', true );
 		wp_add_inline_script( 'themeplate-datepicker-script', 'if ( ! jQuery.fn.bootstrapDP && jQuery.fn.datepicker && jQuery.fn.datepicker.noConflict ) jQuery.fn.bootstrapDP = jQuery.fn.datepicker.noConflict();' );
 		wp_enqueue_style( 'themeplate-style', Main::asset_url( 'themeplate.css' ), array(), TP_CORE_VERSION );
-		wp_enqueue_script( 'themeplate-script', Main::asset_url( 'themeplate.js' ), array(), TP_CORE_VERSION, true );
-		wp_enqueue_script( 'themeplate-wysiwyg', Main::asset_url( 'wysiwyg.js' ), array(), TP_CORE_VERSION, true );
+		wp_enqueue_script( 'themeplate-script', Main::asset_url( 'themeplate.js' ), array( 'wp-dom-ready' ), TP_CORE_VERSION, true );
+		wp_enqueue_script( 'themeplate-wysiwyg', Main::asset_url( 'wysiwyg.js' ), array( 'editor' ), TP_CORE_VERSION, true );
 		wp_enqueue_script( 'themeplate-show-hide', Main::asset_url( 'show-hide.js' ), array(), TP_CORE_VERSION, true );
 		wp_enqueue_script( 'themeplate-repeater', Main::asset_url( 'repeater.js' ), array(), TP_CORE_VERSION, true );
 
